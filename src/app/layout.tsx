@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Noto_Sans_JP } from "next/font/google";
 import "./globals.css";
 import { SmoothScroll } from "@/components/layout/SmoothScroll";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 const notoSansJP = Noto_Sans_JP({
   variable: "--font-noto-sans-jp",
@@ -78,6 +79,7 @@ export default function RootLayout({
           {children}
         </SmoothScroll>
       </body>
+      <GoogleAnalytics gaId="G-Y986CYNENJ" />
     </html>
   );
 }

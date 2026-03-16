@@ -1,30 +1,30 @@
 import { Container } from "@/components/ui/Container";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
-import { Card, CardContent, CardTitle, CardCategoryBadge, CardImage } from "@/components/ui/Card";
+import { Card, CardContent, CardTitle, CardCategoryBadge } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 
-// Placeholder images from Unsplash representing business/tech environments
 const previewWorks = [
-  { 
-    slug: "corporate-site-renewal", 
-    title: "株式会社〇〇様 コーポレートサイト刷新", 
-    category: "Webサイト制作", 
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800" 
+  {
+    slug: "corporate-site-renewal",
+    title: "株式会社◯◯様 コーポレートサイト刷新",
+    category: "Webサイト制作",
+    image: "/images/works-corporate-site.png",
   },
-  { 
-    slug: "booking-system", 
-    title: "〇〇業界向け 予約管理システム開発", 
-    category: "Webシステム開発", 
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800" 
+  {
+    slug: "booking-system",
+    title: "◯◯業界向け 予約管理システム開発",
+    category: "Webシステム開発",
+    image: "/images/works-booking-system.png",
   },
-  { 
-    slug: "ai-knowledge-base", 
-    title: "AI社内ナレッジ検索システム導入", 
-    category: "AI導入支援", 
-    image: "https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&q=80&w=800" 
+  {
+    slug: "ai-knowledge-base",
+    title: "AI社内ナレッジ検索システム導入",
+    category: "AI導入支援",
+    image: "/images/works-ai-system.png",
   },
 ];
 
@@ -43,13 +43,22 @@ export function WorksPreviewSection() {
             </Link>
           </AnimatedSection>
         </div>
-        
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {previewWorks.map((work, i) => (
             <AnimatedSection key={work.slug} delay={i * 0.1}>
-              <Link href={`/works/${work.slug}`} className="block h-full">
-                <Card className="h-full">
-                  <CardImage src={work.image} alt={work.title} />
+              <Link href={`/works/${work.slug}`} className="block h-full group">
+                <Card className="h-full overflow-hidden">
+                  {/* Image area */}
+                  <div className="relative w-full aspect-[4/3] overflow-hidden bg-gray-100">
+                    <Image
+                      src={work.image}
+                      alt={work.title}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    />
+                  </div>
                   <CardContent>
                     <div className="mb-3">
                       <CardCategoryBadge>{work.category}</CardCategoryBadge>

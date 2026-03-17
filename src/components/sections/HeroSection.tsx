@@ -23,9 +23,10 @@ export function HeroSection() {
             </AnimatedSection>
 
             <AnimatedSection delay={0.2}>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-extrabold tracking-tight text-text-primary leading-[1.4] md:leading-tight text-balance">
-                売上とブランドを<span className="inline-block">育てる、</span><br className="hidden sm:block" />
-                <span className="inline-block">一気通貫の</span><span className="text-brand-primary relative inline-block">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-extrabold tracking-tight text-text-primary leading-[1.4] md:leading-tight">
+                売り上げと<br />
+                ブランドを育てる、<br />
+                一気通貫の<span className="text-brand-primary relative inline-block">
                   Web戦略
                   <span className="absolute bottom-2 left-0 w-full h-3 bg-brand-primary/20 -z-10" />
                 </span>。

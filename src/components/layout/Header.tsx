@@ -42,15 +42,18 @@ export function Header() {
       )}
     >
       <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-5 md:px-8">
-        <Link href="/" className="flex items-center space-x-2">
+        <Link href="/" className="flex items-center space-x-3 transition-opacity hover:opacity-80">
           <Image
-            src="/socialboost.logo.png"
-            alt="SocialBoost"
-            width={160}
+            src="/web-app-manifest-512x512.png"
+            alt=""
+            width={40}
             height={40}
-            className="h-8 w-auto md:h-9"
+            className="h-8 w-8 md:h-10 md:w-10 object-contain"
             priority
           />
+          <span className="font-extrabold tracking-tight text-xl md:text-2xl text-text-primary uppercase">
+            Social<span className="text-brand-primary">Boost</span>
+          </span>
         </Link>
 
         {/* Desktop Nav */}

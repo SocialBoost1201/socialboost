@@ -2,6 +2,7 @@ import { Container } from "@/components/ui/Container";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { Star, Quote } from "lucide-react";
+import { getReviews } from "@/lib/microcms";
 
 type Testimonial = {
   id: string;
@@ -39,7 +40,23 @@ const TESTIMONIALS: Testimonial[] = [
   },
 ];
 
-export function TestimonialsSection() {
+export async function TestimonialsSection() {
+  // microCMSから最新のお客様の声（レビュー）を取得
+  const res = await getReviews({ limit: 3 });
+  const cmsReviews = res.contents;
+
+  // microCMSデータが存在する場合はそちらを使用し、無い場合はモックデータを表示するフェイルセーフ
+  const displayItems = cmsReviews.length > 0 
+    ? cmsReviews.map(r => ({
+        id: r.id,
+        clientName: r.client_name,
+        companyName: r.company_name || "ご利用企業様",
+        role: r.project_name || "プロジェクト担当",
+        content: r.comment,
+        rating: r.rating || 5,
+      }))
+    : TESTIMONIALS;
+
   return (
     <section className="py-24 md:py-20 bg-background-alt overflow-hidden">
       <Container>
@@ -56,7 +73,7 @@ export function TestimonialsSection() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10 mt-16 md:mt-24">
-          {TESTIMONIALS.map((testimonial, i) => (
+          {displayItems.map((testimonial, i) => (
             <AnimatedSection key={testimonial.id} delay={i * 0.1} className="h-full">
               <div className="bg-white rounded-2xl p-8 md:p-10 shadow-sm border border-gray-100 flex flex-col h-full relative">
                 {/* Decorative Quote Icon */}

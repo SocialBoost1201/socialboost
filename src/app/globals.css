@@ -13,6 +13,17 @@
   --color-brand-light: #EFF6FF;
 
   --font-sans: var(--font-noto-sans-jp);
+
+  /* Fluid Typography for smooth 320px to 1024px scaling */
+  --text-sm: clamp(0.8125rem, 0.7801rem + 0.1618vw, 0.875rem); /* 13px - 14px */
+  --text-base: clamp(0.9375rem, 0.9051rem + 0.1618vw, 1rem); /* 15px - 16px */
+  --text-lg: clamp(1rem, 0.9352rem + 0.3236vw, 1.125rem); /* 16px - 18px */
+  --text-xl: clamp(1.125rem, 1.0602rem + 0.3236vw, 1.25rem); /* 18px - 20px */
+  --text-2xl: clamp(1.25rem, 1.1205rem + 0.6472vw, 1.5rem); /* 20px - 24px */
+  --text-3xl: clamp(1.5rem, 1.3058rem + 0.9709vw, 1.875rem); /* 24px - 30px */
+  --text-4xl: clamp(1.875rem, 1.6808rem + 0.9709vw, 2.25rem); /* 30px - 36px */
+  --text-5xl: clamp(2.25rem, 1.8616rem + 1.9417vw, 3rem); /* 36px - 48px */
+  --text-6xl: clamp(2.75rem, 2.2322rem + 2.589vw, 3.75rem); /* 44px - 60px */
 }
 
 :root {

@@ -50,6 +50,29 @@ export type MicroCMSBlogListResponse = {
   limit: number;
 };
 
+// ==========================================
+// Reviews (お客様の声) の型定義
+// ==========================================
+export type MicroCMSReview = {
+  id: string;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+  revisedAt?: string;
+  company_name?: string;
+  client_name: string;
+  project_name?: string;
+  rating: number;
+  comment: string;
+};
+
+export type MicroCMSReviewListResponse = {
+  contents: MicroCMSReview[];
+  totalCount: number;
+  offset: number;
+  limit: number;
+};
+
 // 環境変数が未設定の場合は null を返す（ビルドエラーを防ぐ）
 export function getClient() {
   const serviceDomain = process.env.MICROCMS_SERVICE_DOMAIN;
@@ -67,4 +90,20 @@ export const client = {
     if (!c) throw new Error('microCMS client is not configured');
     return c.get<T>(args);
   },
+};
+
+// お客様の声一覧を取得
+export const getReviews = async (queries?: any) => {
+  try {
+    const c = getClient();
+    if (!c) return { contents: [], totalCount: 0, offset: 0, limit: 0 };
+    return await c.getList<MicroCMSReview>({
+      endpoint: "reviews",
+      queries,
+    });
+  } catch (error) {
+    console.error("Failed to fetch reviews from microCMS:", error);
+    // APIが未作成の場合などを考慮しフェイルセーフで空配列を返す
+    return { contents: [], totalCount: 0, offset: 0, limit: 0 };
+  }
 };

@@ -30,8 +30,8 @@ export async function POST(req: Request) {
           comment,
         };
 
-        // status=draft を付与して下書き状態でPOSTする
-        const cmsRes = await fetch(`https://${serviceDomain}.microcms.io/api/v1/reviews?status=draft`, {
+        // status=draft を外し、送信された瞬間に即時公開（完全自動化）する
+        const cmsRes = await fetch(`https://${serviceDomain}.microcms.io/api/v1/reviews`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -61,7 +61,7 @@ export async function POST(req: Request) {
         subject: `【レビュー到着】お客様の声が届きました（${client_name}様）`,
         text: `
 クライアントからのプロジェクト評価・レビューが届きました。
-${microCmsSuccess ? "※microCMSの「reviews」APIに下書き保存されていますので、管理画面から公開してください。" : "※microCMSの設定が存在しないかエラーのため、メールのみでの通知となります。"}
+${microCmsSuccess ? "※microCMSの「reviews」APIに即時公開（完全自動反映）されました。" : "※microCMSの設定が存在しないかエラーのため、メールのみでの通知となります。"}
 
 ■ 会社名: ${company_name || '未入力'}
 ■ お名前: ${client_name}

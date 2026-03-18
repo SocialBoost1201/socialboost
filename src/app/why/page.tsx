@@ -27,42 +27,42 @@ const reasons = [
     description:
       "「言われたものを作る」だけの制作会社ではありません。ビジネスモデルやターゲット、現状のボトルネックを深く理解し、本来解決すべき課題を特定した上で最適なソリューションをご提案します。事業の目的を共有し、同じ方向を向いて進むパートナーとしてコミットします。",
     icon: Target,
-    image: "/images/reason-01.png",
+    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=800&auto=format&fit=crop", // Target/Strategy
   },
   {
     title: "制作・システム・AIまで一気通貫",
     description:
       "Webサイトの立ち上げから、業務を効率化するシステム開発、最新のAI技術の導入まで。複数の専門業者を跨ぐことなく、一括で相談・進行が可能なため、一貫性とスピードが両立します。ベンダーコントロールの手間を省き、コア業務に集中いただけます。",
     icon: Layers,
-    image: "/images/reason-02.png",
+    image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=800&auto=format&fit=crop", // Layers/Teamwork
   },
   {
     title: "スモールスタートからの段階的拡張",
     description:
       "最初から多額の投資を求めることはしません。まずは必要最小限（MVP）で小さく始めて効果を検証し、事業の成長に合わせて柔軟にシステムやサイトを拡張していく、リスクの低いロードマップを描きます。",
     icon: TrendingUp,
-    image: "/images/reason-03.png",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop", // Data/Growth
   },
   {
     title: "ユーザー視点に立ったUI/UX設計",
     description:
       "どれだけ高度な機能を持つシステムや美しいWebサイトでも、ユーザーに使われなければ意味がありません。徹底したユーザーリサーチに基づき、直感的で迷わない、行動を促すUI/UX設計をご提供します。",
     icon: Users,
-    image: "/images/works-corporate-site.png", // 代替画像
+    image: "https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?q=80&w=800&auto=format&fit=crop", // UI Design
   },
   {
     title: "高いセキュリティと品質担保",
     description:
       "大切な顧客情報や事業データを守るため、初期段階からセキュリティを考慮したアーキテクチャ設計を行います。また、リリース前の厳格なテストやコードレビューにより、安定して稼働する高品質なシステムをお届けします。",
     icon: ShieldCheck,
-    image: "/images/hero-visual.png", // 代替画像
+    image: "https://images.unsplash.com/photo-1563986768609-322da135f146?q=80&w=800&auto=format&fit=crop", // Security/Data
   },
   {
     title: "迅速な対応とアジャイルな進行",
     description:
       "変化の激しい現代のビジネス環境において、スピードは最大の武器です。定期的なミーティングと透明性の高いコミュニケーションで、状況の変化に柔軟に対応し、迅速に価値を提供し続けるアジャイルな進行を心がけています。",
     icon: Zap,
-    image: "/images/works-ai-system.png", // 代替画像
+    image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=800&auto=format&fit=crop", // Agile/Speed
   },
 ];
 

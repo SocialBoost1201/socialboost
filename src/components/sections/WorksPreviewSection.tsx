@@ -23,7 +23,7 @@ async function getPreviewWorks() {
   return { source: "static" as const, works: WORKS_DATA.slice(0, 3) };
 }
 
-export async function WorksPreviewSection() {
+export async function WorksPreviewSection({ showMoreButton = false }: { showMoreButton?: boolean } = {}) {
   const { source, works } = await getPreviewWorks();
 
   return (

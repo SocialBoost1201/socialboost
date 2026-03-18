@@ -103,7 +103,7 @@ function ServiceBlock({ service, Icon, bgText, isEven, index }: any) {
             {service.title}
           </h2>
           <p className="text-lg md:text-xl text-text-secondary leading-relaxed mb-10 font-medium">
-            {service.shortDesc}
+            {service.hero.description}
           </p>
 
           <Link 
@@ -133,7 +133,7 @@ function ServiceBlock({ service, Icon, bgText, isEven, index }: any) {
             対象となる課題・お悩み
           </h3>
           <ul className="space-y-5 relative z-10">
-            {service.problems.map((prob: string, i: number) => (
+            {service.beforeAfter.problems.map((prob: string, i: number) => (
               <li key={i} className="flex items-start group/item">
                 <CheckCircle2 className="mr-4 h-6 w-6 shrink-0 text-gray-300 group-hover/item:text-brand-primary transition-colors mt-0.5" />
                 <span className="text-base md:text-lg text-text-secondary leading-relaxed font-medium">
@@ -153,11 +153,11 @@ function ServiceBlock({ service, Icon, bgText, isEven, index }: any) {
             提供するソリューション
           </h3>
           <ul className="space-y-5 relative z-10">
-            {service.offerings.map((off: string, i: number) => (
+            {service.scopes.map((scope: any, i: number) => (
               <li key={i} className="flex items-center p-4 bg-white/80 rounded-2xl border border-gray-50 shadow-sm group-hover/item:border-brand-primary/20 transition-all hover:-translate-y-1">
                 <div className="w-2 h-2 rounded-full bg-brand-primary mr-4" />
                 <span className="text-base font-bold text-text-primary">
-                  {off}
+                  {scope.title}
                 </span>
               </li>
             ))}

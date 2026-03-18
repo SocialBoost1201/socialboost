@@ -19,10 +19,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   
   return {
     title: `${service.title} | サービス`,
-    description: service.shortDesc,
+    description: service.hero.description,
     openGraph: {
       title: `${service.title} | サービス | SocialBoost`,
-      description: service.shortDesc,
+      description: service.hero.description,
       url: `https://socialboost.jp/services/${slug}`,
       type: "website",
     },

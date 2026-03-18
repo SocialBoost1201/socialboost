@@ -263,17 +263,33 @@ export function generateWebSiteJsonLd() {
   };
 }
 
+/** ---------- ServicesPage 構造化データ ---------- */
+export function generateServicesPageJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: "Service | コンサルティング・制作・開発 | SocialBoost",
+    description: "SocialBoostが提供するサービス一覧です。Webサイト制作・リニューアルから、システム開発、AI導入支援まで。お客様の事業課題に合わせた最適なデジタルソリューションをご提案します。",
+    url: `${BASE_URL}/services`,
+    publisher: {
+      "@type": "Organization",
+      name: COMPANY_INFO.name,
+      url: BASE_URL,
+    },
+  };
+}
+
 /** ---------- Service 構造化データ ---------- */
 export function generateServiceJsonLd(service: {
   title: string;
-  shortDesc: string;
+  hero: { description: string };
   slug: string;
 }) {
   return {
     "@context": "https://schema.org",
     "@type": "Service",
     name: service.title,
-    description: service.shortDesc,
+    description: service.hero.description,
     url: `${BASE_URL}/services/${service.slug}`,
     serviceType: service.title,
     provider: {

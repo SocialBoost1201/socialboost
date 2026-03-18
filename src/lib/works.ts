@@ -21,7 +21,7 @@ export const WORKS_DATA: WorkDetail[] = [
     category: "Webサイト制作",
     industry: "製造業・BtoB",
     shortDesc: "創業50周年のタイミングで、採用強化と新規リード獲得を目的としたフルリニューアルを実施。",
-    thumbnail: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800",
+    thumbnail: "/images/works-corporate-site.png",
     overview: "採用強化および新規取引先の開拓を目的として、10年以上運用されてきた既存コーポレートサイトのフルリニューアルを行いました。会社の強みである「技術力」と「安定感」をモダンなデザインで表現しています。",
     challenges: [
       "サイトが古く、採用候補者に魅力が伝わっていない",
@@ -45,8 +45,8 @@ export const WORKS_DATA: WorkDetail[] = [
       "運用担当者でも実績の追加が容易になり、社内の情報発信が活性化"
     ],
     images: [
-      "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?auto=format&fit=crop&q=80&w=1200",
-      "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=1200",
+      "/images/works-corporate-site.png",
+      "/images/hero-visual.png",
     ],
     pdfs: []
   },
@@ -56,7 +56,7 @@ export const WORKS_DATA: WorkDetail[] = [
     category: "Webシステム開発",
     industry: "サービス業",
     shortDesc: "既存のSaaSでは対応できなかった独自の運用フローに合わせた予約管理システムをスクラッチ開発。",
-    thumbnail: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800",
+    thumbnail: "/images/works-booking-system.png",
     overview: "店舗展開を行うサービス業のお客様向けに、既存の複数SaaSの組み合わせで発生していた「二重入力」や「予約管理の漏れ」を防ぐための、独自仕様の予約・顧客管理システムを開発しました。",
     challenges: [
       "予約管理用のSaaSと社内の顧客管理DBが分断されている",
@@ -80,7 +80,7 @@ export const WORKS_DATA: WorkDetail[] = [
       "データ一元化により、リピーター分析などのマーケティング施策が可能になった"
     ],
     images: [
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1200"
+      "/images/works-booking-system.png"
     ],
     pdfs: [
       { title: "システム導入による業務改善レポート(PDF表示サンプル)", url: "/sample-report.pdf" }
@@ -92,7 +92,7 @@ export const WORKS_DATA: WorkDetail[] = [
     category: "AI導入支援",
     industry: "IT・通信",
     shortDesc: "膨大な社内ドキュメントを学習させたセキュアなAIチャットボットを構築し、社内ヘルプデスク運用を効率化。",
-    thumbnail: "https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&q=80&w=800",
+    thumbnail: "/images/works-ai-system.png",
     overview: "数百以上の社内規程、マニュアル、業務手順書が散在しており、「どこに情報があるか分からない」という課題を解決するため、セキュアな環境で動作するRAG（検索拡張生成）技術を用いた社内AIチャットボットを導入しました。",
     challenges: [
       "新入社員からバックオフィス部門への同じ問い合わせが1日に何十件も発生",
@@ -116,7 +116,7 @@ export const WORKS_DATA: WorkDetail[] = [
       "安心・安全な社内AI基盤ができたことで、さらなる業務へのAI適用策が自発的に生まれる組織へと変化"
     ],
     images: [
-      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1200"
+      "/images/works-ai-system.png"
     ],
     pdfs: []
   }

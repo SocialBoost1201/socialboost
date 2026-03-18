@@ -15,6 +15,7 @@ export type MicroCMSWork = {
   scope?: string;
   solution?: string;
   result?: string;
+  site_url?: string;
 };
 
 export type MicroCMSWorkListResponse = {

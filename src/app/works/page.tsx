@@ -58,27 +58,36 @@ export default async function WorksPage() {
       <Container className="py-16 md:py-24">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           {source === "cms"
-            ? (works as MicroCMSWork[]).map((work, i) => (
-                <AnimatedSection key={work.id} delay={i * 0.1}>
-                  <Link href={`/works/${work.id}`} className="block h-full outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2 rounded-2xl">
-                    <Card className="h-full">
-                      <CardImage src={work.thumbnail.url} alt={work.title} />
-                      <CardContent>
-                        <div className="mb-4 flex flex-wrap gap-2">
-                          <CardCategoryBadge>{work.category}</CardCategoryBadge>
-                          {work.industry && (
-                            <span className="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-text-secondary">
-                              {work.industry}
-                            </span>
-                          )}
-                        </div>
-                        <CardTitle>{work.title}</CardTitle>
-                        <CardDescription>{work.summary}</CardDescription>
-                      </CardContent>
-                    </Card>
-                  </Link>
-                </AnimatedSection>
-              ))
+            ? (works as MicroCMSWork[]).map((work, i) => {
+                const href = work.site_url || `/works/${work.id}`;
+                const isExternal = !!work.site_url;
+                return (
+                  <AnimatedSection key={work.id} delay={i * 0.1}>
+                    <a
+                      href={href}
+                      target={isExternal ? "_blank" : "_self"}
+                      rel={isExternal ? "noopener noreferrer" : undefined}
+                      className="block h-full outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2 rounded-2xl"
+                    >
+                      <Card className="h-full">
+                        <CardImage src={work.thumbnail.url} alt={work.title} />
+                        <CardContent>
+                          <div className="mb-4 flex flex-wrap gap-2">
+                            <CardCategoryBadge>{work.category}</CardCategoryBadge>
+                            {work.industry && (
+                              <span className="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-text-secondary">
+                                {work.industry}
+                              </span>
+                            )}
+                          </div>
+                          <CardTitle>{work.title}</CardTitle>
+                          <CardDescription>{work.summary}</CardDescription>
+                        </CardContent>
+                      </Card>
+                    </a>
+                  </AnimatedSection>
+                );
+              })
             : (works as typeof WORKS_DATA).map((work, i) => (
                 <AnimatedSection key={work.slug} delay={i * 0.1}>
                   <Link href={`/works/${work.slug}`} className="block h-full outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2 rounded-2xl">

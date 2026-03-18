@@ -1,11 +1,16 @@
 import { HeroSection } from "@/components/sections/HeroSection";
+import { TrustedBySection } from "@/components/sections/TrustedBySection";
 import { ProblemSection } from "@/components/sections/ProblemSection";
+import { VisionSection } from "@/components/sections/VisionSection";
 import { ServiceOverviewSection } from "@/components/sections/ServiceOverviewSection";
 import { WorksPreviewSection } from "@/components/sections/WorksPreviewSection";
+import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
 import { ReasonsSection } from "@/components/sections/ReasonsSection";
+import { InsightsSection } from "@/components/sections/InsightsSection";
 import { PricingGuideSection } from "@/components/sections/PricingGuideSection";
 import { FlowSection } from "@/components/sections/FlowSection";
 import { FAQSection } from "@/components/sections/FAQSection";
+import { MiniAppSection } from "@/components/sections/MiniAppSection";
 import { CTASection } from "@/components/sections/CTASection";
 import { PageLayout } from "@/components/layout/PageLayout";
 import {
@@ -40,13 +45,18 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(generateFAQJsonLd(FAQ_DATA)) }}
       />
       <HeroSection />
+      <TrustedBySection />
       <ProblemSection />
+      <VisionSection />
       <ServiceOverviewSection />
       <WorksPreviewSection />
+      <TestimonialsSection />
       <ReasonsSection />
+      <InsightsSection />
       <PricingGuideSection />
       <FlowSection />
       <FAQSection />
+      <MiniAppSection />
       <CTASection />
     </PageLayout>
   );

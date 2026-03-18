@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Noto_Sans_JP } from "next/font/google";
 import "./globals.css";
 import { SmoothScroll } from "@/components/layout/SmoothScroll";
-import { GoogleAnalytics } from "@next/third-parties/google";
+import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
 import Script from "next/script";
 
 const notoSansJP = Noto_Sans_JP({
@@ -74,9 +74,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const gaId = process.env.NEXT_PUBLIC_GA_ID;
+  const gtmId = process.env.NEXT_PUBLIC_GTM_ID;
 
   return (
     <html lang="ja">
+      {gtmId && <GoogleTagManager gtmId={gtmId} />}
       <body className={`${notoSansJP.variable} font-sans antialiased bg-background-alt text-text-primary`}>
         <SmoothScroll>
           {children}

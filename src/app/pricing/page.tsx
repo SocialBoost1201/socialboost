@@ -5,6 +5,7 @@ import { CTASection } from "@/components/sections/CTASection";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import { Metadata } from "next";
 import { CheckCircle2 } from "lucide-react";
+import { PricingComparisonSection } from "@/components/sections/PricingComparisonSection";
 
 export const metadata: Metadata = {
   title: "料金案内",
@@ -137,6 +138,8 @@ export default function PricingPage() {
           </div>
         </Container>
       </section>
+
+      <PricingComparisonSection />
 
       <CTASection />
     </PageLayout>

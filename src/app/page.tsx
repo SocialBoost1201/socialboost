@@ -5,6 +5,7 @@ import { VisionSection } from "@/components/sections/VisionSection";
 import { ServiceOverviewSection } from "@/components/sections/ServiceOverviewSection";
 import { WorksPreviewSection } from "@/components/sections/WorksPreviewSection";
 import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
+import { PricingComparisonSection } from "@/components/sections/PricingComparisonSection";
 import { ReasonsSection } from "@/components/sections/ReasonsSection";
 import { InsightsSection } from "@/components/sections/InsightsSection";
 import { PricingGuideSection } from "@/components/sections/PricingGuideSection";
@@ -51,6 +52,7 @@ export default function Home() {
       <ServiceOverviewSection />
       <WorksPreviewSection />
       <TestimonialsSection />
+      <PricingComparisonSection />
       <ReasonsSection />
       <InsightsSection />
       <PricingGuideSection />

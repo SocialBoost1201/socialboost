@@ -48,8 +48,9 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          # 実行中に発生した不要なファイル（package-lock.json等）を無視して画像のみを対象にする
+          # 画像のみをステージに追加し、それ以外の変更（npm installで生じた変更等）をクリアする
           git add public/images/ai-blogs/*.png
+          git checkout -- .
           if git diff --staged --quiet; then
             echo "No new thumbnails to commit."
           else

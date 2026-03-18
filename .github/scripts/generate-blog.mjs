@@ -284,7 +284,10 @@ async function generateThumbnail(imagePrompt, slug) {
   const filePath = path.join(dir, `${slug}.png`);
   fs.writeFileSync(filePath, buffer);
   
-  return `/images/ai-blogs/${slug}.png`;
+  return {
+    localPath: `/images/ai-blogs/${slug}.png`,
+    publicUrl: imageUrl // Instagram投稿用にDALL-Eの一時公開URLも返す
+  };
 }
 
 // ============================================================
@@ -384,6 +387,62 @@ async function postToX(article, slug) {
 }
 
 // ============================================================
+// Instagram 自動投稿 (Graph API)
+// ============================================================
+async function postToInstagram(article, slug, imageUrl) {
+  const { IG_USER_ID, IG_ACCESS_TOKEN } = process.env;
+  if (!IG_USER_ID || !IG_ACCESS_TOKEN) {
+    console.log("ℹ️ Instagram (Graph API) の認証情報が未設定のため、Instagram連携はスキップします。");
+    return;
+  }
+  if (!imageUrl) {
+    console.log("⚠️ Instagram投稿用の公開画像URLがないためスキップします。");
+    return;
+  }
+
+  try {
+    const caption = `【新着記事のご案内】\n\n「${article.title}」\n\n${article.description}\n\n詳細はこちら👇\nhttps://socialboost.jp/blog/${slug}\n\n#SocialBoost #Web制作 #システム開発 #DX推進`;
+
+    // 1. 画像コンテナを作成
+    const containerRes = await fetch(`https://graph.facebook.com/v19.0/${IG_USER_ID}/media`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        image_url: imageUrl,
+        caption: caption,
+        access_token: IG_ACCESS_TOKEN,
+      }),
+    });
+
+    const containerData = await containerRes.json();
+    if (!containerRes.ok || containerData.error) {
+      throw new Error(containerData.error?.message || "コンテナ作成失敗");
+    }
+
+    const creationId = containerData.id;
+
+    // 2. コンテナを公開
+    const publishRes = await fetch(`https://graph.facebook.com/v19.0/${IG_USER_ID}/media_publish`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        creation_id: creationId,
+        access_token: IG_ACCESS_TOKEN,
+      }),
+    });
+
+    const publishData = await publishRes.json();
+    if (!publishRes.ok || publishData.error) {
+      throw new Error(publishData.error?.message || "メディア公開失敗");
+    }
+
+    console.log(`📸 Instagram に自動投稿しました (ID: ${publishData.id})`);
+  } catch (err) {
+    console.error("⚠️ Instagramへの投稿に失敗しました:", err.message);
+  }
+}
+
+// ============================================================
 // メイン処理
 // ============================================================
 async function main() {
@@ -401,24 +460,27 @@ async function main() {
 
   // 2. DALL-E 3 画像生成
   console.log("🎨 OpenAI API (dall-e-3) でサムネイル画像を生成中...");
-  let thumbnailUrl = null;
+  let thumbnailData = null;
   try {
     const imageConcept = article.thumbnail_prompt || keyword;
-    thumbnailUrl = await generateThumbnail(imageConcept, slug);
-    console.log(`🖼 画像を保存しました: ${thumbnailUrl}`);
+    thumbnailData = await generateThumbnail(imageConcept, slug);
+    console.log(`🖼 画像を保存しました: ${thumbnailData.localPath}`);
   } catch (err) {
     console.error("⚠️ サムネイル生成に失敗しました（スキップします）:", err.message);
   }
 
   // 3. microCMS に投稿
   console.log("📤 microCMSに投稿中...");
-  await postToMicroCMS(article, keyword, slug, thumbnailUrl);
+  await postToMicroCMS(article, keyword, slug, thumbnailData?.localPath);
 
   // 4. SEO Ping
   await pingGoogle();
 
   // 5. X (Twitter) へ自動連携
   await postToX(article, slug);
+
+  // 6. Instagram へ自動連携
+  await postToInstagram(article, slug, thumbnailData?.publicUrl);
 
   console.log("🎉 生成完了！この後GitHub Actionが画像をコミット＆プッシュします");
 }

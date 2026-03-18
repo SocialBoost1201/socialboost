@@ -193,7 +193,7 @@ async function postToMicroCMS(article, keyword, slug, thumbnailUrl) {
     category,
     description: article.description,
     body: article.body,
-    tags: article.tags ?? [],
+    tags: (article.tags ?? []).join(", "),
     author: "SocialBoost 編集部（AI生成）",
     readTime: article.readTime ?? "約3分",
     ...(thumbnailUrl && { thumbnail_url: thumbnailUrl }), // GitHub画像のパスを格納する

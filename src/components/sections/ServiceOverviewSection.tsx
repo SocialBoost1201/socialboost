@@ -55,19 +55,22 @@ export function ServiceOverviewSection() {
           {services.map((service, i) => (
             <AnimatedSection key={service.title} delay={i * 0.1}>
               <Link href={service.href} className="group block h-full">
-                <div className="flex h-full flex-col rounded-2xl bg-white p-8 shadow-sm ring-1 ring-gray-100 transition-all duration-300 hover:-translate-y-1 hover:shadow-md hover:ring-brand-primary/30 relative overflow-hidden">
-                  <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-xl bg-brand-light text-brand-primary transition-colors group-hover:bg-brand-primary group-hover:text-white">
-                    <service.icon className="h-7 w-7" />
+                <div className="flex h-full flex-col rounded-3xl bg-linear-to-br from-brand-primary/90 to-brand-navy p-10 shadow-lg ring-1 ring-white/10 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:ring-brand-light/50 relative overflow-hidden group-hover:from-brand-primary group-hover:to-[#121c32]">
+                  {/* 背景の装飾エフェクト */}
+                  <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-white/5 blur-3xl transition-transform duration-700 group-hover:scale-150"></div>
+                  
+                  <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-white/10 text-white backdrop-blur-sm transition-colors group-hover:bg-white group-hover:text-brand-primary border border-white/20">
+                    <service.icon className="h-8 w-8" />
                   </div>
-                  <h3 className="mb-4 text-xl font-bold text-text-primary">
+                  <h3 className="mb-4 text-2xl font-bold text-white tracking-wide">
                     {service.title}
                   </h3>
-                  <p className="mb-8 text-sm leading-relaxed text-text-secondary flex-1">
+                  <p className="mb-8 text-base leading-relaxed text-gray-200 flex-1">
                     {service.description}
                   </p>
-                  <div className="mt-auto flex items-center text-sm font-semibold text-brand-primary">
+                  <div className="mt-auto flex items-center text-sm font-bold text-white border-t border-white/20 pt-6 group-hover:text-brand-light transition-colors">
                     詳細を見る
-                    <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-2" />
                   </div>
                 </div>
               </Link>

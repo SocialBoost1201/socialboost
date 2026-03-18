@@ -41,8 +41,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       url: `https://socialboost.jp/blog/${slug}`,
       type: "article",
       publishedTime: blog.publishedAt,
-      ...(blog.thumbnail && {
-        images: [{ url: blog.thumbnail.url, width: blog.thumbnail.width, height: blog.thumbnail.height }],
+      ...((blog.thumbnail || blog.thumbnail_url) && {
+        images: blog.thumbnail 
+          ? [{ url: blog.thumbnail.url, width: blog.thumbnail.width, height: blog.thumbnail.height }]
+          : [{ url: `https://socialboost.jp${blog.thumbnail_url}`, width: 1200, height: 630 }],
       }),
     },
     alternates: { canonical: `https://socialboost.jp/blog/${slug}` },
@@ -79,7 +81,9 @@ export default async function BlogDetailPage({ params }: Props) {
               url: "https://socialboost.jp",
             },
             url: `https://socialboost.jp/blog/${slug}`,
-            ...(blog.thumbnail && { image: blog.thumbnail.url }),
+            ...((blog.thumbnail || blog.thumbnail_url) && { 
+              image: blog.thumbnail ? blog.thumbnail.url : `https://socialboost.jp${blog.thumbnail_url}` 
+            }),
           }),
         }}
       />
@@ -133,12 +137,12 @@ export default async function BlogDetailPage({ params }: Props) {
       </section>
 
       {/* Thumbnail */}
-      {blog.thumbnail && (
+      {(blog.thumbnail || blog.thumbnail_url) && (
         <div className="bg-white border-b border-gray-100">
           <Container className="py-8">
             <div className="max-w-3xl mx-auto relative aspect-video rounded-2xl overflow-hidden shadow-md">
               <Image
-                src={blog.thumbnail.url}
+                src={blog.thumbnail ? blog.thumbnail.url : blog.thumbnail_url!}
                 alt={blog.title}
                 fill
                 sizes="(max-width: 768px) 100vw, 800px"

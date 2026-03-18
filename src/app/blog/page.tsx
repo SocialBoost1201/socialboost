@@ -64,7 +64,7 @@ async function getBlogs() {
       description: b.description,
       category: b.category,
       publishedAt: b.publishedAt,
-      thumbnail: b.thumbnail,
+      thumbnail: b.thumbnail_url ? { url: b.thumbnail_url } : b.thumbnail,
     }));
   } catch {
     return MOCK;

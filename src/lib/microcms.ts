@@ -36,7 +36,8 @@ export type MicroCMSBlog = {
   category: string;
   description: string;   // メタディスクリプション・リード文
   body: string;          // HTML本文
-  thumbnail?: { url: string; height: number; width: number };
+  thumbnail?: { url: string; height: number; width: number }; // 既存の画像アップロード用
+  thumbnail_url?: string; // GitHub自動コミット時のURL指定用（テキスト）
   tags?: string[];       // タグ（事実上のstring[]・タグ配列）
   author?: string;       // 著者名
   readTime?: string;     // "約2分"  

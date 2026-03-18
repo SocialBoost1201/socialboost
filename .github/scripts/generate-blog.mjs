@@ -8,6 +8,8 @@
  *   - MICROCMS_API_KEY
  *   - MANUAL_KEYWORD (任意: workflow_dispatch時に手動指定)
  */
+import fs from "fs";
+import path from "path";
 
 // ============================================================
 // キーワードリスト（週次でローテーション）
@@ -61,7 +63,7 @@ function detectCategory(keyword) {
   return "Webサイト制作";
 }
 
-function generateSlug(title) {
+function generateSlug() {
   const date = new Date().toISOString().split("T")[0]; // 2026-03-18
   const random = Math.random().toString(36).substring(2, 6);
   return `blog-${date}-${random}`;
@@ -75,7 +77,7 @@ function pickKeyword() {
 }
 
 // ============================================================
-// OpenAI API で記事生成
+// OpenAI API で記事生成 (テキスト)
 // ============================================================
 async function generateArticle(keyword) {
   const systemPrompt = `あなたはSocialBoost（デジタル戦略パートナー）の専門コンテンツライターです。
@@ -129,9 +131,53 @@ JSON形式：
 }
 
 // ============================================================
+// DALL-E 3 でアイキャッチ画像（サムネイル）生成
+// ============================================================
+async function generateThumbnail(keyword, slug) {
+  const prompt = `A modern, high-quality flat vector illustration representing the business concept of "${keyword}". Clean, corporate, minimalist style, suitable for a BtoB IT tech or digital strategy blog. Use a sophisticated color palette featuring deep navy blues, bright electric blues, and subtle emerald green accents. NO TEXT in the image.`;
+  
+  const res = await fetch("https://api.openai.com/v1/images/generations", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`,
+    },
+    body: JSON.stringify({
+      model: "dall-e-3",
+      prompt,
+      size: "1024x1024",
+      quality: "standard",
+      n: 1,
+    }),
+  });
+
+  if (!res.ok) {
+    const err = await res.text();
+    throw new Error(`DALL-E 3 API error: ${res.status} ${err}`);
+  }
+
+  const json = await res.json();
+  const imageUrl = json.data[0].url;
+
+  // ダウンロードしてローカルに保存
+  const imgRes = await fetch(imageUrl);
+  const arrayBuffer = await imgRes.arrayBuffer();
+  const buffer = Buffer.from(arrayBuffer);
+
+  const dir = path.join(process.cwd(), 'public', 'images', 'ai-blogs');
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
+  }
+  const filePath = path.join(dir, `${slug}.png`);
+  fs.writeFileSync(filePath, buffer);
+  
+  return `/images/ai-blogs/${slug}.png`;
+}
+
+// ============================================================
 // microCMS に投稿
 // ============================================================
-async function postToMicroCMS(article, keyword) {
+async function postToMicroCMS(article, keyword, slug, thumbnailUrl) {
   const serviceDomain = process.env.MICROCMS_SERVICE_DOMAIN;
   const apiKey = process.env.MICROCMS_API_KEY;
 
@@ -139,7 +185,6 @@ async function postToMicroCMS(article, keyword) {
     throw new Error("MICROCMS_SERVICE_DOMAIN or MICROCMS_API_KEY is not set");
   }
 
-  const slug = generateSlug(article.title);
   const category = detectCategory(keyword);
 
   const payload = {
@@ -151,6 +196,7 @@ async function postToMicroCMS(article, keyword) {
     tags: article.tags ?? [],
     author: "SocialBoost 編集部（AI生成）",
     readTime: article.readTime ?? "約3分",
+    ...(thumbnailUrl && { thumbnail_url: thumbnailUrl }), // GitHub画像のパスを格納する
   };
 
   const res = await fetch(`https://${serviceDomain}.microcms.io/api/v1/blogs`, {
@@ -181,14 +227,28 @@ async function main() {
   const keyword = pickKeyword();
   console.log(`📝 キーワード: ${keyword}`);
 
-  console.log("⏳ OpenAI APIで記事生成中...");
+  const slug = generateSlug();
+
+  // 1. テキスト記事生成
+  console.log("⏳ OpenAI API (gpt-4o-mini) で記事生成中...");
   const article = await generateArticle(keyword);
   console.log(`✍️ 記事タイトル: ${article.title}`);
 
-  console.log("📤 microCMSに投稿中...");
-  await postToMicroCMS(article, keyword);
+  // 2. DALL-E 3 画像生成
+  console.log("🎨 OpenAI API (dall-e-3) でサムネイル画像を生成中...");
+  let thumbnailUrl = null;
+  try {
+    thumbnailUrl = await generateThumbnail(keyword, slug);
+    console.log(`🖼 画像を保存しました: ${thumbnailUrl}`);
+  } catch (err) {
+    console.error("⚠️ サムネイル生成に失敗しました（スキップします）:", err.message);
+  }
 
-  console.log("🎉 完了！Vercel Deploy Hook でサイトが自動更新されます");
+  // 3. microCMS に投稿
+  console.log("📤 microCMSに投稿中...");
+  await postToMicroCMS(article, keyword, slug, thumbnailUrl);
+
+  console.log("🎉 生成完了！この後GitHub Actionが画像をコミット＆プッシュします");
 }
 
 main().catch((err) => {

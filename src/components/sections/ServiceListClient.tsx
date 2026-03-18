@@ -144,7 +144,7 @@ function ServiceBlock({ service, Icon, bgText, isEven, index }: any) {
         </div>
 
         {/* Deliverables Card */}
-        <div className="bg-white/60 backdrop-blur-xl border border-white/50 shadow-[0_8px_30px_rgb(0,0,0,0.04)] p-8 md:p-10 rounded-3xl relative overflow-hidden group hover:border-brand-primary/20 transition-colors mt-4 md:mt-12 lg:ml-12">
+        <div className="bg-white/60 backdrop-blur-xl border border-white/50 shadow-[0_8px_30px_rgb(0,0,0,0.04)] p-8 md:p-10 rounded-3xl relative overflow-hidden group hover:border-brand-primary/20 transition-colors mt-4 md:mt-12">
           <div className="absolute bottom-0 right-0 w-40 h-40 bg-brand-primary/10 rounded-full blur-3xl translate-y-1/2 translate-x-1/2" />
           
           <h3 className="font-extrabold text-text-primary mb-8 flex items-center gap-3">

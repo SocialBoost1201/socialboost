@@ -86,14 +86,13 @@ export function Header() {
         )}
       >
         <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-5 md:px-8">
-          <Link href="/" className="flex items-center space-x-3 transition-opacity hover:opacity-80" onClick={() => setIsMobileMenuOpen(false)}>
-            <div className="flex h-9 w-9 md:h-11 md:w-11 shrink-0 items-center justify-center rounded-full border border-gray-200 bg-white shadow-sm overflow-hidden p-1">
+          <Link href="/" className="inline-flex items-center space-x-3 transition-opacity hover:opacity-80" onClick={() => setIsMobileMenuOpen(false)}>
+            <div className="relative h-10 w-10 md:h-12 md:w-12 shrink-0">
               <Image
                 src="/web-app-manifest-512x512.png"
-                alt=""
-                width={40}
-                height={40}
-                className="h-full w-full object-contain rounded-full"
+                alt="SocialBoost Logo"
+                fill
+                className="object-contain"
                 priority
               />
             </div>

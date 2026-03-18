@@ -82,10 +82,10 @@ export default async function WorksPage() {
                             </span>
                           )}
                         </div>
-                        <h3 className="text-lg font-bold text-text-primary mb-4 leading-snug group-hover:text-brand-primary transition-colors">
+                        <h3 className="text-lg md:text-xl lg:text-2xl font-bold text-text-primary mb-4 leading-snug text-left group-hover:text-brand-primary transition-colors">
                           {work.title}
                         </h3>
-                        <p className="text-sm text-text-secondary line-clamp-2 mb-6">
+                        <p className="text-sm md:text-base text-text-secondary line-clamp-2 mb-6 text-left">
                           {work.summary}
                         </p>
                         
@@ -106,7 +106,7 @@ export default async function WorksPage() {
                     </div>
                     <div className="flex flex-col flex-1 p-6 md:p-8">
                       <div className="text-xs font-bold text-gray-400 mb-2 truncate">{work.title.split(' ')[0]}</div>
-                      <h3 className="text-lg font-bold text-text-primary mb-6 leading-snug group-hover:text-brand-primary transition-colors">
+                      <h3 className="text-lg md:text-xl lg:text-2xl font-bold text-text-primary mb-6 leading-snug text-left group-hover:text-brand-primary transition-colors">
                         {work.shortDesc || work.title}
                       </h3>
                       

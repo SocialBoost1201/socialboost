@@ -60,8 +60,8 @@ export async function WorksPreviewSection({ showMoreButton = false }: { showMore
                         />
                       </div>
                       <div className="flex flex-col flex-1 p-6 md:p-8">
-                        <div className="text-xs font-bold text-gray-500 mb-3">{work.category}</div>
-                        <h3 className="text-lg md:text-xl font-bold text-text-primary mb-6 leading-snug group-hover:text-brand-primary transition-colors">
+                        <div className="text-xs font-bold text-gray-500 mb-3 text-left">{work.category}</div>
+                        <h3 className="text-lg md:text-xl lg:text-2xl font-bold text-text-primary mb-6 leading-snug group-hover:text-brand-primary transition-colors text-left">
                           {work.title}
                         </h3>
                         {/* MicroCMS側の実績データは簡略化表示 */}
@@ -87,8 +87,8 @@ export async function WorksPreviewSection({ showMoreButton = false }: { showMore
                       />
                     </div>
                     <div className="flex flex-col flex-1 p-6 md:p-8">
-                      <div className="text-xs font-bold text-gray-400 mb-2 truncate">{work.title.split(' ')[0]}</div>
-                      <h3 className="text-lg font-bold text-text-primary mb-6 leading-snug group-hover:text-brand-primary transition-colors">
+                      <div className="text-xs font-bold text-gray-400 mb-2 truncate text-left">{work.title.split(' ')[0]}</div>
+                      <h3 className="text-lg md:text-xl lg:text-2xl font-bold text-text-primary mb-6 leading-snug group-hover:text-brand-primary transition-colors text-left">
                         {work.shortDesc || work.title}
                       </h3>
                       

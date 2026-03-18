@@ -8,7 +8,7 @@ import { WORKS_DATA, getWorkBySlug } from "@/lib/works";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { FileText, ArrowLeft, CheckCircle2, ArrowRight, ExternalLink } from "lucide-react";
+import { FileText, ArrowLeft, CheckCircle2, ArrowRight, ExternalLink, Quote, Clock, Users, Wrench } from "lucide-react";
 import { Metadata } from "next";
 import { generateBreadcrumbJsonLd } from "@/lib/jsonld";
 import { WorkGallery } from "@/components/sections/WorkGallery";
@@ -29,6 +29,12 @@ type UnifiedWorkDetail = {
   images: string[];
   pdfs: { title: string; url: string }[];
   site_url?: string;
+  // 拡張フィールド
+  kpis?: { value: string; label: string }[];
+  testimonial?: { comment: string; name: string; role: string };
+  techStack?: string[];
+  duration?: string;
+  teamSize?: string;
 };
 
 async function getUnifiedWork(slug: string): Promise<UnifiedWorkDetail | null> {
@@ -163,6 +169,27 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
         </Container>
       </section>
 
+      {/* KPI 数値ハイライト */}
+      {work.kpis && work.kpis.length > 0 && (
+        <section className="bg-brand-navy py-12 md:py-16">
+          <Container>
+            <div className={`grid gap-8 ${
+              work.kpis.length === 3 ? 'grid-cols-3' :
+              work.kpis.length === 2 ? 'grid-cols-2' : 'grid-cols-1'
+            } max-w-3xl mx-auto`}>
+              {work.kpis.map((kpi, i) => (
+                <div key={i} className="text-center">
+                  <div className="text-4xl md:text-5xl font-black text-white tracking-tight mb-2">
+                    {kpi.value}
+                  </div>
+                  <div className="text-sm md:text-base text-gray-300 font-medium">{kpi.label}</div>
+                </div>
+              ))}
+            </div>
+          </Container>
+        </section>
+      )}
+
       <Container className="py-20 md:py-32">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
           
@@ -230,6 +257,28 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
               </AnimatedSection>
             )}
 
+            {/* Testimonial (お客様の声) */}
+            {work.testimonial && (
+              <AnimatedSection>
+                <h2 className="text-2xl font-bold text-text-primary mb-8 border-b-2 border-brand-primary pb-4 inline-block">お客様の声</h2>
+                <div className="bg-brand-light/30 border border-brand-primary/15 rounded-3xl p-8 md:p-10 relative">
+                  <Quote className="absolute top-6 left-6 w-8 h-8 text-brand-primary/20" />
+                  <p className="text-text-primary text-lg leading-relaxed font-medium mb-8 pl-4">
+                    &ldquo;{work.testimonial.comment}&rdquo;
+                  </p>
+                  <div className="flex items-center gap-4 pl-4">
+                    <div className="w-10 h-10 rounded-full bg-brand-primary flex items-center justify-center text-white font-black text-sm shrink-0">
+                      {work.testimonial.name.charAt(0)}
+                    </div>
+                    <div>
+                      <div className="font-bold text-text-primary">{work.testimonial.name}</div>
+                      <div className="text-sm text-text-secondary">{work.testimonial.role}</div>
+                    </div>
+                  </div>
+                </div>
+              </AnimatedSection>
+            )}
+
             {/* Document / PDF List */}
             {work.pdfs.length > 0 && (
               <AnimatedSection>
@@ -271,6 +320,29 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
                     制作したサイトを開く
                     <ExternalLink className="h-5 w-5 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
                   </a>
+                </AnimatedSection>
+              )}
+
+              {/* 制作期間・体制 */}
+              {(work.duration || work.teamSize) && (
+                <AnimatedSection delay={0.15} className="bg-white p-6 rounded-2xl shadow-sm ring-1 ring-gray-100">
+                  <h3 className="text-sm font-bold text-text-secondary mb-4 uppercase tracking-wider">プロジェクト概要</h3>
+                  <div className="space-y-3">
+                    {work.duration && (
+                      <div className="flex items-center gap-3 text-sm">
+                        <Clock className="w-4 h-4 text-brand-primary shrink-0" />
+                        <span className="text-text-secondary font-medium">制作期間：</span>
+                        <span className="font-bold text-text-primary">{work.duration}</span>
+                      </div>
+                    )}
+                    {work.teamSize && (
+                      <div className="flex items-center gap-3 text-sm">
+                        <Users className="w-4 h-4 text-brand-primary shrink-0" />
+                        <span className="text-text-secondary font-medium">体制：</span>
+                        <span className="font-bold text-text-primary">{work.teamSize}</span>
+                      </div>
+                    )}
+                  </div>
                 </AnimatedSection>
               )}
 

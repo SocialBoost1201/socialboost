@@ -1,3 +1,14 @@
+export type KpiStat = {
+  value: string; // "2.5x" "60h" "+40%"
+  label: string; // "エントリー数増加" "月間工数削減"
+};
+
+export type Testimonial = {
+  comment: string;
+  name: string;    // 例: "山田様"
+  role: string;    // 例: "代表取締役"
+};
+
 export type WorkDetail = {
   slug: string;
   title: string;
@@ -12,6 +23,13 @@ export type WorkDetail = {
   results: string[];
   images: string[];
   pdfs: { title: string; url: string }[];
+  // --- 追加フィールド ---
+  kpis?: KpiStat[];           // 数値ハイライト
+  testimonial?: Testimonial;  // お客様の声
+  techStack?: string[];       // 使用技術スタック
+  duration?: string;          // 制作期間 ("約2ヶ月")
+  teamSize?: string;          // 規模 ("2名")
+  site_url?: string;          // 公開URL
 };
 
 export const WORKS_DATA: WorkDetail[] = [
@@ -48,7 +66,20 @@ export const WORKS_DATA: WorkDetail[] = [
       "/images/works-corporate-site.png",
       "/images/hero-visual.png",
     ],
-    pdfs: []
+    pdfs: [],
+    kpis: [
+      { value: "2.5x", label: "エントリー数増加" },
+      { value: "+15%", label: "商談化率向上" },
+      { value: "1.5ヶ月", label: "公開までの期間" },
+    ],
+    testimonial: {
+      comment: "ただ「きれいなサイト」を作るだけでなく、採用や営業にどう繋げるかを一緒に設計してくれたことが、他の会社との大きな違いでした。リニューアル後の反響は想定以上で、依頼して本当に良かったです。",
+      name: "山田 様",
+      role: "代表取締役"
+    },
+    techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "microCMS"],
+    duration: "約1.5ヶ月",
+    teamSize: "2名（ディレクター + エンジニア）",
   },
   {
     slug: "booking-system",
@@ -84,7 +115,20 @@ export const WORKS_DATA: WorkDetail[] = [
     ],
     pdfs: [
       { title: "システム導入による業務改善レポート(PDF表示サンプル)", url: "/sample-report.pdf" }
-    ]
+    ],
+    kpis: [
+      { value: "60h", label: "月間工数削減" },
+      { value: "▲50%", label: "キャンセル率削減" },
+      { value: "3ヶ月", label: "開発〜導入期間" },
+    ],
+    testimonial: {
+      comment: "SaaSの組み合わせで乗り切ろうとしていましたが、限界を感じていました。スクラッチ開発は怖かったですが、要件定義から丁寧に伴走していただき、スタッフ全員が使いこなせるシステムができました。",
+      name: "鈴木 様",
+      role: "店舗統括マネージャー"
+    },
+    techStack: ["Next.js", "Supabase", "PostgreSQL", "LINE Messaging API", "Vercel"],
+    duration: "約3ヶ月",
+    teamSize: "3名（PM + フロント + バックエンド）",
   },
   {
     slug: "ai-knowledge-base",
@@ -118,7 +162,20 @@ export const WORKS_DATA: WorkDetail[] = [
     images: [
       "/images/works-ai-system.png"
     ],
-    pdfs: []
+    pdfs: [],
+    kpis: [
+      { value: "▲40%", label: "ヘルプデスク工数削減" },
+      { value: "300+", label: "学習ドキュメント数" },
+      { value: "2ヶ月", label: "PoC〜本番稼働" },
+    ],
+    testimonial: {
+      comment: "「AIを入れれば便利になる」という漠然としたイメージを、実際に価値の出る形に具体化してくれました。社員がAIを積極的に使うようになった文化変容が、一番大きな成果だと感じています。",
+      name: "佐藤 様",
+      role: "情報システム部 部長"
+    },
+    techStack: ["Azure OpenAI", "Langchain", "Pinecone", "Slack API", "Python", "Next.js"],
+    duration: "約2ヶ月",
+    teamSize: "2名（AIエンジニア + PMディレクター）",
   }
 ];
 

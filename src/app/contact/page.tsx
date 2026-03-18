@@ -9,6 +9,13 @@ import { Send, Clock, Phone, Mail } from "lucide-react";
 import React, { useState } from "react";
 import { generateContactPageJsonLd } from "@/lib/jsonld";
 
+// GA4 gtag グローバル型宣言
+declare global {
+  interface Window {
+    gtag?: (...args: unknown[]) => void;
+  }
+}
+
 export default function ContactPage() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -42,7 +49,15 @@ export default function ContactPage() {
       });
 
       if (!res.ok) throw new Error("送信に失敗しました。");
-      
+
+      // GA4 コンバージョンイベント発火
+      if (typeof window !== "undefined" && typeof window.gtag === "function") {
+        window.gtag("event", "generate_lead", {
+          event_category: "contact",
+          event_label: formData.type || "other",
+        });
+      }
+
       setIsSubmitted(true);
       window.scrollTo({ top: 0, behavior: "smooth" });
     } catch (err: unknown) {

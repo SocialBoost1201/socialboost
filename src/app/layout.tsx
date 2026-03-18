@@ -73,6 +73,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const gaId = process.env.NEXT_PUBLIC_GA_ID;
+
   return (
     <html lang="ja">
       <body className={`${notoSansJP.variable} font-sans antialiased bg-background-alt text-text-primary`}>
@@ -80,7 +82,7 @@ export default function RootLayout({
           {children}
         </SmoothScroll>
       </body>
-      <GoogleAnalytics gaId="G-Y986CYNENJ" />
+      {gaId && <GoogleAnalytics gaId={gaId} />}
       <Script
         id="microsoft-clarity"
         strategy="afterInteractive"

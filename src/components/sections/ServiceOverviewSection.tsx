@@ -65,7 +65,7 @@ export function ServiceOverviewSection() {
                   <h3 className="mb-4 text-2xl font-bold text-white tracking-wide">
                     {service.title}
                   </h3>
-                  <p className="mb-8 text-base leading-relaxed text-gray-200 flex-1">
+                  <p className="mb-8 text-base leading-relaxed text-white/90 flex-1">
                     {service.description}
                   </p>
                   <div className="mt-auto flex items-center text-sm font-bold text-white border-t border-white/20 pt-6 group-hover:text-brand-light transition-colors">

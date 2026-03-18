@@ -144,7 +144,7 @@ export function HeroSection() {
                     </div>
                     <div>
                       <div className="text-white font-bold text-sm">SocialBoost</div>
-                      <div className="text-gray-400 text-xs">Digital Strategy Partner</div>
+                      <div className="text-gray-300 text-xs">Digital Strategy Partner</div>
                     </div>
                     <div className="ml-auto flex gap-1.5">
                       <div className="w-2.5 h-2.5 rounded-full bg-red-400/70" />

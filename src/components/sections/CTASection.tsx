@@ -13,7 +13,7 @@ export function CTASection() {
         <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-6 leading-tight">
           事業の成長を、<br className="md:hidden" />デジタルの力で加速させる
         </h2>
-        <p className="text-lg md:text-xl text-blue-100 mb-10 max-w-2xl mx-auto leading-relaxed">
+        <p className="text-lg md:text-xl text-white/90 mb-10 max-w-2xl mx-auto leading-relaxed">
           Webサイト制作からシステム開発、AI導入まで。要件が固まっていなくてもお気軽にご相談ください。最適なロードマップをご提案します。
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -30,7 +30,7 @@ export function CTASection() {
             </Link>
           </Button>
         </div>
-        <p className="mt-8 text-sm text-blue-200">
+        <p className="mt-8 text-sm text-white/70">
           オンライン相談（Zoom対応） / ご相談・お見積もり無料
         </p>
       </Container>

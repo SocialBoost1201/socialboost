@@ -16,11 +16,11 @@ export function VisionSection() {
             </span>
             <h2 className="text-3xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-12 tracking-tight">
               作るだけではなく、<br className="hidden md:block" />
-              事業を<span className="text-brand-accent">加速</span>させるパートナー。
+              事業を<span className="text-yellow-300">加速</span>させるパートナー。
             </h2>
           </AnimatedSection>
           
-          <AnimatedSection delay={0.2} className="space-y-6 text-lg md:text-xl text-brand-light/90 leading-relaxed font-medium">
+          <AnimatedSection delay={0.2} className="space-y-6 text-lg md:text-xl text-white/90 leading-relaxed font-medium">
             <p>
               私たちは単なるWeb制作会社ではありません。
             </p>

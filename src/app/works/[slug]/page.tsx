@@ -71,12 +71,13 @@ async function getUnifiedWork(slug: string): Promise<UnifiedWorkDetail | null> {
 }
 
 type Props = {
-  params: { slug: string };
-  searchParams: { [key: string]: string | string[] | undefined };
+  params: Promise<{ slug: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const work = await getUnifiedWork(params.slug);
+  const { slug } = await params;
+  const work = await getUnifiedWork(slug);
   if (!work) return { title: "Not Found" };
   
   return {
@@ -85,12 +86,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: `${work.title} | 実績 | SocialBoost`,
       description: work.shortDesc,
-      url: `https://socialboost.jp/works/${params.slug}`,
+      url: `https://socialboost.jp/works/${slug}`,
       type: "article",
       images: [{ url: work.thumbnail, width: 800, height: 600, alt: work.title }],
     },
     alternates: {
-      canonical: `https://socialboost.jp/works/${params.slug}`,
+      canonical: `https://socialboost.jp/works/${slug}`,
     },
   };
 }
@@ -101,8 +102,9 @@ export function generateStaticParams() {
   }));
 }
 
-export default async function WorkDetailPage({ params }: { params: { slug: string } }) {
-  const work = await getUnifiedWork(params.slug);
+export default async function WorkDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const work = await getUnifiedWork(slug);
   
   if (!work) {
     notFound();

@@ -6,15 +6,7 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "特定商取引法に基づく表記",
-  description: "SocialBoostの特定商取引法に基づく表記に関するページです。",
-  openGraph: {
-    title: "特定商取引法に基づく表記 | SocialBoost",
-    description: "SocialBoostの特定商取引法に基づく表記に関するページです。",
-    url: "https://socialboost.jp/legal/tokushoho",
-  },
-  alternates: {
-    canonical: "https://socialboost.jp/legal/tokushoho",
-  },
+  description: "SocialBoostの特定商取引法に基づく表記です。",
 };
 
 export default function TokushohoPage() {
@@ -31,93 +23,96 @@ export default function TokushohoPage() {
       </div>
 
       <Container className="py-16 md:py-24">
-        <AnimatedSection className="max-w-4xl mx-auto bg-white p-8 md:p-12 rounded-3xl shadow-sm ring-1 ring-gray-100">
-          <div className="prose prose-blue max-w-none text-text-secondary">
-            <dl className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-2 border-b border-gray-100 pb-4">
-                <dt className="font-bold text-text-primary md:mt-1">事業者の種別</dt>
-                <dd className="md:col-span-2 text-text-secondary leading-relaxed">個人事業主</dd>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-2 border-b border-gray-100 pb-4">
-                <dt className="font-bold text-text-primary md:mt-1">事業者名</dt>
-                <dd className="md:col-span-2 text-text-secondary leading-relaxed">SocialBoost</dd>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-2 border-b border-gray-100 pb-4">
-                <dt className="font-bold text-text-primary md:mt-1">代表者名</dt>
-                <dd className="md:col-span-2 text-text-secondary leading-relaxed">眞如 匠馬</dd>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-2 border-b border-gray-100 pb-4">
-                <dt className="font-bold text-text-primary md:mt-1">開業年月</dt>
-                <dd className="md:col-span-2 text-text-secondary leading-relaxed">2025年10月</dd>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-2 border-b border-gray-100 pb-4">
-                <dt className="font-bold text-text-primary md:mt-1">所在地</dt>
-                <dd className="md:col-span-2 text-text-secondary leading-relaxed">
-                  〒244-0003<br />
-                  神奈川県横浜市戸塚区戸塚町4170<br />
-                  高橋ビル1F
-                </dd>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-2 border-b border-gray-100 pb-4">
-                <dt className="font-bold text-text-primary md:mt-1">電話番号</dt>
-                <dd className="md:col-span-2 text-text-secondary leading-relaxed">
-                  070-9175-3590<br />
-                  <span className="text-sm">※お問い合わせにつきましては、行き違い等を防ぐため、原則としてお問い合わせフォームまたはメールにてお願いしております。</span>
-                </dd>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-2 border-b border-gray-100 pb-4">
-                <dt className="font-bold text-text-primary md:mt-1">メールアドレス</dt>
-                <dd className="md:col-span-2 text-text-secondary leading-relaxed">info@socialboost.jp</dd>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-2 border-b border-gray-100 pb-4">
-                <dt className="font-bold text-text-primary md:mt-1">販売価格（役務の対価）</dt>
-                <dd className="md:col-span-2 text-text-secondary leading-relaxed">
-                  各サービス・お見積りごとに個別に設定いたします。<br />
-                  詳細はヒアリング後、お見積書にてご提示いたします。
-                </dd>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-2 border-b border-gray-100 pb-4">
-                <dt className="font-bold text-text-primary md:mt-1">商品代金以外の必要料金</dt>
-                <dd className="md:col-span-2 text-text-secondary leading-relaxed">
-                  ・銀行振込の場合：振込手数料<br />
-                  ・サーバー、ドメイン等のインフラ利用料（お客様にて直接ご契約いただく場合を除く）
-                </dd>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-2 border-b border-gray-100 pb-4">
-                <dt className="font-bold text-text-primary md:mt-1">お支払方法</dt>
-                <dd className="md:col-span-2 text-text-secondary leading-relaxed">銀行振込</dd>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-2 border-b border-gray-100 pb-4">
-                <dt className="font-bold text-text-primary md:mt-1">お支払時期</dt>
-                <dd className="md:col-span-2 text-text-secondary leading-relaxed">
-                  原則として、ご契約時に着手金（50%）、納品月の月末締めで残金（50%）のご請求となります。<br />
-                  （プロジェクト規模・性質により個別に定める場合がございます）
-                </dd>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-2 border-b border-gray-100 pb-4">
-                <dt className="font-bold text-text-primary md:mt-1">役務の提供時期</dt>
-                <dd className="md:col-span-2 text-text-secondary leading-relaxed">ご契約後、お見積書および契約書にて定めたスケジュールに基づき提供・納品いたします。</dd>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-2 pb-4">
-                <dt className="font-bold text-text-primary md:mt-1">キャンセル・返金について</dt>
-                <dd className="md:col-span-2 text-text-secondary leading-relaxed">
-                  提供する役務（システム開発・Web制作等のデータ制作）という性質上、契約締結後のお客様都合によるキャンセルについては、原則として返金には応じられません。<br />
-                  また、作業着手後の解約につきましては、それまでに発生した実働分の費用をご請求させていただきます。
-                </dd>
-              </div>
-            </dl>
+        <AnimatedSection className="max-w-4xl mx-auto">
+          <div className="bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden">
+            <table className="w-full text-left border-collapse">
+              <tbody>
+                <tr className="border-b border-gray-100">
+                  <th className="py-6 px-6 md:px-8 bg-gray-50/50 w-1/3 text-sm font-bold text-text-primary align-top">
+                    屋号 / サービス名
+                  </th>
+                  <td className="py-6 px-6 md:px-8 text-sm md:text-base text-text-secondary">
+                    SocialBoost（ソーシャルブースト）
+                  </td>
+                </tr>
+                <tr className="border-b border-gray-100">
+                  <th className="py-6 px-6 md:px-8 bg-gray-50/50 w-1/3 text-sm font-bold text-text-primary align-top">
+                    代表者
+                  </th>
+                  <td className="py-6 px-6 md:px-8 text-sm md:text-base text-text-secondary">
+                    眞如 匠馬
+                  </td>
+                </tr>
+                <tr className="border-b border-gray-100">
+                  <th className="py-6 px-6 md:px-8 bg-gray-50/50 w-1/3 text-sm font-bold text-text-primary align-top">
+                    所在地
+                  </th>
+                  <td className="py-6 px-6 md:px-8 text-sm md:text-base text-text-secondary">
+                    〒244-0003<br />
+                    神奈川県横浜市戸塚区戸塚町4170 高橋ビル1F
+                  </td>
+                </tr>
+                <tr className="border-b border-gray-100">
+                  <th className="py-6 px-6 md:px-8 bg-gray-50/50 w-1/3 text-sm font-bold text-text-primary align-top">
+                    電話番号
+                  </th>
+                  <td className="py-6 px-6 md:px-8 text-sm md:text-base text-text-secondary">
+                    070-9175-3590<br />
+                    <span className="text-xs text-gray-400">※営業電話はお断りしております。お問い合わせフォームよりご連絡ください。</span>
+                  </td>
+                </tr>
+                <tr className="border-b border-gray-100">
+                  <th className="py-6 px-6 md:px-8 bg-gray-50/50 w-1/3 text-sm font-bold text-text-primary align-top">
+                    メールアドレス
+                  </th>
+                  <td className="py-6 px-6 md:px-8 text-sm md:text-base text-text-secondary">
+                    info@socialboost.jp
+                  </td>
+                </tr>
+                <tr className="border-b border-gray-100">
+                  <th className="py-6 px-6 md:px-8 bg-gray-50/50 w-1/3 text-sm font-bold text-text-primary align-top">
+                    販売価格
+                  </th>
+                  <td className="py-6 px-6 md:px-8 text-sm md:text-base text-text-secondary">
+                    各サービス・個別お見積りごとに提示いたします。
+                  </td>
+                </tr>
+                <tr className="border-b border-gray-100">
+                  <th className="py-6 px-6 md:px-8 bg-gray-50/50 w-1/3 text-sm font-bold text-text-primary align-top">
+                    商品代金以外の必要料金
+                  </th>
+                  <td className="py-6 px-6 md:px-8 text-sm md:text-base text-text-secondary">
+                    ・消費税（10%）<br />
+                    ・銀行振込手数料<br />
+                    ・サーバー、ドメイン等、外部サービス利用における実費
+                  </td>
+                </tr>
+                <tr className="border-b border-gray-100">
+                  <th className="py-6 px-6 md:px-8 bg-gray-50/50 w-1/3 text-sm font-bold text-text-primary align-top">
+                    お支払い方法
+                  </th>
+                  <td className="py-6 px-6 md:px-8 text-sm md:text-base text-text-secondary">
+                    銀行振込（前払い・着手金、および納品後払い等、契約書にて別途定めます）
+                  </td>
+                </tr>
+                <tr className="border-b border-gray-100">
+                  <th className="py-6 px-6 md:px-8 bg-gray-50/50 w-1/3 text-sm font-bold text-text-primary align-top">
+                    引渡し時期
+                  </th>
+                  <td className="py-6 px-6 md:px-8 text-sm md:text-base text-text-secondary">
+                    機能や要件により大きく異なるため、各案件の契約（業務委託契約書）にて定めた納期に従って引渡しを行います。
+                  </td>
+                </tr>
+                <tr>
+                  <th className="py-6 px-6 md:px-8 bg-gray-50/50 w-1/3 text-sm font-bold text-text-primary align-top">
+                    返品・キャンセルについて
+                  </th>
+                  <td className="py-6 px-6 md:px-8 text-sm md:text-base text-text-secondary">
+                    情報提供サービスおよび役務提供（システム開発・デザイン等の無形商材）の性質上、契約締結後の返品や返金は原則としてお受けできません。契約内容に従い、瑕疵担保責任（契約不適合責任）の範囲内で修正・補修にて対応いたします。
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </AnimatedSection>
       </Container>

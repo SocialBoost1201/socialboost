@@ -332,6 +332,58 @@ async function postToMicroCMS(article, keyword, slug, thumbnailUrl) {
 }
 
 // ============================================================
+// Google Indexing Ping
+// ============================================================
+async function pingGoogle() {
+  try {
+    const sitemapUrl = "https://socialboost.jp/sitemap.xml";
+    const res = await fetch(`https://www.google.com/ping?sitemap=${sitemapUrl}`);
+    if (res.ok) {
+      console.log("🌐 Googleに最新のサイトマップをリクエスト（Ping）しました");
+    } else {
+      console.warn("⚠️ Google Pingに失敗しました:", res.status);
+    }
+  } catch (err) {
+    console.warn("⚠️ Google Ping中にエラー発生:", err.message);
+  }
+}
+
+// ============================================================
+// X (Twitter) 自動投稿
+// ============================================================
+async function postToX(article, slug) {
+  const { TWITTER_API_KEY, TWITTER_API_SECRET, TWITTER_ACCESS_TOKEN, TWITTER_ACCESS_SECRET } = process.env;
+  if (!TWITTER_API_KEY || !TWITTER_API_SECRET || !TWITTER_ACCESS_TOKEN || !TWITTER_ACCESS_SECRET) {
+    console.log("ℹ️ X (Twitter)のAPIキーが未設定のため、SNS連携はスキップします。");
+    return;
+  }
+
+  // OAuth 1.0a署名を自前で行うのは難しいため、twitter-api-v2等のモジュールが通常必要ですが、
+  // GitHub Actions 上で一時的にインストールして実行される想定とします。
+  try {
+    // スクリプト実行時に動的インポート（package.json に無い場合のエラー回避）
+    const { TwitterApi } = await import("twitter-api-v2");
+    
+    const client = new TwitterApi({
+      appKey: TWITTER_API_KEY,
+      appSecret: TWITTER_API_SECRET,
+      accessToken: TWITTER_ACCESS_TOKEN,
+      accessSecret: TWITTER_ACCESS_SECRET,
+    });
+
+    const tweetText = `【新着記事のご案内】\n\n「${article.title}」\n\n${article.description}\n\n詳細はこちら👇\nhttps://socialboost.jp/blog/${slug}\n\n#SocialBoost #Web制作 #システム開発 #DX推進`;
+    await client.v2.tweet(tweetText);
+    console.log("🕊 X (Twitter) に自動投稿しました");
+  } catch (err) {
+    console.error("⚠️ X (Twitter)への投稿に失敗しました:", err.message);
+    // Twitterモジュールが無い場合はインストールガイドを表示
+    if (err.code === 'ERR_MODULE_NOT_FOUND') {
+      console.error("💡 ヒント: auto-blog.yml で 'npm install twitter-api-v2' を実行するように追加してください");
+    }
+  }
+}
+
+// ============================================================
 // メイン処理
 // ============================================================
 async function main() {
@@ -361,6 +413,12 @@ async function main() {
   // 3. microCMS に投稿
   console.log("📤 microCMSに投稿中...");
   await postToMicroCMS(article, keyword, slug, thumbnailUrl);
+
+  // 4. SEO Ping
+  await pingGoogle();
+
+  // 5. X (Twitter) へ自動連携
+  await postToX(article, slug);
 
   console.log("🎉 生成完了！この後GitHub Actionが画像をコミット＆プッシュします");
 }

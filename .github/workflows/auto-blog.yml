@@ -34,7 +34,13 @@ jobs:
           MICROCMS_SERVICE_DOMAIN: ${{ secrets.MICROCMS_SERVICE_DOMAIN }}
           MICROCMS_API_KEY: ${{ secrets.MICROCMS_API_KEY }}
           MANUAL_KEYWORD: ${{ inputs.keyword }}
-        run: node .github/scripts/generate-blog.mjs
+          TWITTER_API_KEY: ${{ secrets.TWITTER_API_KEY }}
+          TWITTER_API_SECRET: ${{ secrets.TWITTER_API_SECRET }}
+          TWITTER_ACCESS_TOKEN: ${{ secrets.TWITTER_ACCESS_TOKEN }}
+          TWITTER_ACCESS_SECRET: ${{ secrets.TWITTER_ACCESS_SECRET }}
+        run: |
+          npm install twitter-api-v2
+          node .github/scripts/generate-blog.mjs
 
       - name: Commit and Push AI Thumbnail
         run: |

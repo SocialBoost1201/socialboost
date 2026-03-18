@@ -55,6 +55,10 @@ export const metadata: Metadata = {
     description: SITE_DESCRIPTION,
     images: ["/og-image.png"],
   },
+  icons: {
+    icon: "/round-favicon.png?v=round-cache-bypass",
+    apple: "/round-apple-icon.png?v=round-cache-bypass",
+  },
   alternates: {
     canonical: SITE_URL,
   },

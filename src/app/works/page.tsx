@@ -7,6 +7,7 @@ import { Card, CardContent, CardTitle, CardDescription, CardCategoryBadge, CardI
 import { WORKS_DATA } from "@/lib/works";
 import Link from "next/link";
 import { Metadata } from "next";
+import { client, MicroCMSWork } from "@/lib/microcms";
 
 export const metadata: Metadata = {
   title: "制作・開発実績",
@@ -21,11 +22,27 @@ export const metadata: Metadata = {
   },
 };
 
-export default function WorksPage() {
+// microCMSからデータを取得し、失敗した場合は静的データにフォールバック
+async function getWorks() {
+  try {
+    const data = await client.get<{ contents: MicroCMSWork[] }>({
+      endpoint: "works",
+      queries: { limit: 100, orders: "-publishedAt" },
+    });
+    if (data.contents.length > 0) return { source: "cms" as const, works: data.contents };
+  } catch (e) {
+    console.warn("microCMS取得失敗、静的データを使用します:", e);
+  }
+  return { source: "static" as const, works: WORKS_DATA };
+}
+
+export default async function WorksPage() {
+  const { source, works } = await getWorks();
+
   return (
     <PageLayout>
       <Breadcrumb items={[{ name: "制作実績" }]} />
-      
+
       <div className="bg-background-alt py-16 md:py-24 border-b border-gray-100">
         <Container>
           <AnimatedSection>
@@ -37,28 +54,51 @@ export default function WorksPage() {
 
       <Container className="py-16 md:py-24">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {WORKS_DATA.map((work, i) => (
-            <AnimatedSection key={work.slug} delay={i * 0.1}>
-              <Link href={`/works/${work.slug}`} className="block h-full outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2 rounded-2xl">
-                <Card className="h-full">
-                  <CardImage src={work.thumbnail} alt={work.title} />
-                  <CardContent>
-                    <div className="mb-4 flex flex-wrap gap-2">
-                      <CardCategoryBadge>{work.category}</CardCategoryBadge>
-                      <span className="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-text-secondary">
-                        {work.industry}
-                      </span>
-                    </div>
-                    <CardTitle>{work.title}</CardTitle>
-                    <CardDescription>{work.shortDesc}</CardDescription>
-                  </CardContent>
-                </Card>
-              </Link>
-            </AnimatedSection>
-          ))}
+          {source === "cms"
+            ? (works as MicroCMSWork[]).map((work, i) => (
+                <AnimatedSection key={work.id} delay={i * 0.1}>
+                  <Link href={`/works/${work.id}`} className="block h-full outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2 rounded-2xl">
+                    <Card className="h-full">
+                      <CardImage src={work.thumbnail.url} alt={work.title} />
+                      <CardContent>
+                        <div className="mb-4 flex flex-wrap gap-2">
+                          <CardCategoryBadge>{work.category}</CardCategoryBadge>
+                          {work.industry && (
+                            <span className="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-text-secondary">
+                              {work.industry}
+                            </span>
+                          )}
+                        </div>
+                        <CardTitle>{work.title}</CardTitle>
+                        <CardDescription>{work.summary}</CardDescription>
+                      </CardContent>
+                    </Card>
+                  </Link>
+                </AnimatedSection>
+              ))
+            : (works as typeof WORKS_DATA).map((work, i) => (
+                <AnimatedSection key={work.slug} delay={i * 0.1}>
+                  <Link href={`/works/${work.slug}`} className="block h-full outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2 rounded-2xl">
+                    <Card className="h-full">
+                      <CardImage src={work.thumbnail} alt={work.title} />
+                      <CardContent>
+                        <div className="mb-4 flex flex-wrap gap-2">
+                          <CardCategoryBadge>{work.category}</CardCategoryBadge>
+                          <span className="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-text-secondary">
+                            {work.industry}
+                          </span>
+                        </div>
+                        <CardTitle>{work.title}</CardTitle>
+                        <CardDescription>{work.shortDesc}</CardDescription>
+                      </CardContent>
+                    </Card>
+                  </Link>
+                </AnimatedSection>
+              ))
+          }
         </div>
       </Container>
-      
+
       <CTASection />
     </PageLayout>
   );

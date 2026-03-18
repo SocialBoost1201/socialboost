@@ -20,30 +20,7 @@ export const metadata: Metadata = {
   },
 };
 
-// モックデータ
-const DOCUMENTS_DATA = [
-  {
-    slug: "b2b-site-renewal-guide",
-    title: "BtoB企業のためのWebサイトリニューアル完全ガイド",
-    shortDesc: "要件定義の進め方から、ベンダー選定のポイント、失敗しない進行管理までを網羅した全40ページの解説書。",
-    category: "Web戦略",
-    thumbnail: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop", // Data/Analytics
-  },
-  {
-    slug: "ai-implementation-roadmap",
-    title: "中小企業向け AI導入・活用ロードマップ",
-    shortDesc: "ChatGPTをはじめとした生成AIを自社業務にどう組み込むか？実証実験から社内定着までのステップを解説。",
-    category: "AI導入",
-    thumbnail: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=800&auto=format&fit=crop", // AI Idea
-  },
-  {
-    slug: "system-development-cost-guide",
-    title: "システム開発の費用相場と見積もり削減のコツ",
-    shortDesc: "開発手法（スクラッチ、パッケージ、ノーコード等）による費用の違いと、無駄なコストを抑える要件定義のコツをご紹介。",
-    category: "システム開発",
-    thumbnail: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=800&auto=format&fit=crop", // Coding/Setup
-  },
-];
+import { DOCUMENTS_DATA } from "@/lib/documents";
 
 export default function DocumentsPage() {
   return (

@@ -56,7 +56,7 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.1 }}
-              className="text-[2.1rem] xs:text-[2.5rem] sm:text-5xl md:text-[3.25rem] lg:text-[3.5rem] font-black tracking-tight leading-[1.18] text-brand-navy"
+              className="text-[1.75rem] xs:text-3xl md:text-4xl lg:text-[2.75rem] font-extrabold tracking-tight leading-[1.35] text-brand-navy"
             >
               売上と<br />
               <span className="text-brand-primary">ブランドを育てる、</span>

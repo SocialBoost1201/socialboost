@@ -85,7 +85,7 @@ export function Header() {
             : "bg-white py-5"
         )}
       >
-        <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-5 md:px-8">
+        <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-5 md:px-8">
           <Link href="/" className="inline-flex items-center space-x-3 transition-opacity hover:opacity-80" onClick={() => setIsMobileMenuOpen(false)}>
             <div className="relative h-8 w-8 md:h-10 md:w-10 shrink-0">
               <Image

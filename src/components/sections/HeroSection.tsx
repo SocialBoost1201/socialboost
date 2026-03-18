@@ -43,31 +43,30 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="w-full lg:w-[60%] bg-white p-8 sm:p-10 lg:p-14 rounded-2xl shadow-2xl relative"
+            className="w-full lg:w-[55%] xl:w-[50%] max-w-2xl bg-white p-6 sm:p-8 lg:p-10 rounded-2xl shadow-xl relative"
           >
             {/* Accent Line */}
             <div className="absolute top-0 left-0 w-full h-1.5 bg-brand-primary rounded-t-2xl" />
 
-            <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-light/80 text-[10px] md:text-xs font-bold text-brand-primary tracking-widest uppercase mb-6 sm:mb-8 border border-brand-primary/10">
-              <Zap className="w-3.5 h-3.5" />
+            <span className="inline-flex items-center gap-2 px-3 py-1 bg-brand-light/80 text-[10px] font-bold text-brand-primary tracking-widest uppercase mb-5 border border-brand-primary/10">
+              <Zap className="w-3 h-3" />
               デジタル戦略パートナー
             </span>
 
             {/* Headline (Adjusted compact size) */}
-            <h1 className="text-[1.75rem] xs:text-3xl md:text-4xl lg:text-[2.75rem] font-extrabold tracking-tight leading-[1.35] text-brand-navy mb-6">
+            <h1 className="text-2xl xs:text-3xl md:text-[2rem] lg:text-[2.25rem] font-extrabold tracking-tight leading-[1.4] text-brand-navy mb-5">
               売上とブランドを育てる、<br />
               一気通貫のWeb戦略。
             </h1>
 
-            <p className="text-sm md:text-base leading-[1.85] text-text-secondary mb-10">
+            <p className="text-sm md:text-[0.95rem] leading-[1.8] text-text-secondary mb-8">
               単なる「ホームページ制作」ではありません。<br className="hidden md:block" />Web戦略の設計から、コーポレートサイト・LP・業務システム・AI導入まで、事業課題を解決する最適なソリューションをご提案します。
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-10">
+            <div className="flex flex-col sm:flex-row gap-3 mb-8">
               <Button
                 asChild
-                size="lg"
-                className="w-full sm:w-auto px-8 shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all justify-center"
+                className="w-full sm:w-auto px-7 py-2.5 shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all justify-center"
               >
                 <Link href="/contact">
                   無料相談・お問い合わせ
@@ -76,9 +75,8 @@ export function HeroSection() {
               </Button>
               <Button
                 asChild
-                size="lg"
                 variant="outline"
-                className="w-full sm:w-auto px-8 hover:bg-gray-50 border-gray-200 text-text-primary justify-center"
+                className="w-full sm:w-auto px-7 py-2.5 hover:bg-gray-50 border-gray-200 text-text-primary justify-center"
               >
                 <Link href="/services">
                   対応領域を見る
@@ -86,10 +84,10 @@ export function HeroSection() {
               </Button>
             </div>
 
-            <div className="flex flex-wrap items-center gap-x-6 gap-y-3 pt-6 border-t border-gray-100">
+            <div className="flex flex-wrap items-center gap-x-5 gap-y-2 pt-5 border-t border-gray-100">
               {TRUSTED_BY.map((t, i) => (
                 <div key={i} className="flex items-center gap-1.5 text-xs text-text-secondary font-medium">
-                  <span className={`inline-block w-1.5 h-1.5 rounded-full shrink-0 ${i === 0 ? 'bg-emerald-400' : 'bg-brand-primary/60'}`} />
+                  <span className={`inline-block w-1 h-1 rounded-full shrink-0 ${i === 0 ? 'bg-emerald-400' : 'bg-brand-primary/60'}`} />
                   {t}
                 </div>
               ))}

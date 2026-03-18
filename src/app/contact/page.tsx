@@ -146,6 +146,17 @@ export default function ContactPage() {
                         placeholder="03-0000-0000"
                       />
                     </div>
+
+                    <div>
+                      <label htmlFor="preferred_date" className="block text-sm font-bold text-text-primary mb-2">
+                        ご希望のお打ち合わせ日程 <span className="ml-2 text-xs font-semibold text-gray-500 bg-gray-100 px-2 py-0.5 rounded">任意</span>
+                      </label>
+                      <input
+                        type="date"
+                        id="preferred_date"
+                        className="w-full rounded-lg border-gray-200 bg-gray-50 px-4 py-3 text-text-primary focus:border-brand-primary focus:bg-white focus:ring-1 focus:ring-brand-primary outline-none transition-colors border cursor-pointer"
+                      />
+                    </div>
                     
                     <div>
                       <label htmlFor="type" className="block text-sm font-bold text-text-primary mb-2">

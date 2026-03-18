@@ -80,15 +80,21 @@ function pickKeyword() {
 // OpenAI API で記事生成 (テキスト)
 // ============================================================
 async function generateArticle(keyword) {
-  const systemPrompt = `あなたはSocialBoost（デジタル戦略パートナー）の専門コンテンツライターです。
-BtoBの経営者・マーケター・IT担当者向けに、実践的で信頼性の高いコラム記事を書いてください。
+  const systemPrompt = `あなたはSocialBoost（デジタル戦略パートナー）の経験豊富なWebコンサルティング専門家です。
+BtoBの経営者・マーケター・IT担当者向けに、血の通った実践的で信頼性の高いコラム記事を書いてください。
 
-ルール：
+【最重要ルール：AI感を完全に排除すること】
+1. AI特有の「〜といえるでしょう」「〜が重要です」「〜が求められます」「〜について解説します」といった単調で教科書的な言い回しは絶対に使わないでください。
+2. 断定的な表現や、筆者の実体験・現場目線（「我々が支援する中でよくあるのが〜」「実際のご相談では〜」）を自然に交えて、人間が書いたような説得力を持たせてください。
+3. 抽象的なまとめ文で終わらせず、具体的なネクストアクションを提示してください。
+4. 自然な日本語の揺らぎ（体言止め、読者への問いかけなど）を取り入れてください。
+
+【その他のルール】
 - 文字数: 2000〜3000字
 - 見出し（h2/h3）を適切に使い、SEO・GEO対策を意識した構成にする
 - 根拠のない数値は使わない
 - SocialBoostのサービス（Web制作・システム開発・AI導入）への自然な誘導を末尾に1回だけ入れる
-- 出力はJSON形式のみ（マークダウンや説明文は不要）
+- 出力はJSON形式のみ（マークダウンや他の説明文は一切不要）
 
 JSON形式：
 {
@@ -96,7 +102,8 @@ JSON形式：
   "description": "メタディスクリプション（80〜120字）",
   "body": "HTML形式の記事本文（h2/h3/p/ul/li/strong タグを使用）",
   "tags": ["タグ1", "タグ2", "タグ3"],
-  "readTime": "約〇分"
+  "readTime": "約〇分",
+  "imagePrompt": "A highly detailed English prompt describing a specific conceptual scene representing this article. (e.g. 'A futuristic server room with glowing blue data streams connecting to a smartphone')"
 }`;
 
   const res = await fetch("https://api.openai.com/v1/chat/completions", {
@@ -133,8 +140,8 @@ JSON形式：
 // ============================================================
 // DALL-E 3 でアイキャッチ画像（サムネイル）生成
 // ============================================================
-async function generateThumbnail(keyword, slug) {
-  const prompt = `A modern, high-quality flat vector illustration representing the business concept of "${keyword}". Clean, corporate, minimalist style, suitable for a BtoB IT tech or digital strategy blog. Use a sophisticated color palette featuring deep navy blues, bright electric blues, and subtle emerald green accents. NO TEXT in the image.`;
+async function generateThumbnail(imagePrompt, slug) {
+  const prompt = `Create a modern, ultra-high-quality flat vector illustration. Scene concept: ${imagePrompt}. Design style: Clean, corporate, minimalist, suitable for a premium BtoB IT tech web agency blog. Color palette: sophisticated deep navy blues, bright electric blues, and subtle emerald green or gold accents. Masterpiece quality, highly detailed yet flat. STRICTLY NO TEXT, NO LETTERS, NO WORDS in the image.`;
   
   const res = await fetch("https://api.openai.com/v1/images/generations", {
     method: "POST",
@@ -238,7 +245,8 @@ async function main() {
   console.log("🎨 OpenAI API (dall-e-3) でサムネイル画像を生成中...");
   let thumbnailUrl = null;
   try {
-    thumbnailUrl = await generateThumbnail(keyword, slug);
+    const imageConcept = article.imagePrompt || keyword;
+    thumbnailUrl = await generateThumbnail(imageConcept, slug);
     console.log(`🖼 画像を保存しました: ${thumbnailUrl}`);
   } catch (err) {
     console.error("⚠️ サムネイル生成に失敗しました（スキップします）:", err.message);

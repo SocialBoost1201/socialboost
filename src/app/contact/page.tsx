@@ -5,7 +5,7 @@ import { Container } from "@/components/ui/Container";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import { Button } from "@/components/ui/Button";
-import { Send, Clock, Phone, Mail } from "lucide-react";
+import { Send, Clock, Phone, Mail, Zap } from "lucide-react";
 import React, { useState } from "react";
 import { generateContactPageJsonLd } from "@/lib/jsonld";
 
@@ -27,6 +27,7 @@ export default function ContactPage() {
     phone: "",
     preferred_date: "",
     type: "",
+    service: "",
     message: "",
   });
 
@@ -233,12 +234,44 @@ export default function ContactPage() {
                         <option value="other">その他</option>
                       </select>
                     </div>
+
+                    {/* 希望サービス */}
+                    <div>
+                      <label htmlFor="service" className="block text-sm font-bold text-text-primary mb-2">
+                        希望サービス <span className="ml-2 text-xs font-semibold text-gray-500 bg-gray-100 px-2 py-0.5 rounded">任意</span>
+                      </label>
+                      <select
+                        id="service"
+                        value={formData.service}
+                        onChange={handleChange}
+                        className="w-full rounded-lg border-gray-200 bg-gray-50 px-4 py-3 text-text-primary focus:border-brand-primary focus:bg-white focus:ring-1 focus:ring-brand-primary outline-none transition-colors border appearance-none"
+                      >
+                        <option value="">選択してください（任意）</option>
+                        <option value="corporate">コーポレートサイト制作</option>
+                        <option value="lp">ランディングページ（LP）制作</option>
+                        <option value="ec">ECサイト構築</option>
+                        <option value="system">業務システム・SaaS開発</option>
+                        <option value="app">モバイルアプリ開発（iOS / Android）</option>
+                        <option value="ai">AI・LLM導入支援</option>
+                        <option value="strategy">Web戦略設計・コンサルティング</option>
+                        <option value="maintenance">保守・運用・改善サポート</option>
+                        <option value="other_service">その他・まだ決まっていない</option>
+                      </select>
+                      <p className="text-xs text-text-secondary mt-2">まだ決まっていない場合も、「その他」を選択いただければ詳しくお聞きします。</p>
+                    </div>
                     
                     <div>
                       <label htmlFor="message" className="block text-sm font-bold text-text-primary mb-2">
                         ご相談内容 <span className="ml-2 text-xs font-semibold text-red-500 bg-red-50 px-2 py-0.5 rounded">必須</span>
                       </label>
-                      <p className="text-xs text-text-secondary mb-3">現状の課題や実現したいこと、スケジュール感やご予算など、分かる範囲でご記入ください。</p>
+                      {/* Prompt: より具体的な要望を促すメッセージ */}
+                      <div className="flex items-start gap-3 mb-3 p-3 bg-brand-light/40 border border-brand-primary/15 rounded-xl">
+                        <Zap className="w-4 h-4 text-brand-primary shrink-0 mt-0.5" />
+                        <p className="text-xs text-brand-primary font-semibold leading-relaxed">
+                          <strong>具体的な要望があるほど、見積もり・実装が早くなります。</strong><br />
+                          スケジュール・予算・現在の課題・参考サイトなど、分かる範囲でお知らせください。
+                        </p>
+                      </div>
                       <textarea
                         id="message"
                         required
@@ -246,7 +279,7 @@ export default function ContactPage() {
                         onChange={handleChange}
                         rows={6}
                         className="w-full rounded-lg border-gray-200 bg-gray-50 px-4 py-3 text-text-primary focus:border-brand-primary focus:bg-white focus:ring-1 focus:ring-brand-primary outline-none transition-colors border resize-y"
-                        placeholder="（例）既存のコーポレートサイトが古くなったため、採用強化を目的にリニューアルを検討しています。予算は◯◯◯万円程度で、◯月頃の公開を希望しています。"
+                        placeholder={`（記入例）\n・現状の課題: 問い合わせが少ない、デザインが古い\n・ご希望: 採用強化のためにリニューアルしたい\n・予算感: 〇〇万円前後\n・希望公開時期: 〇月頃\n・参考サイト: https://example.com`}
                       ></textarea>
                     </div>
 

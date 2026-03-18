@@ -48,54 +48,64 @@ export async function WorksPreviewSection() {
                 const isExternal = !!work.site_url;
                 return (
                   <AnimatedSection key={work.id} delay={i * 0.1}>
-                    <a
-                      href={href}
-                      target={isExternal ? "_blank" : "_self"}
-                      rel={isExternal ? "noopener noreferrer" : undefined}
-                      className="block h-full group"
-                    >
-                      <Card className="h-full overflow-hidden">
-                        <div className="relative w-full aspect-4/3 overflow-hidden bg-gray-100">
-                          <Image
-                            src={work.thumbnail.url}
-                            alt={work.title}
-                            fill
-                            className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
-                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                          />
-                        </div>
-                        <CardContent>
-                          <div className="mb-3">
-                            <CardCategoryBadge>{work.category}</CardCategoryBadge>
-                          </div>
-                          <CardTitle className="text-lg">{work.title}</CardTitle>
-                        </CardContent>
-                      </Card>
-                    </a>
-                  </AnimatedSection>
-                );
-              })
-            : (works as typeof WORKS_DATA).map((work, i) => (
-                <AnimatedSection key={work.slug} delay={i * 0.1}>
-                  <Link href={`/works/${work.slug}`} className="block h-full group">
-                    <Card className="h-full overflow-hidden">
+                    <Card className="h-full flex flex-col overflow-hidden">
                       <div className="relative w-full aspect-4/3 overflow-hidden bg-gray-100">
                         <Image
-                          src={work.thumbnail}
+                          src={work.thumbnail.url}
                           alt={work.title}
                           fill
                           className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
                           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                         />
                       </div>
-                      <CardContent>
+                      <CardContent className="flex flex-col flex-1 p-6">
                         <div className="mb-3">
                           <CardCategoryBadge>{work.category}</CardCategoryBadge>
                         </div>
                         <CardTitle className="text-lg">{work.title}</CardTitle>
+                        
+                        <div className="mt-auto pt-6 flex flex-col gap-3">
+                          <Link href={`/works/${work.id}`} className="group inline-flex items-center justify-between w-full rounded-lg bg-brand-primary px-4 py-3 text-sm font-bold text-white shadow-sm hover:bg-brand-accent transition-colors">
+                            詳細を見る
+                            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                          </Link>
+                          {work.site_url && (
+                            <a href={work.site_url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center w-full rounded-lg bg-white border border-gray-200 px-4 py-3 text-sm font-bold text-text-primary shadow-sm hover:bg-gray-50 transition-colors">
+                              制作したサイトへ移動する
+                            </a>
+                          )}
+                        </div>
                       </CardContent>
                     </Card>
-                  </Link>
+                  </AnimatedSection>
+                );
+              })
+            : (works as typeof WORKS_DATA).map((work, i) => (
+                <AnimatedSection key={work.slug} delay={i * 0.1}>
+                  <Card className="h-full flex flex-col overflow-hidden">
+                    <div className="relative w-full aspect-4/3 overflow-hidden bg-gray-100">
+                      <Image
+                        src={work.thumbnail}
+                        alt={work.title}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      />
+                    </div>
+                    <CardContent className="flex flex-col flex-1 p-6">
+                      <div className="mb-3">
+                        <CardCategoryBadge>{work.category}</CardCategoryBadge>
+                      </div>
+                      <CardTitle className="text-lg">{work.title}</CardTitle>
+                      
+                      <div className="mt-auto pt-6 flex flex-col gap-3">
+                        <Link href={`/works/${work.slug}`} className="group inline-flex items-center justify-between w-full rounded-lg bg-brand-primary px-4 py-3 text-sm font-bold text-white shadow-sm hover:bg-brand-accent transition-colors">
+                          詳細を見る
+                          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                        </Link>
+                      </div>
+                    </CardContent>
+                  </Card>
                 </AnimatedSection>
               ))}
         </div>

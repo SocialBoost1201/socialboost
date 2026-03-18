@@ -6,6 +6,7 @@ import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import { Card, CardContent, CardTitle, CardDescription, CardCategoryBadge, CardImage } from "@/components/ui/Card";
 import { WORKS_DATA } from "@/lib/works";
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { Metadata } from "next";
 import { client, MicroCMSWork } from "@/lib/microcms";
 
@@ -63,48 +64,58 @@ export default async function WorksPage() {
                 const isExternal = !!work.site_url;
                 return (
                   <AnimatedSection key={work.id} delay={i * 0.1}>
-                    <a
-                      href={href}
-                      target={isExternal ? "_blank" : "_self"}
-                      rel={isExternal ? "noopener noreferrer" : undefined}
-                      className="block h-full outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2 rounded-2xl"
-                    >
-                      <Card className="h-full">
-                        <CardImage src={work.thumbnail.url} alt={work.title} />
-                        <CardContent>
-                          <div className="mb-4 flex flex-wrap gap-2">
-                            <CardCategoryBadge>{work.category}</CardCategoryBadge>
-                            {work.industry && (
-                              <span className="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-text-secondary">
-                                {work.industry}
-                              </span>
-                            )}
-                          </div>
-                          <CardTitle>{work.title}</CardTitle>
-                          <CardDescription>{work.summary}</CardDescription>
-                        </CardContent>
-                      </Card>
-                    </a>
+                    <Card className="h-full flex flex-col overflow-hidden outline-none focus-within:ring-2 focus-within:ring-brand-primary focus-within:ring-offset-2">
+                      <CardImage src={work.thumbnail.url} alt={work.title} />
+                      <CardContent className="flex flex-col flex-1">
+                        <div className="mb-4 flex flex-wrap gap-2">
+                          <CardCategoryBadge>{work.category}</CardCategoryBadge>
+                          {work.industry && (
+                            <span className="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-text-secondary">
+                              {work.industry}
+                            </span>
+                          )}
+                        </div>
+                        <CardTitle>{work.title}</CardTitle>
+                        <CardDescription>{work.summary}</CardDescription>
+                        
+                        <div className="mt-8 flex flex-col gap-3">
+                          <Link href={`/works/${work.id}`} className="group inline-flex items-center justify-between w-full rounded-lg bg-brand-primary px-4 py-3 text-sm font-bold text-white shadow-sm hover:bg-brand-accent transition-colors">
+                            詳細を見る
+                            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                          </Link>
+                          {work.site_url && (
+                            <a href={work.site_url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center w-full rounded-lg bg-white border border-gray-200 px-4 py-3 text-sm font-bold text-text-primary shadow-sm hover:bg-gray-50 transition-colors">
+                              制作したサイトへ移動する
+                            </a>
+                          )}
+                        </div>
+                      </CardContent>
+                    </Card>
                   </AnimatedSection>
                 );
               })
             : (works as typeof WORKS_DATA).map((work, i) => (
                 <AnimatedSection key={work.slug} delay={i * 0.1}>
-                  <Link href={`/works/${work.slug}`} className="block h-full outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2 rounded-2xl">
-                    <Card className="h-full">
-                      <CardImage src={work.thumbnail} alt={work.title} />
-                      <CardContent>
-                        <div className="mb-4 flex flex-wrap gap-2">
-                          <CardCategoryBadge>{work.category}</CardCategoryBadge>
-                          <span className="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-text-secondary">
-                            {work.industry}
-                          </span>
-                        </div>
-                        <CardTitle>{work.title}</CardTitle>
-                        <CardDescription>{work.shortDesc}</CardDescription>
-                      </CardContent>
-                    </Card>
-                  </Link>
+                  <Card className="h-full flex flex-col overflow-hidden outline-none focus-within:ring-2 focus-within:ring-brand-primary focus-within:ring-offset-2">
+                    <CardImage src={work.thumbnail} alt={work.title} />
+                    <CardContent className="flex flex-col flex-1">
+                      <div className="mb-4 flex flex-wrap gap-2">
+                        <CardCategoryBadge>{work.category}</CardCategoryBadge>
+                        <span className="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-text-secondary">
+                          {work.industry}
+                        </span>
+                      </div>
+                      <CardTitle>{work.title}</CardTitle>
+                      <CardDescription>{work.shortDesc}</CardDescription>
+                      
+                      <div className="mt-8 flex flex-col gap-3">
+                        <Link href={`/works/${work.slug}`} className="group inline-flex items-center justify-between w-full rounded-lg bg-brand-primary px-4 py-3 text-sm font-bold text-white shadow-sm hover:bg-brand-accent transition-colors">
+                          詳細を見る
+                          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                        </Link>
+                      </div>
+                    </CardContent>
+                  </Card>
                 </AnimatedSection>
               ))
           }

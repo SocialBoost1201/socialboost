@@ -8,10 +8,67 @@ import { WORKS_DATA, getWorkBySlug } from "@/lib/works";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { FileText, ArrowLeft, CheckCircle2, ArrowRight } from "lucide-react";
+import { FileText, ArrowLeft, CheckCircle2, ArrowRight, ExternalLink } from "lucide-react";
 import { Metadata } from "next";
 import { generateBreadcrumbJsonLd } from "@/lib/jsonld";
 import { WorkGallery } from "@/components/sections/WorkGallery";
+import { client, MicroCMSWork } from "@/lib/microcms";
+
+type UnifiedWorkDetail = {
+  slug: string;
+  title: string;
+  category: string;
+  industry: string;
+  shortDesc: string;
+  thumbnail: string;
+  overview: string;
+  challenges: string[];
+  scope: string[];
+  implementations: string[];
+  results: string[];
+  images: string[];
+  pdfs: { title: string; url: string }[];
+  site_url?: string;
+};
+
+async function getUnifiedWork(slug: string): Promise<UnifiedWorkDetail | null> {
+  try {
+    const cmsData = await client.get<MicroCMSWork>({
+      endpoint: "works",
+      contentId: slug,
+    });
+    if (cmsData) {
+      return {
+        slug: cmsData.id,
+        title: cmsData.title,
+        category: cmsData.category,
+        industry: cmsData.industry || "その他",
+        shortDesc: cmsData.summary,
+        thumbnail: cmsData.thumbnail.url,
+        overview: cmsData.summary,
+        challenges: cmsData.challenge ? cmsData.challenge.split(/\r?\n/).filter(Boolean) : [],
+        scope: cmsData.scope ? cmsData.scope.split(/\r?\n/).filter(Boolean) : [],
+        implementations: cmsData.solution ? cmsData.solution.split(/\r?\n/).filter(Boolean) : [],
+        results: cmsData.result ? cmsData.result.split(/\r?\n/).filter(Boolean) : [],
+        images: [],
+        pdfs: [],
+        site_url: cmsData.site_url,
+      };
+    }
+  } catch (e) {
+    // NotFound in CMS, fallback to static
+  }
+
+  const staticWork = getWorkBySlug(slug);
+  if (staticWork) {
+    return {
+      ...staticWork,
+      site_url: undefined,
+    };
+  }
+
+  return null;
+}
 
 type Props = {
   params: { slug: string };
@@ -19,7 +76,7 @@ type Props = {
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const work = getWorkBySlug(params.slug);
+  const work = await getUnifiedWork(params.slug);
   if (!work) return { title: "Not Found" };
   
   return {
@@ -44,8 +101,8 @@ export function generateStaticParams() {
   }));
 }
 
-export default function WorkDetailPage({ params }: { params: { slug: string } }) {
-  const work = getWorkBySlug(params.slug);
+export default async function WorkDetailPage({ params }: { params: { slug: string } }) {
+  const work = await getUnifiedWork(params.slug);
   
   if (!work) {
     notFound();
@@ -111,8 +168,9 @@ export default function WorkDetailPage({ params }: { params: { slug: string } })
           <div className="lg:col-span-8 space-y-20">
             
             {/* Challenges & Results */}
-            <AnimatedSection>
-              <h2 className="text-2xl font-bold text-text-primary mb-8 border-b-2 border-brand-primary pb-4 inline-block">抱えていた課題と、実施後の成果</h2>
+            {(work.challenges.length > 0 || work.results.length > 0) && (
+              <AnimatedSection>
+                <h2 className="text-2xl font-bold text-text-primary mb-8 border-b-2 border-brand-primary pb-4 inline-block">抱えていた課題と、実施後の成果</h2>
               <div className="space-y-8">
                 <div className="bg-red-50/50 p-6 md:p-8 rounded-2xl border border-red-100">
                   <h3 className="text-lg font-bold text-red-600 mb-4 flex items-center">
@@ -145,10 +203,12 @@ export default function WorkDetailPage({ params }: { params: { slug: string } })
                 </div>
               </div>
             </AnimatedSection>
+            )}
             
             {/* Implementation Details */}
-            <AnimatedSection>
-              <h2 className="text-2xl font-bold text-text-primary mb-8 border-b-2 border-brand-primary pb-4 inline-block">実施した内容・工夫した点</h2>
+            {work.implementations.length > 0 && (
+              <AnimatedSection>
+                <h2 className="text-2xl font-bold text-text-primary mb-8 border-b-2 border-brand-primary pb-4 inline-block">実施した内容・工夫した点</h2>
               <ul className="space-y-6">
                 {work.implementations.map((imp, i) => (
                   <li key={i} className="flex items-start bg-white p-6 rounded-xl shadow-sm ring-1 ring-gray-100">
@@ -156,8 +216,9 @@ export default function WorkDetailPage({ params }: { params: { slug: string } })
                     <span className="text-lg text-text-primary leading-relaxed mt-1 font-medium">{imp}</span>
                   </li>
                 ))}
-              </ul>
-            </AnimatedSection>
+                </ul>
+              </AnimatedSection>
+            )}
             
             {/* Image Gallery */}
             {work.images.length > 0 && (
@@ -196,7 +257,23 @@ export default function WorkDetailPage({ params }: { params: { slug: string } })
           {/* Sidebar */}
           <div className="lg:col-span-4">
             <div className="sticky top-32 space-y-8">
-              <AnimatedSection delay={0.2} className="bg-background-alt p-8 rounded-2xl">
+              {work.site_url && (
+                <AnimatedSection delay={0.1} className="bg-white p-6 rounded-2xl shadow-sm ring-1 ring-gray-100">
+                  <h3 className="text-sm font-bold text-text-secondary mb-4 uppercase tracking-wider">実際のサイト</h3>
+                  <a 
+                    href={work.site_url} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="group flex items-center justify-between w-full rounded-xl bg-brand-light px-5 py-4 text-brand-primary font-bold hover:bg-brand-primary hover:text-white transition-colors"
+                  >
+                    制作したサイトを開く
+                    <ExternalLink className="h-5 w-5 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+                  </a>
+                </AnimatedSection>
+              )}
+
+              {work.scope.length > 0 && (
+                <AnimatedSection delay={0.2} className="bg-background-alt p-8 rounded-2xl">
                 <h3 className="text-lg font-bold text-text-primary mb-6">対応範囲（スコープ）</h3>
                 <div className="flex flex-wrap gap-2">
                   {work.scope.map((s, i) => (
@@ -206,6 +283,7 @@ export default function WorkDetailPage({ params }: { params: { slug: string } })
                   ))}
                 </div>
               </AnimatedSection>
+              )}
               
               <AnimatedSection delay={0.3} className="bg-brand-light p-8 rounded-2xl text-center">
                 <h3 className="text-lg font-bold text-brand-primary mb-4">類似プロジェクトのご相談</h3>

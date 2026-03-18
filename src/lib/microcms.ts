@@ -1,17 +1,5 @@
 import { createClient } from 'microcms-js-sdk';
 
-if (!process.env.MICROCMS_SERVICE_DOMAIN) {
-  throw new Error('MICROCMS_SERVICE_DOMAIN is not defined');
-}
-if (!process.env.MICROCMS_API_KEY) {
-  throw new Error('MICROCMS_API_KEY is not defined');
-}
-
-export const client = createClient({
-  serviceDomain: process.env.MICROCMS_SERVICE_DOMAIN,
-  apiKey: process.env.MICROCMS_API_KEY,
-});
-
 // microCMS 実績レスポンス型
 export type MicroCMSWork = {
   id: string;
@@ -34,4 +22,23 @@ export type MicroCMSWorkListResponse = {
   totalCount: number;
   offset: number;
   limit: number;
+};
+
+// 環境変数が未設定の場合は null を返す（ビルドエラーを防ぐ）
+export function getClient() {
+  const serviceDomain = process.env.MICROCMS_SERVICE_DOMAIN;
+  const apiKey = process.env.MICROCMS_API_KEY;
+
+  if (!serviceDomain || !apiKey) return null;
+
+  return createClient({ serviceDomain, apiKey });
+}
+
+// 後方互換のために残す（既存コードへの影響最小化）
+export const client = {
+  get: async <T>(args: Parameters<ReturnType<typeof createClient>['get']>[0]): Promise<T> => {
+    const c = getClient();
+    if (!c) throw new Error('microCMS client is not configured');
+    return c.get<T>(args);
+  },
 };

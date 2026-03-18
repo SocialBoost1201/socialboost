@@ -7,28 +7,25 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 
-const previewWorks = [
-  {
-    slug: "corporate-site-renewal",
-    title: "株式会社◯◯様 コーポレートサイト刷新",
-    category: "Webサイト制作",
-    image: "/images/works-corporate-site.png",
-  },
-  {
-    slug: "booking-system",
-    title: "◯◯業界向け 予約管理システム開発",
-    category: "Webシステム開発",
-    image: "/images/works-booking-system.png",
-  },
-  {
-    slug: "ai-knowledge-base",
-    title: "AI社内ナレッジ検索システム導入",
-    category: "AI導入支援",
-    image: "/images/works-ai-system.png",
-  },
-];
+import { client, MicroCMSWork } from "@/lib/microcms";
+import { WORKS_DATA } from "@/lib/works";
 
-export function WorksPreviewSection() {
+async function getPreviewWorks() {
+  try {
+    const data = await client.get<{ contents: MicroCMSWork[] }>({
+      endpoint: "works",
+      queries: { limit: 3, orders: "-publishedAt" },
+    });
+    if (data.contents.length > 0) return { source: "cms" as const, works: data.contents };
+  } catch (e) {
+    console.warn("microCMS取得失敗、静的データを使用します:", e);
+  }
+  return { source: "static" as const, works: WORKS_DATA.slice(0, 3) };
+}
+
+export async function WorksPreviewSection() {
+  const { source, works } = await getPreviewWorks();
+
   return (
     <section className="bg-background-alt py-24 md:py-32">
       <Container>
@@ -45,30 +42,62 @@ export function WorksPreviewSection() {
         </div>
 
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {previewWorks.map((work, i) => (
-            <AnimatedSection key={work.slug} delay={i * 0.1}>
-              <Link href={`/works/${work.slug}`} className="block h-full group">
-                <Card className="h-full overflow-hidden">
-                  {/* Image area */}
-                  <div className="relative w-full aspect-[4/3] overflow-hidden bg-gray-100">
-                    <Image
-                      src={work.image}
-                      alt={work.title}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    />
-                  </div>
-                  <CardContent>
-                    <div className="mb-3">
-                      <CardCategoryBadge>{work.category}</CardCategoryBadge>
-                    </div>
-                    <CardTitle className="text-lg">{work.title}</CardTitle>
-                  </CardContent>
-                </Card>
-              </Link>
-            </AnimatedSection>
-          ))}
+          {source === "cms"
+            ? (works as MicroCMSWork[]).map((work, i) => {
+                const href = work.site_url || `/works/${work.id}`;
+                const isExternal = !!work.site_url;
+                return (
+                  <AnimatedSection key={work.id} delay={i * 0.1}>
+                    <a
+                      href={href}
+                      target={isExternal ? "_blank" : "_self"}
+                      rel={isExternal ? "noopener noreferrer" : undefined}
+                      className="block h-full group"
+                    >
+                      <Card className="h-full overflow-hidden">
+                        <div className="relative w-full aspect-4/3 overflow-hidden bg-gray-100">
+                          <Image
+                            src={work.thumbnail.url}
+                            alt={work.title}
+                            fill
+                            className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                          />
+                        </div>
+                        <CardContent>
+                          <div className="mb-3">
+                            <CardCategoryBadge>{work.category}</CardCategoryBadge>
+                          </div>
+                          <CardTitle className="text-lg">{work.title}</CardTitle>
+                        </CardContent>
+                      </Card>
+                    </a>
+                  </AnimatedSection>
+                );
+              })
+            : (works as typeof WORKS_DATA).map((work, i) => (
+                <AnimatedSection key={work.slug} delay={i * 0.1}>
+                  <Link href={`/works/${work.slug}`} className="block h-full group">
+                    <Card className="h-full overflow-hidden">
+                      <div className="relative w-full aspect-4/3 overflow-hidden bg-gray-100">
+                        <Image
+                          src={work.thumbnail}
+                          alt={work.title}
+                          fill
+                          className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        />
+                      </div>
+                      <CardContent>
+                        <div className="mb-3">
+                          <CardCategoryBadge>{work.category}</CardCategoryBadge>
+                        </div>
+                        <CardTitle className="text-lg">{work.title}</CardTitle>
+                      </CardContent>
+                    </Card>
+                  </Link>
+                </AnimatedSection>
+              ))}
         </div>
 
         <AnimatedSection delay={0.4} className="mt-12 text-center md:hidden">

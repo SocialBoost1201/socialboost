@@ -1,13 +1,13 @@
 "use client";
 
-import { motion, HTMLMotionProps } from "framer-motion";
-import { ReactNode } from "react";
+import { useEffect, useRef, ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
-interface AnimatedSectionProps extends Omit<HTMLMotionProps<"div">, "ref"> {
+interface AnimatedSectionProps {
   children: ReactNode;
   className?: string;
   delay?: number;
+  [key: string]: unknown;
 }
 
 export function AnimatedSection({
@@ -16,20 +16,38 @@ export function AnimatedSection({
   delay = 0,
   ...props
 }: AnimatedSectionProps) {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    // delayをCSS変数として設定
+    el.style.setProperty("--anim-delay", `${delay}s`);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            el.classList.add("is-visible");
+            observer.unobserve(el);
+          }
+        });
+      },
+      { rootMargin: "-80px 0px", threshold: 0.1 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [delay]);
+
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{
-        duration: 0.8,
-        ease: [0.21, 0.47, 0.32, 0.98], // elegant ease-out
-        delay: delay,
-      }}
-      className={cn("", className)}
+    <div
+      ref={ref}
+      className={cn("animate-on-scroll", className)}
       {...props}
     >
       {children}
-    </motion.div>
+    </div>
   );
 }

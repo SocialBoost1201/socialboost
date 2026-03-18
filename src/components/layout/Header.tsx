@@ -12,6 +12,7 @@ const navLinks = [
   { name: "サービス", href: "/services" },
   { name: "料金", href: "/pricing" },
   { name: "実績", href: "/works" },
+  { name: "選ばれる理由", href: "/why" },
 ];
 
 export function Header() {

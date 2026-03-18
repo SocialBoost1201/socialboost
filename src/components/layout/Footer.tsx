@@ -42,6 +42,7 @@ export function Footer() {
               <li><Link href="/services" className="hover:text-brand-primary transition-colors">サービス一覧</Link></li>
               <li><Link href="/pricing" className="hover:text-brand-primary transition-colors">料金案内</Link></li>
               <li><Link href="/works" className="hover:text-brand-primary transition-colors">制作実績</Link></li>
+              <li><Link href="/why" className="hover:text-brand-primary transition-colors">選ばれる理由</Link></li>
               <li><Link href="/contact" className="hover:text-brand-primary transition-colors">お問い合わせ</Link></li>
             </ul>
           </div>

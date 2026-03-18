@@ -11,6 +11,7 @@ import Link from "next/link";
 import { FileText, ArrowLeft, CheckCircle2, ArrowRight } from "lucide-react";
 import { Metadata } from "next";
 import { generateBreadcrumbJsonLd } from "@/lib/jsonld";
+import { WorkGallery } from "@/components/sections/WorkGallery";
 
 type Props = {
   params: { slug: string };
@@ -162,19 +163,7 @@ export default function WorkDetailPage({ params }: { params: { slug: string } })
             {work.images.length > 0 && (
               <AnimatedSection>
                 <h2 className="text-2xl font-bold text-text-primary mb-8 border-b-2 border-brand-primary pb-4 inline-block">ギャラリー</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {work.images.map((img, i) => (
-                    <div key={i} className="relative aspect-4/3 w-full overflow-hidden rounded-xl bg-gray-100 ring-1 ring-gray-200">
-                      <Image
-                        src={img}
-                        alt={`${work.title} ギャラリー ${i + 1}`}
-                        fill
-                        sizes="(max-width: 768px) 100vw, 50vw"
-                        className="object-cover transition-transform duration-500 hover:scale-105"
-                      />
-                    </div>
-                  ))}
-                </div>
+                <WorkGallery images={work.images} title={work.title} />
               </AnimatedSection>
             )}
 

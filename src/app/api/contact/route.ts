@@ -24,7 +24,7 @@ export async function POST(req: Request) {
 
     // 管理者への通知メール
     await resend.emails.send({
-      from: 'SocialBoost Contact <onboarding@resend.dev>', // TODO: カスタムドメインに移行後に変更
+      from: 'SocialBoost Contact <no-reply@socialboost.jp>',
       to: 'info@socialboost.jp',
       subject: `【お問い合わせ】${name}様より新規のご相談`,
       text: `
@@ -43,7 +43,7 @@ ${message}
 
     // お客様への自動返信メール
     await resend.emails.send({
-      from: 'SocialBoost <onboarding@resend.dev>', // TODO: カスタムドメインに移行後に変更
+      from: 'SocialBoost <no-reply@socialboost.jp>',
       to: email,
       subject: '【SocialBoost】お問い合わせを受け付けました',
       text: `

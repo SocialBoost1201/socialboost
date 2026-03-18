@@ -69,11 +69,11 @@ function generateSlug() {
   return `blog-${date}-${random}`;
 }
 
-// 週番号でキーワードをローテーション
+// 実行時間（時間単位）でキーワードをローテーションし、同日でも被らないようにする
 function pickKeyword() {
   if (process.env.MANUAL_KEYWORD) return process.env.MANUAL_KEYWORD;
-  const weekNumber = Math.floor(Date.now() / (7 * 24 * 60 * 60 * 1000));
-  return KEYWORD_LIST[weekNumber % KEYWORD_LIST.length];
+  const hoursSinceEpoch = Math.floor(Date.now() / (60 * 60 * 1000));
+  return KEYWORD_LIST[hoursSinceEpoch % KEYWORD_LIST.length];
 }
 
 // ============================================================

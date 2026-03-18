@@ -9,6 +9,9 @@ import Link from "next/link";
 import { Metadata } from "next";
 import { client, MicroCMSWork } from "@/lib/microcms";
 
+// microCMSのデータ更新を60秒ごとに反映（ISR）
+export const revalidate = 60;
+
 export const metadata: Metadata = {
   title: "制作・開発実績",
   description: "Webサイト制作からシステム開発、AI導入まで、これまでの制作・開発実績をご紹介します。",

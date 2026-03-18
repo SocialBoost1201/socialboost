@@ -87,7 +87,7 @@ export function Header() {
       >
         <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-5 md:px-8">
           <Link href="/" className="inline-flex items-center space-x-3 transition-opacity hover:opacity-80" onClick={() => setIsMobileMenuOpen(false)}>
-            <div className="relative h-10 w-10 md:h-12 md:w-12 shrink-0">
+            <div className="relative h-8 w-8 md:h-10 md:w-10 shrink-0">
               <Image
                 src="/web-app-manifest-512x512.png"
                 alt="SocialBoost Logo"
@@ -96,7 +96,7 @@ export function Header() {
                 priority
               />
             </div>
-            <span className="font-extrabold tracking-tight text-xl md:text-2xl text-text-primary uppercase">
+            <span className="font-extrabold tracking-tight text-lg md:text-xl text-text-primary uppercase">
               Social<span className="text-brand-primary">Boost</span>
             </span>
           </Link>

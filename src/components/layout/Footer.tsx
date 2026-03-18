@@ -9,7 +9,7 @@ export function Footer() {
         <div className="grid grid-cols-1 gap-12 md:grid-cols-4 lg:grid-cols-5">
           <div className="md:col-span-1 lg:col-span-2">
             <Link href="/" className="inline-flex items-center space-x-3 mb-8 transition-opacity hover:opacity-80">
-              <div className="relative h-12 w-12 md:h-16 md:w-16 shrink-0">
+              <div className="relative h-10 w-10 md:h-12 md:w-12 shrink-0">
                 <Image
                   src="/web-app-manifest-512x512.png"
                   alt="SocialBoost Logo"
@@ -17,7 +17,7 @@ export function Footer() {
                   className="object-contain"
                 />
               </div>
-              <span className="font-extrabold tracking-tight text-2xl md:text-3xl text-text-primary uppercase">
+              <span className="font-extrabold tracking-tight text-xl md:text-2xl text-text-primary uppercase">
                 Social<span className="text-brand-primary">Boost</span>
               </span>
             </Link>

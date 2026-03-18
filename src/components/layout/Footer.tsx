@@ -56,6 +56,8 @@ export function Footer() {
               <li><a href="tel:070-9175-3590" className="hover:text-brand-primary transition-colors">TEL: 070-9175-3590</a></li>
               <li><a href="mailto:info@socialboost.jp" className="hover:text-brand-primary transition-colors">info@socialboost.jp</a></li>
               <li className="pt-2"><Link href="/privacy-policy" className="hover:text-brand-primary transition-colors">プライバシーポリシー</Link></li>
+              <li><Link href="/legal/terms" className="hover:text-brand-primary transition-colors">利用規約</Link></li>
+              <li><Link href="/legal/tokushoho" className="hover:text-brand-primary transition-colors">特定商取引法に基づく表記</Link></li>
             </ul>
           </div>
         </div>

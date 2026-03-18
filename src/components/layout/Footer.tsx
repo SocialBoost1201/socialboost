@@ -9,13 +9,15 @@ export function Footer() {
         <div className="grid grid-cols-1 gap-12 md:grid-cols-4 lg:grid-cols-5">
           <div className="md:col-span-1 lg:col-span-2">
             <Link href="/" className="inline-flex items-center space-x-3 mb-8 transition-opacity hover:opacity-80">
-              <Image
-                src="/web-app-manifest-512x512.png"
-                alt=""
-                width={56}
-                height={56}
-                className="h-10 w-10 md:h-14 md:w-14 object-contain"
-              />
+              <div className="flex h-12 w-12 md:h-16 md:w-16 shrink-0 items-center justify-center rounded-full border border-gray-200 bg-white shadow-sm overflow-hidden p-1.5">
+                <Image
+                  src="/web-app-manifest-512x512.png"
+                  alt=""
+                  width={56}
+                  height={56}
+                  className="h-full w-full object-contain rounded-full"
+                />
+              </div>
               <span className="font-extrabold tracking-tight text-2xl md:text-3xl text-text-primary uppercase">
                 Social<span className="text-brand-primary">Boost</span>
               </span>

@@ -395,21 +395,20 @@ async function postToInstagram(article, slug, imageUrl) {
     console.log("ℹ️ Instagram (Graph API) の認証情報が未設定のため、Instagram連携はスキップします。");
     return;
   }
-  if (!imageUrl) {
-    console.log("⚠️ Instagram投稿用の公開画像URLがないためスキップします。");
-    return;
-  }
-
-  // トークンの簡易クリーンアップ（改行や引用符の混入対策）
+  // 1784... のIDと、EAA... のトークンの簡易クリーンアップ
   const cleanToken = IG_ACCESS_TOKEN.trim().replace(/^["']|["']$/g, '');
   const cleanId = IG_USER_ID.trim().replace(/^["']|["']$/g, '');
+
+  // デバッグ用（最初の3文字と最後の3文字を表示）
+  const maskedToken = `${cleanToken.substring(0, 3)}...${cleanToken.substring(cleanToken.length - 3)}`;
+  console.log(`⏳ Instagram投稿準備中... (ID: ${cleanId}, Token: ${maskedToken}, Length: ${cleanToken.length})`);
 
   try {
     const caption = `【新着記事のご案内】\n\n「${article.title}」\n\n${article.description}\n\n詳細はこちら👇\nhttps://socialboost.jp/blog/${slug}\n\n#SocialBoost #Web制作 #システム開発 #DX推進`;
 
     // 1. 画像コンテナを作成
-    console.log(`⏳ Instagramコンテナ作成中... (Token length: ${cleanToken.length})`);
-    const containerRes = await fetch(`https://graph.facebook.com/v19.0/${cleanId}/media?access_token=${cleanToken}`, {
+    console.log("⏳ Instagramメディアコンテナを作成中...");
+    const containerRes = await fetch(`https://graph.facebook.com/v19.0/${cleanId}/media?access_token=${encodeURIComponent(cleanToken)}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -426,8 +425,8 @@ async function postToInstagram(article, slug, imageUrl) {
     const creationId = containerData.id;
 
     // 2. コンテナを公開
-    console.log("⏳ Instagram投稿を公開中...");
-    const publishRes = await fetch(`https://graph.facebook.com/v19.0/${cleanId}/media_publish?access_token=${cleanToken}`, {
+    console.log("⏳ Instagram投稿を公開（Publish）中...");
+    const publishRes = await fetch(`https://graph.facebook.com/v19.0/${cleanId}/media_publish?access_token=${encodeURIComponent(cleanToken)}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

@@ -400,17 +400,21 @@ async function postToInstagram(article, slug, imageUrl) {
     return;
   }
 
+  // トークンの簡易クリーンアップ（改行や引用符の混入対策）
+  const cleanToken = IG_ACCESS_TOKEN.trim().replace(/^["']|["']$/g, '');
+  const cleanId = IG_USER_ID.trim().replace(/^["']|["']$/g, '');
+
   try {
     const caption = `【新着記事のご案内】\n\n「${article.title}」\n\n${article.description}\n\n詳細はこちら👇\nhttps://socialboost.jp/blog/${slug}\n\n#SocialBoost #Web制作 #システム開発 #DX推進`;
 
     // 1. 画像コンテナを作成
-    const containerRes = await fetch(`https://graph.facebook.com/v19.0/${IG_USER_ID}/media`, {
+    const containerRes = await fetch(`https://graph.facebook.com/v19.0/${cleanId}/media`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         image_url: imageUrl,
         caption: caption,
-        access_token: IG_ACCESS_TOKEN,
+        access_token: cleanToken,
       }),
     });
 
@@ -422,12 +426,12 @@ async function postToInstagram(article, slug, imageUrl) {
     const creationId = containerData.id;
 
     // 2. コンテナを公開
-    const publishRes = await fetch(`https://graph.facebook.com/v19.0/${IG_USER_ID}/media_publish`, {
+    const publishRes = await fetch(`https://graph.facebook.com/v19.0/${cleanId}/media_publish`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         creation_id: creationId,
-        access_token: IG_ACCESS_TOKEN,
+        access_token: cleanToken,
       }),
     });
 

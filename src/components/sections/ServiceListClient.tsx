@@ -31,7 +31,7 @@ export function ServiceListClient() {
       {/* Dynamic continuous dots or noise background could go here, but we will use clean gradients */}
       <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] bg-size-[32px_32px] opacity-30 pointer-events-none" />
 
-      <Container className="relative z-10 py-16 md:py-32">
+      <Container className="relative z-10 py-16 md:py-20">
         <div className="space-y-32 md:space-y-48">
           {SERVICES_DATA.map((service, index) => {
             const Icon = SERVICE_ICONS[service.slug] || Globe;

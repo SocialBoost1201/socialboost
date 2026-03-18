@@ -28,7 +28,7 @@ const PROBLEMS = [
 
 export function ProblemSection() {
   return (
-    <section className="bg-background-alt py-24 md:py-32 relative overflow-hidden">
+    <section className="bg-background-alt py-24 md:py-20 relative overflow-hidden">
       {/* Background Decor */}
       <div className="absolute top-0 right-0 w-1/2 h-full bg-linear-to-b from-brand-light/30 to-transparent pointer-events-none" />
 

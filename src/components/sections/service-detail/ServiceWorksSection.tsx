@@ -9,7 +9,7 @@ import Link from "next/link";
 
 export function ServiceWorksSection({ service }: { service: ServiceDetail }) {
   return (
-    <section className="py-24 md:py-32 bg-brand-navy text-white relative border-t border-white/10">
+    <section className="py-24 md:py-20 bg-brand-navy text-white relative border-t border-white/10">
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
         <div className="absolute top-1/2 left-1/4 w-96 h-96 bg-brand-primary/10 blur-[100px] rounded-full -translate-x-1/2 -translate-y-1/2" />
         <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-brand-accent/10 blur-[100px] rounded-full translate-x-1/2 translate-y-1/2" />
@@ -25,7 +25,7 @@ export function ServiceWorksSection({ service }: { service: ServiceDetail }) {
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-white/10 border border-white/20 text-brand-light mb-8 shadow-sm">
             <FolderHeart className="w-8 h-8" />
           </div>
-          <h2 className="text-3xl md:text-5xl font-black mb-6 tracking-tight">
+          <h2 className="text-3xl md:text-4xl font-black mb-6 tracking-tight">
             確かな成果と、共創の歩み
           </h2>
           <p className="text-lg text-gray-300 font-medium leading-relaxed mb-10">

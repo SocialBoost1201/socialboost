@@ -83,7 +83,7 @@ export default function WhyPage() {
       <div className="bg-background-alt py-16 md:py-24 border-b border-gray-100">
         <Container>
           <AnimatedSection>
-            <h1 className="text-3xl font-bold tracking-tight text-text-primary md:text-5xl text-center uppercase">
+            <h1 className="text-3xl font-bold tracking-tight text-text-primary md:text-4xl text-center uppercase">
               Why Us
             </h1>
             <p className="mt-4 text-center text-text-secondary font-medium text-lg">
@@ -98,7 +98,7 @@ export default function WhyPage() {
         </Container>
       </div>
 
-      <Container className="py-24 md:py-32">
+      <Container className="py-24 md:py-20">
         <div className="space-y-20 md:space-y-32">
           {reasons.map((reason, i) => (
             <AnimatedSection key={i}>
@@ -123,7 +123,7 @@ export default function WhyPage() {
                 {/* Text */}
                 <div className="w-full md:w-7/12 border-t-4 border-brand-primary pt-8">
                   <div className="mb-6 flex">
-                    <span className="text-6xl font-black text-gray-100 tracking-tighter leading-none block -mt-2 -ml-1">
+                    <span className="text-4xl font-black text-gray-100 tracking-tighter leading-none block -mt-2 -ml-1">
                       {String(i + 1).padStart(2, "0")}
                     </span>
                   </div>

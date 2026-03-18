@@ -63,7 +63,7 @@ export function ServiceHeroSection({ service }: { service: ServiceDetail }) {
           initial={{ y: 30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-4xl md:text-6xl lg:text-7xl font-black text-brand-navy tracking-tight leading-[1.2] mb-10 text-balance"
+          className="text-4xl md:text-4xl lg:text-4xl font-black text-brand-navy tracking-tight leading-[1.2] mb-10 text-balance"
         >
           {service.hero.tagline}
         </motion.h1>

@@ -6,13 +6,13 @@ import Link from "next/link";
 
 export function MiniAppSection() {
   return (
-    <section className="py-24 md:py-32 bg-gray-50 relative overflow-hidden">
+    <section className="py-24 md:py-20 bg-gray-50 relative overflow-hidden">
       {/* Abstract Background Element */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-5xl h-[500px] bg-brand-accent/3 rounded-full blur-3xl pointer-events-none" />
 
       <Container className="relative z-10">
         <AnimatedSection className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-extrabold text-text-primary tracking-tight leading-tight mb-6">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-text-primary tracking-tight leading-tight mb-6">
             いきなり相談するのは、<br className="md:hidden" />
             少しハードルが高いですか？
           </h2>

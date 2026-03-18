@@ -164,7 +164,7 @@ export function PricingComparisonSection() {
   const [activeTab, setActiveTab] = useState<ServiceCategory>("web");
 
   return (
-    <section className="py-24 md:py-32 bg-gray-50 relative overflow-hidden">
+    <section className="py-24 md:py-20 bg-gray-50 relative overflow-hidden">
       {/* Dynamic Background Elements */}
       <div className="absolute top-0 right-0 -translate-y-1/4 translate-x-1/4 w-[800px] h-[800px] bg-brand-primary/4 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/4 w-[600px] h-[600px] bg-brand-accent/4 rounded-full blur-3xl pointer-events-none" />

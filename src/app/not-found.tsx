@@ -43,7 +43,7 @@ export default function NotFound() {
             404
           </div>
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="text-6xl sm:text-8xl font-black text-white tracking-tighter">
+            <div className="text-4xl sm:text-8xl font-black text-white tracking-tighter">
               4<span className="text-brand-primary">0</span>4
             </div>
           </div>

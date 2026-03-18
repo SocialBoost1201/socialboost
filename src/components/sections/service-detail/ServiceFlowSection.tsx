@@ -8,7 +8,7 @@ import { ArrowDownCircle } from "lucide-react";
 
 export function ServiceFlowSection({ service }: { service: ServiceDetail }) {
   return (
-    <section className="py-24 md:py-32 bg-white border-t border-gray-100 overflow-hidden">
+    <section className="py-24 md:py-20 bg-white border-t border-gray-100 overflow-hidden">
       <Container>
         <motion.div 
           initial={{ y: 20, opacity: 0 }}
@@ -20,7 +20,7 @@ export function ServiceFlowSection({ service }: { service: ServiceDetail }) {
             <ArrowDownCircle className="w-4 h-4" />
             Project Flow
           </div>
-          <h2 className="text-3xl md:text-5xl font-black text-text-primary tracking-tight">
+          <h2 className="text-3xl md:text-4xl font-black text-text-primary tracking-tight">
             プロジェクト進行フロー
           </h2>
         </motion.div>

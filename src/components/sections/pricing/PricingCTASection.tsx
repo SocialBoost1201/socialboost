@@ -8,7 +8,7 @@ import { ArrowRight, MessageSquare, Briefcase, Smartphone } from "lucide-react";
 
 export function PricingCTASection() {
   return (
-    <section className="py-24 md:py-32 bg-gray-50 relative overflow-hidden border-t border-gray-200">
+    <section className="py-24 md:py-20 bg-gray-50 relative overflow-hidden border-t border-gray-200">
       <Container>
         <div className="max-w-4xl mx-auto text-center">
           <motion.div
@@ -17,7 +17,7 @@ export function PricingCTASection() {
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
-            <h2 className="text-3xl md:text-5xl lg:text-6xl font-black text-text-primary mb-8 leading-tight tracking-tight">
+            <h2 className="text-3xl md:text-4xl lg:text-4xl font-black text-text-primary mb-8 leading-tight tracking-tight">
               未来への投資を、<br className="md:hidden" />
               <span className="text-brand-primary">最適化する。</span>
             </h2>

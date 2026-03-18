@@ -7,7 +7,7 @@ import { ListChecks } from "lucide-react";
 
 export function ServiceRequirementsSection({ service }: { service: ServiceDetail }) {
   return (
-    <section className="py-32 md:py-48 bg-brand-navy text-white relative overflow-hidden">
+    <section className="py-20 md:py-48 bg-brand-navy text-white relative overflow-hidden">
       {/* Background Decor */}
       <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '40px 40px' }} />
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-primary/20 blur-[150px] rounded-full translate-x-1/2 -translate-y-1/2 pointer-events-none" />
@@ -26,7 +26,7 @@ export function ServiceRequirementsSection({ service }: { service: ServiceDetail
               <ListChecks className="w-4 h-4" />
               Requirements
             </div>
-            <h2 className="text-4xl md:text-6xl font-black mb-6 tracking-tight leading-tight">
+            <h2 className="text-4xl md:text-4xl font-black mb-6 tracking-tight leading-tight">
               要件分解
             </h2>
             <p className="text-lg text-gray-300 font-medium leading-relaxed mb-8">

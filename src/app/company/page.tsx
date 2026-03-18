@@ -24,7 +24,7 @@ export default function CompanyPage() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(24,119,242,0.15)_0%,transparent_60%)]" />
         <Container className="relative z-10 text-center">
           <AnimatedSection>
-            <h1 className="text-3xl md:text-5xl font-extrabold text-white tracking-tight mb-6">会社概要</h1>
+            <h1 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight mb-6">会社概要</h1>
             <p className="text-brand-light/90 max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
               最新のテクノロジーと緻密な戦略設計で、お客様の事業成長を加速させるデジタルパートナー。
             </p>
@@ -33,7 +33,7 @@ export default function CompanyPage() {
       </section>
 
       {/* Vision / Message */}
-      <section className="py-24 md:py-32 bg-white">
+      <section className="py-24 md:py-20 bg-white">
         <Container>
           <div className="max-w-4xl mx-auto">
             <AnimatedSection>
@@ -60,7 +60,7 @@ export default function CompanyPage() {
       </section>
 
       {/* Company Profile Table */}
-      <section className="py-24 md:py-32 bg-background-light">
+      <section className="py-24 md:py-20 bg-background-light">
         <Container>
           <AnimatedSection className="max-w-4xl mx-auto">
             <h2 className="text-2xl font-bold text-text-primary mb-10 text-center">企業情報</h2>

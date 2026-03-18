@@ -10,7 +10,7 @@ export function CTASection() {
       <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at center, #ffffff 1px, transparent 1px)', backgroundSize: '32px 32px' }} />
       
       <Container className="relative z-10 text-center">
-        <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-6 leading-tight">
+        <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-6 leading-tight">
           事業の成長を、<br className="md:hidden" />デジタルの力で加速させる
         </h2>
         <p className="text-lg md:text-xl text-white/90 mb-10 max-w-2xl mx-auto leading-relaxed">

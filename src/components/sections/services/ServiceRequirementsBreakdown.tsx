@@ -67,7 +67,7 @@ export function ServiceRequirementsBreakdown() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   return (
-    <section ref={containerRef} className="py-32 md:py-48 bg-brand-navy relative overflow-hidden text-white">
+    <section ref={containerRef} className="py-20 md:py-48 bg-brand-navy relative overflow-hidden text-white">
       {/* Background Orbs to give it a premium feel */}
       <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-brand-primary/10 rounded-full blur-[150px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-sky-500/10 rounded-full blur-[120px] pointer-events-none" />
@@ -100,7 +100,7 @@ export function ServiceRequirementsBreakdown() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="text-3xl md:text-5xl lg:text-6xl font-black leading-[1.2] text-white tracking-tight"
+            className="text-3xl md:text-4xl lg:text-4xl font-black leading-[1.2] text-white tracking-tight"
           >
             必要な領域を、<br className="md:hidden" />分解して比較する
           </motion.h3>

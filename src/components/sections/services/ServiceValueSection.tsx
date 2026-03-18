@@ -24,7 +24,7 @@ export function ServiceValueSection() {
   ];
 
   return (
-    <section className="py-32 md:py-48 bg-gray-50 relative overflow-hidden">
+    <section className="py-20 md:py-48 bg-gray-50 relative overflow-hidden">
       <div className="absolute top-0 right-0 w-full h-px bg-linear-to-r from-transparent via-gray-200 to-transparent" />
       
       <Container>
@@ -46,7 +46,7 @@ export function ServiceValueSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="text-3xl md:text-5xl lg:text-6xl font-black leading-[1.2] text-text-primary tracking-tight"
+            className="text-3xl md:text-4xl lg:text-4xl font-black leading-[1.2] text-text-primary tracking-tight"
           >
             なぜ、SocialBoostが<br className="md:hidden" />選ばれるのか
           </motion.h3>

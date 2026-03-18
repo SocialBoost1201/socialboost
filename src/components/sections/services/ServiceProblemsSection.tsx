@@ -38,7 +38,7 @@ export function ServiceProblemsSection() {
   const titleOpacity = useTransform(scrollYProgress, [0, 0.4], [0, 1]);
 
   return (
-    <section ref={containerRef} className="py-32 md:py-48 bg-brand-navy text-white relative overflow-hidden">
+    <section ref={containerRef} className="py-20 md:py-48 bg-brand-navy text-white relative overflow-hidden">
       {/* Abstract Background Elements */}
       <div className="absolute top-0 right-0 w-[50%] h-full bg-linear-to-l from-white/5 to-transparent skew-x-[-15deg] pointer-events-none" />
       <div className="absolute bottom-[-20%] left-[-10%] w-[600px] h-[600px] bg-brand-primary/20 blur-[140px] rounded-full pointer-events-none" />
@@ -56,7 +56,7 @@ export function ServiceProblemsSection() {
                 <span className="w-10 h-[2px] bg-brand-primary" />
                 Common Challenges
               </h2>
-              <h3 className="text-3xl md:text-5xl font-black leading-[1.2] tracking-tight mb-8">
+              <h3 className="text-3xl md:text-4xl font-black leading-[1.2] tracking-tight mb-8">
                 デジタルの投資が<br/>
                 <span className="text-gray-400">「ただの出費」</span>に<br/>
                 なっていませんか？
@@ -78,7 +78,7 @@ export function ServiceProblemsSection() {
                 transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
                 className="group relative bg-white/5 backdrop-blur-md border border-white/10 p-8 md:p-12 rounded-4xl hover:bg-white/10 transition-colors"
               >
-                <div className="absolute top-8 right-8 text-6xl font-black text-white/5 group-hover:text-brand-primary/10 transition-colors duration-500">
+                <div className="absolute top-8 right-8 text-4xl font-black text-white/5 group-hover:text-brand-primary/10 transition-colors duration-500">
                   {prob.num}
                 </div>
                 <h4 className="text-2xl font-bold mb-4 pr-16 text-white">{prob.title}</h4>

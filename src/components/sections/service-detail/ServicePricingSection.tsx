@@ -9,7 +9,7 @@ import Link from "next/link";
 
 export function ServicePricingSection({ service }: { service: ServiceDetail }) {
   return (
-    <section className="py-24 md:py-32 bg-white relative">
+    <section className="py-24 md:py-20 bg-white relative">
       <Container>
         <motion.div 
           initial={{ opacity: 0, y: 40 }}
@@ -26,7 +26,7 @@ export function ServicePricingSection({ service }: { service: ServiceDetail }) {
           <div className="flex flex-col md:flex-row items-center justify-center gap-4 mb-8">
             <span className="text-xl font-bold text-text-secondary">初期費用</span>
             <div className="flex items-baseline gap-2">
-              <span className="text-5xl md:text-6xl font-black text-brand-primary tracking-tighter">
+              <span className="text-4xl md:text-4xl font-black text-brand-primary tracking-tighter">
                 {service.pricing.startingPrice}
               </span>
               <span className="text-xl font-bold text-brand-primary">円〜</span>

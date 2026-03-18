@@ -24,7 +24,7 @@ const RELIEFS = [
 
 export function PricingAnxietySection() {
   return (
-    <section className="py-24 md:py-32 bg-white relative overflow-hidden">
+    <section className="py-24 md:py-20 bg-white relative overflow-hidden">
       <Container>
         <div className="text-center mb-16 md:mb-24">
           <motion.h2
@@ -32,7 +32,7 @@ export function PricingAnxietySection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="text-3xl md:text-5xl font-black leading-[1.2] text-text-primary tracking-tight mb-6"
+            className="text-3xl md:text-4xl font-black leading-[1.2] text-text-primary tracking-tight mb-6"
           >
             ご相談前のよくある<span className="text-brand-primary">不安</span>
           </motion.h2>

@@ -90,7 +90,7 @@ export function PricingSimulatorSection() {
   const stepIndex = steps.findIndex((s) => s.key === step);
 
   return (
-    <section className="py-24 md:py-32 bg-brand-navy relative overflow-hidden">
+    <section className="py-24 md:py-20 bg-brand-navy relative overflow-hidden">
       {/* BG Effects */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-primary/10 blur-[150px] rounded-full translate-x-1/3 -translate-y-1/3 pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-400/5 blur-[150px] rounded-full -translate-x-1/3 translate-y-1/3 pointer-events-none" />
@@ -119,7 +119,7 @@ export function PricingSimulatorSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-3xl md:text-5xl font-black text-white tracking-tight mb-4"
+            className="text-3xl md:text-4xl font-black text-white tracking-tight mb-4"
           >
             概算料金シミュレーター
           </motion.h2>
@@ -291,7 +291,7 @@ export function PricingSimulatorSection() {
                     <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-primary/20 border border-brand-primary/30 text-brand-light text-sm font-bold mb-6">
                       <Calculator className="w-4 h-4" /> 概算見積もり
                     </div>
-                    <div className="text-5xl md:text-6xl font-black text-white tracking-tight mb-3">
+                    <div className="text-4xl md:text-4xl font-black text-white tracking-tight mb-3">
                       {formatPrice(totalPrice)}
                     </div>
                     <p className="text-gray-400 text-sm">

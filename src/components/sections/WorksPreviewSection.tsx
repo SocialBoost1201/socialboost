@@ -26,7 +26,7 @@ export async function WorksPreviewSection({ showMoreButton = false }: { showMore
   const { source, works } = await getPreviewWorks();
 
   return (
-    <section className="bg-background-light py-24 md:py-32">
+    <section className="bg-background-light py-24 md:py-20">
       <Container>
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16">
           <AnimatedSection>

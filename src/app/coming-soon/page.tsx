@@ -20,12 +20,12 @@ export default function ComingSoonPage() {
       <div className="bg-background-alt py-16 md:py-24 border-b border-gray-100">
         <Container>
           <AnimatedSection>
-            <h1 className="text-3xl font-bold tracking-tight text-text-primary md:text-5xl text-center">Coming Soon</h1>
+            <h1 className="text-3xl font-bold tracking-tight text-text-primary md:text-4xl text-center">Coming Soon</h1>
           </AnimatedSection>
         </Container>
       </div>
 
-      <Container className="py-24 md:py-32">
+      <Container className="py-24 md:py-20">
         <AnimatedSection className="max-w-2xl mx-auto text-center">
           <div className="bg-white p-12 rounded-3xl shadow-sm ring-1 ring-gray-100">
             <h2 className="text-2xl font-bold text-text-primary mb-4">このページは現在準備中です</h2>

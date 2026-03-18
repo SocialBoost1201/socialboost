@@ -144,7 +144,7 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
               </span>
             </div>
             
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-text-primary leading-tight mb-8">
+            <h1 className="text-3xl md:text-4xl lg:text-4xl font-bold text-text-primary leading-tight mb-8">
               {work.title}
             </h1>
             
@@ -179,7 +179,7 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
             } max-w-3xl mx-auto`}>
               {work.kpis.map((kpi, i) => (
                 <div key={i} className="text-center">
-                  <div className="text-4xl md:text-5xl font-black text-white tracking-tight mb-2">
+                  <div className="text-4xl md:text-4xl font-black text-white tracking-tight mb-2">
                     {kpi.value}
                   </div>
                   <div className="text-sm md:text-base text-gray-300 font-medium">{kpi.label}</div>
@@ -190,7 +190,7 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
         </section>
       )}
 
-      <Container className="py-20 md:py-32">
+      <Container className="py-20 md:py-20">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
           
           {/* Main Content */}

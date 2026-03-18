@@ -24,7 +24,7 @@ const REASONS = [
 
 export function PricingWhyCheapSection() {
   return (
-    <section className="py-24 md:py-32 bg-background-alt relative overflow-hidden">
+    <section className="py-24 md:py-20 bg-background-alt relative overflow-hidden">
       <Container>
         <div className="flex flex-col md:flex-row gap-12 lg:gap-24 items-start">
           
@@ -39,7 +39,7 @@ export function PricingWhyCheapSection() {
               <span className="w-8 h-[2px] bg-brand-primary" />
               Structural Efficiency
             </h2>
-            <h3 className="text-3xl md:text-5xl font-black leading-[1.2] text-text-primary tracking-tight mb-6">
+            <h3 className="text-3xl md:text-4xl font-black leading-[1.2] text-text-primary tracking-tight mb-6">
               なぜ、高品質なのに<br />
               適正価格なのか？
             </h3>

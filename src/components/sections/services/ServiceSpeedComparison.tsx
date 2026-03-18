@@ -26,7 +26,7 @@ const SPEEDS = [
 
 export function ServiceSpeedComparison() {
   return (
-    <section className="py-32 md:py-48 bg-background-alt relative overflow-hidden">
+    <section className="py-20 md:py-48 bg-background-alt relative overflow-hidden">
       <Container>
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 md:gap-24 items-center">
           
@@ -47,7 +47,7 @@ export function ServiceSpeedComparison() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="text-3xl md:text-5xl font-black leading-[1.2] text-text-primary tracking-tight mb-8"
+              className="text-3xl md:text-4xl font-black leading-[1.2] text-text-primary tracking-tight mb-8"
             >
               ビジネスを止めない、<br />
               圧倒的な開発スピード

@@ -10,7 +10,7 @@ export function ServiceFAQSection({ service }: { service: ServiceDetail }) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section className="py-24 md:py-32 bg-gray-50 border-t border-gray-100">
+    <section className="py-24 md:py-20 bg-gray-50 border-t border-gray-100">
       <Container>
         <div className="flex flex-col lg:flex-row gap-16 lg:gap-24">
           <motion.div 
@@ -23,7 +23,7 @@ export function ServiceFAQSection({ service }: { service: ServiceDetail }) {
               <MessageCircleQuestion className="w-4 h-4 text-brand-primary" />
               FAQ
             </div>
-            <h2 className="text-3xl md:text-5xl font-black text-brand-navy mb-6 tracking-tight leading-tight">
+            <h2 className="text-3xl md:text-4xl font-black text-brand-navy mb-6 tracking-tight leading-tight">
               よくあるご質問
             </h2>
             <p className="text-lg text-text-secondary font-medium leading-relaxed">

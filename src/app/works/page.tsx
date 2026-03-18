@@ -53,7 +53,7 @@ export default async function WorksPage() {
         <div className="absolute top-0 right-0 w-1/3 h-full bg-linear-to-b from-brand-light/30 to-transparent pointer-events-none" />
         <Container className="relative z-10">
           <AnimatedSection>
-            <h1 className="text-3xl font-bold tracking-tight text-text-primary md:text-5xl text-center uppercase mb-6">Works</h1>
+            <h1 className="text-3xl font-bold tracking-tight text-text-primary md:text-4xl text-center uppercase mb-6">Works</h1>
             <p className="mt-4 text-center text-text-secondary font-medium text-lg leading-relaxed max-w-2xl mx-auto">
               単なる「制作」に留まらず、お客様の事業成長に直結する<br className="hidden md:block" />
               「成果」にこだわった数多くのプロジェクト支援実績がございます。

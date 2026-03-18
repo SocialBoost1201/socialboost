@@ -80,13 +80,13 @@ export default function ContactPage() {
       <div className="bg-background-alt py-16 md:py-24 border-b border-gray-100">
         <Container>
           <AnimatedSection>
-            <h1 className="text-3xl font-bold tracking-tight text-text-primary md:text-5xl text-center uppercase">Contact</h1>
+            <h1 className="text-3xl font-bold tracking-tight text-text-primary md:text-4xl text-center uppercase">Contact</h1>
             <p className="mt-4 text-center text-text-secondary font-medium">無料相談・お問い合わせ</p>
           </AnimatedSection>
         </Container>
       </div>
 
-      <Container className="py-20 md:py-32">
+      <Container className="py-20 md:py-20">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
           <div className="lg:col-span-5 lg:order-2">
             <AnimatedSection>

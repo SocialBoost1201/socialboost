@@ -3,7 +3,7 @@ import { AnimatedSection } from "@/components/ui/AnimatedSection";
 
 export function VisionSection() {
   return (
-    <section className="py-24 md:py-32 bg-brand-primary text-white relative overflow-hidden">
+    <section className="py-24 md:py-20 bg-brand-primary text-white relative overflow-hidden">
       {/* Background decorations */}
       <div className="absolute top-0 right-0 -translate-y-1/4 translate-x-1/4 w-[800px] h-[800px] bg-white/3 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 left-0 translate-y-1/4 -translate-x-1/4 w-[600px] h-[600px] bg-brand-accent/20 rounded-full blur-3xl pointer-events-none" />
@@ -14,7 +14,7 @@ export function VisionSection() {
             <span className="inline-block py-1 px-3 rounded-full bg-white/10 text-brand-light text-sm font-bold tracking-wider mb-8">
               OUR VISION
             </span>
-            <h2 className="text-3xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-12 tracking-tight">
+            <h2 className="text-3xl md:text-4xl lg:text-4xl font-extrabold leading-tight mb-12 tracking-tight">
               作るだけではなく、<br className="hidden md:block" />
               事業を<span className="text-yellow-300">加速</span>させるパートナー。
             </h2>

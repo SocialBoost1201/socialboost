@@ -7,7 +7,7 @@ import { Building2 } from "lucide-react";
 
 export function ServiceTargetSection({ service }: { service: ServiceDetail }) {
   return (
-    <section className="py-24 md:py-32 bg-white relative z-20">
+    <section className="py-24 md:py-20 bg-white relative z-20">
       <Container>
         <div className="flex flex-col lg:flex-row gap-16 lg:gap-24 items-start">
           <motion.div 
@@ -16,7 +16,7 @@ export function ServiceTargetSection({ service }: { service: ServiceDetail }) {
             viewport={{ once: true, margin: "-100px" }}
             className="lg:w-1/3 sticky top-32"
           >
-            <h2 className="text-3xl md:text-5xl font-black text-brand-navy mb-6 tracking-tight leading-tight">
+            <h2 className="text-3xl md:text-4xl font-black text-brand-navy mb-6 tracking-tight leading-tight">
               対象となる<br/>企業・ユーザー
             </h2>
             <p className="text-lg text-text-secondary font-medium leading-relaxed">

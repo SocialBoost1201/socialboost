@@ -7,7 +7,7 @@ import { Scale, CheckCircle2, XCircle } from "lucide-react";
 
 export function ServiceComparisonSection({ service }: { service: ServiceDetail }) {
   return (
-    <section className="py-24 md:py-32 bg-gray-50 border-t border-gray-100 relative">
+    <section className="py-24 md:py-20 bg-gray-50 border-t border-gray-100 relative">
       <Container>
         <div className="text-center mb-16 md:mb-24">
           <motion.div
@@ -24,7 +24,7 @@ export function ServiceComparisonSection({ service }: { service: ServiceDetail }
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-3xl md:text-5xl font-black text-brand-navy tracking-tight mb-6"
+            className="text-3xl md:text-4xl font-black text-brand-navy tracking-tight mb-6"
           >
             他社との圧倒的な違い
           </motion.h2>

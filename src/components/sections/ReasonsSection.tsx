@@ -30,7 +30,7 @@ const reasons = [
 
 export function ReasonsSection() {
   return (
-    <section className="bg-background-alt py-24 md:py-32">
+    <section className="bg-background-alt py-24 md:py-20">
       <Container>
         <AnimatedSection>
           <SectionTitle en="REASONS" ja="選ばれる理由" />

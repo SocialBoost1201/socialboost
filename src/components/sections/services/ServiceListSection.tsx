@@ -8,7 +8,7 @@ import { SERVICES_DATA } from "@/lib/services";
 
 export function ServiceListSection() {
   return (
-    <section className="py-32 md:py-48 bg-white relative overflow-hidden">
+    <section className="py-20 md:py-48 bg-white relative overflow-hidden">
       <Container>
         <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-20 md:mb-32 gap-10">
           <motion.div
@@ -22,7 +22,7 @@ export function ServiceListSection() {
               <span className="w-8 h-[2px] bg-brand-primary" />
               Service Lineup
             </h2>
-            <h3 className="text-4xl md:text-6xl font-black leading-[1.1] text-text-primary tracking-tight">
+            <h3 className="text-4xl md:text-4xl font-black leading-[1.1] text-text-primary tracking-tight">
               あらゆる課題に応える<br />提供サービス
             </h3>
           </motion.div>

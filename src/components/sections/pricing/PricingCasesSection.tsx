@@ -74,7 +74,7 @@ export function PricingCasesSection() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   return (
-    <section ref={containerRef} className="py-32 md:py-48 bg-white relative overflow-hidden">
+    <section ref={containerRef} className="py-20 md:py-48 bg-white relative overflow-hidden">
       {/* Background soft gradients */}
       <div className="absolute top-[20%] right-[-10%] w-[500px] h-[500px] bg-brand-primary/5 rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] bg-sky-200/10 rounded-full blur-[100px] pointer-events-none" />
@@ -98,7 +98,7 @@ export function PricingCasesSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="text-3xl md:text-5xl lg:text-6xl font-black leading-[1.2] text-text-primary tracking-tight mb-8"
+            className="text-3xl md:text-4xl lg:text-4xl font-black leading-[1.2] text-text-primary tracking-tight mb-8"
           >
             ケース別 お見積もり例
           </motion.h3>

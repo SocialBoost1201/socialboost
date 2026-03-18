@@ -34,7 +34,7 @@ export function PricingRangesSection() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="text-3xl md:text-5xl font-black leading-[1.2] text-text-primary tracking-tight mb-8"
+              className="text-3xl md:text-4xl font-black leading-[1.2] text-text-primary tracking-tight mb-8"
             >
               領域ごとの<br />
               基本料金レンジ

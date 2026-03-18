@@ -7,7 +7,7 @@ import { Layers } from "lucide-react";
 
 export function ServiceScopeSection({ service }: { service: ServiceDetail }) {
   return (
-    <section className="py-24 md:py-32 bg-white relative">
+    <section className="py-24 md:py-20 bg-white relative">
       <Container>
         <div className="flex flex-col md:flex-row gap-12 lg:gap-20 items-center">
           <motion.div 
@@ -20,7 +20,7 @@ export function ServiceScopeSection({ service }: { service: ServiceDetail }) {
               <Layers className="w-4 h-4" />
               Scope of Work
             </div>
-            <h2 className="text-3xl md:text-5xl font-black text-brand-navy mb-6 tracking-tight leading-tight">
+            <h2 className="text-3xl md:text-4xl font-black text-brand-navy mb-6 tracking-tight leading-tight">
               提供内容・<br className="hidden md:block" />対応範囲
             </h2>
             <p className="text-lg text-text-secondary font-medium leading-relaxed">

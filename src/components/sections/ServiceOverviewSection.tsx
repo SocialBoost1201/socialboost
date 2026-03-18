@@ -45,7 +45,7 @@ const services = [
 
 export function ServiceOverviewSection() {
   return (
-    <section className="bg-white py-24 md:py-32">
+    <section className="bg-white py-24 md:py-20">
       <Container>
         <AnimatedSection>
           <SectionTitle en="SERVICES" ja="提供サービス" />

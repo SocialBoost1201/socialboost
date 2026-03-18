@@ -48,7 +48,7 @@ export function PricingHeroSection() {
             </span>
           </motion.div>
 
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-black text-white leading-[1.1] tracking-tight mb-8">
+          <h1 className="text-4xl md:text-4xl lg:text-4xl font-black text-white leading-[1.1] tracking-tight mb-8">
             <motion.span
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}

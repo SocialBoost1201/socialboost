@@ -7,7 +7,7 @@ import { FileWarning, CheckCircle2, ArrowRight } from "lucide-react";
 
 export function ServiceBeforeAfterSection({ service }: { service: ServiceDetail }) {
   return (
-    <section className="py-24 md:py-32 bg-brand-navy relative overflow-hidden">
+    <section className="py-24 md:py-20 bg-brand-navy relative overflow-hidden">
       <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-brand-primary/20 blur-[120px] rounded-full translate-x-1/3 -translate-y-1/3 pointer-events-none" />
       
       <Container className="relative z-10">
@@ -16,7 +16,7 @@ export function ServiceBeforeAfterSection({ service }: { service: ServiceDetail 
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-3xl md:text-5xl font-black text-white mb-6 tracking-tight"
+            className="text-3xl md:text-4xl font-black text-white mb-6 tracking-tight"
           >
             課題と解決策
           </motion.h2>

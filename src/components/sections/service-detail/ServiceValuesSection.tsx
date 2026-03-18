@@ -7,7 +7,7 @@ import { Sparkles } from "lucide-react";
 
 export function ServiceValuesSection({ service }: { service: ServiceDetail }) {
   return (
-    <section className="py-24 md:py-32 bg-gray-50 border-y border-gray-100 relative">
+    <section className="py-24 md:py-20 bg-gray-50 border-y border-gray-100 relative">
       <Container>
         <div className="mb-16 md:mb-24 flex flex-col items-center text-center">
           <motion.div
@@ -24,7 +24,7 @@ export function ServiceValuesSection({ service }: { service: ServiceDetail }) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-3xl md:text-5xl font-black text-brand-navy tracking-tight"
+            className="text-3xl md:text-4xl font-black text-brand-navy tracking-tight"
           >
             私たちが選ばれる理由
           </motion.h2>

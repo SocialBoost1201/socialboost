@@ -5,7 +5,7 @@ import { Container } from "@/components/ui/Container";
 
 export function PricingPhilosophySection() {
   return (
-    <section className="py-24 md:py-32 bg-white relative overflow-hidden">
+    <section className="py-24 md:py-20 bg-white relative overflow-hidden">
       <Container>
         <div className="max-w-4xl mx-auto text-center">
           <motion.div

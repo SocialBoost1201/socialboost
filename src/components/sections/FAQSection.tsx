@@ -16,7 +16,7 @@ export function FAQSection() {
   const displayFaqs = FAQ_DATA.slice(0, DISPLAY_COUNT);
 
   return (
-    <section className="bg-background-alt py-24 md:py-32">
+    <section className="bg-background-alt py-24 md:py-20">
       <Container>
         <AnimatedSection>
           <SectionTitle en="FAQ" ja="よくあるご質問" />

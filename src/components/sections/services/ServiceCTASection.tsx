@@ -8,7 +8,7 @@ import { ArrowRight, Calculator, MessageSquare } from "lucide-react";
 
 export function ServiceCTASection() {
   return (
-    <section className="py-24 md:py-32 bg-white relative overflow-hidden">
+    <section className="py-24 md:py-20 bg-white relative overflow-hidden">
       <Container>
         <motion.div
           initial={{ opacity: 0, scale: 0.98, y: 30 }}
@@ -22,7 +22,7 @@ export function ServiceCTASection() {
           <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-sky-500/20 rounded-full blur-[80px] pointer-events-none translate-y-1/3 -translate-x-1/3" />
 
           <div className="relative z-10 max-w-3xl mx-auto">
-            <h2 className="text-3xl md:text-5xl font-black text-white mb-6 leading-tight tracking-tight">
+            <h2 className="text-3xl md:text-4xl font-black text-white mb-6 leading-tight tracking-tight">
               プロジェクトの現在地から、<br className="hidden md:block" />最適解をご提案します。
             </h2>
             <p className="text-gray-300 text-lg md:text-xl font-medium leading-relaxed mb-12">

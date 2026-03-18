@@ -81,7 +81,7 @@ export default async function BlogPage() {
       <div className="bg-background-alt py-16 md:py-24 border-b border-gray-100">
         <Container>
           <AnimatedSection>
-            <h1 className="text-3xl font-bold tracking-tight text-text-primary md:text-5xl text-center uppercase">Blog</h1>
+            <h1 className="text-3xl font-bold tracking-tight text-text-primary md:text-4xl text-center uppercase">Blog</h1>
             <p className="mt-4 text-center text-text-secondary font-medium">お役立ちコラム・最新情報</p>
           </AnimatedSection>
         </Container>

@@ -1,5 +1,6 @@
 import { Header } from "./Header";
 import { Footer } from "./Footer";
+import { StickyCtaBar } from "@/components/ui/StickyCtaBar";
 
 export function PageLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -9,6 +10,8 @@ export function PageLayout({ children }: { children: React.ReactNode }) {
         {children}
       </main>
       <Footer />
+      {/* モバイル専用スティッキーCTAバー */}
+      <StickyCtaBar />
     </div>
   );
 }

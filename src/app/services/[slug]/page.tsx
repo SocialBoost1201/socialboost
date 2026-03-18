@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { CTASection } from "@/components/sections/CTASection";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import { Metadata } from "next";
-import { generateServiceJsonLd, generateBreadcrumbJsonLd } from "@/lib/jsonld";
+import { generateServiceJsonLd, generateBreadcrumbJsonLd, generateFAQJsonLd } from "@/lib/jsonld";
 import { ServiceDetailClient } from "@/components/sections/ServiceDetailClient";
 
 type Props = {
@@ -65,6 +65,20 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
           ),
         }}
       />
+      {/* FAQ構造化データ（リッチスニペット対応） */}
+      {service.faqs && service.faqs.length > 0 && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(
+              generateFAQJsonLd(service.faqs.map((faq) => ({
+                question: faq.q,
+                answer: faq.a,
+              })))
+            ),
+          }}
+        />
+      )}
       <Breadcrumb items={[{ name: "サービス", href: "/services" }, { name: service.title }]} />
       
       <ServiceDetailClient service={service} />

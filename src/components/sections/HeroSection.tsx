@@ -57,14 +57,14 @@ export function HeroSection() {
             </AnimatedSection>
 
             <AnimatedSection delay={0.35} className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
-              <Link href="/contact" tabIndex={-1} className="w-full sm:w-auto">
-                <Button size="lg" className="w-full sm:w-auto group text-base h-13 px-7 shadow-lg shadow-brand-primary/25 hover:shadow-brand-primary/40 transition-shadow">
+              <Link href="/contact" tabIndex={-1} className="w-full sm:w-[320px]">
+                <Button size="lg" className="w-full group text-base h-13 px-7 shadow-lg shadow-brand-primary/25 hover:shadow-brand-primary/40 transition-shadow justify-center">
                   オンラインで無料相談する
                   <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
                 </Button>
               </Link>
-              <Link href="/services" tabIndex={-1} className="w-full sm:w-auto">
-                <Button size="lg" variant="outline" className="w-full sm:w-auto glass-card text-base h-13 px-7 hover:bg-white/90 transition-all">
+              <Link href="/services" tabIndex={-1} className="w-full sm:w-[320px]">
+                <Button size="lg" variant="outline" className="w-full glass-card text-base h-13 px-7 hover:bg-white/90 transition-all justify-center">
                   対応可能な領域を見る
                 </Button>
               </Link>

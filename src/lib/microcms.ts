@@ -25,6 +25,30 @@ export type MicroCMSWorkListResponse = {
   limit: number;
 };
 
+// microCMS ブログレスポンス型
+export type MicroCMSBlog = {
+  id: string;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+  title: string;
+  slug: string;
+  category: string;
+  description: string;   // メタディスクリプション・リード文
+  body: string;          // HTML本文
+  thumbnail?: { url: string; height: number; width: number };
+  tags?: string[];       // タグ（事実上のstring[]・タグ配列）
+  author?: string;       // 著者名
+  readTime?: string;     // "約2分"  
+};
+
+export type MicroCMSBlogListResponse = {
+  contents: MicroCMSBlog[];
+  totalCount: number;
+  offset: number;
+  limit: number;
+};
+
 // 環境変数が未設定の場合は null を返す（ビルドエラーを防ぐ）
 export function getClient() {
   const serviceDomain = process.env.MICROCMS_SERVICE_DOMAIN;

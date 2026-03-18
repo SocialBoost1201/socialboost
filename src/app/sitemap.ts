@@ -1,10 +1,11 @@
 import type { MetadataRoute } from "next";
 import { SERVICES_DATA } from "@/lib/services";
 import { WORKS_DATA } from "@/lib/works";
+import { getClient, MicroCMSBlogListResponse } from "@/lib/microcms";
 
 const BASE_URL = "https://socialboost.jp";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
 
   // 静的ページ
@@ -63,5 +64,34 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...staticPages, ...servicePages, ...worksPages];
+  // ブログ詳細ページ
+  let blogPages: MetadataRoute.Sitemap = [];
+  try {
+    const c = getClient();
+    if (c) {
+      const res = await c.get<MicroCMSBlogListResponse>({
+        endpoint: "blogs",
+        queries: { fields: "slug,id,updatedAt", limit: 100 },
+      });
+      blogPages = res.contents.map((b) => ({
+        url: `${BASE_URL}/blog/${b.slug || b.id}`,
+        lastModified: new Date(b.updatedAt),
+        changeFrequency: "monthly" as const,
+        priority: 0.7,
+      }));
+    }
+  } catch {
+    // ignore
+  }
+
+  const blogList: MetadataRoute.Sitemap = [
+    {
+      url: `${BASE_URL}/blog`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.8,
+    }
+  ];
+
+  return [...staticPages, ...servicePages, ...worksPages, ...blogList, ...blogPages];
 }

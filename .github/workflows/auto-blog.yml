@@ -1,0 +1,45 @@
+name: AI Blog Auto Generate
+
+on:
+  schedule:
+    # 毎週月曜 09:00 JST (00:00 UTC) に自動実行
+    - cron: '0 0 * * 1'
+  workflow_dispatch:
+    inputs:
+      keyword:
+        description: '記事のキーワード（省略時はリストからランダム選択）'
+        required: false
+        type: string
+
+jobs:
+  generate-blog:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Generate and Publish Blog Article
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          MICROCMS_SERVICE_DOMAIN: ${{ secrets.MICROCMS_SERVICE_DOMAIN }}
+          MICROCMS_API_KEY: ${{ secrets.MICROCMS_API_KEY }}
+          MANUAL_KEYWORD: ${{ inputs.keyword }}
+        run: node .github/scripts/generate-blog.mjs
+
+      - name: Trigger Vercel Redeploy
+        env:
+          VERCEL_DEPLOY_HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK }}
+        run: |
+          if [ -n "$VERCEL_DEPLOY_HOOK" ]; then
+            curl -X POST "$VERCEL_DEPLOY_HOOK"
+            echo "✅ Vercel redeploy triggered"
+          else
+            echo "⚠️ VERCEL_DEPLOY_HOOK is not set, skipping redeploy"
+          fi

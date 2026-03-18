@@ -22,10 +22,14 @@ export async function POST(req: Request) {
       return NextResponse.json({ success: true, mock: true });
     }
 
+    // 環境変数からメールアドレスを取得（フォールバックあり）
+    const toEmail = process.env.CONTACT_FORM_TO_EMAIL || 'info@socialboost.jp';
+    const fromEmail = process.env.CONTACT_FORM_FROM_EMAIL || 'no-reply@socialboost.jp';
+
     // 管理者への通知メール
     await resend.emails.send({
-      from: 'SocialBoost Contact <no-reply@socialboost.jp>',
-      to: 'info@socialboost.jp',
+      from: `SocialBoost Contact <${fromEmail}>`,
+      to: toEmail,
       subject: `【お問い合わせ】${name}様より新規のご相談`,
       text: `
 SocialBoost Webサイトより、新規のお問い合わせを受け付けました。
@@ -43,7 +47,7 @@ ${message}
 
     // お客様への自動返信メール
     await resend.emails.send({
-      from: 'SocialBoost <no-reply@socialboost.jp>',
+      from: `SocialBoost <${fromEmail}>`,
       to: email,
       subject: '【SocialBoost】お問い合わせを受け付けました',
       text: `

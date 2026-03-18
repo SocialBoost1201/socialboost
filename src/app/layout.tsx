@@ -10,7 +10,7 @@ const notoSansJP = Noto_Sans_JP({
   subsets: ["latin"],
 });
 
-const SITE_URL = "https://socialboost.jp";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://socialboost.jp";
 const SITE_NAME = "SocialBoost";
 const SITE_DESCRIPTION = "SocialBoostは、Web戦略設計からLP・サイト制作、システム開発、アプリ開発、AI導入まで一気通貫で支援するデジタル戦略パートナーです。";
 

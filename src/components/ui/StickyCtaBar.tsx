@@ -3,55 +3,59 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { MessageCircle, X } from "lucide-react";
+import { MessageCircle, FileText } from "lucide-react";
 
 /**
- * スクロール量が一定を超えたらモバイルに表示される固定CTAバー
- * Heroセクションより下にスクロールした際に表示
+ * スマホ専用の画面下部固定コンバージョンバー（Bottom Navigation CTA）
  */
 export function StickyCtaBar() {
   const [visible, setVisible] = useState(false);
-  const [dismissed, setDismissed] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      // 400px以上スクロールで表示
-      setVisible(window.scrollY > 400);
+      // 100px以上スクロールで表示（最初のファーストビューの抜け感は担保する）
+      setVisible(window.scrollY > 100);
     };
+    
+    // 初回マウント時にもチェック
+    handleScroll();
+    
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const shouldShow = visible && !dismissed;
-
   return (
     <AnimatePresence>
-      {shouldShow && (
+      {visible && (
         <motion.div
           initial={{ y: 100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 100, opacity: 0 }}
           transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-          // md以上では非表示（デスクトップはヘッダーCTAで十分）
+          // デスクトップでは非表示
           className="fixed bottom-0 left-0 right-0 z-50 md:hidden"
+          style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
         >
-          <div className="bg-brand-navy/95 backdrop-blur-md border-t border-white/10 px-4 py-3 flex items-center gap-3 safe-area-inset-bottom">
-            {/* CTA Button */}
+          {/* 
+            BtoB向け王道の2分割レイアウト 
+            [資料ダウンロード] [無料相談]
+           */}
+          <div className="flex items-center w-full bg-white border-t border-gray-200 shadow-[0_-5px_15px_rgba(0,0,0,0.05)]">
+            <Link
+              href="/documents"
+              className="flex-1 flex flex-col items-center justify-center py-2.5 bg-white text-brand-navy hover:bg-gray-50 transition-colors border-r border-gray-200"
+            >
+              <FileText className="w-5 h-5 mb-1 text-gray-500" />
+              <span className="text-[10px] font-bold">お役立ち資料</span>
+            </Link>
+            
             <Link
               href="/contact"
-              className="flex-1 flex items-center justify-center gap-2 bg-brand-primary text-white font-bold text-sm py-3 rounded-xl shadow-lg shadow-brand-primary/30 hover:bg-brand-accent transition-colors"
+              className="flex-1 flex flex-col items-center justify-center py-2.5 bg-brand-primary text-white hover:bg-brand-accent transition-colors"
             >
-              <MessageCircle className="w-4 h-4 shrink-0" />
-              無料で相談する（オンライン）
+              <MessageCircle className="w-5 h-5 mb-1 text-white/90" />
+              <span className="text-[10px] font-bold">無料相談</span>
             </Link>
-            {/* Dismiss */}
-            <button
-              onClick={() => setDismissed(true)}
-              className="w-10 h-10 flex items-center justify-center rounded-xl border border-white/20 text-white/60 hover:text-white transition-colors shrink-0"
-              aria-label="閉じる"
-            >
-              <X className="w-4 h-4" />
-            </button>
           </div>
         </motion.div>
       )}

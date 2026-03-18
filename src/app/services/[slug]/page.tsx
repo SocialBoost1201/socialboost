@@ -8,12 +8,13 @@ import { generateServiceJsonLd, generateBreadcrumbJsonLd } from "@/lib/jsonld";
 import { ServiceDetailClient } from "@/components/sections/ServiceDetailClient";
 
 type Props = {
-  params: { slug: string };
-  searchParams: { [key: string]: string | string[] | undefined };
+  params: Promise<{ slug: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const service = getServiceBySlug(params.slug);
+  const { slug } = await params;
+  const service = getServiceBySlug(slug);
   if (!service) return { title: "Not Found" };
   
   return {
@@ -22,11 +23,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: `${service.title} | サービス | SocialBoost`,
       description: service.shortDesc,
-      url: `https://socialboost.jp/services/${params.slug}`,
+      url: `https://socialboost.jp/services/${slug}`,
       type: "website",
     },
     alternates: {
-      canonical: `https://socialboost.jp/services/${params.slug}`,
+      canonical: `https://socialboost.jp/services/${slug}`,
     },
   };
 }
@@ -37,8 +38,9 @@ export function generateStaticParams() {
   }));
 }
 
-export default function ServiceDetailPage({ params }: { params: { slug: string } }) {
-  const service = getServiceBySlug(params.slug);
+export default async function ServiceDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const service = getServiceBySlug(slug);
   
   if (!service) {
     notFound();

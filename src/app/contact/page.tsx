@@ -11,16 +11,45 @@ import { generateContactPageJsonLd } from "@/lib/jsonld";
 
 export default function ContactPage() {
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [formData, setFormData] = useState({
+    company: "",
+    name: "",
+    email: "",
+    phone: "",
+    preferred_date: "",
+    type: "",
+    message: "",
+  });
+
   const contactJsonLd = generateContactPageJsonLd();
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    setFormData({ ...formData, [e.target.id]: e.target.value });
+  };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulate API call
-    setTimeout(() => {
+    setIsSubmitting(true);
+    setError(null);
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (!res.ok) throw new Error("送信に失敗しました。");
+      
       setIsSubmitted(true);
       window.scrollTo({ top: 0, behavior: "smooth" });
-    }, 800);
+    } catch (err: any) {
+      setError(err.message || "予期せぬエラーが発生しました。時間をおいて再度お試しください。");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -104,6 +133,8 @@ export default function ContactPage() {
                       <input
                         type="text"
                         id="company"
+                        value={formData.company}
+                        onChange={handleChange}
                         className="w-full rounded-lg border-gray-200 bg-gray-50 px-4 py-3 text-text-primary focus:border-brand-primary focus:bg-white focus:ring-1 focus:ring-brand-primary outline-none transition-colors border"
                         placeholder="株式会社SocialBoost"
                       />
@@ -117,6 +148,8 @@ export default function ContactPage() {
                         type="text"
                         id="name"
                         required
+                        value={formData.name}
+                        onChange={handleChange}
                         className="w-full rounded-lg border-gray-200 bg-gray-50 px-4 py-3 text-text-primary focus:border-brand-primary focus:bg-white focus:ring-1 focus:ring-brand-primary outline-none transition-colors border"
                         placeholder="山田 太郎"
                       />
@@ -130,6 +163,8 @@ export default function ContactPage() {
                         type="email"
                         id="email"
                         required
+                        value={formData.email}
+                        onChange={handleChange}
                         className="w-full rounded-lg border-gray-200 bg-gray-50 px-4 py-3 text-text-primary focus:border-brand-primary focus:bg-white focus:ring-1 focus:ring-brand-primary outline-none transition-colors border"
                         placeholder="info@example.com"
                       />
@@ -142,6 +177,8 @@ export default function ContactPage() {
                       <input
                         type="tel"
                         id="phone"
+                        value={formData.phone}
+                        onChange={handleChange}
                         className="w-full rounded-lg border-gray-200 bg-gray-50 px-4 py-3 text-text-primary focus:border-brand-primary focus:bg-white focus:ring-1 focus:ring-brand-primary outline-none transition-colors border"
                         placeholder="03-0000-0000"
                       />
@@ -154,6 +191,8 @@ export default function ContactPage() {
                       <input
                         type="date"
                         id="preferred_date"
+                        value={formData.preferred_date}
+                        onChange={handleChange}
                         className="w-full rounded-lg border-gray-200 bg-gray-50 px-4 py-3 text-text-primary focus:border-brand-primary focus:bg-white focus:ring-1 focus:ring-brand-primary outline-none transition-colors border cursor-pointer"
                       />
                     </div>
@@ -165,6 +204,8 @@ export default function ContactPage() {
                       <select
                         id="type"
                         required
+                        value={formData.type}
+                        onChange={handleChange}
                         className="w-full rounded-lg border-gray-200 bg-gray-50 px-4 py-3 text-text-primary focus:border-brand-primary focus:bg-white focus:ring-1 focus:ring-brand-primary outline-none transition-colors border appearance-none"
                       >
                         <option value="">選択してください</option>
@@ -185,20 +226,28 @@ export default function ContactPage() {
                       <textarea
                         id="message"
                         required
+                        value={formData.message}
+                        onChange={handleChange}
                         rows={6}
                         className="w-full rounded-lg border-gray-200 bg-gray-50 px-4 py-3 text-text-primary focus:border-brand-primary focus:bg-white focus:ring-1 focus:ring-brand-primary outline-none transition-colors border resize-y"
                         placeholder="（例）既存のコーポレートサイトが古くなったため、採用強化を目的にリニューアルを検討しています。予算は◯◯◯万円程度で、◯月頃の公開を希望しています。"
                       ></textarea>
                     </div>
 
+                    {error && (
+                      <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-lg text-sm font-medium">
+                        {error}
+                      </div>
+                    )}
+
                     <div className="pt-6 border-t border-gray-100 text-center">
                       <p className="text-sm text-text-secondary mb-6">
                         <a href="/privacy-policy" className="text-brand-primary hover:underline underline-offset-4 font-semibold" target="_blank">プライバシーポリシー</a>
                         に同意の上、送信してください。
                       </p>
-                      <Button type="submit" size="lg" className="w-full sm:w-auto h-14 px-12 text-lg shadow-md hover:shadow-lg transition-transform hover:-translate-y-0.5 group">
-                        同意して送信する
-                        <Send className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+                      <Button type="submit" disabled={isSubmitting} size="lg" className="w-full sm:w-auto h-14 px-12 text-lg shadow-md hover:shadow-lg transition-transform hover:-translate-y-0.5 group disabled:opacity-70 disabled:hover:translate-y-0">
+                        {isSubmitting ? "送信中..." : "同意して送信する"}
+                        {!isSubmitting && <Send className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />}
                       </Button>
                     </div>
 

@@ -76,11 +76,11 @@ export function Header() {
               </li>
             ))}
           </ul>
-          <Link href="/contact" tabIndex={-1}>
-            <Button size="sm" className="rounded-full px-6 shadow-md hover:shadow-lg transition-all hover:-translate-y-0.5">
+          <Button asChild size="sm" className="rounded-full px-6 shadow-md hover:shadow-lg transition-all hover:-translate-y-0.5">
+            <Link href="/contact" tabIndex={-1}>
               お問い合わせ
-            </Button>
-          </Link>
+            </Link>
+          </Button>
         </nav>
 
         {/* Mobile Menu Toggle */}
@@ -117,9 +117,11 @@ export function Header() {
               </li>
             ))}
             <li className="pt-4">
-              <Link href="/contact" className="block w-full" tabIndex={-1}>
-                <Button className="w-full justify-center h-12 text-base">無料で相談してみる</Button>
-              </Link>
+              <Button asChild className="w-full justify-center h-12 text-base">
+                <Link href="/contact" className="block w-full" tabIndex={-1}>
+                  無料で相談してみる
+                </Link>
+              </Button>
             </li>
           </ul>
         </div>

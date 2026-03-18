@@ -17,18 +17,18 @@ export function CTASection() {
           Webサイト制作からシステム開発、AI導入まで。要件が固まっていなくてもお気軽にご相談ください。最適なロードマップをご提案します。
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Link href="/contact" tabIndex={-1} className="w-full sm:w-[320px]">
-            <Button size="lg" className="w-full bg-white text-brand-primary hover:bg-gray-50 flex items-center justify-center gap-2 group shadow-xl transition-transform hover:-translate-y-1">
-              <MessageCircle className="w-5 h-5" />
+          <Button asChild size="lg" className="w-full sm:w-[320px] bg-white text-brand-primary hover:bg-gray-50 flex items-center justify-center gap-2 group shadow-xl transition-transform hover:-translate-y-1">
+            <Link href="/contact" tabIndex={-1}>
+              <MessageCircle className="w-5 h-5 cursor-pointer" />
               まずは無料で相談してみる
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-            </Button>
-          </Link>
-          <Link href="/works" tabIndex={-1} className="w-full sm:w-[320px] mt-4 sm:mt-0">
-            <Button size="lg" variant="ghost" className="w-full text-white hover:bg-white/10 hover:text-white border border-white/30 transition-transform hover:-translate-y-1 justify-center">
+            </Link>
+          </Button>
+          <Button asChild size="lg" variant="ghost" className="w-full sm:w-[320px] mt-4 sm:mt-0 text-white hover:bg-white/10 hover:text-white border border-white/30 transition-transform hover:-translate-y-1 justify-center">
+            <Link href="/works" tabIndex={-1}>
               制作実績を見る
-            </Button>
-          </Link>
+            </Link>
+          </Button>
         </div>
         <p className="mt-8 text-sm text-blue-200">
           オンライン相談（Zoom対応） / ご相談・お見積もり無料

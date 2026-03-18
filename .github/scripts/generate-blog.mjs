@@ -403,7 +403,7 @@ async function main() {
   console.log("🎨 OpenAI API (dall-e-3) でサムネイル画像を生成中...");
   let thumbnailUrl = null;
   try {
-    const imageConcept = article.imagePrompt || keyword;
+    const imageConcept = article.thumbnail_prompt || keyword;
     thumbnailUrl = await generateThumbnail(imageConcept, slug);
     console.log(`🖼 画像を保存しました: ${thumbnailUrl}`);
   } catch (err) {

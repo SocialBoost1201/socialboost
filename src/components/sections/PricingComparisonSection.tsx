@@ -286,14 +286,14 @@ export function PricingComparisonSection() {
                       </div>
 
                       {/* SocialBoost Column */}
-                      <div className="col-span-5 p-6 md:p-8 flex flex-col justify-center relative bg-linear-to-br from-white to-brand-light/30">
+                      <div className="col-span-5 p-4 md:p-8 flex flex-col justify-center relative bg-blue-50/50 border-t border-brand-primary/10 md:border-t-0">
                         <div className="flex items-start gap-3">
-                          <CheckCircle2 className="w-6 h-6 text-brand-primary shrink-0 mt-0.5" />
+                          <CheckCircle2 className="w-5 h-5 text-brand-primary shrink-0 mt-0.5" />
                           <div>
-                            <div className="font-extrabold text-brand-primary text-lg md:text-xl mb-1.5">
+                            <div className="font-extrabold text-brand-primary text-base md:text-xl mb-1.5">
                               {item.us.value}
                             </div>
-                            <p className="text-sm md:text-base text-text-secondary leading-relaxed font-medium">
+                            <p className="text-sm text-text-secondary leading-relaxed font-medium">
                               {item.us.desc}
                             </p>
                           </div>

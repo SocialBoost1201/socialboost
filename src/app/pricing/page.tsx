@@ -9,6 +9,7 @@ import { PricingCasesSection } from "@/components/sections/pricing/PricingCasesS
 import { PricingWhyCheapSection } from "@/components/sections/pricing/PricingWhyCheapSection";
 import { PricingAnxietySection } from "@/components/sections/pricing/PricingAnxietySection";
 import { PricingCTASection } from "@/components/sections/pricing/PricingCTASection";
+import { PricingSimulatorSection } from "@/components/sections/pricing/PricingSimulatorSection";
 
 export const metadata: Metadata = {
   title: "Pricing | 適正価格によるハイエンドなWeb開発",
@@ -26,7 +27,10 @@ export default function PricingPage() {
       {/* 1. Hero: 透明性と哲学の宣言 */}
       <PricingHeroSection />
 
-      {/* 2. Philosophy: 構造への課題提示 */}
+      {/* 2. Simulator: インタラクティブな概算シミュレーター */}
+      <PricingSimulatorSection />
+
+      {/* 3. Philosophy: 構造への課題提示 */}
       <PricingPhilosophySection />
 
       {/* 3. Ranges: 標準的な料金感 */}

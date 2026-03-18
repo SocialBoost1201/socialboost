@@ -45,13 +45,13 @@ export const CardCategoryBadge = ({ children, className }: { children: React.Rea
 };
 
 export const CardContent = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => {
-  return <div className={cn("flex flex-1 flex-col p-6", className)} {...props} />;
+  return <div className={cn("flex flex-1 flex-col p-6 text-left", className)} {...props} />;
 };
 
 export const CardTitle = ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => {
-  return <h3 className={cn("mt-3 text-xl font-bold leading-snug text-text-primary", className)} {...props} />;
+  return <h3 className={cn("mt-3 text-lg md:text-xl lg:text-2xl font-bold leading-snug text-text-primary text-left", className)} {...props} />;
 };
 
 export const CardDescription = ({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) => {
-  return <p className={cn("mt-3 text-sm leading-relaxed text-text-secondary line-clamp-3", className)} {...props} />;
+  return <p className={cn("mt-3 text-sm md:text-base leading-relaxed text-text-secondary line-clamp-3 text-left", className)} {...props} />;
 };

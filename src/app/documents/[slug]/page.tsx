@@ -74,7 +74,7 @@ export default function DocumentDetailPage({ params }: { params: { slug: string 
                 {doc.title}
               </h1>
               
-              <div className="relative aspect-[1.414/1] w-full max-w-md bg-gray-100 rounded-xl overflow-hidden shadow-lg mb-8 outline outline-1 outline-gray-200">
+              <div className="relative aspect-[1.414/1] w-full max-w-md bg-gray-100 rounded-xl overflow-hidden shadow-lg mb-8 outline-1 outline-gray-200">
                 <Image
                   src={doc.thumbnail}
                   alt={doc.title}

@@ -106,14 +106,15 @@ function ServiceBlock({ service, Icon, bgText, isEven, index }: any) {
             {service.shortDesc}
           </p>
 
-          <Link href={`/services/${service.slug}`} tabIndex={-1}>
-            <button className="group relative inline-flex items-center justify-center px-8 py-4 font-bold text-white transition-all duration-300 bg-brand-navy rounded-full hover:bg-brand-primary hover:shadow-lg hover:shadow-brand-primary/30 overflow-hidden">
-              <span className="relative z-10 flex items-center">
-                詳細設計・実例を見る
-                <ArrowRight className="ml-2 w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
-              </span>
-              <div className="absolute inset-0 h-full w-full bg-linear-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-shimmer" />
-            </button>
+          <Link 
+            href={`/services/${service.slug}`} 
+            className="group relative inline-flex items-center justify-center px-8 py-4 font-bold text-white transition-all duration-300 bg-brand-navy rounded-full hover:bg-brand-primary hover:shadow-lg hover:shadow-brand-primary/30 overflow-hidden"
+          >
+            <span className="relative z-10 flex items-center">
+              詳細設計・実例を見る
+              <ArrowRight className="ml-2 w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
+            </span>
+            <div className="absolute inset-0 h-full w-full bg-linear-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-shimmer" />
           </Link>
         </motion.div>
       </div>

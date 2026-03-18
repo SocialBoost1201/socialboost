@@ -3,6 +3,7 @@ import { Container } from "@/components/ui/Container";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { CTASection } from "@/components/sections/CTASection";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
+import Link from "next/link";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -32,9 +33,9 @@ export default function ComingSoonPage() {
               各実績の詳細や、お役立ち資料のダウンロード、ブログの個別記事などは現在準備を進めています。<br/>
               公開まで今しばらくお待ちください。
             </p>
-            <a href="/" className="inline-flex items-center justify-center rounded-full bg-brand-primary px-8 py-3 text-sm font-bold text-white transition-all hover:bg-brand-secondary hover:shadow-lg hover:-translate-y-0.5">
+            <Link href="/" className="inline-flex items-center justify-center rounded-full bg-brand-primary px-8 py-3 text-sm font-bold text-white transition-all hover:bg-brand-secondary hover:shadow-lg hover:-translate-y-0.5">
               トップページへ戻る
-            </a>
+            </Link>
           </div>
         </AnimatedSection>
       </Container>

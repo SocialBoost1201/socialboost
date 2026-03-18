@@ -13,6 +13,20 @@ interface WorkGalleryProps {
 export function WorkGallery({ images, title }: WorkGalleryProps) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
+  const closeLightbox = React.useCallback(() => {
+    setSelectedIndex(null);
+  }, []);
+
+  const handlePrev = React.useCallback((e?: React.MouseEvent) => {
+    e?.stopPropagation();
+    setSelectedIndex((prev) => (prev !== null ? (prev === 0 ? images.length - 1 : prev - 1) : null));
+  }, [images.length]);
+
+  const handleNext = React.useCallback((e?: React.MouseEvent) => {
+    e?.stopPropagation();
+    setSelectedIndex((prev) => (prev !== null ? (prev === images.length - 1 ? 0 : prev + 1) : null));
+  }, [images.length]);
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (selectedIndex === null) return;
@@ -22,26 +36,21 @@ export function WorkGallery({ images, title }: WorkGalleryProps) {
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [selectedIndex, closeLightbox, handlePrev, handleNext]);
+
+  useEffect(() => {
+    if (selectedIndex !== null) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+    return () => {
+      document.body.style.overflow = "auto";
+    };
   }, [selectedIndex]);
 
   const openLightbox = (index: number) => {
     setSelectedIndex(index);
-    document.body.style.overflow = "hidden";
-  };
-
-  const closeLightbox = () => {
-    setSelectedIndex(null);
-    document.body.style.overflow = "auto";
-  };
-
-  const handlePrev = (e?: React.MouseEvent) => {
-    e?.stopPropagation();
-    setSelectedIndex((prev) => (prev !== null ? (prev === 0 ? images.length - 1 : prev - 1) : null));
-  };
-
-  const handleNext = (e?: React.MouseEvent) => {
-    e?.stopPropagation();
-    setSelectedIndex((prev) => (prev !== null ? (prev === images.length - 1 ? 0 : prev + 1) : null));
   };
 
   if (images.length === 0) return null;

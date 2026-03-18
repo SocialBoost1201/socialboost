@@ -1,7 +1,7 @@
 import { Container } from "@/components/ui/Container";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
-import { ArrowRight, Globe, LayoutTemplate, Code, Smartphone, Cpu, Activity, LineChart } from "lucide-react";
+import { ArrowRight, Globe, LayoutTemplate, Code, Smartphone, Cpu, LineChart } from "lucide-react";
 import Link from "next/link";
 
 const services = [

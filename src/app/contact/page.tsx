@@ -45,8 +45,9 @@ export default function ContactPage() {
       
       setIsSubmitted(true);
       window.scrollTo({ top: 0, behavior: "smooth" });
-    } catch (err: any) {
-      setError(err.message || "予期せぬエラーが発生しました。時間をおいて再度お試しください。");
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : "予期せぬエラーが発生しました。時間をおいて再度お試しください。";
+      setError(errorMessage);
     } finally {
       setIsSubmitting(false);
     }

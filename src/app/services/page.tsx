@@ -34,7 +34,7 @@ export default function ServicesPage() {
       <Container className="py-16 md:py-24">
         <div className="space-y-16 md:space-y-24">
           {SERVICES_DATA.map((service, idx) => (
-            <AnimatedSection key={service.slug} delay={0.1}>
+            <AnimatedSection key={service.slug} delay={idx * 0.1}>
               <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 items-start">
                 <div className="w-full lg:w-1/3">
                   <h2 className="text-2xl font-bold text-text-primary mb-4">{service.title}</h2>

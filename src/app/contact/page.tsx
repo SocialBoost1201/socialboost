@@ -149,7 +149,7 @@ export default function ContactPage() {
 
                     <div>
                       <label htmlFor="preferred_date" className="block text-sm font-bold text-text-primary mb-2">
-                        ご希望のお打ち合わせ日程 <span className="ml-2 text-xs font-semibold text-gray-500 bg-gray-100 px-2 py-0.5 rounded">任意</span>
+                        希望日 <span className="ml-2 text-xs font-semibold text-gray-500 bg-gray-100 px-2 py-0.5 rounded">任意</span>
                       </label>
                       <input
                         type="date"

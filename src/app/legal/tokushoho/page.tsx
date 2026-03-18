@@ -35,6 +35,11 @@ export default function TokushohoPage() {
           <div className="prose prose-blue max-w-none text-text-secondary">
             <dl className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-2 border-b border-gray-100 pb-4">
+                <dt className="font-bold text-text-primary md:mt-1">事業者の種別</dt>
+                <dd className="md:col-span-2 text-text-secondary leading-relaxed">個人事業主</dd>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-2 border-b border-gray-100 pb-4">
                 <dt className="font-bold text-text-primary md:mt-1">事業者名</dt>
                 <dd className="md:col-span-2 text-text-secondary leading-relaxed">SocialBoost</dd>
               </div>
@@ -42,6 +47,11 @@ export default function TokushohoPage() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-2 border-b border-gray-100 pb-4">
                 <dt className="font-bold text-text-primary md:mt-1">代表者名</dt>
                 <dd className="md:col-span-2 text-text-secondary leading-relaxed">眞如 匠馬</dd>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-2 border-b border-gray-100 pb-4">
+                <dt className="font-bold text-text-primary md:mt-1">開業年月</dt>
+                <dd className="md:col-span-2 text-text-secondary leading-relaxed">2025年10月</dd>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-2 border-b border-gray-100 pb-4">

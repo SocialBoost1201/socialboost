@@ -79,7 +79,7 @@ export const WORKS_DATA: WorkDetail[] = [
     },
     techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "microCMS"],
     duration: "約1.5ヶ月",
-    teamSize: "2名（ディレクター + エンジニア）",
+    teamSize: "1名（代表・眞如 匠馬）",
   },
   {
     slug: "booking-system",
@@ -128,7 +128,7 @@ export const WORKS_DATA: WorkDetail[] = [
     },
     techStack: ["Next.js", "Supabase", "PostgreSQL", "LINE Messaging API", "Vercel"],
     duration: "約3ヶ月",
-    teamSize: "3名（PM + フロント + バックエンド）",
+    teamSize: "1名（代表・眞如 匠馬）",
   },
   {
     slug: "ai-knowledge-base",
@@ -175,7 +175,7 @@ export const WORKS_DATA: WorkDetail[] = [
     },
     techStack: ["Azure OpenAI", "Langchain", "Pinecone", "Slack API", "Python", "Next.js"],
     duration: "約2ヶ月",
-    teamSize: "2名（AIエンジニア + PMディレクター）",
+    teamSize: "1名（代表・眞如 匠馬）",
   }
 ];
 

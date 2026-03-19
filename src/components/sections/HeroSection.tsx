@@ -72,7 +72,7 @@ export function HeroSection() {
               </span>
             </motion.div>
 
-            <motion.h1 variants={itemVariants} className="text-4xl md:text-6xl xl:text-7xl font-extrabold tracking-tighter text-white drop-shadow-lg leading-tight mb-8">
+            <motion.h1 variants={itemVariants} style={{ color: 'white' }} className="text-4xl md:text-6xl xl:text-7xl font-extrabold tracking-tighter drop-shadow-lg leading-tight mb-8">
               売上を、<span className="text-brand-primary">「資産」</span>へ。<br />
               戦略から実装まで。<br className="hidden md:block" />
               一貫したWebの勝ち筋。

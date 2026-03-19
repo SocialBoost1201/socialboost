@@ -10,46 +10,44 @@ export function ServiceFAQSection({ service }: { service: ServiceDetail }) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section className="py-24 md:py-20 bg-gray-50 border-t border-gray-100">
-      <Container>
-        <div className="flex flex-col lg:flex-row gap-16 lg:gap-24">
+    <section className="py-24 md:py-48 bg-slate-50 relative overflow-hidden">
+      <Container className="relative z-10">
+        <div className="flex flex-col lg:flex-row gap-16 lg:gap-32 items-start">
           <motion.div 
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            className="lg:w-1/3"
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as any }}
+            className="lg:w-1/3 sticky top-32"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-gray-200 text-sm font-bold text-gray-500 mb-6 uppercase tracking-widest">
-              <MessageCircleQuestion className="w-4 h-4 text-brand-primary" />
-              FAQ
-            </div>
-            <h2 className="text-3xl md:text-4xl font-black text-brand-navy mb-6 tracking-tight leading-tight">
+            <div className="section-badge mb-8 mx-0 bg-white border-slate-200 text-slate-400">Support</div>
+            <h2 className="text-4xl md:text-5xl font-black text-brand-navy mb-8 tracking-tighter leading-tight">
               よくあるご質問
             </h2>
-            <p className="text-lg text-text-secondary font-medium leading-relaxed">
-              ご依頼前に多く寄せられるご質問にお答えしています。記載のない点については、お気軽に無料相談よりお問い合わせください。
+            <p className="text-xl text-text-secondary font-bold leading-relaxed max-w-sm">
+              ご依頼前に多く寄せられるご質問。記載のない点については、お気軽に無料相談よりお問い合わせください。
             </p>
           </motion.div>
 
-          <div className="lg:w-2/3 space-y-4">
+          <div className="lg:w-2/3 space-y-6">
             {service.faqs.map((faq, idx) => (
               <motion.div
                 key={idx}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.4, delay: idx * 0.1 }}
-                className="bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: idx * 0.05, ease: [0.16, 1, 0.3, 1] as any }}
+                className={`bg-white rounded-4xl border transition-all duration-500 overflow-hidden ${openIndex === idx ? 'border-brand-primary/30 shadow-premium' : 'border-slate-100 shadow-sm hover:border-brand-primary/20'}`}
               >
                 <button
                   onClick={() => setOpenIndex(openIndex === idx ? null : idx)}
-                  className="w-full px-6 py-6 md:px-8 md:py-8 flex items-center justify-between text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2"
+                  className="w-full px-10 py-10 flex items-center justify-between text-left focus:outline-none group"
                 >
-                  <span className="text-lg md:text-xl font-bold text-brand-navy pr-8">
+                  <span className={`text-xl md:text-2xl font-black leading-tight pr-8 transition-colors duration-500 ${openIndex === idx ? 'text-brand-primary' : 'text-brand-navy group-hover:text-brand-primary'}`}>
                     {faq.q}
                   </span>
-                  <div className={`w-10 h-10 rounded-full flex items-center justify-center shrink-0 border transition-all duration-300 ${openIndex === idx ? 'bg-brand-primary text-white border-brand-primary transform rotate-180' : 'bg-gray-50 text-gray-400 border-gray-200 group-hover:bg-brand-light group-hover:text-brand-primary'}`}>
-                    <ChevronDown className="w-5 h-5" />
+                  <div className={`w-12 h-12 rounded-full flex items-center justify-center shrink-0 border transition-all duration-500 ${openIndex === idx ? 'bg-brand-primary text-white border-brand-primary rotate-180 shadow-premium-glow' : 'bg-slate-50 text-slate-400 border-slate-100 group-hover:bg-brand-primary/10 group-hover:text-brand-primary'}`}>
+                    <ChevronDown className="w-6 h-6" strokeWidth={3} />
                   </div>
                 </button>
                 <AnimatePresence>
@@ -58,11 +56,13 @@ export function ServiceFAQSection({ service }: { service: ServiceDetail }) {
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      className="overflow-hidden"
+                      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] as any }}
                     >
-                      <div className="px-6 pb-6 md:px-8 md:pb-8 pt-0 text-text-secondary leading-relaxed font-medium">
-                        <div className="w-full h-px bg-gray-100 mb-6" />
-                        {faq.a}
+                      <div className="px-10 pb-12 pt-4">
+                        <div className="w-full h-px bg-slate-100 mb-8" />
+                        <p className="text-lg text-text-secondary leading-relaxed font-bold">
+                          {faq.a}
+                        </p>
                       </div>
                     </motion.div>
                   )}

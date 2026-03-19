@@ -67,109 +67,102 @@ export function ServiceRequirementsBreakdown() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   return (
-    <section ref={containerRef} className="py-20 md:py-48 bg-brand-navy relative overflow-hidden text-white">
-      {/* Background Orbs to give it a premium feel */}
-      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-brand-primary/10 rounded-full blur-[150px] pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-sky-500/10 rounded-full blur-[120px] pointer-events-none" />
-      
-      {/* Grid overlay */}
-      <div 
-        className="absolute inset-0 opacity-[0.05] pointer-events-none"
-        style={{
-          backgroundImage: "linear-gradient(#ffffff 1px, transparent 1px), linear-gradient(90deg, #ffffff 1px, transparent 1px)",
-          backgroundSize: "64px 64px"
-        }}
-      />
+    <section ref={containerRef} className="py-24 md:py-48 bg-brand-navy relative overflow-hidden text-white">
+      {/* ── Background Visuals ── */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(circle_at_100%_0%,rgba(24,119,242,0.08)_0%,transparent_50%)]" />
+        <div className="absolute bottom-0 left-0 w-full h-full bg-[radial-gradient(circle_at_0%_100%,rgba(24,119,242,0.05)_0%,transparent_50%)]" />
+        <div 
+          className="absolute inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage: "linear-gradient(#ffffff 1px, transparent 1px), linear-gradient(90deg, #ffffff 1px, transparent 1px)",
+            backgroundSize: "80px 80px"
+          }}
+        />
+      </div>
 
       <Container className="relative z-10">
-        <div className="text-center mb-24 lg:mb-32">
-          <motion.h2
-            initial={{ opacity: 0, y: 30 }}
+        <div className="max-w-4xl mx-auto text-center mb-24 lg:mb-32">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="text-sm font-bold tracking-widest text-brand-light uppercase mb-6 flex items-center justify-center gap-4"
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as any }}
+            className="section-badge mb-8 bg-white/5 border-white/10 text-white mx-auto"
           >
-            <span className="w-8 h-[2px] bg-brand-light" />
             Requirement Breakdown
-            <span className="w-8 h-[2px] bg-brand-light" />
-          </motion.h2>
+          </motion.div>
 
           <motion.h3
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="text-3xl md:text-4xl lg:text-4xl font-black leading-[1.2] text-white tracking-tight"
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] as any }}
+            className="text-4xl md:text-5xl font-black leading-tight text-white tracking-tighter"
           >
-            必要な領域を、<br className="md:hidden" />分解して比較する
+            ブラックボックスを、<br />
+            <span className="text-brand-primary italic">透明</span>にする。
           </motion.h3>
           
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="mt-8 text-lg text-gray-300 max-w-2xl mx-auto font-medium leading-relaxed"
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] as any }}
+            className="mt-10 text-xl text-white/50 max-w-2xl mx-auto font-bold leading-relaxed"
           >
-            一般的な開発会社では「ブラックボックス」になりがちな要件ごとの価格感と対応範囲を、すべて透明化して可視化します。
+            一般的な制作会社では曖昧になりがちな「要件別の価格と範囲」を、<br className="hidden md:block" />
+            SocialBoostはすべて可視化し、根拠のある提案を行います。
           </motion.p>
         </div>
 
-        {/* Breakdown Interface */}
-        <div className="w-full overflow-x-auto pb-8 hide-scrollbar">
-          <div className="min-w-[900px]">
-            {/* Header Row */}
-            <div className="grid grid-cols-12 gap-6 mb-8 px-6 text-sm font-bold text-gray-400 uppercase tracking-widest">
-              <div className="col-span-4 flex items-end">Area / Description</div>
-              <div className="col-span-4 flex justify-center items-end text-gray-500">一般的な制作会社・代理店</div>
-              <div className="col-span-4 flex justify-center items-end text-brand-light">SocialBoost</div>
-            </div>
-
-            {/* List Rows */}
-            <div className="space-y-4">
-              {BREAKDOWNS.map((item, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-50px" }}
-                  transition={{ duration: 0.6, delay: index * 0.05, ease: [0.16, 1, 0.3, 1] }}
-                  className="grid grid-cols-12 gap-6 bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 items-center hover:bg-white/10 transition-colors group"
-                >
-                  {/* Scope Info */}
-                  <div className="col-span-4">
-                    <h4 className="text-xl font-bold text-white mb-2 group-hover:text-brand-light transition-colors">{item.title}</h4>
-                    <p className="text-sm text-gray-400 leading-relaxed font-medium pr-4">{item.desc}</p>
-                  </div>
-
-                  {/* Competitor */}
-                  <div className="col-span-4 flex flex-col justify-center bg-black/20 rounded-xl p-5 border border-white/5 relative">
-                    <div className="absolute top-4 right-4 text-gray-600">
-                      <X className="w-5 h-5" />
-                    </div>
-                    <div className="text-sm text-gray-400 mb-1 font-medium">価格感</div>
-                    <div className="text-xl font-bold text-gray-300 mb-4">{item.competitor.price}</div>
-                    <div className="text-sm text-gray-400 mb-1 font-medium">対応範囲・制約</div>
-                    <div className="text-sm text-gray-300 leading-relaxed">{item.competitor.scope}</div>
-                  </div>
-
-                  {/* SocialBoost */}
-                  <div className="col-span-4 flex flex-col justify-center bg-brand-primary/20 rounded-xl p-5 border border-brand-primary/40 relative group-hover:bg-brand-primary/30 group-hover:border-brand-primary transition-colors shadow-[0_0_30px_rgba(24,119,242,0.1)]">
-                    <div className="absolute top-4 right-4 text-brand-light">
-                      <Check className="w-5 h-5" />
-                    </div>
-                    <div className="text-sm text-brand-light/80 mb-1 font-medium">価格感</div>
-                    <div className="text-xl font-bold text-white mb-4 drop-shadow-md">{item.socialBoost.price}</div>
-                    <div className="text-sm text-brand-light/80 mb-1 font-medium">対応範囲・強み</div>
-                    <div className="text-sm text-white leading-relaxed font-semibold">{item.socialBoost.scope}</div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+        {/* Breakdown List */}
+        <div className="space-y-6 lg:space-y-8">
+          {/* Header Legend (PC only) */}
+          <div className="hidden lg:grid grid-cols-12 gap-8 px-10 mb-6 text-[10px] font-black text-white/30 tracking-[0.4em] uppercase">
+            <div className="col-span-4">Area & Description</div>
+            <div className="col-span-4 text-center">Conventional Agency</div>
+            <div className="col-span-4 text-center text-brand-primary">SocialBoost Value</div>
           </div>
-        </div>
 
+          {BREAKDOWNS.map((item, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: index * 0.05, ease: [0.16, 1, 0.3, 1] as any }}
+              className="group grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 bg-white/5 backdrop-blur-2xl border border-white/10 rounded-4xl p-8 lg:p-10 transition-all duration-700 hover:bg-white/10 hover:border-brand-primary/30"
+            >
+              <div className="lg:col-span-4">
+                <h4 className="text-2xl font-black text-white mb-4 tracking-tight group-hover:text-brand-primary transition-colors">{item.title}</h4>
+                <p className="text-base text-white/40 leading-relaxed font-bold pr-4">{item.desc}</p>
+              </div>
+
+              {/* Competitor */}
+              <div className="lg:col-span-4 bg-black/20 rounded-3xl p-8 border border-white/5 relative opacity-60 grayscale group-hover:grayscale-0 transition-all duration-700">
+                <div className="absolute top-6 right-6 text-white/10">
+                  <X className="w-6 h-6" />
+                </div>
+                <div className="text-[10px] font-black text-white/20 uppercase tracking-widest mb-2">Market Price</div>
+                <div className="text-xl font-black text-white/80 mb-4 tracking-tight">{item.competitor.price}</div>
+                <div className="text-[10px] font-black text-white/20 uppercase tracking-widest mb-2">Limitations</div>
+                <div className="text-sm text-white/40 leading-relaxed font-bold">{item.competitor.scope}</div>
+              </div>
+
+              {/* SocialBoost */}
+              <div className="lg:col-span-4 bg-brand-primary/10 rounded-3xl p-8 border border-brand-primary/30 relative shadow-2xl shadow-brand-primary/5 group-hover:bg-brand-primary/20 group-hover:border-brand-primary transition-all duration-700">
+                <div className="absolute top-6 right-6 text-brand-primary">
+                  <Check className="w-6 h-6 shadow-glow" strokeWidth={3} />
+                </div>
+                <div className="text-[10px] font-black text-brand-primary/60 uppercase tracking-widest mb-2">Our Price</div>
+                <div className="text-2xl font-black text-white mb-4 tracking-tighter">{item.socialBoost.price}</div>
+                <div className="text-[10px] font-black text-brand-primary/60 uppercase tracking-widest mb-2">Our Advantage</div>
+                <div className="text-sm text-white font-black leading-relaxed">{item.socialBoost.scope}</div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </Container>
     </section>
   );

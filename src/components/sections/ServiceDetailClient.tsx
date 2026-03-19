@@ -12,6 +12,7 @@ import { ServicePricingSection } from "./service-detail/ServicePricingSection";
 import { ServiceFlowSection } from "./service-detail/ServiceFlowSection";
 import { ServiceFAQSection } from "./service-detail/ServiceFAQSection";
 import { ServiceWorksSection } from "./service-detail/ServiceWorksSection";
+import { ServiceCTASection } from "./services/ServiceCTASection";
 
 export function ServiceDetailClient({ service }: { service: ServiceDetail }) {
   return (
@@ -27,6 +28,7 @@ export function ServiceDetailClient({ service }: { service: ServiceDetail }) {
       <ServiceFlowSection service={service} />
       <ServiceWorksSection service={service} />
       <ServiceFAQSection service={service} />
+      <ServiceCTASection />
     </div>
   );
 }

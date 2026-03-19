@@ -7,53 +7,60 @@ import { FileWarning, CheckCircle2, ArrowRight } from "lucide-react";
 
 export function ServiceBeforeAfterSection({ service }: { service: ServiceDetail }) {
   return (
-    <section className="py-24 md:py-20 bg-brand-navy relative overflow-hidden">
-      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-brand-primary/20 blur-[120px] rounded-full translate-x-1/3 -translate-y-1/3 pointer-events-none" />
+    <section className="py-24 md:py-48 bg-brand-navy relative overflow-hidden">
+      {/* ── Background Visuals ── */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-0 right-[-10%] w-full h-full bg-[radial-gradient(circle_at_100%_0%,rgba(24,119,242,0.1)_0%,transparent_50%)]" />
+        <div className="absolute bottom-[-10%] left-[-10%] w-[800px] h-[800px] bg-brand-primary/10 blur-[150px] rounded-full" />
+      </div>
       
       <Container className="relative z-10">
-        <div className="text-center mb-16 md:mb-24">
-          <motion.h2 
-            initial={{ opacity: 0, y: 30 }}
+        <div className="max-w-4xl mx-auto text-center mb-20 md:mb-32">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-3xl md:text-4xl font-black text-white mb-6 tracking-tight"
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as any }}
+            className="section-badge mb-8 bg-white/5 border-white/10 text-white mx-auto"
           >
-            課題と解決策
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-lg text-gray-300 font-medium"
-          >
-            よくある業界の悩みを、確かなアプローチで打ち破ります。
-          </motion.p>
+            Transformation
+          </motion.div>
+
+          <h2 className="text-4xl md:text-5xl font-black text-white mb-8 tracking-tighter leading-tight">
+            非効率を、<span className="text-brand-primary">圧倒的成果</span>へ。
+          </h2>
+          <p className="text-xl text-white/50 font-bold leading-relaxed max-w-2xl mx-auto">
+            業界の「当たり前」となっていた不誠実な構造を打ち破り、<br className="hidden md:block" />
+            本来あるべき投資対効果を最大化させます。
+          </p>
         </div>
 
-        <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 relative">
+        <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 relative">
           
           {/* BEFROE BOX */}
           <motion.div 
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            className="flex-1 bg-white/5 backdrop-blur-md border border-white/10 rounded-[2.5rem] p-8 md:p-12 relative overflow-hidden"
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as any }}
+            className="flex-1 bg-white/5 backdrop-blur-2xl border border-white/10 rounded-4xl p-10 md:p-14 relative overflow-hidden grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-700"
           >
-            <div className="mb-10 flex items-center justify-between">
-              <h3 className="text-3xl font-black text-gray-400 italic font-serif">Before</h3>
-              <div className="px-4 py-2 rounded-full bg-red-500/10 text-red-400 text-sm font-bold border border-red-500/20 flex items-center gap-2">
-                <FileWarning className="w-4 h-4" /> よくある課題
+            <div className="mb-12 flex items-center justify-between">
+              <h3 className="text-4xl font-black text-white/10 tracking-tighter uppercase">Before</h3>
+              <div className="px-5 py-2 rounded-full bg-red-500/10 text-red-400 text-[10px] font-black tracking-widest border border-red-500/20 uppercase">
+                Common Issues
               </div>
             </div>
             
-            <ul className="space-y-6">
+            <ul className="space-y-8">
               {service.beforeAfter.problems.map((prob, idx) => (
-                <li key={idx} className="flex gap-4">
-                  <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-gray-500 shrink-0 font-bold text-sm">
-                    {idx + 1}
+                <li key={idx} className="flex gap-6 group">
+                  <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-white/20 shrink-0 font-black text-xs border border-white/5">
+                    0{idx + 1}
                   </div>
-                  <p className="text-gray-300 font-medium leading-relaxed pt-1 flex-1">{prob}</p>
+                  <p className="text-white/40 font-bold leading-relaxed pt-2 flex-1 group-hover:text-white/60 transition-colors">
+                    {prob}
+                  </p>
                 </li>
               ))}
             </ul>
@@ -65,10 +72,11 @@ export function ServiceBeforeAfterSection({ service }: { service: ServiceDetail 
               initial={{ scale: 0, rotate: -90 }}
               whileInView={{ scale: 1, rotate: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.3, type: "spring" }}
-              className="w-20 h-20 rounded-full bg-brand-primary flex items-center justify-center shadow-[0_0_40px_rgba(24,119,242,0.4)] border-4 border-brand-navy"
+              transition={{ delay: 0.4, type: "spring", stiffness: 100 }}
+              className="w-24 h-24 rounded-full bg-brand-primary flex items-center justify-center shadow-premium-glow border-[6px] border-brand-navy relative"
             >
-              <ArrowRight className="w-8 h-8 text-white" />
+              <ArrowRight className="w-10 h-10 text-white" strokeWidth={3} />
+              <div className="absolute inset-[-12px] border border-brand-primary/20 rounded-full animate-ping-slow" />
             </motion.div>
           </div>
 
@@ -76,29 +84,34 @@ export function ServiceBeforeAfterSection({ service }: { service: ServiceDetail 
           <motion.div 
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ delay: 0.2 }}
-            className="flex-1 bg-white rounded-[2.5rem] p-8 md:p-12 shadow-2xl relative overflow-hidden"
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] as any }}
+            className="flex-1 bg-white rounded-4xl p-10 md:p-14 lg:p-16 shadow-premium relative overflow-hidden group"
           >
-            <div className="absolute top-0 right-0 w-64 h-64 bg-brand-primary/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+            <div className="absolute inset-0 bg-linear-to-br from-brand-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
             
-            <div className="mb-10 flex items-center justify-between relative z-10">
-              <h3 className="text-3xl font-black text-brand-primary italic font-serif">After</h3>
-              <div className="px-4 py-2 rounded-full bg-brand-light text-brand-primary text-sm font-bold border border-brand-primary/20 flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4" /> 独自の解決策
+            <div className="mb-12 flex items-center justify-between relative z-10">
+              <h3 className="text-4xl font-black text-brand-primary tracking-tighter uppercase">After</h3>
+              <div className="px-5 py-2 rounded-full bg-brand-primary text-white text-[10px] font-black tracking-widest shadow-lg shadow-brand-primary/20 uppercase">
+                Our Solution
               </div>
             </div>
             
-            <ul className="space-y-6 relative z-10">
+            <ul className="space-y-8 relative z-10">
               {service.beforeAfter.solutions.map((sol, idx) => (
-                <li key={idx} className="flex gap-4 group">
-                  <div className="w-8 h-8 rounded-full bg-brand-primary/10 flex items-center justify-center text-brand-primary shrink-0 font-bold text-sm group-hover:bg-brand-primary group-hover:text-white transition-colors">
-                    {idx + 1}
+                <li key={idx} className="flex gap-6 group">
+                  <div className="w-10 h-10 rounded-xl bg-brand-primary shadow-lg shadow-brand-primary/20 flex items-center justify-center text-white shrink-0 font-black text-xs transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6">
+                    0{idx + 1}
                   </div>
-                  <p className="text-brand-navy font-bold leading-relaxed pt-1 flex-1">{sol}</p>
+                  <p className="text-brand-navy font-black text-lg leading-relaxed pt-2 flex-1">
+                    {sol}
+                  </p>
                 </li>
               ))}
             </ul>
+
+            {/* Subtle glow effect */}
+            <div className="absolute bottom-0 right-0 w-64 h-64 bg-brand-primary/5 blur-[100px] rounded-full pointer-events-none" />
           </motion.div>
 
         </div>

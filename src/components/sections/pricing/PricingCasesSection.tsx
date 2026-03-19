@@ -5,6 +5,8 @@ import { motion } from "framer-motion";
 import { Container } from "@/components/ui/Container";
 import { Check, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/Button";
 
 const CASES = [
   {
@@ -74,31 +76,28 @@ export function PricingCasesSection() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   return (
-    <section ref={containerRef} className="py-20 md:py-48 bg-white relative overflow-hidden">
-      {/* Background soft gradients */}
-      <div className="absolute top-[20%] right-[-10%] w-[500px] h-[500px] bg-brand-primary/5 rounded-full blur-[100px] pointer-events-none" />
-      <div className="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] bg-sky-200/10 rounded-full blur-[100px] pointer-events-none" />
+    <section ref={containerRef} className="py-24 md:py-48 bg-white relative overflow-hidden">
+      {/* ── Background Visuals ── */}
+      <div className="absolute top-[10%] right-[-5%] w-[600px] h-[600px] bg-brand-primary/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-[-5%] left-[-5%] w-[800px] h-[800px] bg-sky-100/30 rounded-full blur-[120px] pointer-events-none" />
 
       <Container>
-        <div className="text-center mb-20 md:mb-32">
-          <motion.h2
-            initial={{ opacity: 0, y: 30 }}
+        <div className="max-w-4xl mx-auto text-center mb-24 md:mb-32">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="text-sm font-bold tracking-widest text-brand-primary uppercase mb-6 flex items-center justify-center gap-4"
+            viewport={{ once: true }}
+            className="section-badge mb-8"
           >
-            <span className="w-8 h-[2px] bg-brand-primary" />
-            Case Studies
-            <span className="w-8 h-[2px] bg-brand-primary" />
-          </motion.h2>
+            Estimation Cases
+          </motion.div>
 
           <motion.h3
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="text-3xl md:text-4xl lg:text-4xl font-black leading-[1.2] text-text-primary tracking-tight mb-8"
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] as any }}
+            className="text-4xl md:text-5xl font-black leading-tight text-brand-navy tracking-tight mb-8"
           >
             ケース別 お見積もり例
           </motion.h3>
@@ -106,75 +105,96 @@ export function PricingCasesSection() {
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] as any }}
             className="text-lg md:text-xl text-text-secondary leading-relaxed font-medium max-w-2xl mx-auto"
           >
-            ご検討中のプロジェクトに近いケースを選択していただき、<br className="hidden md:block" />どのような内容が内包されているかをご確認ください。
+            プロジェクトの規模や目的に合わせた概算費用です。
+            <br className="hidden md:block" />
+            SocialBoostでは、無駄な工程を省いた「適正価格」での提供を徹底しています。
           </motion.p>
         </div>
 
-        {/* CSS Grid for elegant Bento-box style layout or symmetrical cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
           {CASES.map((item, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.8, delay: index * 0.15, ease: [0.16, 1, 0.3, 1] }}
-              className={`relative overflow-hidden group bg-white border ${item.highlight ? 'border-brand-primary ring-1 ring-brand-primary/20 shadow-[0_20px_60px_rgba(24,119,242,0.1)]' : 'border-gray-100 shadow-[0_20px_40px_rgba(0,0,0,0.03)] hover:shadow-xl hover:border-brand-primary/30'} rounded-[2.5rem] p-8 md:p-12 transition-all duration-500`}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] as any }}
+              className={cn(
+                "relative overflow-hidden group bg-white border rounded-4xl p-10 md:p-14 transition-all duration-700",
+                item.highlight 
+                  ? "border-brand-primary/30 shadow-premium ring-1 ring-brand-primary/5" 
+                  : "border-slate-100 shadow-sm hover:shadow-premium hover:border-brand-primary/20"
+              )}
             >
-              {/* Highlight ribbon if applicable */}
+              {/* Highlight badge */}
               {item.highlight && (
-                <div className="absolute top-0 right-0 bg-brand-primary text-white text-xs font-bold tracking-widest px-6 py-2 uppercase rounded-bl-2xl">
+                <div className="absolute top-0 right-0 bg-brand-primary text-white text-[10px] font-black tracking-[0.2em] px-8 py-3 uppercase rounded-bl-3xl shadow-lg shadow-brand-primary/20">
                   Most Popular
                 </div>
               )}
 
               <div className="flex flex-col h-full">
-                <div className="mb-8">
-                  <span className={`inline-block px-3 py-1 text-xs font-bold rounded-full mb-6 ${item.highlight ? 'bg-brand-primary/10 text-brand-primary' : 'bg-gray-100 text-text-secondary'}`}>
+                <div className="mb-10">
+                  <span className={cn(
+                    "inline-flex items-center px-4 py-1.5 text-[10px] font-black tracking-widest rounded-full mb-8 uppercase border",
+                    item.highlight ? "bg-brand-primary/5 border-brand-primary/20 text-brand-primary" : "bg-slate-50 border-slate-100 text-slate-400"
+                  )}>
                     {item.theme}
                   </span>
-                  <h4 className="text-2xl md:text-3xl font-black text-text-primary mb-3">
+                  <h4 className="text-3xl md:text-4xl font-black text-brand-navy mb-4 tracking-tight">
                     {item.title}
                   </h4>
-                  <p className="text-sm font-semibold text-text-secondary">
+                  <p className="text-base text-text-secondary font-medium leading-relaxed">
                     {item.tagline}
                   </p>
                 </div>
 
-                {/* Price Display */}
-                <div className="flex items-end gap-1 mb-10 pb-10 border-b border-gray-100">
-                  <span className="text-4xl md:text-[3.5rem] font-black tracking-tighter text-text-primary leading-none group-hover:text-brand-primary transition-colors duration-300">
-                    {item.price}
-                  </span>
-                  <span className="text-lg font-bold text-text-secondary mb-1">{item.unit}</span>
-                  <span className="text-sm font-semibold text-gray-400 mb-1 ml-4 line-clamp-1 border-l pl-4 border-gray-200">期間目安: {item.period}</span>
+                {/* Price & Period Display */}
+                <div className="grid grid-cols-2 gap-8 mb-12 pb-12 border-b border-slate-100">
+                  <div>
+                    <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-3">Estimated Price</div>
+                    <div className="flex items-baseline group-hover:text-brand-primary transition-colors duration-500">
+                      <span className="text-4xl md:text-5xl font-black tracking-tighter text-brand-navy group-hover:text-brand-primary transition-colors">{item.price.replace("約 ", "")}</span>
+                      <span className="text-lg font-black text-slate-400 ml-1">{item.unit}</span>
+                    </div>
+                  </div>
+                  <div className="border-l border-slate-100 pl-8">
+                    <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-3">Est. Delivery</div>
+                    <div className="text-2xl md:text-3xl font-black text-brand-navy tracking-tight">{item.period.replace("約 ", "")}</div>
+                  </div>
                 </div>
 
-                {/* Include List */}
-                <div className="mb-10 grow">
-                  <p className="text-xs font-bold text-gray-400 tracking-widest uppercase mb-4">Included</p>
-                  <ul className="space-y-4">
+                {/* Scope List */}
+                <div className="mb-12 grow">
+                  <div className="text-[10px] font-extrabold text-slate-300 tracking-widest uppercase mb-6">Service Scope</div>
+                  <ul className="grid grid-cols-1 sm:grid-cols-1 gap-4">
                     {item.includes.map((incl, i) => (
-                      <li key={i} className="flex items-start">
-                        <Check className="w-5 h-5 text-brand-primary mr-3 shrink-0 mt-0.5" strokeWidth={3} />
-                        <span className="text-text-primary font-medium text-sm md:text-base leading-snug">{incl}</span>
+                      <li key={i} className="flex items-start gap-4">
+                        <div className="mt-1.5 w-4 h-4 rounded-full bg-brand-primary/10 flex items-center justify-center shrink-0">
+                          <Check className="w-2.5 h-2.5 text-brand-primary" strokeWidth={4} />
+                        </div>
+                        <span className="text-text-secondary font-bold text-sm md:text-base leading-snug">{incl}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
 
-                {/* CTA */}
-                <Link 
-                  href="/contact"
-                  className={`flex items-center justify-between w-full p-4 rounded-xl border ${item.highlight ? 'bg-brand-primary text-white border-transparent hover:bg-brand-accent' : 'bg-gray-50 text-text-primary border-gray-100 hover:border-brand-primary/50 hover:bg-white'} font-bold transition-all duration-300 group/btn`}
+                {/* CTA Button */}
+                <Button 
+                  asChild
+                  variant={item.highlight ? "default" : "outline"}
+                  size="xl"
+                  className="w-full rounded-2xl h-16 text-lg font-black group/btn shadow-lg"
                 >
-                  <span>このケースに似た相談をする</span>
-                  <ArrowRight className={`w-5 h-5 transition-transform group-hover/btn:translate-x-1`} />
-                </Link>
+                  <Link href="/contact" className="justify-between px-8">
+                    <span>このプランで相談する</span>
+                    <ArrowRight className="w-5 h-5 transition-transform group-hover/btn:translate-x-1" />
+                  </Link>
+                </Button>
               </div>
             </motion.div>
           ))}

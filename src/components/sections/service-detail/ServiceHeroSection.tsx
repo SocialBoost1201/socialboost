@@ -24,73 +24,97 @@ export function ServiceHeroSection({ service }: { service: ServiceDetail }) {
     target: heroRef,
     offset: ["start start", "end start"],
   });
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "40%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   return (
     <motion.section 
       ref={heroRef}
       style={{ opacity }}
-      className="relative pt-32 pb-32 md:pt-48 md:pb-48 min-h-[85vh] flex flex-col items-center justify-center text-center overflow-hidden bg-background-alt"
+      className="relative pt-32 pb-48 md:pt-48 md:pb-64 min-h-svh flex flex-col items-center justify-center text-center overflow-hidden bg-white"
     >
-      {/* Background Effects */}
+      {/* ── Background Visuals ── */}
       <motion.div style={{ y }} className="absolute inset-0 w-full h-full pointer-events-none">
-        <div className="absolute inset-0 bg-[linear-gradient(to_bottom,transparent,var(--color-white)_90%)] z-10" />
-        <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-brand-primary/10 blur-[120px] rounded-full -z-10 mix-blend-multiply opacity-50" />
-        <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-brand-accent/10 blur-[120px] rounded-full -z-10 mix-blend-multiply opacity-50" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[800px] bg-[radial-gradient(circle,rgba(24,119,242,0.06)_0%,transparent_70%)] rounded-full blur-[120px]" />
+        <div 
+          className="absolute inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage: "linear-gradient(#1B2A4A 1px, transparent 1px), linear-gradient(90deg, #1B2A4A 1px, transparent 1px)",
+            backgroundSize: "80px 80px"
+          }}
+        />
       </motion.div>
 
-      <Container className="relative z-20 flex flex-col items-center max-w-5xl mx-auto px-4">
+      <Container className="relative z-20 flex flex-col items-center max-w-6xl mx-auto">
+        {/* Icon Platform */}
         <motion.div 
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 1, type: "spring", bounce: 0.3 }}
-          className="w-20 h-20 md:w-28 md:h-28 bg-white/80 backdrop-blur-2xl border border-white/50 shadow-[0_8px_40px_rgba(0,0,0,0.06)] rounded-3xl flex items-center justify-center text-brand-primary mb-10"
+          initial={{ scale: 0.8, opacity: 0, rotate: -10 }}
+          animate={{ scale: 1, opacity: 1, rotate: 0 }}
+          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] as any }}
+          className="relative mb-12"
         >
-          <Icon className="w-10 h-10 md:w-14 md:h-14" strokeWidth={1.5} />
+          <div className="absolute inset-0 bg-brand-primary/20 blur-3xl rounded-full scale-150 animate-pulse" />
+          <div className="relative w-24 h-24 md:w-32 md:h-32 bg-white rounded-4xl border border-slate-100 shadow-premium flex items-center justify-center text-brand-primary overflow-hidden group">
+            <div className="absolute inset-0 bg-linear-to-br from-brand-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+            <Icon className="w-12 h-12 md:w-16 md:h-16 relative z-10 transition-all duration-700 group-hover:scale-110 group-hover:-rotate-3" strokeWidth={1.2} />
+          </div>
         </motion.div>
 
         <motion.div
-          initial={{ y: 30, opacity: 0 }}
+          initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.1 }}
-          className="inline-block px-5 py-2 rounded-full bg-brand-navy/5 border border-brand-navy/10 text-brand-navy font-bold text-sm tracking-widest uppercase mb-8"
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="section-badge mb-10 mx-auto"
         >
-          {service.title}
+          Service Detail
         </motion.div>
 
         <motion.h1 
           initial={{ y: 30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-4xl md:text-4xl lg:text-4xl font-black text-brand-navy tracking-tight leading-[1.2] mb-10 text-balance"
+          transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] as any }}
+          className="text-5xl md:text-7xl lg:text-8xl font-black text-brand-navy tracking-tighter leading-[0.95] mb-12 text-balance lg:max-w-5xl"
         >
           {service.hero.tagline}
         </motion.h1>
 
         <motion.p 
-          initial={{ y: 30, opacity: 0 }}
+          initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          className="text-lg md:text-xl lg:text-2xl text-text-secondary leading-relaxed font-medium max-w-3xl text-balance mb-14"
+          transition={{ duration: 1, delay: 0.5, ease: [0.16, 1, 0.3, 1] as any }}
+          className="text-xl md:text-2xl text-text-secondary leading-relaxed font-bold max-w-4xl text-balance mb-16"
         >
           {service.hero.description}
         </motion.p>
 
         <motion.div
-          initial={{ y: 30, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="flex flex-col sm:flex-row gap-4 items-center"
+          initial={{ y: 20, opacity: 0, scale: 0.95 }}
+          animate={{ y: 0, opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.7, ease: [0.16, 1, 0.3, 1] as any }}
+          className="flex flex-col sm:flex-row gap-6 items-center"
         >
-          <Button asChild size="lg" className="w-full sm:w-auto shadow-xl shadow-brand-primary/20 hover:shadow-2xl hover:shadow-brand-primary/30 hover:-translate-y-1 transition-all duration-300">
-            <Link href="/contact">無料で相談する</Link>
+          <Button asChild size="xl" className="w-full sm:w-auto px-16 rounded-3xl shadow-2xl shadow-brand-primary/20">
+            <Link href="/contact" className="gap-3">
+              <span>無料で相談する</span>
+              <Sparkles className="w-5 h-5" />
+            </Link>
           </Button>
-          <Button asChild variant="secondary" size="lg" className="w-full sm:w-auto hover:-translate-y-1 transition-all duration-300 border-gray-200">
+          <Button asChild variant="ghost" size="xl" className="w-full sm:w-auto px-12 font-black text-text-secondary hover:text-brand-primary">
             <Link href="/works">実績を見る</Link>
           </Button>
         </motion.div>
       </Container>
+
+      {/* Scroll Hint */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5, duration: 1 }}
+        className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4"
+      >
+        <span className="text-[10px] font-black tracking-[0.3em] text-slate-300 uppercase">Explore Service</span>
+        <div className="w-px h-16 bg-linear-to-b from-slate-200 to-transparent" />
+      </motion.div>
     </motion.section>
   );
 }

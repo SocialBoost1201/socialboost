@@ -9,11 +9,18 @@ interface SectionTitleProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export function SectionTitle({ en, ja, align = "center", className, ...props }: SectionTitleProps) {
   return (
-    <div className={cn("mb-12 flex flex-col gap-2", align === "center" ? "items-center text-center" : "items-start text-left", className)} {...props}>
-      <span className="text-sm font-bold tracking-widest text-brand-primary uppercase">
+    <div 
+      className={cn(
+        "mb-12 flex flex-col gap-5", 
+        align === "center" ? "items-center text-center" : "items-start text-left", 
+        className
+      )} 
+      {...props}
+    >
+      <span className="section-badge shrink-0">
         {en}
       </span>
-      <h2 className="text-3xl font-bold tracking-tight text-text-primary md:text-4xl">
+      <h2 className="text-3xl font-extrabold tracking-tighter text-brand-navy md:text-4xl lg:text-5xl leading-tight">
         {ja}
       </h2>
     </div>

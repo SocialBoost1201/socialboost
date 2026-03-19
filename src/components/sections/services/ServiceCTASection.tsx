@@ -8,40 +8,60 @@ import { ArrowRight, Calculator, MessageSquare } from "lucide-react";
 
 export function ServiceCTASection() {
   return (
-    <section className="py-24 md:py-20 bg-white relative overflow-hidden">
+    <section className="py-24 md:py-48 bg-white relative overflow-hidden">
       <Container>
         <motion.div
-          initial={{ opacity: 0, scale: 0.98, y: 30 }}
+          initial={{ opacity: 0, scale: 0.95, y: 40 }}
           whileInView={{ opacity: 1, scale: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="bg-brand-navy rounded-[3rem] p-10 md:p-16 lg:p-24 text-center relative overflow-hidden"
+          viewport={{ once: true }}
+          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] as any }}
+          className="bg-brand-navy rounded-4xl md:rounded-[4rem] p-12 md:p-20 lg:p-32 text-center relative overflow-hidden group shadow-premium"
         >
-          {/* Subtle Background Glows */}
-          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-primary/20 rounded-full blur-[100px] pointer-events-none -translate-y-1/2 translate-x-1/3" />
-          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-sky-500/20 rounded-full blur-[80px] pointer-events-none translate-y-1/3 -translate-x-1/3" />
+          {/* ── Background Visuals ── */}
+          <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+            <div className="absolute top-0 right-[-10%] w-full h-full bg-[radial-gradient(circle_at_100%_0%,rgba(24,119,242,0.15)_0%,transparent_60%)] transition-transform duration-1000 group-hover:scale-110" />
+            <div className="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] bg-brand-primary/10 blur-[120px] rounded-full" />
+            <div 
+              className="absolute inset-0 opacity-[0.03]"
+              style={{
+                backgroundImage: "linear-gradient(#ffffff 1px, transparent 1px), linear-gradient(90deg, #ffffff 1px, transparent 1px)",
+                backgroundSize: "60px 60px"
+              }}
+            />
+          </div>
 
-          <div className="relative z-10 max-w-3xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-black text-white mb-6 leading-tight tracking-tight">
-              プロジェクトの現在地から、<br className="hidden md:block" />最適解をご提案します。
+          <div className="relative z-10 max-w-4xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] as any }}
+              className="section-badge mb-10 bg-white/5 border-white/10 text-white mx-auto"
+            >
+              Get Started
+            </motion.div>
+
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-10 leading-tight tracking-tighter">
+              プロジェクトの現在地から、<br className="hidden md:block" />
+              <span className="text-brand-primary shadow-glow-sm">最適解</span>をご提案します。
             </h2>
-            <p className="text-gray-300 text-lg md:text-xl font-medium leading-relaxed mb-12">
-              「何から始めるべきか分からない」「予算感だけ知りたい」といった段階でも構いません。まずはお気軽にご状況をお聞かせください。
+            <p className="text-white/60 text-xl md:text-2xl font-bold leading-relaxed mb-16 max-w-2xl mx-auto">
+              「何から始めるべきか」という段階でも構いません。<br className="hidden md:block" />
+              まずはお気軽にご状況をお聞かせください。
             </p>
 
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-6">
-              <Button asChild size="lg" className="w-full sm:w-[280px] h-14 bg-white text-brand-navy hover:bg-gray-50 flex items-center justify-center gap-2 group transition-transform hover:-translate-y-1">
-                <Link href="/contact" tabIndex={-1}>
-                  <MessageSquare className="w-5 h-5 text-brand-primary" />
-                  <span className="font-bold">この内容で相談する</span>
-                  <ArrowRight className="w-4 h-4 text-brand-primary transition-transform group-hover:translate-x-1 ml-1" />
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+              <Button asChild size="xl" className="w-full sm:w-auto px-16 bg-white text-brand-navy hover:bg-slate-50 border-none group transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-white/20">
+                <Link href="/contact" className="gap-3">
+                  <MessageSquare className="w-6 h-6 text-brand-primary" />
+                  <span className="font-black">この内容で相談する</span>
+                  <ArrowRight className="w-5 h-5 text-brand-primary transition-transform group-hover:translate-x-2" />
                 </Link>
               </Button>
-              <Button asChild size="lg" variant="ghost" className="w-full sm:w-[280px] h-14 text-white border border-white/20 hover:bg-white/10 hover:border-white/30 transition-all flex items-center justify-center gap-2 group">
-                <Link href="/pricing" tabIndex={-1}>
-                  <Calculator className="w-5 h-5 opacity-70" />
-                  <span className="font-bold">ケース別料金を見る</span>
-                  <ArrowRight className="w-4 h-4 opacity-70 transition-transform group-hover:translate-x-1 ml-1" />
+              <Button asChild variant="ghost" size="xl" className="w-full sm:w-auto px-12 text-white/60 hover:text-white hover:bg-white/5 border border-white/10 font-bold transition-all duration-500">
+                <Link href="/pricing" className="gap-3">
+                  <Calculator className="w-5 h-5 opacity-60" />
+                  <span>ケース別料金を見る</span>
                 </Link>
               </Button>
             </div>

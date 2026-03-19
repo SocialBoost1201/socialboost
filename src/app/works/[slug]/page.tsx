@@ -8,7 +8,7 @@ import { WORKS_DATA, getWorkBySlug } from "@/lib/works";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { FileText, ArrowLeft, CheckCircle2, ArrowRight, ExternalLink, Quote, Clock, Users, Wrench } from "lucide-react";
+import { FileText, ArrowLeft, CheckCircle2, ArrowRight, ExternalLink, Quote, Clock, Users, Wrench, Building2 } from "lucide-react";
 import { Metadata } from "next";
 import { generateBreadcrumbJsonLd } from "@/lib/jsonld";
 import { WorkGallery } from "@/components/sections/WorkGallery";
@@ -59,6 +59,10 @@ async function getUnifiedWork(slug: string): Promise<UnifiedWorkDetail | null> {
         images: [],
         pdfs: [],
         site_url: cmsData.site_url,
+        kpis: [], // CMS側の構造に合わせて後ほど拡張
+        techStack: [],
+        duration: "",
+        teamSize: ""
       };
     }
   } catch (e) {
@@ -69,7 +73,6 @@ async function getUnifiedWork(slug: string): Promise<UnifiedWorkDetail | null> {
   if (staticWork) {
     return {
       ...staticWork,
-      site_url: undefined,
     };
   }
 
@@ -131,257 +134,262 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
       />
       <Breadcrumb items={[{ name: "制作実績", href: "/works" }, { name: work.title }]} />
       
-      {/* Header & Overview */}
-      <section className="bg-background-alt py-16 md:py-24 border-b border-gray-100">
-        <Container>
-          <AnimatedSection className="max-w-4xl mx-auto">
-            <div className="mb-6 flex flex-wrap gap-2">
-              <span className="inline-flex items-center rounded-full bg-brand-primary px-3 py-1 text-sm font-semibold text-white shadow-sm">
-                {work.category}
-              </span>
-              <span className="inline-flex items-center rounded-full bg-white px-3 py-1 text-sm font-medium text-text-secondary border border-gray-200">
-                {work.industry}
-              </span>
+      {/* ── Header Section ── */}
+      <section className="relative pt-24 pb-32 lg:pt-32 lg:pb-48 bg-brand-navy overflow-hidden">
+        {/* Background Visuals */}
+        <div className="absolute inset-0 z-0 bg-mesh-gradient opacity-30 pointer-events-none" />
+        <div className="absolute top-0 right-0 w-1/2 h-full bg-[radial-gradient(circle_at_100%_0%,rgba(24,119,242,0.15)_0%,transparent_70%)]" />
+        
+        <Container className="relative z-10">
+          <AnimatedSection className="max-w-5xl mx-auto text-center">
+            <div className="flex justify-center gap-3 mb-8">
+              <span className="section-badge bg-white/5 border-white/10 text-brand-light">Case Study</span>
+              <span className="section-badge bg-brand-primary/20 border-brand-primary/30 text-white">{work.category}</span>
             </div>
             
-            <h1 className="text-3xl md:text-4xl lg:text-4xl font-bold text-text-primary leading-tight mb-8">
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-black text-white tracking-tighter leading-tight mb-12">
               {work.title}
             </h1>
             
-            <div className="relative aspect-video w-full overflow-hidden rounded-2xl shadow-md bg-white mb-12">
-              <Image
-                src={work.thumbnail}
-                alt={work.title}
-                fill
-                sizes="(max-width: 1200px) 100vw, 1200px"
-                className="object-cover"
-                priority
-              />
-            </div>
-            
-            <div className="bg-white p-8 md:p-10 rounded-2xl shadow-sm ring-1 ring-gray-100">
-              <h2 className="text-xl font-bold text-brand-primary mb-4">プロジェクト概要</h2>
-              <p className="text-text-secondary leading-relaxed text-lg">
-                {work.overview}
-              </p>
+            <div className="flex flex-wrap justify-center items-center gap-6 text-gray-400 font-bold text-sm uppercase tracking-widest">
+              <div className="flex items-center gap-2">
+                <Building2 className="w-4 h-4 text-brand-primary" />
+                {work.industry}
+              </div>
+              <div className="hidden sm:block w-px h-4 bg-white/10" />
+              <div className="flex items-center gap-2">
+                <Clock className="w-4 h-4 text-brand-primary" />
+                {work.duration || "開発期間：約2ヶ月"}
+              </div>
             </div>
           </AnimatedSection>
         </Container>
       </section>
 
-      {/* KPI 数値ハイライト */}
-      {work.kpis && work.kpis.length > 0 && (
-        <section className="bg-brand-navy py-12 md:py-16">
-          <Container>
-            <div className={`grid gap-8 ${
-              work.kpis.length === 3 ? 'grid-cols-3' :
-              work.kpis.length === 2 ? 'grid-cols-2' : 'grid-cols-1'
-            } max-w-3xl mx-auto`}>
-              {work.kpis.map((kpi, i) => (
-                <div key={i} className="text-center">
-                  <div className="text-4xl md:text-4xl font-black text-white tracking-tight mb-2">
-                    {kpi.value}
-                  </div>
-                  <div className="text-sm md:text-base text-gray-300 font-medium">{kpi.label}</div>
-                </div>
-              ))}
-            </div>
-          </Container>
-        </section>
-      )}
-
-      <Container className="py-20 md:py-20">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
-          
-          {/* Main Content */}
-          <div className="lg:col-span-8 space-y-20">
-            
-            {/* Challenges & Results */}
-            {(work.challenges.length > 0 || work.results.length > 0) && (
-              <AnimatedSection>
-                <h2 className="text-2xl font-bold text-text-primary mb-8 border-b-2 border-brand-primary pb-4 inline-block">抱えていた課題と、実施後の成果</h2>
-              <div className="space-y-8">
-                <div className="bg-red-50/50 p-6 md:p-8 rounded-2xl border border-red-100">
-                  <h3 className="text-lg font-bold text-red-600 mb-4 flex items-center">
-                    <span className="bg-red-100 text-red-700 w-8 h-8 rounded-full flex items-center justify-center mr-3 text-sm">前</span>
-                    抱えていた課題
-                  </h3>
-                  <ul className="space-y-4">
-                    {work.challenges.map((challenge, i) => (
-                      <li key={i} className="flex items-start text-text-secondary">
-                        <span className="mr-3 mt-2 block h-1.5 w-1.5 shrink-0 rounded-full bg-red-400" />
-                        <span className="leading-relaxed font-medium">{challenge}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                
-                <div className="bg-brand-light/50 p-6 md:p-8 rounded-2xl border border-brand-light">
-                  <h3 className="text-lg font-bold text-brand-primary mb-4 flex items-center">
-                    <span className="bg-brand-primary text-white w-8 h-8 rounded-full flex items-center justify-center mr-3 text-sm">後</span>
-                    実施後の成果
-                  </h3>
-                  <ul className="space-y-4">
-                    {work.results.map((result, i) => (
-                      <li key={i} className="flex items-start text-text-secondary">
-                        <CheckCircle2 className="mr-3 mt-0.5 h-5 w-5 shrink-0 text-brand-primary" />
-                        <span className="leading-relaxed font-medium text-text-primary">{result}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+      {/* ── Visual & KPI Section ── */}
+      <section className="relative -mt-24 lg:-mt-40 z-20 pb-20">
+        <Container>
+          <div className="max-w-6xl mx-auto">
+            {/* Main Image View */}
+            <AnimatedSection delay={0.2}>
+              <div className="relative aspect-video w-full overflow-hidden rounded-[2.5rem] shadow-2xl bg-white border-8 border-white/5">
+                <Image
+                  src={work.thumbnail}
+                  alt={work.title}
+                  fill
+                  sizes="(max-width: 1200px) 100vw, 1200px"
+                  className="object-cover"
+                  priority
+                />
               </div>
             </AnimatedSection>
-            )}
-            
-            {/* Implementation Details */}
-            {work.implementations.length > 0 && (
-              <AnimatedSection>
-                <h2 className="text-2xl font-bold text-text-primary mb-8 border-b-2 border-brand-primary pb-4 inline-block">実施した内容・工夫した点</h2>
-              <ul className="space-y-6">
-                {work.implementations.map((imp, i) => (
-                  <li key={i} className="flex items-start bg-white p-6 rounded-xl shadow-sm ring-1 ring-gray-100">
-                    <span className="text-4xl font-black text-gray-100 mr-6 tracking-tighter shrink-0">{String(i + 1).padStart(2, '0')}</span>
-                    <span className="text-lg text-text-primary leading-relaxed mt-1 font-medium">{imp}</span>
-                  </li>
-                ))}
-                </ul>
-              </AnimatedSection>
-            )}
-            
-            {/* Image Gallery */}
-            {work.images.length > 0 && (
-              <AnimatedSection>
-                <h2 className="text-2xl font-bold text-text-primary mb-8 border-b-2 border-brand-primary pb-4 inline-block">ギャラリー</h2>
-                <WorkGallery images={work.images} title={work.title} />
-              </AnimatedSection>
-            )}
 
-            {/* Testimonial (お客様の声) */}
-            {work.testimonial && (
-              <AnimatedSection>
-                <h2 className="text-2xl font-bold text-text-primary mb-8 border-b-2 border-brand-primary pb-4 inline-block">お客様の声</h2>
-                <div className="bg-brand-light/30 border border-brand-primary/15 rounded-3xl p-8 md:p-10 relative">
-                  <Quote className="absolute top-6 left-6 w-8 h-8 text-brand-primary/20" />
-                  <p className="text-text-primary text-lg leading-relaxed font-medium mb-8 pl-4">
-                    &ldquo;{work.testimonial.comment}&rdquo;
-                  </p>
-                  <div className="flex items-center gap-4 pl-4">
-                    <div className="w-10 h-10 rounded-full bg-brand-primary flex items-center justify-center text-white font-black text-sm shrink-0">
-                      {work.testimonial.name.charAt(0)}
-                    </div>
-                    <div>
-                      <div className="font-bold text-text-primary">{work.testimonial.name}</div>
-                      <div className="text-sm text-text-secondary">{work.testimonial.role}</div>
-                    </div>
-                  </div>
-                </div>
-              </AnimatedSection>
-            )}
-
-            {/* Document / PDF List */}
-            {work.pdfs.length > 0 && (
-              <AnimatedSection>
-                <h2 className="text-2xl font-bold text-text-primary mb-8 border-b-2 border-brand-primary pb-4 inline-block">関連資料 (PDF)</h2>
-                <div className="space-y-4">
-                  {work.pdfs.map((pdf, i) => (
-                    <a
-                      key={i}
-                      href={pdf.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group flex items-center bg-white p-5 rounded-xl shadow-sm ring-1 ring-gray-100 hover:ring-brand-primary/40 transition-all hover:bg-brand-light/30"
-                    >
-                      <div className="bg-red-50 text-red-500 p-3 rounded-lg mr-5 group-hover:bg-red-100 transition-colors">
-                        <FileText className="w-6 h-6" />
+            {/* KPI Metrics Highlight */}
+            {work.kpis && work.kpis.length > 0 && (
+              <AnimatedSection delay={0.4} className="mt-12 lg:mt-16">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {work.kpis.map((kpi, i) => (
+                    <div key={i} className="group p-8 lg:p-10 bg-white rounded-3xl shadow-premium border border-slate-100 hover:-translate-y-2 transition-all duration-500">
+                      <div className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] mb-3 group-hover:text-brand-primary transition-colors">
+                        {kpi.label}
                       </div>
-                      <span className="font-semibold text-text-primary group-hover:text-brand-primary transition-colors flex-1">{pdf.title}</span>
-                      <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-brand-primary transition-transform group-hover:translate-x-1" />
-                    </a>
+                      <div className="text-4xl lg:text-5xl font-black text-brand-navy tracking-tighter">
+                        {kpi.value}
+                      </div>
+                    </div>
                   ))}
                 </div>
               </AnimatedSection>
             )}
-            
           </div>
-          
-          {/* Sidebar */}
-          <div className="lg:col-span-4">
-            <div className="sticky top-32 space-y-8">
-              {work.site_url && (
-                <AnimatedSection delay={0.1} className="bg-white p-6 rounded-2xl shadow-sm ring-1 ring-gray-100">
-                  <h3 className="text-sm font-bold text-text-secondary mb-4 uppercase tracking-wider">実際のサイト</h3>
-                  <a 
-                    href={work.site_url} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="group flex items-center justify-between w-full rounded-xl bg-brand-light px-5 py-4 text-brand-primary font-bold hover:bg-brand-primary hover:text-white transition-colors"
-                  >
-                    制作したサイトを開く
-                    <ExternalLink className="h-5 w-5 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-                  </a>
-                </AnimatedSection>
-              )}
+        </Container>
+      </section>
 
-              {/* 制作期間・体制 */}
-              {(work.duration || work.teamSize) && (
-                <AnimatedSection delay={0.15} className="bg-white p-6 rounded-2xl shadow-sm ring-1 ring-gray-100">
-                  <h3 className="text-sm font-bold text-text-secondary mb-4 uppercase tracking-wider">プロジェクト概要</h3>
-                  <div className="space-y-3">
-                    {work.duration && (
-                      <div className="flex items-center gap-3 text-sm">
-                        <Clock className="w-4 h-4 text-brand-primary shrink-0" />
-                        <span className="text-text-secondary font-medium">制作期間：</span>
-                        <span className="font-bold text-text-primary">{work.duration}</span>
-                      </div>
-                    )}
-                    {work.teamSize && (
-                      <div className="flex items-center gap-3 text-sm">
-                        <Users className="w-4 h-4 text-brand-primary shrink-0" />
-                        <span className="text-text-secondary font-medium">体制：</span>
-                        <span className="font-bold text-text-primary">{work.teamSize}</span>
-                      </div>
-                    )}
-                  </div>
-                </AnimatedSection>
-              )}
-
-              {work.scope.length > 0 && (
-                <AnimatedSection delay={0.2} className="bg-background-alt p-8 rounded-2xl">
-                <h3 className="text-lg font-bold text-text-primary mb-6">対応範囲（スコープ）</h3>
-                <div className="flex flex-wrap gap-2">
-                  {work.scope.map((s, i) => (
-                    <span key={i} className="inline-flex items-center rounded-full bg-white px-3 py-1.5 text-sm font-medium text-text-secondary border border-gray-100">
-                      {s}
-                    </span>
-                  ))}
-                </div>
-              </AnimatedSection>
-              )}
+      <section className="py-20 lg:py-32">
+        <Container>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
+            
+            {/* ── Main Narrative ── */}
+            <div className="lg:col-span-8 space-y-24">
               
-              <AnimatedSection delay={0.3} className="bg-brand-light p-8 rounded-2xl text-center">
-                <h3 className="text-lg font-bold text-brand-primary mb-4">類似プロジェクトのご相談</h3>
-                <p className="text-sm text-text-secondary mb-6 leading-relaxed">
-                  本プロジェクトと同様の課題をお持ちの方は、お気軽にご相談ください。
+              {/* Overview */}
+              <AnimatedSection>
+                <div className="section-badge mb-6">Overview</div>
+                <h2 className="text-3xl font-black text-brand-navy mb-8 tracking-tight">プロジェクトの背景と概要</h2>
+                <p className="text-lg lg:text-xl text-text-secondary leading-relaxed font-medium">
+                  {work.overview}
                 </p>
-                <Link href="/contact" className="block" tabIndex={-1}>
-                  <Button className="w-full">
-                    無料で相談してみる
-                  </Button>
-                </Link>
+              </AnimatedSection>
+              
+              {/* Before / After Analysis */}
+              <AnimatedSection>
+                <div className="section-badge mb-6">Transformation</div>
+                <h2 className="text-3xl font-black text-brand-navy mb-10 tracking-tight">課題解決のストーリー</h2>
+                
+                <div className="space-y-6">
+                  {/* Before */}
+                  <div className="relative p-10 bg-slate-50 rounded-4xl border border-slate-200 overflow-hidden">
+                    <div className="absolute top-0 right-0 px-6 py-2 bg-slate-200 text-[10px] font-black uppercase tracking-widest text-slate-500 rounded-bl-2xl">
+                      Before / Issues
+                    </div>
+                    <ul className="space-y-5">
+                      {work.challenges.map((challenge, i) => (
+                        <li key={i} className="flex items-start gap-4">
+                          <div className="mt-2 w-1.5 h-1.5 rounded-full bg-red-400 shrink-0" />
+                          <span className="text-slate-600 font-medium leading-relaxed">{challenge}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="flex justify-center -my-3 relative z-10">
+                    <div className="w-12 h-12 rounded-full bg-brand-primary flex items-center justify-center shadow-lg shadow-brand-primary/30 border-4 border-white">
+                      <ArrowRight className="w-5 h-5 text-white rotate-90 lg:rotate-0" />
+                    </div>
+                  </div>
+
+                  {/* After */}
+                  <div className="relative p-10 bg-brand-navy rounded-4xl shadow-2xl overflow-hidden">
+                    <div className="absolute top-0 right-0 px-6 py-2 bg-brand-primary text-[10px] font-black uppercase tracking-widest text-white rounded-bl-2xl">
+                      After / Solutions
+                    </div>
+                    <ul className="space-y-5">
+                      {work.results.map((result, i) => (
+                        <li key={i} className="flex items-start gap-4">
+                          <CheckCircle2 className="mt-0.5 w-5 h-5 text-brand-primary shrink-0" />
+                          <span className="text-white font-bold leading-relaxed">{result}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
               </AnimatedSection>
 
-              <AnimatedSection delay={0.4} className="text-center pt-4">
-                <Link href="/works" className="inline-flex items-center text-sm font-medium text-text-secondary hover:text-brand-primary transition-colors">
-                  <ArrowLeft className="mr-2 h-4 w-4" />
-                  実績一覧へ戻る
-                </Link>
+              {/* Implementation Logic */}
+              <AnimatedSection>
+                <div className="section-badge mb-6">Implementation</div>
+                <h2 className="text-3xl font-black text-brand-navy mb-10 tracking-tight">具体的な施策とアプローチ</h2>
+                <div className="grid gap-6">
+                  {work.implementations.map((imp, i) => (
+                    <div key={i} className="group flex items-start gap-8 p-10 bg-white rounded-4xl border border-slate-100 hover:border-brand-primary/20 transition-all shadow-sm hover:shadow-premium">
+                      <span className="text-5xl font-black text-slate-100 group-hover:text-brand-primary/10 transition-colors tracking-tighter shrink-0">{String(i + 1).padStart(2, '0')}</span>
+                      <p className="text-lg text-text-secondary leading-relaxed font-bold group-hover:text-brand-navy transition-colors">{imp}</p>
+                    </div>
+                  ))}
+                </div>
               </AnimatedSection>
+
+              {/* Testimonial */}
+              {work.testimonial && (
+                <AnimatedSection>
+                  <div className="relative p-12 lg:p-16 bg-background-alt rounded-[3rem] overflow-hidden border border-slate-200">
+                    <Quote className="absolute top-10 left-10 w-16 h-16 text-brand-primary/5" />
+                    <blockquote className="relative z-10">
+                      <p className="text-2xl lg:text-3xl font-extrabold text-brand-navy leading-tight mb-12">
+                        &ldquo;{work.testimonial.comment}&rdquo;
+                      </p>
+                      <footer className="flex items-center gap-6">
+                        <div className="w-16 h-16 rounded-3xl bg-brand-navy flex items-center justify-center text-white font-black text-xl shadow-lg">
+                          {work.testimonial.name.charAt(0)}
+                        </div>
+                        <div>
+                          <cite className="not-italic font-black text-brand-navy block text-lg mb-1">{work.testimonial.name}</cite>
+                          <span className="text-sm font-bold text-slate-400 uppercase tracking-widest">{work.testimonial.role}</span>
+                        </div>
+                      </footer>
+                    </blockquote>
+                  </div>
+                </AnimatedSection>
+              )}
+
+              {/* Gallery */}
+              {work.images.length > 1 && (
+                <AnimatedSection>
+                  <div className="section-badge mb-6">Gallery</div>
+                  <h2 className="text-3xl font-black text-brand-navy mb-10 tracking-tight">アウトプット・イメージ</h2>
+                  <WorkGallery images={work.images} title={work.title} />
+                </AnimatedSection>
+              )}
             </div>
+
+            {/* ── Sidebar: Project Metadata ── */}
+            <aside className="lg:col-span-4">
+              <div className="sticky top-32 space-y-8">
+                
+                {/* Site URL CTA */}
+                {work.site_url && (
+                  <div className="p-8 bg-brand-navy rounded-4xl shadow-2xl relative overflow-hidden group">
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-brand-primary/10 rounded-full -translate-y-1/2 translate-x-1/2" />
+                    <h3 className="text-xs font-bold text-brand-primary/60 mb-6 uppercase tracking-widest relative z-10">Experience</h3>
+                    <a 
+                      href={work.site_url} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="group flex flex-col gap-4 w-full relative z-10"
+                    >
+                      <span className="text-xl font-bold text-white group-hover:text-brand-primary transition-colors">公開サイトを見る</span>
+                      <div className="h-14 w-full rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-white font-bold group-hover:bg-brand-primary group-hover:border-brand-primary transition-all">
+                        Open Project <ExternalLink className="ml-3 w-4 h-4" />
+                      </div>
+                    </a>
+                  </div>
+                )}
+
+                {/* Tech Stack */}
+                {work.techStack && work.techStack.length > 0 && (
+                  <div className="p-8 bg-white rounded-4xl shadow-premium border border-slate-100">
+                    <h3 className="text-[10px] font-bold text-slate-400 mb-6 uppercase tracking-widest flex items-center gap-2">
+                      <Wrench className="w-3 h-3 text-brand-primary" />
+                      Technology Stack
+                    </h3>
+                    <div className="flex flex-wrap gap-2">
+                      {work.techStack.map((tech) => (
+                        <span key={tech} className="px-3 py-1.5 bg-slate-50 border border-slate-100 rounded-xl text-xs font-bold text-brand-navy">
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Scope */}
+                {work.scope.length > 0 && (
+                  <div className="p-8 bg-slate-50 rounded-4xl border border-slate-200">
+                    <h3 className="text-[10px] font-bold text-slate-400 mb-6 uppercase tracking-widest">Project Scope</h3>
+                    <div className="space-y-4">
+                      {work.scope.map((s, i) => (
+                        <div key={i} className="flex items-center gap-3 text-sm font-bold text-slate-600">
+                          <CheckCircle2 className="w-4 h-4 text-brand-primary" />
+                          {s}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Related CTA */}
+                <div className="p-8 bg-brand-light rounded-4xl text-center space-y-6">
+                  <h3 className="text-lg font-black text-brand-navy">類似プロジェクトの相談</h3>
+                  <p className="text-sm text-text-secondary leading-relaxed font-medium">
+                    本実績のような課題をお持ちの方は、お気軽にご相談ください。戦略から伴走します。
+                  </p>
+                  <Button asChild size="lg" className="w-full h-14 rounded-2xl">
+                    <Link href="/contact">無料で相談してみる</Link>
+                  </Button>
+                </div>
+
+                <div className="text-center pt-8">
+                  <Link href="/works" className="inline-flex items-center text-sm font-bold text-slate-400 hover:text-brand-primary transition-colors">
+                    <ArrowLeft className="mr-2 h-4 w-4" />
+                    その他の事例を見る
+                  </Link>
+                </div>
+              </div>
+            </aside>
+            
           </div>
-          
-        </div>
-      </Container>
+        </Container>
+      </section>
       
       <CTASection />
     </PageLayout>

@@ -1,9 +1,15 @@
 import type { Metadata } from "next";
-import { Noto_Sans_JP } from "next/font/google";
+import { Noto_Sans_JP, Inter } from "next/font/google";
 import "./globals.css";
 import { SmoothScroll } from "@/components/layout/SmoothScroll";
 import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
 import Script from "next/script";
+
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+  display: "swap",
+});
 
 const notoSansJP = Noto_Sans_JP({
   variable: "--font-noto-sans-jp",
@@ -91,7 +97,7 @@ export default function RootLayout({
   return (
     <html lang="ja">
       {gtmId && <GoogleTagManager gtmId={gtmId} />}
-      <body className={`${notoSansJP.variable} font-sans antialiased bg-background-alt text-text-primary`}>
+      <body className={`${notoSansJP.variable} ${inter.variable} font-sans antialiased bg-background-alt text-text-primary`}>
         <SmoothScroll>
           {children}
         </SmoothScroll>

@@ -8,86 +8,85 @@ import { SERVICES_DATA } from "@/lib/services";
 
 export function ServiceListSection() {
   return (
-    <section className="py-20 md:py-48 bg-white relative overflow-hidden">
+    <section className="py-24 md:py-48 bg-white relative overflow-hidden">
       <Container>
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-20 md:mb-32 gap-10">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-24 md:mb-32 gap-12">
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
+            initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="max-w-2xl"
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as any }}
+            className="max-w-3xl"
           >
-            <h2 className="text-sm font-bold tracking-widest text-brand-primary uppercase mb-6 flex items-center gap-4">
-              <span className="w-8 h-[2px] bg-brand-primary" />
-              Service Lineup
-            </h2>
-            <h3 className="text-4xl md:text-4xl font-black leading-[1.1] text-text-primary tracking-tight">
-              あらゆる課題に応える<br />提供サービス
+            <div className="section-badge mb-8 mx-0">Service Lineup</div>
+            <h3 className="text-4xl md:text-5xl font-black leading-tight text-brand-navy tracking-tighter">
+              点ではなく「面」で、<br />
+              事業の全フェーズを並走する。
             </h3>
           </motion.div>
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
+            initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] as any }}
             className="max-w-lg"
           >
-            <p className="text-lg md:text-xl text-text-secondary leading-relaxed font-medium">
-              Web戦略の立案から、サイト制作、業務システム開発、最先端のAI導入支援まで。点ではなく「面」で事業成長をサポートします。
+            <p className="text-xl text-text-secondary leading-relaxed font-bold">
+              Web戦略の立案から、サイト・システムの実装、最新のAI導入まで。
+              事業成長に直結する6つのコア領域を提供します。
             </p>
           </motion.div>
         </div>
 
-        <div className="flex flex-col gap-6 md:gap-8">
+        <div className="flex flex-col gap-6 md:gap-10">
           {SERVICES_DATA.map((service, index) => (
             <motion.div
               key={service.slug}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] as any }}
             >
               <Link 
                 href={`/services/${service.slug}`}
-                className="group block bg-white border border-gray-100 p-8 md:p-12 lg:p-16 rounded-[2.5rem] shadow-[0_10px_30px_rgba(0,0,0,0.02)] hover:border-brand-primary/20 hover:shadow-[0_30px_60px_rgba(24,119,242,0.08)] transition-all duration-500 overflow-hidden relative"
+                className="group block relative bg-slate-50 border border-slate-100 p-10 md:p-14 lg:p-20 rounded-4xl shadow-sm hover:bg-white hover:border-brand-primary/30 hover:shadow-premium transition-all duration-700 overflow-hidden"
               >
                 {/* Background Text Float */}
-                <div className="absolute -right-10 -bottom-10 text-[10rem] md:text-[14rem] font-black text-gray-50 select-none group-hover:text-brand-light/50 transition-colors duration-500 pointer-events-none tracking-tighter mix-blend-multiply">
+                <div className="absolute -right-8 -bottom-8 text-[12rem] md:text-[20rem] font-black text-brand-navy/[0.02] select-none group-hover:text-brand-primary/[0.04] transition-colors duration-700 pointer-events-none tracking-tighter">
                   {service.slug.substring(0, 3).toUpperCase()}
                 </div>
 
-                <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 md:gap-16 items-center">
+                <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 md:gap-20 items-center">
                   <div className="lg:col-span-4">
-                    <div className="text-sm font-bold text-brand-primary mb-4 tracking-widest uppercase">
-                      0{index + 1}
+                    <div className="text-[10px] font-black tracking-[0.4em] text-brand-primary mb-8 border-b border-brand-primary/10 pb-4 inline-block">
+                      CATEGORY 0{index + 1}
                     </div>
-                    <h4 className="text-3xl md:text-4xl font-black text-text-primary mb-6 leading-tight group-hover:text-brand-primary transition-colors duration-300">
+                    <h4 className="text-3xl md:text-4xl lg:text-5xl font-black text-brand-navy mb-8 leading-tight group-hover:text-brand-primary transition-colors duration-500 tracking-tight">
                       {service.title}
                     </h4>
                   </div>
                   
                   <div className="lg:col-span-6">
-                    <p className="text-lg text-text-secondary leading-relaxed font-medium mb-8">
+                    <p className="text-lg md:text-xl text-text-secondary leading-relaxed font-bold mb-10 max-w-xl">
                       {service.hero.description}
                     </p>
                     <div className="flex flex-wrap gap-3">
-                      {service.scopes.slice(0, 3).map((scope, i) => (
-                        <span key={i} className="px-4 py-2 bg-gray-50 text-text-secondary text-sm font-bold rounded-full border border-gray-100">
+                      {service.scopes.slice(0, 4).map((scope, i) => (
+                        <span key={i} className="px-5 py-2 bg-white text-brand-navy/60 text-xs font-black rounded-full border border-slate-100 shadow-sm group-hover:border-brand-primary/20 transition-colors">
                           {scope.title}
                         </span>
                       ))}
-                      {service.scopes.length > 3 && (
-                        <span className="px-4 py-2 bg-gray-50 text-text-secondary text-sm font-bold rounded-full border border-gray-100">
-                          +{service.scopes.length - 3}
+                      {service.scopes.length > 4 && (
+                        <span className="px-5 py-2 bg-white text-brand-navy/60 text-xs font-black rounded-full border border-slate-100 shadow-sm">
+                          +{service.scopes.length - 4} More Area
                         </span>
                       )}
                     </div>
                   </div>
 
                   <div className="lg:col-span-2 flex justify-start lg:justify-end">
-                    <div className="w-16 h-16 rounded-full bg-gray-50 flex items-center justify-center text-text-primary group-hover:bg-brand-primary group-hover:text-white transition-all duration-500 group-hover:scale-110">
-                      <ArrowRight className="w-6 h-6 transition-transform group-hover:translate-x-1" />
+                    <div className="w-20 h-20 rounded-full bg-white border border-slate-100 shadow-sm flex items-center justify-center text-brand-navy group-hover:bg-brand-primary group-hover:text-white group-hover:border-transparent transition-all duration-700 group-hover:scale-110 group-hover:rotate-12">
+                      <ArrowRight className="w-8 h-8 transition-transform group-hover:translate-x-1" />
                     </div>
                   </div>
                 </div>

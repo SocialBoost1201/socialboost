@@ -14,40 +14,26 @@ const RANGES = [
 
 export function PricingRangesSection() {
   return (
-    <section className="py-24 bg-background-light relative overflow-hidden">
+    <section className="py-24 md:py-48 bg-slate-50/50 relative overflow-hidden">
       <Container>
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 md:gap-20 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-center">
           
           <div className="lg:col-span-5">
-            <motion.h2
+            <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="text-sm font-bold tracking-widest text-brand-primary uppercase mb-6 flex items-center gap-4"
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as any }}
             >
-              <span className="w-8 h-[2px] bg-brand-primary" />
-              Standard Ranges
-            </motion.h2>
-            <motion.h3
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="text-3xl md:text-4xl font-black leading-[1.2] text-text-primary tracking-tight mb-8"
-            >
-              領域ごとの<br />
-              基本料金レンジ
-            </motion.h3>
-            <motion.p
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="text-lg text-text-secondary font-medium leading-relaxed"
-            >
-              ご要望の規模や機能要件により最終的なお見積もりは変動します。以下のレンジはあくまで「標準的なプロジェクト」における概算としてご参照ください。
-            </motion.p>
+              <div className="section-badge mb-8">Standard Ranges</div>
+              <h3 className="text-4xl md:text-5xl font-black leading-tight text-brand-navy tracking-tight mb-8">
+                領域別の<br />
+                費用目安
+              </h3>
+              <p className="text-lg text-text-secondary font-bold leading-relaxed max-w-sm">
+                最終的なお見積もりは要件により変動しますが、標準的なプロジェクトにおける概算レンジは以下の通りです。
+              </p>
+            </motion.div>
           </div>
 
           <div className="lg:col-span-7">
@@ -57,14 +43,17 @@ export function PricingRangesSection() {
                   key={index}
                   initial={{ opacity: 0, y: 10 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-50px" }}
-                  transition={{ duration: 0.5, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                  className="flex flex-col sm:flex-row sm:items-center justify-between p-6 bg-white border border-gray-100 rounded-2xl hover:border-brand-primary/20 hover:shadow-lg transition-all"
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: index * 0.05, ease: [0.16, 1, 0.3, 1] as any }}
+                  className="group flex flex-col sm:flex-row sm:items-center justify-between p-8 bg-white border border-slate-100 rounded-3xl hover:border-brand-primary/20 shadow-sm hover:shadow-premium transition-all duration-500"
                 >
-                  <span className="text-lg font-bold text-text-primary mb-2 sm:mb-0">{item.name}</span>
                   <div className="flex items-center gap-4">
-                    <span className="h-px w-8 sm:w-16 bg-gray-200 hidden sm:block" />
-                    <span className="text-xl md:text-2xl font-black text-brand-primary tracking-tight">
+                    <div className="w-1.5 h-1.5 rounded-full bg-brand-primary opacity-20 group-hover:opacity-100 transition-opacity" />
+                    <span className="text-lg font-black text-brand-navy/80 group-hover:text-brand-navy transition-colors">{item.name}</span>
+                  </div>
+                  <div className="flex items-center gap-6 mt-4 sm:mt-0">
+                    <span className="hidden sm:block h-px w-12 bg-slate-100 group-hover:w-16 group-hover:bg-brand-primary/20 transition-all duration-500" />
+                    <span className="text-2xl md:text-3xl font-black text-brand-primary tracking-tighter">
                       {item.range}
                     </span>
                   </div>

@@ -1,29 +1,41 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-brand-primary: #1877F2;
-  --color-brand-accent: #0A58CA;
-  --color-brand-navy: #1B2A4A;
-  --color-brand-navy-light: #2C3E5D;
+  /* Brand Colors: 深みと信頼感のある配色へ */
+  --color-brand-primary: #1877F2;      /* 鮮やかなプロフェッショナルブルー */
+  --color-brand-accent: #0A58CA;       /* 深みのあるアクセントブルー */
+  --color-brand-navy: #0F172A;         /* 極めて深いネイビー（Slate-900ベース） */
+  --color-brand-navy-light: #1E293B;   /* Slate-800ベース */
   --color-text-primary: #0F172A;
   --color-text-secondary: #475569;
   --color-background-light: #FFFFFF;
-  --color-background-alt: #F8FAFC;
-  --color-background-dark: #0F172A;
+  --color-background-alt: #F8FAFC;     /* わずかに青みがかったクリーンな背景 */
+  --color-background-soft: #F1F5F9;    /* セクション区切り用のソフトな背景 */
   --color-brand-light: #EFF6FF;
 
-  --font-sans: var(--font-noto-sans-jp);
+  --font-sans: var(--font-inter), var(--font-noto-sans-jp), sans-serif;
 
-  /* Fluid Typography for smooth 320px to 1024px scaling */
-  --text-sm: clamp(0.8125rem, 0.7801rem + 0.1618vw, 0.875rem); /* 13px - 14px */
-  --text-base: clamp(0.9375rem, 0.9051rem + 0.1618vw, 1rem); /* 15px - 16px */
-  --text-lg: clamp(1rem, 0.9352rem + 0.3236vw, 1.125rem); /* 16px - 18px */
-  --text-xl: clamp(1.125rem, 1.0602rem + 0.3236vw, 1.25rem); /* 18px - 20px */
-  --text-2xl: clamp(1.25rem, 1.1205rem + 0.6472vw, 1.5rem); /* 20px - 24px */
-  --text-3xl: clamp(1.5rem, 1.3058rem + 0.9709vw, 1.875rem); /* 24px - 30px */
-  --text-4xl: clamp(1.875rem, 1.6808rem + 0.9709vw, 2.25rem); /* 30px - 36px */
-  --text-5xl: clamp(2.25rem, 1.8616rem + 1.9417vw, 3rem); /* 36px - 48px */
-  --text-6xl: clamp(2.75rem, 2.2322rem + 2.589vw, 3.75rem); /* 44px - 60px */
+  /* Fluid Typography: 320pxから1440pxまで滑らかにスケーリング */
+  --text-xs: clamp(0.75rem, 0.73rem + 0.1vw, 0.8125rem);
+  --text-sm: clamp(0.8125rem, 0.7801rem + 0.1618vw, 0.875rem);
+  --text-base: clamp(0.9375rem, 0.9051rem + 0.1618vw, 1rem);
+  --text-lg: clamp(1rem, 0.9352rem + 0.3236vw, 1.125rem);
+  --text-xl: clamp(1.125rem, 1.0602rem + 0.3236vw, 1.25rem);
+  --text-2xl: clamp(1.25rem, 1.12rem + 0.65vw, 1.5rem);
+  --text-3xl: clamp(1.75rem, 1.5rem + 1.25vw, 2.25rem);    /* 見出しをより強調 */
+  --text-4xl: clamp(2.25rem, 1.85rem + 2vw, 3rem);
+  --text-5xl: clamp(3rem, 2.5rem + 3vw, 4.5rem);
+  --text-6xl: clamp(3.5rem, 3rem + 4vw, 5.5rem);          /* ヒーロー用特大タイトル */
+
+  /* Typography tokens: 黄金比に基づいた行間と文字間 */
+  --leading-tight: 1.1;
+  --leading-snug: 1.3;
+  --leading-normal: 1.6;
+  --leading-relaxed: 1.85;
+  --tracking-tighter: -0.04em;
+  --tracking-tight: -0.02em;
+  --tracking-wide: 0.05em;
+  --tracking-widest: 0.15em;
 }
 
 :root {
@@ -32,14 +44,8 @@
 }
 
 /* =============================
-   Base Reset
+   Base Reset & Advanced Typography
    ============================= */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
 html {
   scroll-behavior: smooth;
   text-rendering: optimizeLegibility;
@@ -49,97 +55,109 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans), "Hiragino Kaku Gothic ProN", "Hiragino Sans",
-    Meiryo, sans-serif;
+  font-family: var(--font-sans), "Hiragino Kaku Gothic ProN", "Hiragino Sans", sans-serif;
+  font-feature-settings: "palt" 1, "kern" 1; /* 文字詰めとカーニングを同時有効化 */
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  line-height: 1.75;
+  line-height: var(--leading-normal);
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 800;
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-brand-navy);
 }
 
 /* =============================
-   Scroll-triggered animations
+   Premium Utilities
    ============================= */
-.animate-on-scroll {
+
+/* 静かな迫力を生む広域ソフトシャドウ */
+.shadow-premium {
+  box-shadow: 
+    0 10px 40px -10px rgba(15, 23, 42, 0.08),
+    0 4px 12px -4px rgba(15, 23, 42, 0.03);
+  transition: box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.shadow-premium:hover {
+  box-shadow: 
+    0 30px 60px -12px rgba(15, 23, 42, 0.12),
+    0 18px 36px -18px rgba(15, 23, 42, 0.08);
+}
+
+/* ガラスのような透明感と境界線 */
+.glass-surface {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+}
+
+/* 視線誘導を促す繊細なグラデーション */
+.bg-mesh-gradient {
+  background-color: #ffffff;
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(24, 119, 242, 0.03) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(10, 88, 202, 0.03) 0px, transparent 50%);
+}
+
+/* 強い信頼感を示すセクションラベル */
+.section-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.4rem 1rem;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: var(--color-brand-primary);
+  background: rgba(24, 119, 242, 0.05);
+  border: 1px solid rgba(24, 119, 242, 0.1);
+  border-radius: 100px;
+  text-transform: uppercase;
+}
+
+/* ハイエンドなボタンスタイル（共通クラス） */
+.btn-premium {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+/* =============================
+   Scroll Animations (Optimized)
+   ============================= */
+.reveal-on-scroll {
   opacity: 0;
-  transform: translateY(28px);
-  transition:
-    opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1) var(--anim-delay, 0s),
-    transform 0.75s cubic-bezier(0.22, 1, 0.36, 1) var(--anim-delay, 0s);
+  transform: translateY(30px) scale(0.98);
+  transition: 
+    opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
 }
 
-.animate-on-scroll.is-visible {
+.reveal-on-scroll.is-visible {
   opacity: 1;
-  transform: translateY(0);
-}
-
-/* prefers-reduced-motion: アニメーション無効 */
-@media (prefers-reduced-motion: reduce) {
-  .animate-on-scroll {
-    transition: none;
-    opacity: 1;
-    transform: none;
-  }
+  transform: translateY(0) scale(1);
 }
 
 /* =============================
-   Gradient utilities
+   Interactive Elements
    ============================= */
-.gradient-text {
-  background: linear-gradient(135deg, #1877f2 0%, #0ea5e9 60%, #38bdf8 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+.hover-lift {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.hover-lift:hover {
+  transform: translateY(-8px);
 }
 
-.gradient-brand {
-  background: linear-gradient(135deg, #1877f2 0%, #0a58ca 100%);
-}
-
-/* =============================
-   Glassmorphism card
-   ============================= */
-.glass-card {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(12px) saturate(180%);
-  -webkit-backdrop-filter: blur(12px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  box-shadow:
-    0 4px 24px rgba(24, 119, 242, 0.06),
-    0 1px 4px rgba(0, 0, 0, 0.04);
-}
-
-/* =============================
-   Section heading accent
-   ============================= */
-.section-label {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #1877f2;
-  background: linear-gradient(135deg, #eff6ff, #dbeafe);
-  border: 1px solid #bfdbfe;
-  border-radius: 9999px;
-  padding: 0.3rem 0.85rem;
-}
-
-/* =============================
-   Focus ring
-   ============================= */
-:focus-visible {
-  outline: 2px solid #1877f2;
-  outline-offset: 3px;
-  border-radius: 4px;
-}
-
-/* =============================
-   Selection color
-   ============================= */
+/* Selection Color: サイトのトーンに合わせた高貴な青 */
 ::selection {
-  background: #bfdbfe;
-  color: #1e3a5f;
+  background: rgba(24, 119, 242, 0.15);
+  color: var(--color-brand-navy);
 }

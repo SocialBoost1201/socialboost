@@ -24,46 +24,54 @@ const REASONS = [
 
 export function PricingWhyCheapSection() {
   return (
-    <section className="py-24 md:py-20 bg-background-alt relative overflow-hidden">
-      <Container>
-        <div className="flex flex-col md:flex-row gap-12 lg:gap-24 items-start">
+    <section className="py-24 md:py-48 bg-white relative overflow-hidden">
+      {/* ── Background Visuals ── */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_0%_0%,rgba(24,119,242,0.03)_0%,transparent_50%)]" />
+      </div>
+
+      <Container className="relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-start">
           
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="md:w-1/3 md:sticky md:top-32"
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as any }}
+            className="lg:col-span-5 lg:sticky lg:top-32"
           >
-            <h2 className="text-sm font-bold tracking-widest text-brand-primary uppercase mb-6 flex items-center gap-4">
-              <span className="w-8 h-[2px] bg-brand-primary" />
-              Structural Efficiency
-            </h2>
-            <h3 className="text-3xl md:text-4xl font-black leading-[1.2] text-text-primary tracking-tight mb-6">
-              なぜ、高品質なのに<br />
-              適正価格なのか？
+            <div className="section-badge mb-8">Structural Efficiency</div>
+            <h3 className="text-4xl md:text-5xl font-black leading-tight text-brand-navy tracking-tight mb-8">
+              高品質を、<br />
+              適正価格で実現できる理由
             </h3>
-            <p className="text-lg text-text-secondary font-medium leading-relaxed">
-              SocialBoostの価格設定の裏には、業界の構造的課題を解決する明確な理由があります。
+            <p className="text-lg text-text-secondary font-medium leading-relaxed max-w-md">
+              SocialBoostの価格設定は、単なる「安売り」ではありません。
+              業界の構造的な非効率を、テクノロジーと独自フローで徹底的に排除した結果です。
             </p>
           </motion.div>
 
-          <div className="md:w-2/3 flex flex-col gap-6 md:gap-8">
+          <div className="lg:col-span-7 flex flex-col gap-6 md:gap-8">
             {REASONS.map((reason, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.6, delay: index * 0.15, ease: [0.16, 1, 0.3, 1] }}
-                className="bg-white p-8 md:p-12 rounded-4xl border border-gray-100 shadow-[0_10px_30px_rgba(0,0,0,0.02)] flex flex-col sm:flex-row gap-6 md:gap-8 items-start hover:shadow-[0_20px_40px_rgba(24,119,242,0.05)] hover:border-brand-primary/10 transition-all duration-500 group"
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] as any }}
+                className="group relative bg-white p-8 md:p-14 rounded-4xl border border-slate-100 shadow-sm hover:shadow-premium hover:border-brand-primary/20 transition-all duration-700 overflow-hidden"
               >
-                <div className="w-16 h-16 rounded-2xl bg-brand-primary/5 flex items-center justify-center shrink-0 group-hover:bg-brand-primary group-hover:scale-110 transition-all duration-500">
-                  <reason.icon className="w-8 h-8 text-brand-primary group-hover:text-white transition-colors duration-500" strokeWidth={1.5} />
-                </div>
-                <div>
-                  <h4 className="text-xl md:text-2xl font-bold text-text-primary mb-4">{reason.title}</h4>
-                  <p className="text-text-secondary leading-relaxed font-medium">{reason.desc}</p>
+                {/* Subtle hover effect background */}
+                <div className="absolute inset-0 bg-linear-to-br from-brand-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                
+                <div className="relative z-10 flex flex-col sm:flex-row gap-8 items-start">
+                  <div className="w-16 h-16 rounded-2xl bg-brand-primary/5 flex items-center justify-center shrink-0 group-hover:bg-brand-primary group-hover:scale-110 group-hover:rotate-3 transition-all duration-700 shadow-sm group-hover:shadow-lg group-hover:shadow-brand-primary/20">
+                    <reason.icon className="w-8 h-8 text-brand-primary group-hover:text-white transition-colors duration-700" strokeWidth={1.5} />
+                  </div>
+                  <div>
+                    <h4 className="text-2xl font-black text-brand-navy mb-4 tracking-tight group-hover:text-brand-primary transition-colors duration-500">{reason.title}</h4>
+                    <p className="text-text-secondary leading-relaxed font-bold text-base md:text-lg">{reason.desc}</p>
+                  </div>
                 </div>
               </motion.div>
             ))}

@@ -7,6 +7,7 @@ interface AnimatedSectionProps {
   children: ReactNode;
   className?: string;
   delay?: number;
+  threshold?: number;
   [key: string]: unknown;
 }
 
@@ -14,6 +15,7 @@ export function AnimatedSection({
   children,
   className,
   delay = 0,
+  threshold = 0.1,
   ...props
 }: AnimatedSectionProps) {
   const ref = useRef<HTMLDivElement>(null);
@@ -23,7 +25,7 @@ export function AnimatedSection({
     if (!el) return;
 
     // delayをCSS変数として設定
-    el.style.setProperty("--anim-delay", `${delay}s`);
+    el.style.setProperty("transition-delay", `${delay}s`);
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -34,17 +36,20 @@ export function AnimatedSection({
           }
         });
       },
-      { rootMargin: "-80px 0px", threshold: 0.1 }
+      { 
+        rootMargin: "0px 0px -10% 0px", // 画面下部10%に入った時点で発火
+        threshold 
+      }
     );
 
     observer.observe(el);
     return () => observer.disconnect();
-  }, [delay]);
+  }, [delay, threshold]);
 
   return (
     <div
       ref={ref}
-      className={cn("animate-on-scroll", className)}
+      className={cn("reveal-on-scroll", className)}
       {...props}
     >
       {children}

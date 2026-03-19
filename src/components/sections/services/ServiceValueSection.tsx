@@ -8,67 +8,69 @@ export function ServiceValueSection() {
   const values = [
     {
       icon: Building2,
-      title: "「作るだけ」ではなく、\n事業構造から整理する",
-      desc: "Webサイトやシステムは手段にすぎません。ビジネスモデルや営業プロセスを深く理解し、KGI/KPIの策定から伴走することで、確実なROI（投資対効果）を創出します。",
+      title: "事業構造から整理する、\n戦略的アプローチ",
+      desc: "Webサイトやシステムは、あくまで事業成長の手段です。私たちはビジネスのKGI/KPIを深く理解し、投資対効果（ROI）を最大化させるための戦略策定から伴走します。",
     },
     {
       icon: FastForward,
-      title: "不要なプロセスを省いた\n圧倒的なスピード",
-      desc: "一般的な多重下請けや縦割りの分業制を排除し、戦略策定からデザイン・開発までを一気通貫で実行。アジャイルな進行により、本来の半分の期間でのリリースを実現します。",
+      title: "不要なプロセスを省いた、\n圧倒的なリリース速度",
+      desc: "多重下請けや縦割りの分業を排除し、一気通貫のチーム体制を構築。アジャイルな進行とAI活用により、旧来の半分以下の期間で高品質なプロダクトをリリースします。",
     },
     {
       icon: Cpu,
-      title: "最新AI技術と\n構造化による価格低減",
-      desc: "モダンなアーキテクチャ（Next.js / Supabase等）の選定と、AIを活用した開発プロセスの効率化により、ハイエンドな品質を維持しながらコストを大幅に抑えることが可能です。",
+      title: "最新AI技術による、\n高品質・適正価格の実現",
+      desc: "Next.jsやBaaS（Supabase等）の選定に加え、AIを開発プロセスに組み込むことで工数を劇的に削減。ハイエンドな品質を維持しながら、本質的な価値にコストを集中させます。",
     },
   ];
 
   return (
-    <section className="py-20 md:py-48 bg-gray-50 relative overflow-hidden">
-      <div className="absolute top-0 right-0 w-full h-px bg-linear-to-r from-transparent via-gray-200 to-transparent" />
+    <section className="py-24 md:py-48 bg-white relative overflow-hidden">
+      {/* ── Background Visuals ── */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-linear-to-r from-transparent via-slate-200 to-transparent" />
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-px bg-linear-to-r from-transparent via-slate-200 to-transparent" />
+      </div>
       
-      <Container>
-        <div className="text-center mb-24 lg:mb-32">
-          <motion.h2
-            initial={{ opacity: 0, y: 30 }}
+      <Container className="relative z-10">
+        <div className="max-w-4xl mx-auto text-center mb-24 lg:mb-32">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="text-sm font-bold tracking-widest text-brand-primary uppercase mb-6 flex items-center justify-center gap-4"
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as any }}
+            className="section-badge mb-8 mx-auto"
           >
-            <span className="w-8 h-[2px] bg-brand-primary" />
             Our Value
-            <span className="w-8 h-[2px] bg-brand-primary" />
-          </motion.h2>
+          </motion.div>
 
           <motion.h3
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="text-3xl md:text-4xl lg:text-4xl font-black leading-[1.2] text-text-primary tracking-tight"
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] as any }}
+            className="text-4xl md:text-5xl font-black leading-tight text-brand-navy tracking-tighter"
           >
             なぜ、SocialBoostが<br className="md:hidden" />選ばれるのか
           </motion.h3>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-12 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
           {values.map((item, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.8, delay: index * 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="bg-white p-10 md:p-14 rounded-[2.5rem] border border-gray-100 shadow-[0_20px_40px_rgba(0,0,0,0.03)] group hover:-translate-y-2 hover:shadow-[0_40px_80px_rgba(0,0,0,0.05)] transition-all duration-500"
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] as any }}
+              className="group relative bg-white p-10 md:p-14 rounded-4xl border border-slate-100 shadow-sm hover:shadow-premium hover:border-brand-primary/20 transition-all duration-700"
             >
-              <div className="w-16 h-16 md:w-20 md:h-20 bg-brand-light/50 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-brand-primary group-hover:scale-110 transition-all duration-500">
-                <item.icon className="w-8 h-8 md:w-10 md:h-10 text-brand-primary group-hover:text-white transition-colors duration-500" strokeWidth={1.5} />
+              <div className="w-16 h-16 md:w-20 md:h-20 bg-brand-primary/5 rounded-2xl flex items-center justify-center mb-10 group-hover:bg-brand-primary transition-all duration-700 group-hover:scale-110 group-hover:rotate-3">
+                <item.icon className="w-8 h-8 md:w-10 md:h-10 text-brand-primary group-hover:text-white transition-colors duration-700" strokeWidth={1.5} />
               </div>
-              <h4 className="text-2xl font-bold text-text-primary mb-6 whitespace-pre-line leading-snug">
+              <h4 className="text-2xl font-black text-brand-navy mb-6 whitespace-pre-line leading-tight tracking-tight group-hover:text-brand-primary transition-colors duration-500">
                 {item.title}
               </h4>
-              <p className="text-text-secondary leading-relaxed font-medium">
+              <p className="text-text-secondary leading-relaxed font-bold text-base md:text-lg">
                 {item.desc}
               </p>
             </motion.div>

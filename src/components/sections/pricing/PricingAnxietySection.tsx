@@ -24,42 +24,41 @@ const RELIEFS = [
 
 export function PricingAnxietySection() {
   return (
-    <section className="py-24 md:py-20 bg-white relative overflow-hidden">
+    <section className="py-24 md:py-48 bg-white relative overflow-hidden">
       <Container>
-        <div className="text-center mb-16 md:mb-24">
-          <motion.h2
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="text-3xl md:text-4xl font-black leading-[1.2] text-text-primary tracking-tight mb-6"
-          >
-            ご相談前のよくある<span className="text-brand-primary">不安</span>
-          </motion.h2>
-          <motion.p
+        <div className="max-w-4xl mx-auto text-center mb-24 md:mb-32">
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="text-lg text-text-secondary leading-relaxed font-medium max-w-2xl mx-auto"
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as any }}
           >
-            高額なIT投資に対する不安は当然です。私たちは透明性を第一に考え、お客様が納得して意思決定できる環境をご用意しています。
-          </motion.p>
+            <div className="section-badge mb-8 mx-auto">Common Concerns</div>
+            <h2 className="text-4xl md:text-5xl font-black leading-tight text-brand-navy tracking-tight mb-8">
+              ご相談前の<span className="text-brand-primary">不安</span>を解消します
+            </h2>
+            <p className="text-lg text-text-secondary leading-relaxed font-bold max-w-2xl mx-auto">
+              IT投資は決して安価ではありません。私たちは透明性を極限まで高め、<br className="hidden md:block" />
+              お客様が心から納得してスタートできる環境を整えています。
+            </p>
+          </motion.div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
           {RELIEFS.map((item, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.8, delay: index * 0.15, ease: [0.16, 1, 0.3, 1] }}
-              className="bg-gray-50 border border-gray-100 rounded-3xl p-10 hover:-translate-y-2 transition-transform duration-500"
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] as any }}
+              className="group bg-slate-50/50 border border-slate-100 rounded-4xl p-10 md:p-14 hover:bg-white hover:shadow-premium hover:border-brand-primary/10 transition-all duration-700"
             >
-              <item.icon className="w-10 h-10 text-brand-primary mb-6" strokeWidth={1.5} />
-              <h3 className="text-xl font-bold text-text-primary mb-4">{item.title}</h3>
-              <p className="text-text-secondary leading-relaxed font-medium text-sm md:text-base">{item.desc}</p>
+              <div className="w-16 h-16 rounded-2xl bg-white shadow-sm flex items-center justify-center mb-10 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-700">
+                <item.icon className="w-8 h-8 text-brand-primary" strokeWidth={1.5} />
+              </div>
+              <h3 className="text-2xl font-black text-brand-navy mb-6 tracking-tight">{item.title}</h3>
+              <p className="text-text-secondary leading-relaxed font-bold text-base">{item.desc}</p>
             </motion.div>
           ))}
         </div>

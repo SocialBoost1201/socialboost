@@ -54,10 +54,32 @@ const FEATURES = [
   { id: "maintenance", label: "運用・保守サポート", add: 80000 },
 ];
 
-function formatPrice(price: number) {
-  if (price >= 10000000) return `${(price / 10000000).toFixed(1)}千万円〜`;
-  if (price >= 1000000) return `${(price / 10000).toFixed(0).replace(/(\d)(?=(\d{3})+$)/g, "$1,")}万円〜`;
-  return `${(price / 10000).toFixed(0)}万円〜`;
+import { cn } from "@/lib/utils";
+
+function PriceDisplay({ price, className, size = "md" }: { price: number; className?: string; size?: "sm" | "md" | "lg" | "xl" }) {
+  const isTenMillion = price >= 10000000;
+  const value = isTenMillion 
+    ? (price / 10000000).toFixed(1) 
+    : (price / 10000).toFixed(0).replace(/(\d)(?=(\d{3})+$)/g, "$1,");
+  const unit = isTenMillion ? "千万円〜" : "万円〜";
+
+  const sizeClasses = {
+    sm: "text-lg",
+    md: "text-xl md:text-2xl",
+    lg: "text-3xl md:text-4xl",
+    xl: "text-4xl md:text-6xl",
+  };
+
+  return (
+    <span className={cn("inline-flex items-baseline gap-0.5 font-sans", className)}>
+      <span className={cn("font-black tracking-tighter transition-colors duration-300", sizeClasses[size])}>
+        {value}
+      </span>
+      <span className={cn("font-bold text-text-secondary opacity-80", size === "xl" ? "text-xl" : "text-sm")}>
+        {unit}
+      </span>
+    </span>
+  );
 }
 
 export function PricingSimulatorSection() {
@@ -81,269 +103,317 @@ export function PricingSimulatorSection() {
   };
 
   const steps: { key: StepKey; label: string }[] = [
-    { key: "service", label: "サービス" },
-    { key: "scale", label: "規模・要件" },
-    { key: "features", label: "オプション" },
-    { key: "result", label: "概算結果" },
+    { key: "service", label: "SERVICE" },
+    { key: "scale", label: "SCALE" },
+    { key: "features", label: "OPTIONS" },
+    { key: "result", label: "RESULT" },
   ];
 
   const stepIndex = steps.findIndex((s) => s.key === step);
 
   return (
-    <section className="py-24 md:py-20 bg-brand-navy relative overflow-hidden">
-      {/* BG Effects */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-primary/10 blur-[150px] rounded-full translate-x-1/3 -translate-y-1/3 pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-400/5 blur-[150px] rounded-full -translate-x-1/3 translate-y-1/3 pointer-events-none" />
-      <div
-        className="absolute inset-0 opacity-[0.025] pointer-events-none"
-        style={{
-          backgroundImage: "linear-gradient(#ffffff 1px, transparent 1px), linear-gradient(90deg, #ffffff 1px, transparent 1px)",
-          backgroundSize: "48px 48px",
-        }}
-      />
+    <section className="py-32 md:py-48 bg-brand-navy relative overflow-hidden">
+      {/* ── Background Visuals ── */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-brand-primary/5 rounded-full blur-[200px]" />
+        <div 
+          className="absolute inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage: "linear-gradient(#ffffff 1px, transparent 1px), linear-gradient(90deg, #ffffff 1px, transparent 1px)",
+            backgroundSize: "64px 64px"
+          }}
+        />
+      </div>
 
       <Container className="relative z-10">
-        {/* Header */}
-        <div className="text-center mb-12 md:mb-16">
+        <div className="max-w-4xl mx-auto text-center mb-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 text-brand-light text-sm font-bold tracking-widest uppercase mb-6"
+            className="section-badge mb-6"
           >
-            <Calculator className="w-4 h-4" />
-            Price Simulator
+            Estimation Tool
           </motion.div>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-3xl md:text-4xl font-black text-white tracking-tight mb-4"
+            className="text-4xl md:text-5xl font-black text-white tracking-tight mb-8"
           >
-            概算料金シミュレーター
+            概算シミュレーター
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-gray-300 font-medium max-w-xl mx-auto text-base md:text-lg"
+            className="text-gray-400 font-medium max-w-2xl mx-auto text-lg leading-relaxed"
           >
-            ご検討中のプロジェクトを選択して、費用感の目安をご確認ください。
-            最終的なお見積もりは無料相談にて詳しくご提示いたします。
+            プロジェクトの要件を選択するだけで、概算の費用感をご確認いただけます。
+            <br className="hidden md:block" />
+            より精緻なお見積もりは、無料相談にて承ります。
           </motion.p>
         </div>
 
-        {/* Simulator Card */}
-        <div className="max-w-3xl mx-auto">
-          {/* Progress Steps */}
-          <div className="flex items-center justify-center gap-0 mb-8 md:mb-10">
+        {/* ── Simulator Interface ── */}
+        <div className="max-w-4xl mx-auto">
+          {/* Progress Indicator */}
+          <div className="flex justify-between mb-16 relative">
+            <div className="absolute top-5 left-0 right-0 h-px bg-white/10 z-0" />
             {steps.map((s, i) => (
-              <div key={s.key} className="flex items-center">
+              <div key={s.key} className="relative z-10 flex flex-col items-center gap-3">
                 <button
                   onClick={() => {
                     if (i < stepIndex || (i === 1 && selectedService) || (i === 2 && selectedScale)) {
                       setStep(s.key);
                     }
                   }}
-                  className={`flex flex-col items-center gap-1 transition-all ${i <= stepIndex ? 'opacity-100' : 'opacity-40'}`}
+                  className={cn(
+                    "w-10 h-10 rounded-full flex items-center justify-center font-black text-sm transition-all duration-500 border-2",
+                    i < stepIndex ? "bg-brand-primary border-brand-primary text-white" :
+                    i === stepIndex ? "bg-white border-white text-brand-navy shadow-[0_0_20px_rgba(255,255,255,0.3)]" :
+                    "bg-brand-navy border-white/20 text-white/30"
+                  )}
                 >
-                  <div className={`w-8 h-8 md:w-9 md:h-9 rounded-full flex items-center justify-center font-black text-sm border-2 transition-all ${i < stepIndex ? 'bg-brand-primary border-brand-primary text-white' : i === stepIndex ? 'bg-white border-white text-brand-navy' : 'bg-transparent border-white/30 text-white/50'}`}>
-                    {i < stepIndex ? "✓" : i + 1}
-                  </div>
-                  <span className="text-[10px] md:text-xs font-bold hidden sm:block text-white/70 whitespace-nowrap">{s.label}</span>
+                  {i < stepIndex ? "✓" : i + 1}
                 </button>
-                {i < steps.length - 1 && (
-                  <div className={`w-8 md:w-12 h-px mx-1 md:mx-2 ${i < stepIndex ? 'bg-brand-primary' : 'bg-white/20'} transition-all`} />
-                )}
+                <span className={cn(
+                  "text-[10px] font-black tracking-widest uppercase transition-colors duration-500",
+                  i <= stepIndex ? "text-white" : "text-white/20"
+                )}>
+                  {s.label}
+                </span>
               </div>
             ))}
           </div>
 
-          {/* Step Content */}
-          <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl overflow-hidden">
-            <AnimatePresence mode="wait">
-              {/* Step 1: Service Selection */}
-              {step === "service" && (
-                <motion.div
-                  key="service"
-                  initial={{ opacity: 0, x: 30 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -30 }}
-                  className="p-6 md:p-10"
-                >
-                  <h3 className="text-xl md:text-2xl font-black text-white mb-2">どのサービスをお探しですか？</h3>
-                  <p className="text-gray-400 text-sm mb-8">最も近いものを選択してください</p>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
-                    {SERVICES.map((s) => (
+          {/* Card Container */}
+          <div className="relative group">
+            <div className="absolute -inset-1 bg-linear-to-r from-brand-primary/20 to-blue-500/20 rounded-[2.5rem] blur opacity-25 group-hover:opacity-50 transition duration-1000" />
+            <div className="relative bg-white/3 backdrop-blur-2xl border border-white/10 rounded-[2.5rem] overflow-hidden shadow-2xl">
+              <AnimatePresence mode="wait">
+                {step === "service" && (
+                  <motion.div
+                    key="service"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    className="p-8 md:p-16"
+                  >
+                    <h3 className="text-2xl md:text-3xl font-black text-white mb-10 tracking-tight">プランを選択してください</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                      {SERVICES.map((s) => (
+                        <button
+                          key={s.id}
+                          onClick={() => {
+                            setSelectedService(s.id);
+                            setSelectedScale(null);
+                            setSelectedFeatures([]);
+                            setStep("scale");
+                          }}
+                          className={cn(
+                            "group text-left p-8 rounded-3xl border transition-all duration-500",
+                            selectedService === s.id 
+                              ? "bg-brand-primary border-brand-primary shadow-lg" 
+                              : "bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/30"
+                          )}
+                        >
+                          <div className="text-3xl mb-6 group-hover:scale-110 transition-transform duration-500">{s.icon}</div>
+                          <div className={cn(
+                            "font-black text-lg mb-2",
+                            selectedService === s.id ? "text-white" : "text-white/90"
+                          )}>{s.label}</div>
+                          <PriceDisplay 
+                            price={s.base} 
+                            size="sm" 
+                            className={selectedService === s.id ? "text-white/80" : "text-brand-light"} 
+                          />
+                        </button>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+
+                {step === "scale" && selectedService && (
+                  <motion.div
+                    key="scale"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    className="p-8 md:p-16"
+                  >
+                    <h3 className="text-2xl md:text-3xl font-black text-white mb-10 tracking-tight">規模・要件はどの程度ですか？</h3>
+                    <div className="space-y-4">
+                      {(SCALES[selectedService] || []).map((s) => (
+                        <button
+                          key={s.id}
+                          onClick={() => {
+                            setSelectedScale(s.id);
+                            setStep("features");
+                          }}
+                          className={cn(
+                            "group w-full text-left p-8 rounded-3xl border transition-all duration-500 flex items-center justify-between",
+                            selectedScale === s.id 
+                              ? "bg-brand-primary border-brand-primary shadow-lg" 
+                              : "bg-white/5 border-white/10 hover:bg-white/10"
+                          )}
+                        >
+                          <div className={cn(
+                            "flex-1",
+                            selectedScale === s.id ? "text-white" : "text-white/80"
+                          )}>
+                            <div className="font-black text-xl mb-1">{s.label}</div>
+                            <div className="text-sm opacity-60 font-medium">{s.desc}</div>
+                          </div>
+                          <div className="flex items-center gap-6">
+                            <PriceDisplay 
+                              price={Math.round(serviceData!.base * s.mult)} 
+                              size="md" 
+                              className={selectedScale === s.id ? "text-white" : "text-brand-light"} 
+                            />
+                            <ChevronRight className={cn(
+                              "w-6 h-6 transition-transform group-hover:translate-x-1",
+                              selectedScale === s.id ? "text-white" : "text-white/20"
+                            )} />
+                          </div>
+                        </button>
+                      ))}
+                    </div>
+                    <button 
+                      onClick={() => setStep("service")} 
+                      className="mt-12 text-white/30 hover:text-white transition-colors flex items-center gap-2 font-bold text-sm"
+                    >
+                      <ArrowRight className="w-4 h-4 rotate-180" /> プラン選択に戻る
+                    </button>
+                  </motion.div>
+                )}
+
+                {step === "features" && (
+                  <motion.div
+                    key="features"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    className="p-8 md:p-16"
+                  >
+                    <h3 className="text-2xl md:text-3xl font-black text-white mb-10 tracking-tight">追加オプション</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {FEATURES.map((f) => {
+                        const isSelected = selectedFeatures.includes(f.id);
+                        return (
+                          <button
+                            key={f.id}
+                            onClick={() => toggleFeature(f.id)}
+                            className={cn(
+                              "text-left p-6 rounded-3xl border transition-all duration-500 flex items-center gap-4",
+                              isSelected 
+                                ? "bg-brand-primary border-brand-primary shadow-lg" 
+                                : "bg-white/5 border-white/10 hover:bg-white/10"
+                            )}
+                          >
+                            <div className={cn(
+                              "w-6 h-6 rounded-lg border-2 flex items-center justify-center transition-all duration-300",
+                              isSelected ? "bg-white border-white" : "border-white/20"
+                            )}>
+                              {isSelected && <ArrowRight className="w-4 h-4 text-brand-primary" />}
+                            </div>
+                            <div className="flex-1">
+                              <div className="font-bold text-white text-base">{f.label}</div>
+                              <div className="text-xs text-white/50 font-medium mt-0.5">
+                                +{(f.add / 10000).toFixed(0)}万円
+                              </div>
+                            </div>
+                          </button>
+                        );
+                      })}
+                    </div>
+                    <div className="mt-16 flex items-center justify-between">
+                      <button 
+                        onClick={() => setStep("scale")} 
+                        className="text-white/30 hover:text-white transition-colors flex items-center gap-2 font-bold text-sm"
+                      >
+                        <ArrowRight className="w-4 h-4 rotate-180" /> 要件選択に戻る
+                      </button>
+                      <Button
+                        size="xl"
+                        className="px-12 rounded-2xl shadow-2xl shadow-brand-primary/30"
+                        onClick={() => setStep("result")}
+                      >
+                        概算結果を見る <ArrowRight className="ml-3 w-5 h-5" />
+                      </Button>
+                    </div>
+                  </motion.div>
+                )}
+
+                {step === "result" && (
+                  <motion.div
+                    key="result"
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 1.05 }}
+                    className="p-8 md:p-20 text-center"
+                  >
+                    <div className="section-badge mb-10 bg-brand-primary/20 text-white border-brand-primary/30 mx-auto">
+                      Estimated Cost
+                    </div>
+                    
+                    <div className="mb-4 text-white/40 font-bold tracking-widest uppercase text-xs">概算合計金額</div>
+                    <div className="mb-12">
+                      <PriceDisplay price={totalPrice} size="xl" className="text-white scale-125 md:scale-150 transform transition-transform" />
+                    </div>
+
+                    {/* Breakdown List */}
+                    <div className="max-w-md mx-auto bg-white/5 rounded-4xl border border-white/10 p-10 mb-16 space-y-6">
+                      <div className="flex justify-between items-center text-sm">
+                        <span className="text-white/50 font-bold">{serviceData?.label}（{scaleData?.label}）</span>
+                        <PriceDisplay price={Math.round(scaledPrice)} size="sm" className="text-white" />
+                      </div>
+                      {FEATURES.filter((f) => selectedFeatures.includes(f.id)).map((f) => (
+                        <div key={f.id} className="flex justify-between items-center text-sm">
+                          <span className="text-white/50 font-bold">+ {f.label}</span>
+                          <span className="text-white font-black font-inter">+{(f.add / 10000).toFixed(0)}万円</span>
+                        </div>
+                      ))}
+                      <div className="pt-6 border-t border-white/10 flex justify-between items-baseline">
+                        <span className="text-white font-black text-lg">TOTAL</span>
+                        <PriceDisplay price={totalPrice} size="lg" className="text-brand-primary" />
+                      </div>
+                    </div>
+
+                    <div className="flex flex-col sm:flex-row gap-4 max-w-2xl mx-auto">
+                      <Button asChild size="xl" className="flex-1 rounded-2xl shadow-2xl shadow-brand-primary/30">
+                        <Link href="/contact" className="gap-3">
+                          <MessageCircle className="w-5 h-5" />
+                          無料で詳しく相談する
+                        </Link>
+                      </Button>
                       <button
-                        key={s.id}
                         onClick={() => {
-                          setSelectedService(s.id);
+                          setStep("service");
+                          setSelectedService(null);
                           setSelectedScale(null);
                           setSelectedFeatures([]);
-                          setStep("scale");
                         }}
-                        className={`group text-left p-5 rounded-2xl border transition-all duration-300 ${selectedService === s.id ? 'bg-brand-primary/20 border-brand-primary shadow-[0_0_30px_rgba(24,119,242,0.2)]' : 'bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/30'}`}
+                        className="flex-1 h-16 rounded-2xl border border-white/10 text-white font-bold hover:bg-white/5 transition-all"
                       >
-                        <div className="text-2xl mb-3">{s.icon}</div>
-                        <div className="text-white font-bold text-sm md:text-base leading-snug">{s.label}</div>
-                        <div className="text-gray-400 text-xs mt-1">{formatPrice(s.base)} 〜</div>
+                        シミュレーションをやり直す
                       </button>
-                    ))}
-                  </div>
-                </motion.div>
-              )}
-
-              {/* Step 2: Scale */}
-              {step === "scale" && selectedService && (
-                <motion.div
-                  key="scale"
-                  initial={{ opacity: 0, x: 30 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -30 }}
-                  className="p-6 md:p-10"
-                >
-                  <h3 className="text-xl md:text-2xl font-black text-white mb-2">規模・要件はどの程度ですか？</h3>
-                  <p className="text-gray-400 text-sm mb-8">プロジェクトの規模感を選択してください</p>
-                  <div className="flex flex-col gap-3">
-                    {(SCALES[selectedService] || []).map((s) => (
-                      <button
-                        key={s.id}
-                        onClick={() => {
-                          setSelectedScale(s.id);
-                          setStep("features");
-                        }}
-                        className={`group text-left p-5 md:p-6 rounded-2xl border transition-all duration-300 flex items-center gap-4 ${selectedScale === s.id ? 'bg-brand-primary/20 border-brand-primary' : 'bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/30'}`}
-                      >
-                        <div className="flex-1">
-                          <div className="text-white font-bold text-base md:text-lg">{s.label}</div>
-                          <div className="text-gray-400 text-sm mt-1">{s.desc}</div>
-                        </div>
-                        <div className="text-brand-light font-black text-sm md:text-base whitespace-nowrap">
-                          {formatPrice(Math.round(serviceData!.base * s.mult))}
-                        </div>
-                        <ChevronRight className="w-5 h-5 text-gray-500 group-hover:text-white transition-colors shrink-0" />
-                      </button>
-                    ))}
-                  </div>
-                  <button onClick={() => setStep("service")} className="mt-6 text-gray-500 text-sm hover:text-white transition-colors">← 戻る</button>
-                </motion.div>
-              )}
-
-              {/* Step 3: Features */}
-              {step === "features" && (
-                <motion.div
-                  key="features"
-                  initial={{ opacity: 0, x: 30 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -30 }}
-                  className="p-6 md:p-10"
-                >
-                  <h3 className="text-xl md:text-2xl font-black text-white mb-2">追加したいオプションは？</h3>
-                  <p className="text-gray-400 text-sm mb-8">複数選択可。不要な場合はスキップできます</p>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    {FEATURES.map((f) => {
-                      const isSelected = selectedFeatures.includes(f.id);
-                      return (
-                        <button
-                          key={f.id}
-                          onClick={() => toggleFeature(f.id)}
-                          className={`text-left p-4 md:p-5 rounded-2xl border transition-all duration-300 flex items-center gap-3 ${isSelected ? 'bg-brand-primary/20 border-brand-primary' : 'bg-white/5 border-white/10 hover:bg-white/10'}`}
-                        >
-                          <div className={`w-5 h-5 rounded-md border-2 shrink-0 flex items-center justify-center transition-all ${isSelected ? 'bg-brand-primary border-brand-primary' : 'border-gray-600'}`}>
-                            {isSelected && <span className="text-white text-xs font-black">✓</span>}
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <div className="text-white font-semibold text-sm md:text-base truncate">{f.label}</div>
-                          </div>
-                          <div className="text-gray-400 text-xs font-bold shrink-0">+{(f.add / 10000).toFixed(0)}万</div>
-                        </button>
-                      );
-                    })}
-                  </div>
-                  <div className="mt-8 flex gap-3">
-                    <button onClick={() => setStep("scale")} className="text-gray-500 text-sm hover:text-white transition-colors">← 戻る</button>
-                    <Button
-                      asChild
-                      size="lg"
-                      className="flex-1 shadow-lg shadow-brand-primary/30 justify-center"
-                    >
-                      <button onClick={() => setStep("result")}>
-                        概算を見る <ArrowRight className="ml-2 w-4 h-4" />
-                      </button>
-                    </Button>
-                  </div>
-                </motion.div>
-              )}
-
-              {/* Step 4: Result */}
-              {step === "result" && (
-                <motion.div
-                  key="result"
-                  initial={{ opacity: 0, scale: 0.97 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0 }}
-                  className="p-6 md:p-10"
-                >
-                  <div className="text-center mb-10">
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-primary/20 border border-brand-primary/30 text-brand-light text-sm font-bold mb-6">
-                      <Calculator className="w-4 h-4" /> 概算見積もり
                     </div>
-                    <div className="text-4xl md:text-4xl font-black text-white tracking-tight mb-3">
-                      {formatPrice(totalPrice)}
-                    </div>
-                    <p className="text-gray-400 text-sm">
-                      ※ あくまで目安です。詳細は無料相談でご確認ください
-                    </p>
-                  </div>
-
-                  {/* Breakdown */}
-                  <div className="bg-white/5 border border-white/10 rounded-2xl p-6 mb-8 space-y-3">
-                    <div className="flex justify-between text-sm">
-                      <span className="text-gray-300">{serviceData?.label}（{scaleData?.label}）</span>
-                      <span className="text-white font-bold">{formatPrice(Math.round(scaledPrice))}</span>
-                    </div>
-                    {FEATURES.filter((f) => selectedFeatures.includes(f.id)).map((f) => (
-                      <div key={f.id} className="flex justify-between text-sm">
-                        <span className="text-gray-300">+ {f.label}</span>
-                        <span className="text-white font-bold">+{(f.add / 10000).toFixed(0)}万円</span>
-                      </div>
-                    ))}
-                    <div className="pt-3 border-t border-white/10 flex justify-between font-black">
-                      <span className="text-white">概算合計</span>
-                      <span className="text-brand-light text-lg">{formatPrice(totalPrice)}</span>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-col sm:flex-row gap-3">
-                    <Button asChild size="lg" className="flex-1 shadow-lg shadow-brand-primary/30 justify-center">
-                      <Link href="/contact">
-                        <MessageCircle className="mr-2 w-4 h-4" />
-                        無料で詳しく相談する
-                      </Link>
-                    </Button>
-                    <button
-                      onClick={() => {
-                        setStep("service");
-                        setSelectedService(null);
-                        setSelectedScale(null);
-                        setSelectedFeatures([]);
-                      }}
-                      className="flex-1 py-3 px-6 rounded-lg border border-white/20 text-white/70 text-sm font-bold hover:border-white/40 hover:text-white transition-all"
-                    >
-                      やり直す
-                    </button>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
           </div>
 
-          <p className="text-center text-gray-500 text-xs mt-6">
-            ※ 表示される金額はあくまで概算です。最終的なお見積もりは要件定義後にご提示いたします。
-          </p>
+          <motion.p 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            className="text-center text-white/20 text-[10px] font-bold tracking-widest mt-12 uppercase"
+          >
+            ※ The above prices are estimates and may vary based on specific requirements.
+          </motion.p>
         </div>
       </Container>
     </section>

@@ -31,7 +31,7 @@ export function ServiceHeroSection({ service }: { service: ServiceDetail }) {
     <motion.section 
       ref={heroRef}
       style={{ opacity }}
-      className="relative pt-32 pb-48 md:pt-48 md:pb-64 min-h-svh flex flex-col items-center justify-center text-center overflow-hidden bg-white"
+      className="relative pt-24 pb-32 md:pt-48 md:pb-64 min-h-svh flex flex-col items-center justify-center text-center overflow-hidden bg-white"
     >
       {/* ── Background Visuals ── */}
       <motion.div style={{ y }} className="absolute inset-0 w-full h-full pointer-events-none">
@@ -51,12 +51,12 @@ export function ServiceHeroSection({ service }: { service: ServiceDetail }) {
           initial={{ scale: 0.8, opacity: 0, rotate: -10 }}
           animate={{ scale: 1, opacity: 1, rotate: 0 }}
           transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] as any }}
-          className="relative mb-12"
+          className="relative mb-8 md:mb-12"
         >
           <div className="absolute inset-0 bg-brand-primary/20 blur-3xl rounded-full scale-150 animate-pulse" />
-          <div className="relative w-24 h-24 md:w-32 md:h-32 bg-white rounded-4xl border border-slate-100 shadow-premium flex items-center justify-center text-brand-primary overflow-hidden group">
+          <div className="relative w-20 h-20 md:w-28 md:h-28 bg-white rounded-3xl md:rounded-4xl border border-slate-100 shadow-premium flex items-center justify-center text-brand-primary overflow-hidden group">
             <div className="absolute inset-0 bg-linear-to-br from-brand-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-            <Icon className="w-12 h-12 md:w-16 md:h-16 relative z-10 transition-all duration-700 group-hover:scale-110 group-hover:-rotate-3" strokeWidth={1.2} />
+            <Icon className="w-10 h-10 md:w-14 md:h-14 relative z-10 transition-all duration-700 group-hover:scale-110 group-hover:-rotate-3" strokeWidth={1.2} />
           </div>
         </motion.div>
 
@@ -64,7 +64,7 @@ export function ServiceHeroSection({ service }: { service: ServiceDetail }) {
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="section-badge mb-10 mx-auto"
+          className="section-badge mb-6 md:mb-10 mx-auto"
         >
           Service Detail
         </motion.div>
@@ -73,7 +73,7 @@ export function ServiceHeroSection({ service }: { service: ServiceDetail }) {
           initial={{ y: 30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] as any }}
-          className="text-5xl md:text-7xl lg:text-8xl font-black text-brand-navy tracking-tighter leading-[0.95] mb-12 text-balance lg:max-w-5xl"
+          className="text-[2.2rem] leading-[0.95] sm:text-5xl md:text-7xl lg:text-8xl font-black text-brand-navy tracking-tighter mb-8 md:mb-12 text-balance lg:max-w-5xl"
         >
           {service.hero.tagline}
         </motion.h1>
@@ -82,7 +82,7 @@ export function ServiceHeroSection({ service }: { service: ServiceDetail }) {
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 1, delay: 0.5, ease: [0.16, 1, 0.3, 1] as any }}
-          className="text-xl md:text-2xl text-text-secondary leading-relaxed font-bold max-w-4xl text-balance mb-16"
+          className="text-base md:text-xl lg:text-2xl text-text-secondary leading-relaxed font-bold max-w-4xl text-balance mb-10 md:mb-16"
         >
           {service.hero.description}
         </motion.p>

@@ -52,7 +52,7 @@ export function ServiceHeroSection() {
           </motion.div>
 
           {/* Main Title */}
-          <h1 className="text-[2.6rem] leading-[0.9] sm:text-5xl md:text-7xl lg:text-9xl font-black text-brand-navy tracking-tighter mb-10 md:mb-12">
+          <h1 className="text-[2.6rem] leading-[0.9] sm:text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-black text-brand-navy tracking-tighter mb-10 md:mb-12">
             <motion.span
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}

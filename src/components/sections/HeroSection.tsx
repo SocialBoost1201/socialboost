@@ -45,11 +45,11 @@ export function HeroSection() {
           src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=2560"
           alt="Business Strategy"
           fill
-          className="object-cover opacity-30 mix-blend-luminosity scale-105"
+          className="object-cover opacity-20 mix-blend-luminosity scale-105"
           priority
         />
         {/* Advanced Mesh Gradient Overlay */}
-        <div className="absolute inset-0 bg-linear-to-b from-brand-navy/90 via-brand-navy/70 to-brand-navy" />
+        <div className="absolute inset-0 bg-linear-to-b from-brand-navy/80 via-brand-navy/60 to-brand-navy/90" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(24,119,242,0.15)_0%,transparent_50%)]" />
       </div>
 
@@ -72,13 +72,13 @@ export function HeroSection() {
               </span>
             </motion.div>
 
-            <motion.h1 variants={itemVariants} className="text-4xl md:text-6xl xl:text-7xl font-extrabold tracking-tighter text-white leading-tight mb-8">
+            <motion.h1 variants={itemVariants} className="text-4xl md:text-6xl xl:text-7xl font-extrabold tracking-tighter text-white drop-shadow-lg leading-tight mb-8">
               売上を、<span className="text-brand-primary">「資産」</span>へ。<br />
               戦略から実装まで。<br className="hidden md:block" />
               一貫したWebの勝ち筋。
             </motion.h1>
 
-            <motion.p variants={itemVariants} className="text-lg md:text-xl text-gray-400 leading-relaxed mb-12 max-w-2xl mx-auto lg:mx-0">
+            <motion.p variants={itemVariants} className="text-lg md:text-xl text-gray-200 leading-relaxed mb-12 max-w-2xl mx-auto lg:mx-0">
               単なる「制作」で終わらせない。事業成長にフォーカスした戦略設計、<br className="hidden xl:block" />
               そして、世界水準の技術力が、貴社のビジネスを加速させます。
             </motion.p>
@@ -99,8 +99,8 @@ export function HeroSection() {
               {STATS.map((s, i) => (
                 <div key={i} className="text-left">
                   <div className="text-3xl font-black text-white tracking-tight mb-1">{s.value}</div>
-                  <div className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">{s.label}</div>
-                  <div className="text-[10px] text-gray-600">{s.sub}</div>
+                  <div className="text-xs font-bold text-gray-300 uppercase tracking-wider mb-1">{s.label}</div>
+                  <div className="text-[10px] text-gray-400">{s.sub}</div>
                 </div>
               ))}
             </motion.div>

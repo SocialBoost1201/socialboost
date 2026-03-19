@@ -4,18 +4,20 @@
  */
 "use client"
 
-import { motion, useReducedMotion } from "framer-motion"
-import { type ButtonHTMLAttributes, forwardRef } from "react"
+import { motion, useReducedMotion, type HTMLMotionProps } from "framer-motion"
+import { forwardRef } from "react"
 import { cn } from "@/lib/utils"
 
 type ButtonVariant = "primary" | "secondary" | "ghost" | "glow"
 type ButtonSize    = "sm" | "md" | "lg"
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+// HTMLMotionProps<"button"> をベースにすることで motion.button との型衝突を根本排除
+interface ButtonProps extends Omit<HTMLMotionProps<"button">, "children"> {
   variant?: ButtonVariant
   size?:    ButtonSize
   loading?: boolean
   icon?:    React.ReactNode
+  children?: React.ReactNode
 }
 
 const variantStyles: Record<ButtonVariant, string> = {

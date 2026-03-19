@@ -52,7 +52,7 @@ export function ServiceHeroSection() {
           </motion.div>
 
           {/* Main Title */}
-          <h1 className="text-5xl md:text-7xl lg:text-9xl font-black text-brand-navy leading-[0.9] tracking-tighter mb-12">
+          <h1 className="text-[2.6rem] leading-[0.9] sm:text-5xl md:text-7xl lg:text-9xl font-black text-brand-navy tracking-tighter mb-10 md:mb-12">
             <motion.span
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
@@ -75,7 +75,7 @@ export function ServiceHeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] as any }}
-            className="text-xl md:text-2xl text-text-secondary font-bold leading-relaxed max-w-3xl mx-auto mb-20"
+            className="text-base md:text-xl lg:text-2xl text-text-secondary font-bold leading-relaxed max-w-3xl mx-auto mb-12 md:mb-20"
           >
             デジタル領域のあらゆる課題を、<br className="hidden md:block" />
             戦略設計から実装、運用まで一気通貫で解決します。
@@ -86,7 +86,7 @@ export function ServiceHeroSection() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.6, ease: [0.16, 1, 0.3, 1] as any }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 mb-24"
+            className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6 mb-12 md:mb-24"
           >
             {[
               { icon: Globe, label: "Web戦略・KPI設計" },
@@ -94,10 +94,10 @@ export function ServiceHeroSection() {
               { icon: Zap, label: "UI/UXデザイン" },
               { icon: Sparkles, label: "AI導入・プロセス改善" }
             ].map((item, i) => (
-              <div key={i} className="group relative p-8 rounded-4xl bg-slate-50 border border-slate-100 transition-all duration-500 hover:bg-white hover:border-brand-primary/20 hover:shadow-premium overflow-hidden text-center">
-                <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <item.icon className="w-10 h-10 text-brand-primary mx-auto mb-6 shrink-0 transition-all duration-500 group-hover:scale-110 group-hover:-rotate-3" strokeWidth={1.5} />
-                <span className="block text-base md:text-lg font-black text-brand-navy tracking-tight">{item.label}</span>
+              <div key={i} className="group relative p-5 md:p-8 rounded-2xl md:rounded-4xl bg-slate-50 border border-slate-100 transition-all duration-500 hover:bg-white hover:border-brand-primary/20 hover:shadow-premium overflow-hidden text-center">
+                <div className="absolute inset-0 bg-linear-to-br from-brand-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <item.icon className="w-7 h-7 md:w-10 md:h-10 text-brand-primary mx-auto mb-3 md:mb-6 shrink-0 transition-all duration-500 group-hover:scale-110 group-hover:-rotate-3" strokeWidth={1.5} />
+                <span className="block text-xs md:text-base font-black text-brand-navy tracking-tight leading-snug">{item.label}</span>
               </div>
             ))}
           </motion.div>

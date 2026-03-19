@@ -48,7 +48,7 @@ export function ServiceValueSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] as any }}
-            className="text-4xl md:text-5xl font-black leading-tight text-brand-navy tracking-tighter"
+            className="text-3xl md:text-5xl font-black leading-tight text-brand-navy tracking-tighter"
           >
             なぜ、SocialBoostが<br className="md:hidden" />選ばれるのか
           </motion.h3>
@@ -62,12 +62,12 @@ export function ServiceValueSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] as any }}
-              className="group relative bg-white p-10 md:p-14 rounded-4xl border border-slate-100 shadow-sm hover:shadow-premium hover:border-brand-primary/20 transition-all duration-700"
+              className="group relative bg-white p-7 md:p-10 lg:p-14 rounded-3xl md:rounded-4xl border border-slate-100 shadow-sm hover:shadow-premium hover:border-brand-primary/20 transition-all duration-700"
             >
               <div className="w-16 h-16 md:w-20 md:h-20 bg-brand-primary/5 rounded-2xl flex items-center justify-center mb-10 group-hover:bg-brand-primary transition-all duration-700 group-hover:scale-110 group-hover:rotate-3">
                 <item.icon className="w-8 h-8 md:w-10 md:h-10 text-brand-primary group-hover:text-white transition-colors duration-700" strokeWidth={1.5} />
               </div>
-              <h4 className="text-2xl font-black text-brand-navy mb-6 whitespace-pre-line leading-tight tracking-tight group-hover:text-brand-primary transition-colors duration-500">
+              <h4 className="text-xl md:text-2xl font-black text-brand-navy mb-4 whitespace-pre-line leading-tight tracking-tight group-hover:text-brand-primary transition-colors duration-500">
                 {item.title}
               </h4>
               <p className="text-text-secondary leading-relaxed font-bold text-base md:text-lg">

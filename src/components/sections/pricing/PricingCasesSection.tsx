@@ -97,7 +97,7 @@ export function PricingCasesSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] as any }}
-            className="text-4xl md:text-5xl font-black leading-tight text-brand-navy tracking-tight mb-8"
+            className="text-3xl md:text-4xl lg:text-5xl font-black leading-tight text-brand-navy tracking-tight mb-8"
           >
             ケース別 お見積もり例
           </motion.h3>
@@ -124,7 +124,7 @@ export function PricingCasesSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] as any }}
               className={cn(
-                "relative overflow-hidden group bg-white border rounded-4xl p-10 md:p-14 transition-all duration-700",
+                "relative overflow-hidden group bg-white border rounded-3xl md:rounded-4xl p-7 sm:p-10 md:p-14 transition-all duration-700",
                 item.highlight 
                   ? "border-brand-primary/30 shadow-premium ring-1 ring-brand-primary/5" 
                   : "border-slate-100 shadow-sm hover:shadow-premium hover:border-brand-primary/20"
@@ -145,7 +145,7 @@ export function PricingCasesSection() {
                   )}>
                     {item.theme}
                   </span>
-                  <h4 className="text-3xl md:text-4xl font-black text-brand-navy mb-4 tracking-tight">
+                  <h4 className="text-2xl md:text-3xl lg:text-4xl font-black text-brand-navy mb-4 tracking-tight">
                     {item.title}
                   </h4>
                   <p className="text-base text-text-secondary font-medium leading-relaxed">
@@ -154,17 +154,17 @@ export function PricingCasesSection() {
                 </div>
 
                 {/* Price & Period Display */}
-                <div className="grid grid-cols-2 gap-8 mb-12 pb-12 border-b border-slate-100">
-                  <div>
+                <div className="flex flex-col sm:flex-row sm:items-start gap-6 mb-10 pb-10 border-b border-slate-100">
+                  <div className="flex-1">
                     <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-3">Estimated Price</div>
                     <div className="flex items-baseline group-hover:text-brand-primary transition-colors duration-500">
-                      <span className="text-4xl md:text-5xl font-black tracking-tighter text-brand-navy group-hover:text-brand-primary transition-colors">{item.price.replace("約 ", "")}</span>
-                      <span className="text-lg font-black text-slate-400 ml-1">{item.unit}</span>
+                      <span className="text-3xl md:text-4xl lg:text-5xl font-black tracking-tighter text-brand-navy group-hover:text-brand-primary transition-colors">{item.price}</span>
+                      <span className="text-base font-black text-slate-400 ml-2">{item.unit}</span>
                     </div>
                   </div>
-                  <div className="border-l border-slate-100 pl-8">
+                  <div className="sm:border-l sm:border-slate-100 sm:pl-6">
                     <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-3">Est. Delivery</div>
-                    <div className="text-2xl md:text-3xl font-black text-brand-navy tracking-tight">{item.period.replace("約 ", "")}</div>
+                    <div className="text-xl md:text-2xl font-black text-brand-navy tracking-tight">{item.period}</div>
                   </div>
                 </div>
 

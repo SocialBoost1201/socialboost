@@ -55,12 +55,12 @@ export function ServiceProblemsSection() {
               className="sticky top-32"
             >
               <div className="section-badge mb-8 bg-white/5 border-white/10 text-white mx-0">Common Challenges</div>
-              <h3 className="text-4xl md:text-5xl font-black leading-tight tracking-tighter mb-10">
+              <h3 className="text-3xl md:text-5xl font-black leading-tight tracking-tighter mb-8">
                 デジタルの投資が、<br />
                 <span className="text-white/40 italic">「ただの出費」</span>に<br />
                 なっていませんか？
               </h3>
-              <p className="text-xl text-white/60 leading-relaxed font-bold max-w-lg mb-8">
+              <p className="text-base md:text-xl text-white/60 leading-relaxed font-bold max-w-lg mb-6">
                 多くのお客様が「期待した成果が出ない」「構造的に不透明」といった悩みを抱えています。その根本原因は、旧態依然とした業界構造にあります。
               </p>
             </motion.div>
@@ -75,12 +75,12 @@ export function ServiceProblemsSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] as any }}
-                className="group relative bg-white/5 backdrop-blur-2xl border border-white/10 p-10 md:p-12 rounded-4xl hover:bg-white/10 hover:border-brand-primary/30 transition-all duration-700"
+                className="group relative bg-white/5 backdrop-blur-2xl border border-white/10 p-7 md:p-10 lg:p-12 rounded-3xl md:rounded-4xl hover:bg-white/10 hover:border-brand-primary/30 transition-all duration-700"
               >
                 <div className="text-[10px] font-black tracking-[0.4em] text-white/20 mb-8 border-b border-white/5 pb-4 group-hover:text-brand-primary/40 group-hover:border-brand-primary/20 transition-colors">
                   PROBLEM {prob.num}
                 </div>
-                <h4 className="text-2xl font-black text-white mb-6 tracking-tight leading-snug pr-8">{prob.title}</h4>
+                <h4 className="text-xl md:text-2xl font-black text-white mb-4 tracking-tight leading-snug pr-4">{prob.title}</h4>
                 <p className="text-white/60 leading-relaxed font-bold text-base">
                   {prob.desc}
                 </p>

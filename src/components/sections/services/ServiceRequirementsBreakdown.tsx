@@ -98,7 +98,7 @@ export function ServiceRequirementsBreakdown() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] as any }}
-            className="text-4xl md:text-5xl font-black leading-tight text-white tracking-tighter"
+            className="text-3xl md:text-5xl font-black leading-tight text-white tracking-tighter"
           >
             ブラックボックスを、<br />
             <span className="text-brand-primary italic">透明</span>にする。
@@ -132,15 +132,15 @@ export function ServiceRequirementsBreakdown() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: index * 0.05, ease: [0.16, 1, 0.3, 1] as any }}
-              className="group grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 bg-white/5 backdrop-blur-2xl border border-white/10 rounded-4xl p-8 lg:p-10 transition-all duration-700 hover:bg-white/10 hover:border-brand-primary/30"
+              className="group grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-8 bg-white/5 backdrop-blur-2xl border border-white/10 rounded-3xl md:rounded-4xl p-6 md:p-8 lg:p-10 transition-all duration-700 hover:bg-white/10 hover:border-brand-primary/30"
             >
               <div className="lg:col-span-4">
-                <h4 className="text-2xl font-black text-white mb-4 tracking-tight group-hover:text-brand-primary transition-colors">{item.title}</h4>
+                <h4 className="text-lg md:text-2xl font-black text-white mb-3 tracking-tight group-hover:text-brand-primary transition-colors">{item.title}</h4>
                 <p className="text-base text-white/40 leading-relaxed font-bold pr-4">{item.desc}</p>
               </div>
 
               {/* Competitor */}
-              <div className="lg:col-span-4 bg-black/20 rounded-3xl p-8 border border-white/5 relative opacity-60 grayscale group-hover:grayscale-0 transition-all duration-700">
+              <div className="lg:col-span-4 bg-black/20 rounded-2xl p-5 md:p-7 lg:p-8 border border-white/5 relative opacity-60 grayscale group-hover:grayscale-0 transition-all duration-700">
                 <div className="absolute top-6 right-6 text-white/10">
                   <X className="w-6 h-6" />
                 </div>
@@ -151,7 +151,7 @@ export function ServiceRequirementsBreakdown() {
               </div>
 
               {/* SocialBoost */}
-              <div className="lg:col-span-4 bg-brand-primary/10 rounded-3xl p-8 border border-brand-primary/30 relative shadow-2xl shadow-brand-primary/5 group-hover:bg-brand-primary/20 group-hover:border-brand-primary transition-all duration-700">
+              <div className="lg:col-span-4 bg-brand-primary/10 rounded-2xl p-5 md:p-7 lg:p-8 border border-brand-primary/30 relative shadow-2xl shadow-brand-primary/5 group-hover:bg-brand-primary/20 group-hover:border-brand-primary transition-all duration-700">
                 <div className="absolute top-6 right-6 text-brand-primary">
                   <Check className="w-6 h-6 shadow-glow" strokeWidth={3} />
                 </div>

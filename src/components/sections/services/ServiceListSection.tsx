@@ -19,7 +19,7 @@ export function ServiceListSection() {
             className="max-w-3xl"
           >
             <div className="section-badge mb-8 mx-0">Service Lineup</div>
-            <h3 className="text-4xl md:text-5xl font-black leading-tight text-brand-navy tracking-tighter">
+            <h3 className="text-2xl sm:text-3xl md:text-5xl font-black leading-tight text-brand-navy tracking-tighter">
               点ではなく「面」で、<br />
               事業の全フェーズを並走する。
             </h3>
@@ -31,7 +31,7 @@ export function ServiceListSection() {
             transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] as any }}
             className="max-w-lg"
           >
-            <p className="text-xl text-text-secondary leading-relaxed font-bold">
+            <p className="text-base md:text-xl text-text-secondary leading-relaxed font-bold">
               Web戦略の立案から、サイト・システムの実装、最新のAI導入まで。
               事業成長に直結する6つのコア領域を提供します。
             </p>
@@ -49,25 +49,25 @@ export function ServiceListSection() {
             >
               <Link 
                 href={`/services/${service.slug}`}
-                className="group block relative bg-slate-50 border border-slate-100 p-10 md:p-14 lg:p-20 rounded-4xl shadow-sm hover:bg-white hover:border-brand-primary/30 hover:shadow-premium transition-all duration-700 overflow-hidden"
+                className="group block relative bg-slate-50 border border-slate-100 p-6 sm:p-10 md:p-14 lg:p-20 rounded-3xl md:rounded-4xl shadow-sm hover:bg-white hover:border-brand-primary/30 hover:shadow-premium transition-all duration-700 overflow-hidden"
               >
                 {/* Background Text Float */}
                 <div className="absolute -right-8 -bottom-8 text-[12rem] md:text-[20rem] font-black text-brand-navy/[0.02] select-none group-hover:text-brand-primary/[0.04] transition-colors duration-700 pointer-events-none tracking-tighter">
                   {service.slug.substring(0, 3).toUpperCase()}
                 </div>
 
-                <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 md:gap-20 items-center">
+                <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-12 lg:gap-20 items-center">
                   <div className="lg:col-span-4">
-                    <div className="text-[10px] font-black tracking-[0.4em] text-brand-primary mb-8 border-b border-brand-primary/10 pb-4 inline-block">
+                    <div className="text-[10px] font-black tracking-[0.4em] text-brand-primary mb-4 md:mb-8 border-b border-brand-primary/10 pb-3 md:pb-4 inline-block">
                       CATEGORY 0{index + 1}
                     </div>
-                    <h4 className="text-3xl md:text-4xl lg:text-5xl font-black text-brand-navy mb-8 leading-tight group-hover:text-brand-primary transition-colors duration-500 tracking-tight">
+                    <h4 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-brand-navy mb-4 md:mb-8 leading-tight group-hover:text-brand-primary transition-colors duration-500 tracking-tight">
                       {service.title}
                     </h4>
                   </div>
                   
                   <div className="lg:col-span-6">
-                    <p className="text-lg md:text-xl text-text-secondary leading-relaxed font-bold mb-10 max-w-xl">
+                    <p className="text-sm md:text-lg text-text-secondary leading-relaxed font-bold mb-6 md:mb-10 max-w-xl">
                       {service.hero.description}
                     </p>
                     <div className="flex flex-wrap gap-3">
@@ -84,9 +84,9 @@ export function ServiceListSection() {
                     </div>
                   </div>
 
-                  <div className="lg:col-span-2 flex justify-start lg:justify-end">
-                    <div className="w-20 h-20 rounded-full bg-white border border-slate-100 shadow-sm flex items-center justify-center text-brand-navy group-hover:bg-brand-primary group-hover:text-white group-hover:border-transparent transition-all duration-700 group-hover:scale-110 group-hover:rotate-12">
-                      <ArrowRight className="w-8 h-8 transition-transform group-hover:translate-x-1" />
+                  <div className="hidden sm:flex lg:col-span-2 justify-start lg:justify-end">
+                    <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-white border border-slate-100 shadow-sm flex items-center justify-center text-brand-navy group-hover:bg-brand-primary group-hover:text-white group-hover:border-transparent transition-all duration-700 group-hover:scale-110 group-hover:rotate-12">
+                      <ArrowRight className="w-7 h-7 md:w-8 md:h-8 transition-transform group-hover:translate-x-1" />
                     </div>
                   </div>
                 </div>

@@ -57,15 +57,12 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/round-favicon.png?v=2", sizes: "512x512", type: "image/png" },
-      { url: "/round-favicon.png?v=2", sizes: "192x192", type: "image/png" },
-      { url: "/round-favicon.png?v=2", sizes: "32x32", type: "image/png" },
-      { url: "/round-favicon.png?v=2", sizes: "16x16", type: "image/png" },
+      { url: "/web-app-manifest-512x512.png?v=3", sizes: "512x512", type: "image/png" },
     ],
     apple: [
-      { url: "/round-apple-icon.png?v=2", sizes: "512x512", type: "image/png" },
+      { url: "/web-app-manifest-512x512.png?v=3", sizes: "512x512", type: "image/png" },
     ],
-    shortcut: "/round-favicon.png?v=2",
+    shortcut: "/web-app-manifest-512x512.png?v=3",
   },
   alternates: {
     canonical: SITE_URL,

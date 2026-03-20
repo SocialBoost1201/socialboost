@@ -180,7 +180,7 @@ export function PricingSimulatorSection() {
                   {i < stepIndex ? "✓" : i + 1}
                 </button>
                 <span className={cn(
-                  "text-[10px] font-black tracking-widest uppercase transition-colors duration-500",
+                  "text-xs font-black tracking-widest uppercase transition-colors duration-500",
                   i <= stepIndex ? "text-white" : "text-white/20"
                 )}>
                   {s.label}
@@ -410,7 +410,7 @@ export function PricingSimulatorSection() {
           <motion.p 
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            className="text-center text-white/20 text-[10px] font-bold tracking-widest mt-12 uppercase"
+            className="text-center text-white/20 text-xs font-bold tracking-widest mt-12 uppercase"
           >
             ※ The above prices are estimates and may vary based on specific requirements.
           </motion.p>

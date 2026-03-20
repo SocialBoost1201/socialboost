@@ -33,7 +33,7 @@ export function ServicePricingSection({ service }: { service: ServiceDetail }) {
             
             <div className="section-badge mb-8 mx-auto bg-slate-50 border-slate-100 text-slate-400">Pricing Estimation</div>
             
-            <h2 className="text-4xl md:text-5xl font-black text-brand-navy mb-12 tracking-tighter">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-brand-navy mb-12 tracking-tight">
               投資対効果を、具体的に。
             </h2>
 

@@ -119,7 +119,7 @@ export function ServiceRequirementsBreakdown() {
         {/* Breakdown List */}
         <div className="space-y-6 lg:space-y-8">
           {/* Header Legend (PC only) */}
-          <div className="hidden lg:grid grid-cols-12 gap-8 px-10 mb-6 text-[10px] font-black text-white/30 tracking-[0.4em] uppercase">
+          <div className="hidden lg:grid grid-cols-12 gap-8 px-10 mb-6 text-xs font-black text-white/30 tracking-[0.4em] uppercase">
             <div className="col-span-4">Area & Description</div>
             <div className="col-span-4 text-center">Conventional Agency</div>
             <div className="col-span-4 text-center text-brand-primary">SocialBoost Value</div>
@@ -132,33 +132,37 @@ export function ServiceRequirementsBreakdown() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: index * 0.05, ease: [0.16, 1, 0.3, 1] as any }}
-              className="group grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-8 bg-white/5 backdrop-blur-2xl border border-white/10 rounded-3xl md:rounded-4xl p-6 md:p-8 lg:p-10 transition-all duration-700 hover:bg-white/10 hover:border-brand-primary/30"
+              className="group bg-white/5 backdrop-blur-2xl border border-white/10 rounded-3xl md:rounded-4xl p-6 md:p-10 transition-all duration-700 hover:bg-white/10 hover:border-brand-primary/30"
             >
-              <div className="lg:col-span-4">
-                <h4 className="text-lg md:text-2xl font-black text-white mb-3 tracking-tight group-hover:text-brand-primary transition-colors">{item.title}</h4>
-                <p className="text-base text-white/40 leading-relaxed font-bold pr-4">{item.desc}</p>
+              {/* Title - full width always */}
+              <div className="mb-5">
+                <h4 className="text-base md:text-2xl font-black text-white tracking-tight group-hover:text-brand-primary transition-colors">{item.title}</h4>
+                <p className="hidden md:block text-sm text-white/40 leading-relaxed font-bold mt-2">{item.desc}</p>
               </div>
 
-              {/* Competitor */}
-              <div className="lg:col-span-4 bg-black/20 rounded-2xl p-5 md:p-7 lg:p-8 border border-white/5 relative opacity-60 grayscale group-hover:grayscale-0 transition-all duration-700">
-                <div className="absolute top-6 right-6 text-white/10">
-                  <X className="w-6 h-6" />
+              {/* Comparison - always 2 columns side by side */}
+              <div className="grid grid-cols-2 gap-3 md:gap-6">
+                {/* Competitor */}
+                <div className="bg-black/20 rounded-2xl p-4 md:p-7 border border-white/5 relative opacity-60 grayscale group-hover:grayscale-0 transition-all duration-700">
+                  <div className="absolute top-3 right-3 md:top-6 md:right-6 text-white/10">
+                    <X className="w-4 h-4 md:w-6 md:h-6" />
+                  </div>
+                  <div className="text-xs md:text-xs font-black text-white/20 uppercase tracking-widest mb-1 md:mb-2">一般的な会社</div>
+                  <div className="text-sm md:text-xl font-black text-white/80 mb-2 md:mb-4 tracking-tight leading-snug">{item.competitor.price}</div>
+                  <div className="text-xs font-black text-white/20 uppercase tracking-widest mb-1 hidden md:block">内容</div>
+                  <div className="text-xs text-white/40 leading-relaxed font-bold hidden md:block">{item.competitor.scope}</div>
                 </div>
-                <div className="text-[10px] font-black text-white/20 uppercase tracking-widest mb-2">Market Price</div>
-                <div className="text-xl font-black text-white/80 mb-4 tracking-tight">{item.competitor.price}</div>
-                <div className="text-[10px] font-black text-white/20 uppercase tracking-widest mb-2">Limitations</div>
-                <div className="text-sm text-white/40 leading-relaxed font-bold">{item.competitor.scope}</div>
-              </div>
 
-              {/* SocialBoost */}
-              <div className="lg:col-span-4 bg-brand-primary/10 rounded-2xl p-5 md:p-7 lg:p-8 border border-brand-primary/30 relative shadow-2xl shadow-brand-primary/5 group-hover:bg-brand-primary/20 group-hover:border-brand-primary transition-all duration-700">
-                <div className="absolute top-6 right-6 text-brand-primary">
-                  <Check className="w-6 h-6 shadow-glow" strokeWidth={3} />
+                {/* SocialBoost */}
+                <div className="bg-brand-primary/10 rounded-2xl p-4 md:p-7 border border-brand-primary/30 relative shadow-2xl shadow-brand-primary/5 group-hover:bg-brand-primary/20 group-hover:border-brand-primary transition-all duration-700">
+                  <div className="absolute top-3 right-3 md:top-6 md:right-6 text-brand-primary">
+                    <Check className="w-4 h-4 md:w-6 md:h-6 shadow-glow" strokeWidth={3} />
+                  </div>
+                  <div className="text-xs md:text-xs font-black text-brand-primary/60 uppercase tracking-widest mb-1 md:mb-2">SocialBoost</div>
+                  <div className="text-sm md:text-2xl font-black text-white mb-2 md:mb-4 tracking-tight leading-snug">{item.socialBoost.price}</div>
+                  <div className="text-xs font-black text-brand-primary/60 uppercase tracking-widest mb-1 hidden md:block">強み</div>
+                  <div className="text-xs text-white font-black leading-relaxed hidden md:block">{item.socialBoost.scope}</div>
                 </div>
-                <div className="text-[10px] font-black text-brand-primary/60 uppercase tracking-widest mb-2">Our Price</div>
-                <div className="text-2xl font-black text-white mb-4 tracking-tighter">{item.socialBoost.price}</div>
-                <div className="text-[10px] font-black text-brand-primary/60 uppercase tracking-widest mb-2">Our Advantage</div>
-                <div className="text-sm text-white font-black leading-relaxed">{item.socialBoost.scope}</div>
               </div>
             </motion.div>
           ))}

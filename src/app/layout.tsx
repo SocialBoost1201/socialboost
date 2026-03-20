@@ -63,12 +63,12 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/web-app-manifest-512x512.png?v=4", sizes: "512x512", type: "image/png" },
+      { url: "/round-favicon.png?v=5", sizes: "512x512", type: "image/png" },
     ],
     apple: [
-      { url: "/web-app-manifest-512x512.png?v=4", sizes: "512x512", type: "image/png" },
+      { url: "/round-apple-icon.png?v=5", sizes: "512x512", type: "image/png" },
     ],
-    shortcut: "/web-app-manifest-512x512.png?v=4",
+    shortcut: "/round-favicon.png?v=5",
   },
   alternates: {
     canonical: SITE_URL,

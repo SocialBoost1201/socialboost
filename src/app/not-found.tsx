@@ -15,26 +15,21 @@ const QUICK_LINKS = [
 
 export default function NotFound() {
   return (
-    <main className="relative min-h-svh flex items-center justify-center overflow-hidden bg-brand-navy">
-      {/* BG effects */}
-      <div className="absolute top-[-20%] right-[-10%] w-[700px] h-[700px] bg-brand-primary/10 rounded-full blur-[150px] pointer-events-none" />
-      <div className="absolute bottom-[-20%] left-[-10%] w-[600px] h-[600px] bg-blue-400/5 rounded-full blur-[150px] pointer-events-none" />
-      <div
-        className="absolute inset-0 opacity-[0.025] pointer-events-none"
-        style={{
-          backgroundImage:
-            "linear-gradient(#ffffff 1px, transparent 1px), linear-gradient(90deg, #ffffff 1px, transparent 1px)",
-          backgroundSize: "64px 64px",
-        }}
-      />
-
-      <Container className="relative z-10 text-center py-24">
+    <main
+      className="min-h-svh flex items-center justify-center overflow-hidden bg-brand-navy"
+      style={{
+        backgroundImage:
+          "radial-gradient(circle at 95% -5%, rgba(24,119,242,0.22) 0%, transparent 44%), radial-gradient(circle at 2% 104%, rgba(96,165,250,0.12) 0%, transparent 45%), linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)",
+        backgroundSize: "auto, auto, 64px 64px, 64px 64px",
+      }}
+    >
+      <Container className="text-center py-24">
         {/* 404 Number */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="relative mb-8"
+          className="mb-8"
         >
           <div
             className="text-[10rem] sm:text-[14rem] font-black text-white/5 leading-none select-none tracking-tighter"
@@ -42,10 +37,8 @@ export default function NotFound() {
           >
             404
           </div>
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="text-4xl sm:text-8xl font-black text-white tracking-tighter">
-              4<span className="text-brand-primary">0</span>4
-            </div>
+          <div className="-mt-24 sm:-mt-36 text-4xl sm:text-8xl font-black text-white tracking-tighter">
+            4<span className="text-brand-primary">0</span>4
           </div>
         </motion.div>
 
@@ -70,7 +63,7 @@ export default function NotFound() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          className="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-2xl mx-auto mb-12"
+          className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-3xl mx-auto mb-12"
         >
           {QUICK_LINKS.map((link, i) => (
             <Link

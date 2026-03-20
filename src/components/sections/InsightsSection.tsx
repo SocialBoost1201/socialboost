@@ -33,7 +33,7 @@ const RECENT_INSIGHTS = [
 
 export function InsightsSection() {
   return (
-    <section className="py-24 md:py-20 bg-white border-t border-gray-100">
+    <section className="py-20 md:py-24 bg-white border-t border-gray-100">
       <Container>
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 md:mb-20 gap-6">
           <div className="flex flex-col gap-4">

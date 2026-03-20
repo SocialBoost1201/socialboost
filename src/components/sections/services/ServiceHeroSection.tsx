@@ -132,7 +132,7 @@ export function ServiceHeroSection() {
         transition={{ delay: 1.5, duration: 1 }}
         className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4"
       >
-        <span className="text-[10px] font-black tracking-[0.3em] text-slate-300 uppercase rotate-0">Scroll</span>
+        <span className="text-xs font-black tracking-[0.3em] text-slate-300 uppercase rotate-0">Scroll</span>
         <div className="w-px h-16 bg-linear-to-b from-slate-200 to-transparent" />
       </motion.div>
     </section>

@@ -41,7 +41,7 @@ export function ServiceCTASection() {
               Get Started
             </motion.div>
 
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-10 leading-tight tracking-tighter">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white mb-10 leading-snug tracking-tight">
               プロジェクトの現在地から、<br className="hidden md:block" />
               <span className="text-brand-primary shadow-glow-sm">最適解</span>をご提案します。
             </h2>

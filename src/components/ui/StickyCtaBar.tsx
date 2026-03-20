@@ -46,7 +46,7 @@ export function StickyCtaBar() {
               className="flex-1 flex flex-col items-center justify-center py-2.5 bg-white text-brand-navy hover:bg-gray-50 transition-colors border-r border-gray-200"
             >
               <FileText className="w-5 h-5 mb-1 text-gray-500" />
-              <span className="text-[10px] font-bold">お役立ち資料</span>
+              <span className="text-xs font-bold">お役立ち資料</span>
             </Link>
             
             <Link
@@ -54,7 +54,7 @@ export function StickyCtaBar() {
               className="flex-1 flex flex-col items-center justify-center py-2.5 bg-brand-primary text-white hover:bg-brand-accent transition-colors"
             >
               <MessageCircle className="w-5 h-5 mb-1 text-white/90" />
-              <span className="text-[10px] font-bold">無料相談</span>
+              <span className="text-xs font-bold">無料相談</span>
             </Link>
           </div>
         </motion.div>

@@ -24,7 +24,7 @@ export function PricingCTASection() {
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] as any }}
           >
             <div className="section-badge mb-10 mx-auto bg-white/5 border-white/10 text-white">Let's Talk</div>
-            <h2 className="text-4xl md:text-6xl font-black text-white mb-10 leading-tight tracking-tighter">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white mb-10 leading-snug tracking-tight">
               未来への投資を、<br />
               <span className="text-brand-primary italic">最適化</span>する。
             </h2>
@@ -54,7 +54,7 @@ export function PricingCTASection() {
                     <Smartphone className="w-6 h-6 text-white" />
                   </div>
                   <div className="text-left">
-                    <div className="text-[10px] font-black text-white/40 tracking-widest uppercase mb-1">Explore</div>
+                    <div className="text-xs font-black text-white/40 tracking-widest uppercase mb-1">Explore</div>
                     <div className="text-white font-black text-lg">サービス一覧</div>
                   </div>
                 </div>
@@ -70,7 +70,7 @@ export function PricingCTASection() {
                     <Briefcase className="w-6 h-6 text-white" />
                   </div>
                   <div className="text-left">
-                    <div className="text-[10px] font-black text-white/40 tracking-widest uppercase mb-1">Showcase</div>
+                    <div className="text-xs font-black text-white/40 tracking-widest uppercase mb-1">Showcase</div>
                     <div className="text-white font-black text-lg">制作・開発実績</div>
                   </div>
                 </div>

@@ -86,7 +86,7 @@ export function PricingHeroSection() {
         transition={{ delay: 1, duration: 1 }}
         className="absolute bottom-12 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-3"
       >
-        <span className="text-[10px] font-bold text-white/30 tracking-widest uppercase">Select Plan</span>
+        <span className="text-xs font-bold text-white/30 tracking-widest uppercase">Select Plan</span>
         <div className="w-px h-10 bg-white/10 overflow-hidden">
           <motion.div
             animate={{ y: [0, 40] }}

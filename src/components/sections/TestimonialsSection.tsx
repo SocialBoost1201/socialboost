@@ -66,7 +66,7 @@ export async function TestimonialsSection() {
     : TESTIMONIALS;
 
   return (
-    <section className="py-24 bg-background-alt overflow-hidden relative">
+    <section className="py-20 md:py-24 bg-background-alt overflow-hidden relative">
       <div className="absolute inset-0 bg-mesh-gradient opacity-40 pointer-events-none" />
       
       <Container className="relative z-10">
@@ -103,7 +103,7 @@ export async function TestimonialsSection() {
                 
                 <div className="flex flex-wrap gap-2 mb-6">
                   {testimonial.tags.map((tag) => (
-                    <span key={tag} className="px-2.5 py-1 bg-brand-light text-brand-primary text-[10px] font-bold rounded-lg uppercase tracking-wider">
+                    <span key={tag} className="px-2.5 py-1 bg-brand-light text-brand-primary text-xs font-bold rounded-lg uppercase tracking-wider">
                       {tag}
                     </span>
                   ))}
@@ -123,7 +123,7 @@ export async function TestimonialsSection() {
                     <div className="font-bold text-brand-navy text-sm mb-0.5">
                       {testimonial.companyName}
                     </div>
-                    <div className="text-[11px] text-text-secondary font-medium">
+                    <div className="text-xs text-text-secondary font-medium">
                       {testimonial.role} <span className="mx-1 text-slate-300">/</span> {testimonial.clientName}
                     </div>
                   </div>

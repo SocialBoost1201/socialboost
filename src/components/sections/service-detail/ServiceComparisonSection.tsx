@@ -26,7 +26,7 @@ export function ServiceComparisonSection({ service }: { service: ServiceDetail }
             Comparison
           </motion.div>
 
-          <h2 className="text-4xl md:text-5xl font-black text-brand-navy mb-8 tracking-tighter leading-tight">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-brand-navy mb-8 tracking-tight leading-snug">
             圧倒的な、<span className="text-brand-primary">「質」と「スピード」</span>の違い。
           </h2>
           <p className="text-xl text-text-secondary font-bold leading-relaxed max-w-2xl mx-auto">
@@ -38,7 +38,7 @@ export function ServiceComparisonSection({ service }: { service: ServiceDetail }
         <div className="max-w-6xl mx-auto">
           {/* Header Row (Desktop) */}
           <div className="hidden lg:grid grid-cols-12 gap-8 px-10 mb-8 items-end">
-            <div className="col-span-4 text-[10px] font-black text-slate-400 uppercase tracking-[0.4em]">Feature</div>
+            <div className="col-span-4 text-xs font-black text-slate-400 uppercase tracking-[0.4em]">Feature</div>
             <div className="col-span-4 bg-brand-primary rounded-t-3xl pt-8 pb-4 px-8 text-center">
               <span className="text-xs font-black text-white uppercase tracking-widest shadow-glow-sm">SocialBoost Advantage</span>
             </div>
@@ -55,27 +55,34 @@ export function ServiceComparisonSection({ service }: { service: ServiceDetail }
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: idx * 0.05, ease: [0.16, 1, 0.3, 1] as any }}
-                className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 bg-slate-50 border border-slate-100 p-8 lg:p-0 rounded-4xl lg:rounded-none lg:bg-transparent lg:border-0 lg:border-b lg:border-slate-100"
+                className="bg-slate-50 border border-slate-100 p-6 md:p-8 rounded-3xl"
               >
-                {/* Feature Name */}
-                <div className="lg:col-span-4 flex items-center lg:py-10 lg:px-10">
-                  <h4 className="text-xl font-black text-brand-navy tracking-tight">{comp.feature}</h4>
-                </div>
+                {/* Feature Name - always full width */}
+                <h4 className="text-base md:text-xl font-black text-brand-navy tracking-tight mb-4">{comp.feature}</h4>
 
-                {/* SocialBoost */}
-                <div className="lg:col-span-4 bg-white lg:bg-brand-primary/5 border border-brand-primary/20 lg:border-x lg:border-t-0 lg:border-b-0 lg:border-brand-primary/10 p-8 lg:py-10 lg:px-12 relative flex items-start gap-4 shadow-sm lg:shadow-none">
-                  <div className="w-6 h-6 rounded-full bg-brand-primary flex items-center justify-center text-white shrink-0 mt-1 shadow-premium-glow">
-                    <CheckCircle2 className="w-4 h-4" strokeWidth={3} />
+                {/* SocialBoost vs Others - always 2 columns */}
+                <div className="grid grid-cols-2 gap-3 md:gap-6">
+                  {/* SocialBoost */}
+                  <div className="bg-white border border-brand-primary/20 p-4 md:p-6 rounded-2xl relative flex items-start gap-3 shadow-sm">
+                    <div className="w-5 h-5 rounded-full bg-brand-primary flex items-center justify-center text-white shrink-0 mt-0.5">
+                      <CheckCircle2 className="w-3 h-3" strokeWidth={3} />
+                    </div>
+                    <div>
+                      <div className="text-xs font-black text-brand-primary uppercase tracking-widest mb-1">SocialBoost</div>
+                      <p className="text-sm md:text-base text-brand-navy font-black leading-snug">{comp.socialBoost}</p>
+                    </div>
                   </div>
-                  <p className="text-lg text-brand-navy font-black leading-relaxed">{comp.socialBoost}</p>
-                </div>
 
-                {/* Others */}
-                <div className="lg:col-span-4 p-8 lg:py-10 lg:px-12 flex items-start gap-4 opacity-40">
-                  <div className="w-6 h-6 rounded-full bg-slate-200 flex items-center justify-center text-slate-400 shrink-0 mt-1">
-                    <XCircle className="w-4 h-4" strokeWidth={3} />
+                  {/* Others */}
+                  <div className="p-4 md:p-6 rounded-2xl flex items-start gap-3 opacity-50 bg-slate-100/50">
+                    <div className="w-5 h-5 rounded-full bg-slate-300 flex items-center justify-center text-slate-500 shrink-0 mt-0.5">
+                      <XCircle className="w-3 h-3" strokeWidth={3} />
+                    </div>
+                    <div>
+                      <div className="text-xs font-black text-slate-400 uppercase tracking-widest mb-1">一般的な会社</div>
+                      <p className="text-sm md:text-base text-text-secondary font-bold leading-snug">{comp.others}</p>
+                    </div>
                   </div>
-                  <p className="text-base text-text-secondary font-bold leading-relaxed">{comp.others}</p>
                 </div>
               </motion.div>
             ))}

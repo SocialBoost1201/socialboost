@@ -58,7 +58,7 @@ export function ServiceListSection() {
 
                 <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-12 lg:gap-20 items-center">
                   <div className="lg:col-span-4">
-                    <div className="text-[10px] font-black tracking-[0.4em] text-brand-primary mb-4 md:mb-8 border-b border-brand-primary/10 pb-3 md:pb-4 inline-block">
+                    <div className="text-xs font-black tracking-[0.4em] text-brand-primary mb-4 md:mb-8 border-b border-brand-primary/10 pb-3 md:pb-4 inline-block">
                       CATEGORY 0{index + 1}
                     </div>
                     <h4 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-brand-navy mb-4 md:mb-8 leading-tight group-hover:text-brand-primary transition-colors duration-500 tracking-tight">

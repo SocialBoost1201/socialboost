@@ -7,7 +7,7 @@ import { ArrowRight } from "lucide-react";
 
 export function PricingGuideSection() {
   return (
-    <section className="bg-background-alt py-24 md:py-20">
+    <section className="bg-background-alt py-20 md:py-24">
       <Container>
         <AnimatedSection>
           <SectionTitle en="PRICING" ja="料金の考え方" />

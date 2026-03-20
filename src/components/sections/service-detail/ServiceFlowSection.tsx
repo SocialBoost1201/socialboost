@@ -21,7 +21,7 @@ export function ServiceFlowSection({ service }: { service: ServiceDetail }) {
             Project Flow
           </motion.div>
 
-          <h2 className="text-4xl md:text-5xl font-black text-brand-navy mb-8 tracking-tighter leading-tight">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-brand-navy mb-8 tracking-tight leading-snug">
             スムーズな並走、<br className="md:hidden" /><span className="text-brand-primary">最短距離</span>での成果。
           </h2>
           <p className="text-xl text-text-secondary font-bold leading-relaxed max-w-2xl mx-auto">
@@ -88,7 +88,7 @@ function FlowStep({ item, index, total }: { item: any; index: number; total: num
         <div className="absolute top-0 right-0 w-48 h-48 bg-slate-50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-brand-primary/5 transition-colors duration-700" />
         
         <div className="relative z-10">
-          <div className="text-[10px] font-black text-slate-300 uppercase tracking-[0.4em] mb-4">Phase {index + 1}</div>
+          <div className="text-xs font-black text-slate-300 uppercase tracking-[0.4em] mb-4">Phase {index + 1}</div>
           <h3 className="text-2xl md:text-3xl font-black text-brand-navy mb-6 tracking-tight group-hover:text-brand-primary transition-colors duration-500">
             {item.title}
           </h3>

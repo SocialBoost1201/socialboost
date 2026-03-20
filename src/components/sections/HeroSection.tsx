@@ -4,13 +4,13 @@ import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Zap, Shield, Globe, Star, CheckCircle2 } from "lucide-react";
+import { ArrowRight, Star, CheckCircle2, ShieldCheck, Clock3, BadgeCheck } from "lucide-react";
 import { motion } from "framer-motion";
 
 const STATS = [
-  { value: "50+", label: "実績企業数", sub: "スタートアップ〜上場企業" },
-  { value: "98%", label: "リピート率", sub: "継続的なパートナーシップ" },
-  { value: "2w", label: "最短納期", sub: "戦略に基づいた超速開発" },
+  { value: "50+", label: "支援企業数", sub: "スタートアップから上場企業まで" },
+  { value: "2.5x", label: "最大成果事例", sub: "リード獲得数が2.5倍に改善" },
+  { value: "60h", label: "業務削減実績", sub: "月間工数を最大60時間削減" },
 ];
 
 const containerVariants = {
@@ -25,44 +25,42 @@ const containerVariants = {
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 40 },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 1,
-      ease: [0.16, 1, 0.3, 1] as any,
+      duration: 1.2,
+      ease: [0.16, 1, 0.3, 1] as const,
     },
   },
 };
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-svh flex items-center overflow-hidden bg-brand-navy py-20 lg:py-0">
+    <section className="relative min-h-svh flex items-center overflow-hidden bg-brand-navy pt-20 pb-18 md:pt-24 md:pb-22 lg:py-0">
       {/* ── Background Visual ── */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <Image
-          src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=2560"
-          alt="Business Strategy"
+          src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=2560"
+          alt="Premium Office Environment"
           fill
-          className="object-cover opacity-20 mix-blend-luminosity scale-105"
+          className="object-cover opacity-15 mix-blend-luminosity scale-105"
           priority
         />
-        {/* Advanced Mesh Gradient Overlay */}
-        <div className="absolute inset-0 bg-linear-to-b from-brand-navy/80 via-brand-navy/60 to-brand-navy/90" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(24,119,242,0.15)_0%,transparent_50%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(2,12,27,0.66),rgba(2,12,27,0.86)),radial-gradient(circle_at_24%_24%,rgba(24,119,242,0.16)_0%,transparent_52%),radial-gradient(circle_at_76%_52%,rgba(24,119,242,0.08)_0%,transparent_58%)]" />
       </div>
 
-      <Container className="relative z-10">
+      <Container className="relative z-10 max-w-7xl">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="flex flex-col lg:flex-row items-center gap-16 xl:gap-24"
+          className="flex flex-col lg:flex-row items-center gap-14 md:gap-16 lg:gap-20 xl:gap-28"
         >
           {/* ── Content Block ── */}
-          <div className="flex-1 text-center lg:text-left">
-            <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-full backdrop-blur-md mb-8">
+          <div className="flex-1 text-center lg:text-left lg:max-w-3xl">
+            <motion.div variants={itemVariants} className="inline-flex items-center gap-2.5 px-4 py-2 bg-white/5 border border-white/10 rounded-full backdrop-blur-md mb-7 md:mb-8">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-primary opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-primary"></span>
@@ -72,35 +70,53 @@ export function HeroSection() {
               </span>
             </motion.div>
 
-            <motion.h1 variants={itemVariants} style={{ color: 'white' }} className="text-4xl md:text-6xl xl:text-7xl font-extrabold tracking-tighter drop-shadow-lg leading-tight mb-8">
-              売上を、<span className="text-brand-primary">「資産」</span>へ。<br />
-              戦略から実装まで。<br className="hidden md:block" />
-              一貫したWebの勝ち筋。
+            <motion.h1
+              variants={itemVariants}
+              style={{ color: "white" }}
+              className="text-[clamp(2rem,4.8vw,4.4rem)] font-black tracking-tight drop-shadow-2xl leading-[1.16] mb-7 md:mb-9"
+            >
+              問い合わせ獲得・採用強化・業務効率化を、<br />
+              <span className="text-brand-primary">戦略設計から実装まで一気通貫</span>で支援。
             </motion.h1>
 
-            <motion.p variants={itemVariants} className="text-lg md:text-xl text-gray-200 leading-relaxed mb-12 max-w-2xl mx-auto lg:mx-0">
-              単なる「制作」で終わらせない。事業成長にフォーカスした戦略設計、<br className="hidden xl:block" />
-              そして、世界水準の技術力が、貴社のビジネスを加速させます。
+            <motion.p variants={itemVariants} className="text-base md:text-lg text-gray-200/95 leading-[1.85] mb-9 md:mb-11 max-w-3xl mx-auto lg:mx-0 font-medium">
+              コーポレートサイト制作、業務システム、AI活用まで。<br className="hidden lg:block" />
+              事業課題に直結する成果指標を起点に、意思決定しやすい設計でプロジェクトを推進します。
             </motion.p>
 
-            <motion.div variants={itemVariants} className="flex flex-wrap items-center justify-center lg:justify-start gap-4 mb-16">
-              <Button asChild size="lg" className="h-16 px-10">
-                <Link href="/contact" className="flex items-center gap-3">
-                  無料相談・お問い合わせ
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-stretch gap-3.5 mb-7 max-w-xl mx-auto lg:mx-0">
+              <Button asChild size="lg" className="w-full sm:flex-1 h-14 text-sm px-6 shadow-xl shadow-brand-primary/25">
+                <Link href="/contact" className="flex items-center justify-center gap-2">
+                  お問い合わせ・ご相談
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </Button>
-              <Button asChild variant="outline" size="lg" className="h-16 px-10 border-white/20 text-white hover:bg-white/5">
-                <Link href="/services">サービス詳細</Link>
+              <Button asChild variant="outline" size="lg" className="flex-none h-14 px-6 text-sm border-white/25 text-white hover:bg-white/10 whitespace-nowrap">
+                <Link href="/works">制作実績を見る</Link>
               </Button>
             </motion.div>
 
-            <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-3 gap-8 pt-8 border-t border-white/10">
+            <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-2.5 text-xs text-gray-300 font-semibold mb-9 md:mb-11">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-white/10 bg-white/5">
+                <Clock3 className="w-3.5 h-3.5 text-brand-light" />
+                最短当日返信
+              </span>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-white/10 bg-white/5">
+                <ShieldCheck className="w-3.5 h-3.5 text-brand-light" />
+                売り込みなし
+              </span>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-white/10 bg-white/5">
+                <BadgeCheck className="w-3.5 h-3.5 text-brand-light" />
+                秘密厳守で相談可能
+              </span>
+            </motion.div>
+
+            <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 pt-7 md:pt-8 border-t border-white/10">
               {STATS.map((s, i) => (
-                <div key={i} className="text-left">
-                  <div className="text-3xl font-black text-white tracking-tight mb-1">{s.value}</div>
-                  <div className="text-xs font-bold text-gray-300 uppercase tracking-wider mb-1">{s.label}</div>
-                  <div className="text-[10px] text-gray-400">{s.sub}</div>
+                <div key={i} className="text-left rounded-2xl border border-white/10 bg-white/5 px-4 py-5 md:px-5 md:py-6">
+                  <div className="text-2xl md:text-4xl font-black text-white tracking-tight mb-1.5">{s.value}</div>
+                  <div className="text-xs font-bold text-gray-300 uppercase tracking-[0.18em] mb-1.5">{s.label}</div>
+                  <div className="text-xs text-gray-400 font-medium leading-relaxed">{s.sub}</div>
                 </div>
               ))}
             </motion.div>
@@ -109,13 +125,11 @@ export function HeroSection() {
           {/* ── Visual Block ── */}
           <motion.div 
             variants={itemVariants}
-            className="w-full lg:w-[450px] space-y-6"
+            className="w-full lg:w-[500px] perspective-1000"
           >
             {/* Case Study Preview Card */}
-            <div className="group relative bg-white rounded-[2.5rem] p-8 shadow-2xl overflow-hidden hover-lift">
-              <div className="absolute top-0 left-0 w-full h-2 bg-brand-primary" />
-              
-              <div className="flex items-center justify-between mb-8">
+            <div className="group bg-white/95 backdrop-blur-2xl rounded-[2.5rem] border-t-4 border-brand-primary/80 p-8 md:p-10 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.3)] overflow-hidden hover-lift border border-white/20">
+              <div className="flex items-center justify-between mb-7">
                 <div className="w-12 h-12 rounded-2xl bg-brand-light flex items-center justify-center text-brand-primary group-hover:scale-110 transition-transform duration-500">
                   <Star className="w-6 h-6 fill-current" />
                 </div>
@@ -123,28 +137,28 @@ export function HeroSection() {
                   {[1, 2, 3].map((i) => (
                     <div key={i} className="w-8 h-8 rounded-full border-2 border-white bg-gray-200" />
                   ))}
-                  <div className="w-8 h-8 rounded-full border-2 border-white bg-brand-navy flex items-center justify-center text-[10px] font-bold text-white">
+                  <div className="w-8 h-8 rounded-full border-2 border-white bg-brand-navy flex items-center justify-center text-xs font-bold text-white">
                     +50
                   </div>
                 </div>
               </div>
 
               <h3 className="text-xl font-bold text-brand-navy mb-4 group-hover:text-brand-primary transition-colors">
-                成果に直結した<br />最新の事例を見る
+                成果数値まで確認できる<br />導入事例を見る
               </h3>
               
-              <p className="text-sm text-gray-500 leading-relaxed mb-8">
+              <p className="text-sm text-gray-500 leading-relaxed mb-7">
                 単なる公開がゴールではありません。コンバージョン率2.5倍、月間工数60時間削減など、実数値に基づいた「成功」のみを追求します。
               </p>
 
-              <Link href="/works" className="flex items-center justify-between p-4 bg-brand-light rounded-2xl text-brand-primary font-bold group/link">
+              <Link href="/works" className="flex items-center justify-between px-5 py-4 bg-brand-light rounded-2xl text-brand-primary font-bold group/link">
                 <span className="text-sm">導入事例ギャラリー</span>
                 <ArrowRight className="w-5 h-5 group-hover/link:translate-x-1 transition-transform" />
               </Link>
             </div>
 
             {/* Floating Trust Indicator */}
-            <div className="bg-brand-navy-light/50 backdrop-blur-xl border border-white/10 rounded-3xl p-6 flex items-center gap-5">
+            <div className="mt-5 bg-brand-navy-light/55 backdrop-blur-xl border border-white/10 rounded-3xl p-6 flex items-center gap-5">
               <div className="w-12 h-12 rounded-full bg-emerald-500/10 flex items-center justify-center">
                 <CheckCircle2 className="w-6 h-6 text-emerald-400" />
               </div>
@@ -164,7 +178,7 @@ export function HeroSection() {
         transition={{ delay: 1.5, duration: 1 }}
         className="absolute bottom-10 left-1/2 -translate-x-1/2 hidden lg:flex flex-col items-center gap-2"
       >
-        <span className="text-[10px] font-bold text-white/30 tracking-widest uppercase">Scroll</span>
+        <span className="text-xs font-bold text-white/30 tracking-widest uppercase">Scroll</span>
         <div className="w-px h-12 bg-white/20 relative overflow-hidden">
           <motion.div
             animate={{ y: [0, 48] }}

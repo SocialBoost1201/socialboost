@@ -21,7 +21,7 @@ export function ServiceFAQSection({ service }: { service: ServiceDetail }) {
             className="lg:w-1/3 sticky top-32"
           >
             <div className="section-badge mb-8 mx-0 bg-white border-slate-200 text-slate-400">Support</div>
-            <h2 className="text-4xl md:text-5xl font-black text-brand-navy mb-8 tracking-tighter leading-tight">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-brand-navy mb-8 tracking-tight leading-snug">
               よくあるご質問
             </h2>
             <p className="text-xl text-text-secondary font-bold leading-relaxed max-w-sm">

@@ -20,7 +20,7 @@ export function PricingPhilosophySection() {
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] as any }}
           >
             <div className="section-badge mb-10 mx-auto">Philosophy</div>
-            <h2 className="text-4xl md:text-6xl font-black text-brand-navy leading-tight tracking-tighter mb-12">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-brand-navy leading-snug tracking-tight mb-12">
               品質を犠牲にするのではなく、<br />
               <span className="text-brand-primary italic">構造</span>を変える。
             </h2>

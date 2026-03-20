@@ -132,7 +132,7 @@ export function PricingCasesSection() {
             >
               {/* Highlight badge */}
               {item.highlight && (
-                <div className="absolute top-0 right-0 bg-brand-primary text-white text-[10px] font-black tracking-[0.2em] px-8 py-3 uppercase rounded-bl-3xl shadow-lg shadow-brand-primary/20">
+                <div className="absolute top-0 right-0 bg-brand-primary text-white text-xs font-black tracking-[0.2em] px-8 py-3 uppercase rounded-bl-3xl shadow-lg shadow-brand-primary/20">
                   Most Popular
                 </div>
               )}
@@ -140,7 +140,7 @@ export function PricingCasesSection() {
               <div className="flex flex-col h-full">
                 <div className="mb-10">
                   <span className={cn(
-                    "inline-flex items-center px-4 py-1.5 text-[10px] font-black tracking-widest rounded-full mb-8 uppercase border",
+                    "inline-flex items-center px-4 py-1.5 text-xs font-black tracking-widest rounded-full mb-8 uppercase border",
                     item.highlight ? "bg-brand-primary/5 border-brand-primary/20 text-brand-primary" : "bg-slate-50 border-slate-100 text-slate-400"
                   )}>
                     {item.theme}
@@ -156,21 +156,21 @@ export function PricingCasesSection() {
                 {/* Price & Period Display */}
                 <div className="flex flex-col sm:flex-row sm:items-start gap-6 mb-10 pb-10 border-b border-slate-100">
                   <div className="flex-1">
-                    <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-3">Estimated Price</div>
+                    <div className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">Estimated Price</div>
                     <div className="flex items-baseline group-hover:text-brand-primary transition-colors duration-500">
                       <span className="text-3xl md:text-4xl lg:text-5xl font-black tracking-tighter text-brand-navy group-hover:text-brand-primary transition-colors">{item.price}</span>
                       <span className="text-base font-black text-slate-400 ml-2">{item.unit}</span>
                     </div>
                   </div>
                   <div className="sm:border-l sm:border-slate-100 sm:pl-6">
-                    <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-3">Est. Delivery</div>
+                    <div className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">Est. Delivery</div>
                     <div className="text-xl md:text-2xl font-black text-brand-navy tracking-tight">{item.period}</div>
                   </div>
                 </div>
 
                 {/* Scope List */}
                 <div className="mb-12 grow">
-                  <div className="text-[10px] font-extrabold text-slate-300 tracking-widest uppercase mb-6">Service Scope</div>
+                  <div className="text-xs font-extrabold text-slate-300 tracking-widest uppercase mb-6">Service Scope</div>
                   <ul className="grid grid-cols-1 sm:grid-cols-1 gap-4">
                     {item.includes.map((incl, i) => (
                       <li key={i} className="flex items-start gap-4">

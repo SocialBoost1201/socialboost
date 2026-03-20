@@ -71,7 +71,7 @@ export function ServiceSpeedComparison() {
           {/* Right Visual Comparison */}
           <div className="lg:col-span-7">
             <div className="bg-white rounded-4xl p-8 md:p-14 lg:p-16 border border-slate-100 shadow-premium relative">
-              <div className="flex justify-between items-end mb-12 text-[10px] font-black text-slate-400 uppercase tracking-[0.4em] px-2">
+              <div className="flex justify-between items-end mb-12 text-xs font-black text-slate-400 uppercase tracking-[0.4em] px-2">
                 <span>Scale / Type</span>
                 <span className="text-right">Timeline Comparison</span>
               </div>

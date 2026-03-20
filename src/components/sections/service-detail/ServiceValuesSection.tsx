@@ -25,7 +25,7 @@ export function ServiceValuesSection({ service }: { service: ServiceDetail }) {
             Core Values
           </motion.div>
 
-          <h2 className="text-4xl md:text-5xl font-black text-brand-navy mb-8 tracking-tighter leading-tight">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-brand-navy mb-8 tracking-tight leading-snug">
             SocialBoostが<br className="md:hidden" /><span className="text-brand-primary">選ばれる理由</span>
           </h2>
           <p className="text-xl text-text-secondary font-bold leading-relaxed max-w-2xl mx-auto">

@@ -20,9 +20,14 @@ export default function CompanyPage() {
   return (
     <PageLayout>
       {/* Page Hero */}
-      <section className="bg-brand-navy pt-32 pb-20 md:pt-40 md:pb-28 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(24,119,242,0.15)_0%,transparent_60%)]" />
-        <Container className="relative z-10 text-center">
+      <section
+        className="bg-brand-navy pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden"
+        style={{
+          backgroundImage:
+            "radial-gradient(circle_at_top_right,rgba(24,119,242,0.2)_0%,transparent_58%), radial-gradient(circle_at_bottom_left,rgba(24,119,242,0.08)_0%,transparent_52%)",
+        }}
+      >
+        <Container className="text-center">
           <AnimatedSection>
             <h1 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight mb-6">会社概要</h1>
             <p className="text-brand-light/90 max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
@@ -83,10 +88,10 @@ export default function CompanyPage() {
 
             {/* Access Map */}
             <h2 className="text-2xl font-bold text-text-primary mb-10 text-center">アクセス</h2>
-            <div className="rounded-2xl overflow-hidden shadow-sm border border-gray-100 bg-gray-50 aspect-video w-full relative">
+            <div className="rounded-2xl overflow-hidden shadow-sm border border-gray-100 bg-gray-50 aspect-video w-full">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3253.945899478496!2d139.52445857508602!3d35.396739747754316!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60185add2ffc6e59%3A0xe5a363a0bf028fd3!2z44CSMjQ0LTAwMDMg56We5aWI5bed55yM5qiq5rWc5biC5oi45aGa5Yy65oi45aGa55S677yU77yR77yX77yQ!5e0!3m2!1sja!2sjp!4v1700000000000!5m2!1sja!2sjp"
-                className="absolute inset-0 w-full h-full border-0"
+                className="w-full h-full border-0"
                 allowFullScreen={false}
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"

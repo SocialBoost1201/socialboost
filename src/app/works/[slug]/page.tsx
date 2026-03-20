@@ -8,7 +8,7 @@ import { WORKS_DATA, getWorkBySlug } from "@/lib/works";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { FileText, ArrowLeft, CheckCircle2, ArrowRight, ExternalLink, Quote, Clock, Users, Wrench, Building2 } from "lucide-react";
+import { ArrowLeft, CheckCircle2, ArrowRight, ExternalLink, Quote, Clock, Wrench, Building2 } from "lucide-react";
 import { Metadata } from "next";
 import { generateBreadcrumbJsonLd } from "@/lib/jsonld";
 import { WorkGallery } from "@/components/sections/WorkGallery";
@@ -65,7 +65,7 @@ async function getUnifiedWork(slug: string): Promise<UnifiedWorkDetail | null> {
         teamSize: ""
       };
     }
-  } catch (e) {
+  } catch {
     // NotFound in CMS, fallback to static
   }
 
@@ -135,12 +135,14 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
       <Breadcrumb items={[{ name: "制作実績", href: "/works" }, { name: work.title }]} />
       
       {/* ── Header Section ── */}
-      <section className="relative pt-24 pb-32 lg:pt-32 lg:pb-48 bg-brand-navy overflow-hidden">
-        {/* Background Visuals */}
-        <div className="absolute inset-0 z-0 bg-mesh-gradient opacity-30 pointer-events-none" />
-        <div className="absolute top-0 right-0 w-1/2 h-full bg-[radial-gradient(circle_at_100%_0%,rgba(24,119,242,0.15)_0%,transparent_70%)]" />
-        
-        <Container className="relative z-10">
+      <section
+        className="pt-24 pb-32 lg:pt-32 lg:pb-44 bg-brand-navy overflow-hidden"
+        style={{
+          backgroundImage:
+            "radial-gradient(circle_at_100%_0%, rgba(24,119,242,0.18) 0%, transparent 55%), radial-gradient(circle_at_0%_100%, rgba(24,119,242,0.08) 0%, transparent 52%)",
+        }}
+      >
+        <Container>
           <AnimatedSection className="max-w-5xl mx-auto text-center">
             <div className="flex justify-center gap-3 mb-8">
               <span className="section-badge bg-white/5 border-white/10 text-brand-light">Case Study</span>
@@ -167,7 +169,7 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
       </section>
 
       {/* ── Visual & KPI Section ── */}
-      <section className="relative -mt-24 lg:-mt-40 z-20 pb-20">
+      <section className="relative -mt-24 lg:-mt-36 z-20 pb-20 lg:pb-24">
         <Container>
           <div className="max-w-6xl mx-auto">
             {/* Main Image View */}
@@ -189,8 +191,8 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
               <AnimatedSection delay={0.4} className="mt-12 lg:mt-16">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   {work.kpis.map((kpi, i) => (
-                    <div key={i} className="group p-8 lg:p-10 bg-white rounded-3xl shadow-premium border border-slate-100 hover:-translate-y-2 transition-all duration-500">
-                      <div className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] mb-3 group-hover:text-brand-primary transition-colors">
+                    <div key={i} className="group h-full p-8 lg:p-10 bg-white rounded-3xl shadow-premium border border-slate-100 hover:-translate-y-2 transition-all duration-500">
+                      <div className="text-xs font-bold text-slate-400 uppercase tracking-[0.2em] mb-3 group-hover:text-brand-primary transition-colors">
                         {kpi.label}
                       </div>
                       <div className="text-4xl lg:text-5xl font-black text-brand-navy tracking-tighter">
@@ -207,10 +209,10 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
 
       <section className="py-20 lg:py-32">
         <Container>
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-20">
             
             {/* ── Main Narrative ── */}
-            <div className="lg:col-span-8 space-y-24">
+            <div className="lg:col-span-8 space-y-20 lg:space-y-24">
               
               {/* Overview */}
               <AnimatedSection>
@@ -226,10 +228,10 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
                 <div className="section-badge mb-6">Transformation</div>
                 <h2 className="text-3xl font-black text-brand-navy mb-10 tracking-tight">課題解決のストーリー</h2>
                 
-                <div className="space-y-6">
+                <div className="space-y-5 md:space-y-6">
                   {/* Before */}
-                  <div className="relative p-10 bg-slate-50 rounded-4xl border border-slate-200 overflow-hidden">
-                    <div className="absolute top-0 right-0 px-6 py-2 bg-slate-200 text-[10px] font-black uppercase tracking-widest text-slate-500 rounded-bl-2xl">
+                  <div className="p-8 md:p-10 bg-slate-50 rounded-4xl border border-slate-200">
+                    <div className="inline-flex items-center px-4 py-2 rounded-full bg-slate-200 text-xs font-black uppercase tracking-widest text-slate-600 mb-6">
                       Before / Issues
                     </div>
                     <ul className="space-y-5">
@@ -249,8 +251,8 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
                   </div>
 
                   {/* After */}
-                  <div className="relative p-10 bg-brand-navy rounded-4xl shadow-2xl overflow-hidden">
-                    <div className="absolute top-0 right-0 px-6 py-2 bg-brand-primary text-[10px] font-black uppercase tracking-widest text-white rounded-bl-2xl">
+                  <div className="p-8 md:p-10 bg-brand-navy rounded-4xl shadow-2xl">
+                    <div className="inline-flex items-center px-4 py-2 rounded-full bg-brand-primary text-xs font-black uppercase tracking-widest text-white mb-6">
                       After / Solutions
                     </div>
                     <ul className="space-y-5">
@@ -271,7 +273,7 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
                 <h2 className="text-3xl font-black text-brand-navy mb-10 tracking-tight">具体的な施策とアプローチ</h2>
                 <div className="grid gap-6">
                   {work.implementations.map((imp, i) => (
-                    <div key={i} className="group flex items-start gap-8 p-10 bg-white rounded-4xl border border-slate-100 hover:border-brand-primary/20 transition-all shadow-sm hover:shadow-premium">
+                    <div key={i} className="group flex items-start gap-6 md:gap-8 p-7 md:p-10 bg-white rounded-4xl border border-slate-100 hover:border-brand-primary/20 transition-all shadow-sm hover:shadow-premium">
                       <span className="text-5xl font-black text-slate-100 group-hover:text-brand-primary/10 transition-colors tracking-tighter shrink-0">{String(i + 1).padStart(2, '0')}</span>
                       <p className="text-lg text-text-secondary leading-relaxed font-bold group-hover:text-brand-navy transition-colors">{imp}</p>
                     </div>
@@ -282,10 +284,12 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
               {/* Testimonial */}
               {work.testimonial && (
                 <AnimatedSection>
-                  <div className="relative p-12 lg:p-16 bg-background-alt rounded-[3rem] overflow-hidden border border-slate-200">
-                    <Quote className="absolute top-10 left-10 w-16 h-16 text-brand-primary/5" />
-                    <blockquote className="relative z-10">
-                      <p className="text-2xl lg:text-3xl font-extrabold text-brand-navy leading-tight mb-12">
+                  <div className="p-10 md:p-12 lg:p-16 bg-background-alt rounded-[3rem] border border-slate-200">
+                    <div className="inline-flex w-14 h-14 items-center justify-center rounded-2xl bg-brand-primary/10 mb-8">
+                      <Quote className="w-8 h-8 text-brand-primary/40" />
+                    </div>
+                    <blockquote>
+                      <p className="text-2xl lg:text-3xl font-extrabold text-brand-navy leading-tight mb-10 md:mb-12">
                         &ldquo;{work.testimonial.comment}&rdquo;
                       </p>
                       <footer className="flex items-center gap-6">
@@ -318,14 +322,13 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
                 
                 {/* Site URL CTA */}
                 {work.site_url && (
-                  <div className="p-8 bg-brand-navy rounded-4xl shadow-2xl relative overflow-hidden group">
-                    <div className="absolute top-0 right-0 w-32 h-32 bg-brand-primary/10 rounded-full -translate-y-1/2 translate-x-1/2" />
-                    <h3 className="text-xs font-bold text-brand-primary/60 mb-6 uppercase tracking-widest relative z-10">Experience</h3>
+                  <div className="p-8 bg-brand-navy rounded-4xl shadow-2xl border border-white/10 group bg-[radial-gradient(circle_at_100%_0%,rgba(24,119,242,0.2)_0%,transparent_48%)]">
+                    <h3 className="text-xs font-bold text-brand-primary/70 mb-6 uppercase tracking-widest">Experience</h3>
                     <a 
                       href={work.site_url} 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="group flex flex-col gap-4 w-full relative z-10"
+                      className="group flex flex-col gap-4 w-full"
                     >
                       <span className="text-xl font-bold text-white group-hover:text-brand-primary transition-colors">公開サイトを見る</span>
                       <div className="h-14 w-full rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-white font-bold group-hover:bg-brand-primary group-hover:border-brand-primary transition-all">
@@ -338,7 +341,7 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
                 {/* Tech Stack */}
                 {work.techStack && work.techStack.length > 0 && (
                   <div className="p-8 bg-white rounded-4xl shadow-premium border border-slate-100">
-                    <h3 className="text-[10px] font-bold text-slate-400 mb-6 uppercase tracking-widest flex items-center gap-2">
+                    <h3 className="text-xs font-bold text-slate-400 mb-6 uppercase tracking-widest flex items-center gap-2">
                       <Wrench className="w-3 h-3 text-brand-primary" />
                       Technology Stack
                     </h3>
@@ -355,7 +358,7 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
                 {/* Scope */}
                 {work.scope.length > 0 && (
                   <div className="p-8 bg-slate-50 rounded-4xl border border-slate-200">
-                    <h3 className="text-[10px] font-bold text-slate-400 mb-6 uppercase tracking-widest">Project Scope</h3>
+                    <h3 className="text-xs font-bold text-slate-400 mb-6 uppercase tracking-widest">Project Scope</h3>
                     <div className="space-y-4">
                       {work.scope.map((s, i) => (
                         <div key={i} className="flex items-center gap-3 text-sm font-bold text-slate-600">
@@ -368,17 +371,17 @@ export default async function WorkDetailPage({ params }: { params: Promise<{ slu
                 )}
 
                 {/* Related CTA */}
-                <div className="p-8 bg-brand-light rounded-4xl text-center space-y-6">
-                  <h3 className="text-lg font-black text-brand-navy">類似プロジェクトの相談</h3>
+                <div className="p-8 md:p-9 bg-brand-light rounded-4xl text-center space-y-5 border border-brand-primary/10">
+                  <h3 className="text-lg md:text-xl font-black text-brand-navy">類似プロジェクトの相談</h3>
                   <p className="text-sm text-text-secondary leading-relaxed font-medium">
                     本実績のような課題をお持ちの方は、お気軽にご相談ください。戦略から伴走します。
                   </p>
-                  <Button asChild size="lg" className="w-full h-14 rounded-2xl">
-                    <Link href="/contact">無料で相談してみる</Link>
+                  <Button asChild size="lg" className="w-full h-14 rounded-2xl shadow-lg shadow-brand-primary/20">
+                    <Link href="/contact">この課題を無料で相談する</Link>
                   </Button>
                 </div>
 
-                <div className="text-center pt-8">
+                <div className="text-center pt-4">
                   <Link href="/works" className="inline-flex items-center text-sm font-bold text-slate-400 hover:text-brand-primary transition-colors">
                     <ArrowLeft className="mr-2 h-4 w-4" />
                     その他の事例を見る

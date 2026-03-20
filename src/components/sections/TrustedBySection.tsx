@@ -1,6 +1,6 @@
 import { Container } from "@/components/ui/Container";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
-import { Building2, Command, Hexagon, Component, Layers, Layout, ShieldHalf, TrendingUp, Users, Target } from "lucide-react";
+import { Command, Hexagon, Component, Layers, TrendingUp } from "lucide-react";
 
 const COMPANIES = [
   { 
@@ -35,20 +35,20 @@ const COMPANIES = [
 
 export function TrustedBySection() {
   return (
-    <section className="py-24 bg-white border-b border-gray-100 overflow-hidden">
+    <section className="py-20 md:py-24 bg-white border-b border-gray-100 overflow-hidden">
       <Container>
         <div className="flex flex-col lg:flex-row items-end justify-between mb-16 gap-8">
           <div className="max-w-2xl">
             <AnimatedSection>
               <div className="section-badge mb-4">Partnership Success</div>
-              <h2 className="text-3xl md:text-5xl font-extrabold tracking-tighter text-brand-navy leading-tight">
-                ビジネスの成長を加速させる、<br />
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold tracking-tight text-brand-navy leading-snug">
+                ビジネスの成長を加速させる、<br className="hidden lg:block" />
                 確かなパートナーシップ。
               </h2>
             </AnimatedSection>
           </div>
-          <AnimatedSection delay={0.1} className="hidden lg:block">
-            <p className="text-gray-500 font-medium text-right max-w-xs">
+          <AnimatedSection delay={0.1}>
+            <p className="text-gray-500 font-medium text-left lg:text-right max-w-xs">
               スタートアップから上場企業まで、<br />
               累計50社以上の事業推進をサポートしています。
             </p>
@@ -65,12 +65,12 @@ export function TrustedBySection() {
                     <div className="w-12 h-12 rounded-2xl bg-white flex items-center justify-center text-brand-primary shadow-sm group-hover:scale-110 transition-transform duration-500">
                       <Icon className="w-6 h-6" />
                     </div>
-                    <div className="px-3 py-1 rounded-full bg-emerald-50 text-[10px] font-bold text-emerald-600 flex items-center gap-1 border border-emerald-100">
+                    <div className="px-3 py-1 rounded-full bg-emerald-50 text-xs font-bold text-emerald-600 flex items-center gap-1 border border-emerald-100">
                       <TrendingUp className="w-3 h-3" />
                       {company.result}
                     </div>
                   </div>
-                  <div className="text-[10px] font-bold text-brand-primary/60 uppercase tracking-widest mb-2">
+                  <div className="text-xs font-bold text-brand-primary/60 uppercase tracking-widest mb-2">
                     {company.industry}
                   </div>
                   <h3 className="text-xl font-extrabold text-brand-navy mb-3">
@@ -98,6 +98,7 @@ export function TrustedBySection() {
             </div>
           </div>
         </AnimatedSection>
+
       </Container>
     </section>
   );

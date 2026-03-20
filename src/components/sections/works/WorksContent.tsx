@@ -138,10 +138,10 @@ export function WorksContent({ initialWorks }: WorksContentProps) {
                       <div className="absolute inset-0 bg-brand-navy/10 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                       <CardImage src={work.thumbnail} alt={work.title} className="group-hover:scale-110 transition-transform duration-700" />
                       <div className="absolute top-6 left-6 z-20 flex flex-wrap gap-2">
-                        <span className="px-3 py-1 bg-white/90 backdrop-blur-md rounded-full text-[10px] font-bold text-brand-navy shadow-sm">
+                        <span className="px-3 py-1 bg-white/90 backdrop-blur-md rounded-full text-xs font-bold text-brand-navy shadow-sm">
                           {work.category}
                         </span>
-                        <span className="px-3 py-1 bg-brand-navy/90 backdrop-blur-md rounded-full text-[10px] font-bold text-white shadow-sm">
+                        <span className="px-3 py-1 bg-brand-navy/90 backdrop-blur-md rounded-full text-xs font-bold text-white shadow-sm">
                           {work.industry}
                         </span>
                       </div>
@@ -158,7 +158,7 @@ export function WorksContent({ initialWorks }: WorksContentProps) {
                         <div className="grid grid-cols-2 gap-4 mb-8 bg-background-alt p-6 rounded-3xl border border-slate-100">
                           {work.kpis.slice(0, 2).map((kpi, index) => (
                             <div key={index} className="flex flex-col">
-                              <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">{kpi.label}</span>
+                              <span className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">{kpi.label}</span>
                               <span className="text-lg lg:text-xl font-black text-brand-navy tracking-tight">{kpi.value}</span>
                             </div>
                           ))}
@@ -172,7 +172,7 @@ export function WorksContent({ initialWorks }: WorksContentProps) {
                           </div>
                           <span className="text-sm font-bold text-brand-navy">プロジェクトの詳細を見る</span>
                         </div>
-                        <div className="text-[10px] font-bold text-slate-400 tracking-widest uppercase">View Case Study</div>
+                        <div className="text-xs font-bold text-slate-400 tracking-widest uppercase">View Case Study</div>
                       </div>
                     </div>
                   </article>

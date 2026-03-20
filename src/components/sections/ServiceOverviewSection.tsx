@@ -45,7 +45,7 @@ const services = [
 
 export function ServiceOverviewSection() {
   return (
-    <section className="bg-white py-24 md:py-20">
+    <section id="services" className="bg-white py-20 md:py-24">
       <Container>
         <AnimatedSection>
           <SectionTitle en="SERVICES" ja="提供サービス" />
@@ -55,22 +55,22 @@ export function ServiceOverviewSection() {
           {services.map((service, i) => (
             <AnimatedSection key={service.title} delay={i * 0.1}>
               <Link href={service.href} className="group block h-full">
-                <div className="flex h-full flex-col rounded-3xl bg-linear-to-br from-brand-primary/90 to-brand-navy p-10 shadow-lg ring-1 ring-white/10 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:ring-brand-light/50 relative overflow-hidden group-hover:from-brand-primary group-hover:to-[#121c32]">
+                <div className="flex h-full flex-col rounded-3xl bg-linear-to-br from-brand-primary to-brand-navy p-8 md:p-10 shadow-lg ring-1 ring-white/10 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:ring-brand-light/50 relative overflow-hidden group-hover:from-brand-primary/90 group-hover:to-[#121c32] text-center items-center">
                   {/* 背景の装飾エフェクト */}
                   <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-white/5 blur-3xl transition-transform duration-700 group-hover:scale-150"></div>
                   
-                  <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-white/10 text-white backdrop-blur-sm transition-colors group-hover:bg-white group-hover:text-brand-primary border border-white/20">
+                  <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-white/15 text-white backdrop-blur-sm transition-colors group-hover:bg-white group-hover:text-brand-primary border border-white/30">
                     <service.icon className="h-8 w-8" />
                   </div>
-                  <h3 className="mb-4 text-2xl font-bold text-white tracking-wide">
+                  <h3 className="mb-4 text-xl md:text-2xl font-bold text-white tracking-wide">
                     {service.title}
                   </h3>
-                  <p className="mb-8 text-base leading-relaxed text-white/90 flex-1">
+                  <p className="mb-8 text-sm md:text-base leading-relaxed text-white flex-1">
                     {service.description}
                   </p>
-                  <div className="mt-auto flex items-center text-sm font-bold text-white border-t border-white/20 pt-6 group-hover:text-brand-light transition-colors">
+                  <div className="mt-auto flex items-center text-sm font-bold text-white/80 border-t border-white/20 pt-5 group-hover:text-white transition-colors w-full justify-center gap-2">
                     詳細を見る
-                    <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-2" />
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-2" />
                   </div>
                 </div>
               </Link>

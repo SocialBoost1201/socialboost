@@ -2,37 +2,19 @@
 
 import { Container } from "@/components/ui/Container";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
-import { motion } from "framer-motion";
 
 export function VisionSection() {
   return (
-    <section className="py-24 md:py-20 bg-brand-primary text-white relative overflow-hidden">
+    <section className="py-20 md:py-24 bg-brand-primary text-white relative overflow-hidden">
       {/* Noise Texture Overlay for premium frosted feel */}
       <div 
         className="absolute inset-0 z-0 opacity-[0.04] pointer-events-none mix-blend-overlay"
         style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.85\' numOctaves=\'3\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\'/%3E%3C/svg%3E")' }}
       />
 
-      {/* Dynamic Aurora / Breathing Blobs */}
-      <motion.div 
-        animate={{ 
-          scale: [1, 1.05, 1],
-          x: ['25%', '28%', '25%'],
-          y: ['-25%', '-28%', '-25%']
-        }}
-        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-0 right-0 w-[800px] h-[800px] bg-white/5 rounded-full blur-[110px] pointer-events-none z-0" 
-      />
-      <motion.div 
-        animate={{ 
-          scale: [1, 1.1, 1],
-          x: ['-25%', '-20%', '-25%'],
-          y: ['25%', '20%', '25%'],
-          opacity: [0.4, 0.6, 0.4]
-        }}
-        transition={{ duration: 18, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-        className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-brand-accent/30 rounded-full blur-[120px] pointer-events-none z-0" 
-      />
+      {/* Static gradient lights for stable performance */}
+      <div className="absolute top-0 right-0 w-[680px] h-[680px] bg-white/6 rounded-full blur-[100px] pointer-events-none z-0" />
+      <div className="absolute bottom-0 left-0 w-[520px] h-[520px] bg-brand-accent/25 rounded-full blur-[100px] pointer-events-none z-0" />
       
       <Container className="relative z-10">
         <div className="max-w-4xl mx-auto text-center">
@@ -46,7 +28,7 @@ export function VisionSection() {
             </h2>
           </AnimatedSection>
           
-          <AnimatedSection delay={0.2} className="space-y-6 text-lg md:text-xl text-white/90 leading-relaxed font-medium">
+          <AnimatedSection delay={0.2} className="space-y-6 text-base md:text-lg text-white/92 leading-[1.9] font-medium">
             <p>
               私たちは単なるWeb制作会社ではありません。
             </p>

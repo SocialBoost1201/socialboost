@@ -31,7 +31,7 @@ export function ServiceRequirementsSection({ service }: { service: ServiceDetail
             className="lg:w-1/3 sticky top-32"
           >
             <div className="section-badge mb-8 mx-0 bg-white/5 border-white/10 text-white">Logic</div>
-            <h2 className="text-4xl md:text-5xl font-black text-white mb-8 tracking-tighter leading-tight">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-white mb-8 tracking-tight leading-snug">
               要件の可視化
             </h2>
             <p className="text-xl text-white/50 font-bold leading-relaxed max-w-sm">

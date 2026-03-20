@@ -77,7 +77,7 @@ export function ServiceProblemsSection() {
                 transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] as any }}
                 className="group relative bg-white/5 backdrop-blur-2xl border border-white/10 p-7 md:p-10 lg:p-12 rounded-3xl md:rounded-4xl hover:bg-white/10 hover:border-brand-primary/30 transition-all duration-700"
               >
-                <div className="text-[10px] font-black tracking-[0.4em] text-white/20 mb-8 border-b border-white/5 pb-4 group-hover:text-brand-primary/40 group-hover:border-brand-primary/20 transition-colors">
+                <div className="text-xs font-black tracking-[0.4em] text-white/20 mb-8 border-b border-white/5 pb-4 group-hover:text-brand-primary/40 group-hover:border-brand-primary/20 transition-colors">
                   PROBLEM {prob.num}
                 </div>
                 <h4 className="text-xl md:text-2xl font-black text-white mb-4 tracking-tight leading-snug pr-4">{prob.title}</h4>

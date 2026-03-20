@@ -26,7 +26,7 @@ export function ServiceBeforeAfterSection({ service }: { service: ServiceDetail 
             Transformation
           </motion.div>
 
-          <h2 className="text-4xl md:text-5xl font-black text-white mb-8 tracking-tighter leading-tight">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white mb-8 tracking-tight leading-snug">
             非効率を、<span className="text-brand-primary">圧倒的成果</span>へ。
           </h2>
           <p className="text-xl text-white/50 font-bold leading-relaxed max-w-2xl mx-auto">
@@ -47,7 +47,7 @@ export function ServiceBeforeAfterSection({ service }: { service: ServiceDetail 
           >
             <div className="mb-12 flex items-center justify-between">
               <h3 className="text-4xl font-black text-white/10 tracking-tighter uppercase">Before</h3>
-              <div className="px-5 py-2 rounded-full bg-red-500/10 text-red-400 text-[10px] font-black tracking-widest border border-red-500/20 uppercase">
+              <div className="px-5 py-2 rounded-full bg-red-500/10 text-red-400 text-xs font-black tracking-widest border border-red-500/20 uppercase">
                 Common Issues
               </div>
             </div>
@@ -92,7 +92,7 @@ export function ServiceBeforeAfterSection({ service }: { service: ServiceDetail 
             
             <div className="mb-12 flex items-center justify-between relative z-10">
               <h3 className="text-4xl font-black text-brand-primary tracking-tighter uppercase">After</h3>
-              <div className="px-5 py-2 rounded-full bg-brand-primary text-white text-[10px] font-black tracking-widest shadow-lg shadow-brand-primary/20 uppercase">
+              <div className="px-5 py-2 rounded-full bg-brand-primary text-white text-xs font-black tracking-widest shadow-lg shadow-brand-primary/20 uppercase">
                 Our Solution
               </div>
             </div>

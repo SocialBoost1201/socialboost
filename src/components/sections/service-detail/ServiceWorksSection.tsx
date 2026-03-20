@@ -37,7 +37,7 @@ export function ServiceWorksSection({ service }: { service: ServiceDetail }) {
 
           <div className="section-badge mb-8 mx-auto bg-white/5 border-white/10 text-white">Our Works</div>
 
-          <h2 className="text-4xl md:text-5xl font-black mb-8 tracking-tighter leading-tight">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-8 tracking-tight leading-snug">
             確かな成果と、共創の歩み
           </h2>
           <p className="text-xl text-white/50 font-bold leading-relaxed mb-16 max-w-2xl mx-auto">

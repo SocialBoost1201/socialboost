@@ -5,9 +5,15 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Container } from "@/components/ui/Container";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
-import { CheckCircle2, XCircle, Wallet, Clock, Star, Settings2, Sparkles } from "lucide-react";
+import { CheckCircle2, XCircle, Wallet, Clock, Star, Settings2, Sparkles, type LucideIcon } from "lucide-react";
 
 type ServiceCategory = "web" | "lp" | "system" | "app" | "ai";
+type ComparisonItem = {
+  icon: LucideIcon;
+  title: string;
+  competitor: { value: string; desc: string };
+  us: { value: string; desc: string };
+};
 
 const CATEGORIES: { id: ServiceCategory; label: string }[] = [
   { id: "web", label: "Web制作" },
@@ -17,7 +23,7 @@ const CATEGORIES: { id: ServiceCategory; label: string }[] = [
   { id: "ai", label: "AI導入支援" },
 ];
 
-const COMPARISON_DATA: Record<ServiceCategory, any> = {
+const COMPARISON_DATA: Record<ServiceCategory, { items: ComparisonItem[] }> = {
   web: {
     items: [
       {
@@ -164,7 +170,7 @@ export function PricingComparisonSection() {
   const [activeTab, setActiveTab] = useState<ServiceCategory>("web");
 
   return (
-    <section className="py-24 md:py-20 bg-gray-50 relative overflow-hidden">
+    <section id="pricing" className="py-20 md:py-24 bg-gray-50 relative overflow-hidden">
       {/* Dynamic Background Elements */}
       <div className="absolute top-0 right-0 -translate-y-1/4 translate-x-1/4 w-[800px] h-[800px] bg-brand-primary/4 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/4 w-[600px] h-[600px] bg-brand-accent/4 rounded-full blur-3xl pointer-events-none" />
@@ -177,7 +183,7 @@ export function PricingComparisonSection() {
             align="center"
             className="mb-6"
           />
-          <p className="text-text-secondary text-lg leading-relaxed">
+          <p className="text-text-secondary text-base md:text-lg leading-relaxed">
             単なる「安さ」ではなく、無駄な管理費のカットやモダン技術の活用により、
             <br className="hidden md:block" />
             <strong className="text-brand-primary font-bold">「相場より安く・早く・高品質」</strong>
@@ -242,7 +248,7 @@ export function PricingComparisonSection() {
                 transition={{ duration: 0.3 }}
                 className="space-y-4 md:space-y-6"
               >
-                {COMPARISON_DATA[activeTab].items.map((item: any, idx: number) => {
+                {COMPARISON_DATA[activeTab].items.map((item, idx) => {
                   const Icon = item.icon;
                   return (
                     <div
@@ -305,6 +311,7 @@ export function PricingComparisonSection() {
               </motion.div>
             </AnimatePresence>
           </div>
+
         </div>
       </Container>
     </section>

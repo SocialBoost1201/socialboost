@@ -34,7 +34,7 @@ export function PricingAnxietySection() {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as any }}
           >
             <div className="section-badge mb-8 mx-auto">Common Concerns</div>
-            <h2 className="text-4xl md:text-5xl font-black leading-tight text-brand-navy tracking-tight mb-8">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black leading-snug text-brand-navy tracking-tight mb-8">
               ご相談前の<span className="text-brand-primary">不安</span>を解消します
             </h2>
             <p className="text-lg text-text-secondary leading-relaxed font-bold max-w-2xl mx-auto">

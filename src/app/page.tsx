@@ -11,8 +11,7 @@ import { InsightsSection } from "@/components/sections/InsightsSection";
 import { PricingGuideSection } from "@/components/sections/PricingGuideSection";
 import { FlowSection } from "@/components/sections/FlowSection";
 import { FAQSection } from "@/components/sections/FAQSection";
-import { MiniAppSection } from "@/components/sections/MiniAppSection";
-import { CTASection } from "@/components/sections/CTASection";
+import { HomeFinalContactSection } from "@/components/sections/HomeFinalContactSection";
 import { PageLayout } from "@/components/layout/PageLayout";
 import {
   generateOrganizationJsonLd,
@@ -24,7 +23,7 @@ import {
 
 export default function Home() {
   return (
-    <PageLayout>
+    <PageLayout showStickyCtaBar={false}>
       {/* Organization: 会社情報 */}
       <script
         type="application/ld+json"
@@ -45,22 +44,29 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(generateFAQJsonLd(FAQ_DATA)) }}
       />
+      {/* 理解 */}
       <HeroSection />
-      <TrustedBySection />
       <ProblemSection />
       <VisionSection />
       <ServiceOverviewSection />
-      <WorksPreviewSection />
+
+      {/* 信頼 */}
+      <div id="works-preview">
+        <WorksPreviewSection showLeadCta={false} />
+      </div>
+      <TrustedBySection />
       <TestimonialsSection />
-      <PricingComparisonSection />
       <ReasonsSection />
-      <InsightsSection />
+
+      {/* 納得 */}
+      <PricingComparisonSection />
       <PricingGuideSection />
       <FlowSection />
       <FAQSection />
-      <MiniAppSection />
-      <CTASection />
+      <InsightsSection />
+
+      {/* 行動 */}
+      <HomeFinalContactSection />
     </PageLayout>
   );
 }
-

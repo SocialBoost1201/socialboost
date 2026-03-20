@@ -28,7 +28,7 @@ const PROBLEMS = [
 
 export function ProblemSection() {
   return (
-    <section className="bg-background-alt py-24 md:py-20 relative overflow-hidden">
+    <section id="issues" className="bg-background-alt py-20 md:py-24 relative overflow-hidden">
       {/* Background Decor */}
       <div className="absolute top-0 right-0 w-1/2 h-full bg-linear-to-b from-brand-light/30 to-transparent pointer-events-none" />
 
@@ -69,8 +69,8 @@ export function ProblemSection() {
           })}
         </div>
 
-        <AnimatedSection delay={0.4} className="mt-16 text-center flex flex-col items-center">
-          <div className="w-12 h-12 rounded-full bg-white shadow-sm border border-gray-100 flex items-center justify-center mb-8 animate-bounce">
+        <AnimatedSection delay={0.4} className="mt-14 md:mt-16 text-center flex flex-col items-center">
+          <div className="w-12 h-12 rounded-full bg-white shadow-sm border border-gray-100 flex items-center justify-center mb-8">
             <ArrowDown className="w-5 h-5 text-brand-primary" />
           </div>
           

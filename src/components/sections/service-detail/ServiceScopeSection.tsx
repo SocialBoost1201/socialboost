@@ -24,7 +24,7 @@ export function ServiceScopeSection({ service }: { service: ServiceDetail }) {
             className="lg:w-1/3 sticky top-32"
           >
             <div className="section-badge mb-8 mx-0 bg-white border-slate-200 text-slate-400">Coverage</div>
-            <h2 className="text-4xl md:text-5xl font-black text-brand-navy mb-8 tracking-tighter leading-tight">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-brand-navy mb-8 tracking-tight leading-snug">
               提供内容・<br className="hidden md:block" />
               対応範囲
             </h2>

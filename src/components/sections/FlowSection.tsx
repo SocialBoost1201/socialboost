@@ -12,7 +12,7 @@ const flowSteps = [
 
 export function FlowSection() {
   return (
-    <section className="bg-white py-24 md:py-20">
+    <section id="flow" className="bg-white py-20 md:py-24">
       <Container>
         <AnimatedSection>
           <SectionTitle en="WORK FLOW" ja="進行フロー" />
@@ -44,6 +44,7 @@ export function FlowSection() {
             ))}
           </div>
         </div>
+
       </Container>
     </section>
   );

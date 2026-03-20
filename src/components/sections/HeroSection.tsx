@@ -75,9 +75,9 @@ export function HeroSection() {
               style={{ color: "white" }}
               className="max-w-[16ch] md:max-w-[18ch] mx-auto lg:mx-0 text-[clamp(2rem,3.9vw,3.7rem)] font-extrabold tracking-[-0.01em] drop-shadow-2xl leading-[1.24] mb-6 md:mb-8"
             >
-              <span className="text-white">問い合わせ獲得・採用強化・業務効率化を、</span>
+              <span className="text-white">成果につながるWeb戦略を、</span>
               <span className="block mt-1 md:mt-2">
-                <span className="text-brand-primary">戦略設計から実装まで</span>
+                <span className="text-brand-primary">設計から実装まで</span>
                 <span className="text-white">一気通貫で支援。</span>
               </span>
             </motion.h1>

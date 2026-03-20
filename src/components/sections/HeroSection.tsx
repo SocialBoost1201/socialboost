@@ -4,7 +4,7 @@ import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Star, CheckCircle2, ShieldCheck, Clock3, BadgeCheck } from "lucide-react";
+import { ArrowRight, ShieldCheck, Clock3, BadgeCheck } from "lucide-react";
 import { motion } from "framer-motion";
 
 const STATS = [
@@ -56,10 +56,10 @@ export function HeroSection() {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="flex flex-col lg:flex-row items-center gap-12 md:gap-14 lg:gap-16 xl:gap-20"
+          className="flex flex-col items-center"
         >
           {/* ── Content Block ── */}
-          <div className="flex-1 text-center lg:text-left lg:max-w-[42rem]">
+          <div className="w-full text-center lg:text-left lg:max-w-4xl">
             <motion.div variants={itemVariants} className="inline-flex items-center gap-2.5 px-4 py-2 bg-white/5 border border-white/10 rounded-full backdrop-blur-md mb-7 md:mb-8">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-primary opacity-75"></span>
@@ -77,8 +77,8 @@ export function HeroSection() {
             >
               <span className="text-white">成果につながるWeb戦略を、</span>
               <span className="block mt-1 md:mt-2">
-                <span className="text-brand-primary">設計から実装まで</span>
-                <span className="text-white">一気通貫で支援。</span>
+                <span className="text-brand-primary whitespace-nowrap">設計から実装まで</span>
+                <span className="text-white whitespace-nowrap">一気通貫で支援。</span>
               </span>
             </motion.h1>
 
@@ -124,53 +124,6 @@ export function HeroSection() {
               ))}
             </motion.div>
           </div>
-
-          {/* ── Visual Block ── */}
-          <motion.div 
-            variants={itemVariants}
-            className="w-full lg:w-[480px] xl:w-[500px] perspective-1000"
-          >
-            {/* Case Study Preview Card */}
-            <div className="group bg-white/95 backdrop-blur-2xl rounded-[2.5rem] border-t-4 border-brand-primary/80 p-8 md:p-10 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.3)] overflow-hidden hover-lift border border-white/20">
-              <div className="flex items-center justify-between mb-7">
-                <div className="w-12 h-12 rounded-2xl bg-brand-light flex items-center justify-center text-brand-primary group-hover:scale-110 transition-transform duration-500">
-                  <Star className="w-6 h-6 fill-current" />
-                </div>
-                <div className="flex -space-x-2">
-                  {[1, 2, 3].map((i) => (
-                    <div key={i} className="w-8 h-8 rounded-full border-2 border-white bg-gray-200" />
-                  ))}
-                  <div className="w-8 h-8 rounded-full border-2 border-white bg-brand-navy flex items-center justify-center text-xs font-bold text-white">
-                    +50
-                  </div>
-                </div>
-              </div>
-
-              <h3 className="text-xl font-bold text-brand-navy mb-4 group-hover:text-brand-primary transition-colors">
-                成果数値まで確認できる<br />導入事例を見る
-              </h3>
-              
-              <p className="text-sm text-gray-500 leading-relaxed mb-7">
-                単なる公開がゴールではありません。コンバージョン率2.5倍、月間工数60時間削減など、実数値に基づいた「成功」のみを追求します。
-              </p>
-
-              <Link href="/works" className="flex items-center justify-between px-5 py-4 bg-brand-light rounded-2xl text-brand-primary font-bold group/link">
-                <span className="text-sm">導入事例ギャラリー</span>
-                <ArrowRight className="w-5 h-5 group-hover/link:translate-x-1 transition-transform" />
-              </Link>
-            </div>
-
-            {/* Floating Trust Indicator */}
-            <div className="mt-5 bg-brand-navy-light/55 backdrop-blur-xl border border-white/10 rounded-3xl p-6 flex items-center gap-5">
-              <div className="w-12 h-12 rounded-full bg-emerald-500/10 flex items-center justify-center">
-                <CheckCircle2 className="w-6 h-6 text-emerald-400" />
-              </div>
-              <div>
-                <div className="text-white font-bold text-sm">Security & Privacy</div>
-                <div className="text-gray-400 text-xs">エンタープライズ基準の堅牢な開発</div>
-              </div>
-            </div>
-          </motion.div>
         </motion.div>
       </Container>
       

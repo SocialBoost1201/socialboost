@@ -56,10 +56,10 @@ export function HeroSection() {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="flex flex-col lg:flex-row items-center gap-14 md:gap-16 lg:gap-20 xl:gap-28"
+          className="flex flex-col lg:flex-row items-center gap-12 md:gap-14 lg:gap-16 xl:gap-20"
         >
           {/* ── Content Block ── */}
-          <div className="flex-1 text-center lg:text-left lg:max-w-3xl">
+          <div className="flex-1 text-center lg:text-left lg:max-w-[42rem]">
             <motion.div variants={itemVariants} className="inline-flex items-center gap-2.5 px-4 py-2 bg-white/5 border border-white/10 rounded-full backdrop-blur-md mb-7 md:mb-8">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-primary opacity-75"></span>
@@ -73,10 +73,13 @@ export function HeroSection() {
             <motion.h1
               variants={itemVariants}
               style={{ color: "white" }}
-              className="text-[clamp(2rem,4.8vw,4.4rem)] font-black tracking-tight drop-shadow-2xl leading-[1.16] mb-7 md:mb-9"
+              className="max-w-[16ch] md:max-w-[18ch] mx-auto lg:mx-0 text-[clamp(2rem,3.9vw,3.7rem)] font-extrabold tracking-[-0.01em] drop-shadow-2xl leading-[1.24] mb-6 md:mb-8"
             >
-              問い合わせ獲得・採用強化・業務効率化を、<br />
-              <span className="text-brand-primary">戦略設計から実装まで一気通貫</span>で支援。
+              <span className="text-white">問い合わせ獲得・採用強化・業務効率化を、</span>
+              <span className="block mt-1 md:mt-2">
+                <span className="text-brand-primary">戦略設計から実装まで</span>
+                <span className="text-white">一気通貫で支援。</span>
+              </span>
             </motion.h1>
 
             <motion.p variants={itemVariants} className="text-base md:text-lg text-gray-200/95 leading-[1.85] mb-9 md:mb-11 max-w-3xl mx-auto lg:mx-0 font-medium">
@@ -125,7 +128,7 @@ export function HeroSection() {
           {/* ── Visual Block ── */}
           <motion.div 
             variants={itemVariants}
-            className="w-full lg:w-[500px] perspective-1000"
+            className="w-full lg:w-[480px] xl:w-[500px] perspective-1000"
           >
             {/* Case Study Preview Card */}
             <div className="group bg-white/95 backdrop-blur-2xl rounded-[2.5rem] border-t-4 border-brand-primary/80 p-8 md:p-10 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.3)] overflow-hidden hover-lift border border-white/20">

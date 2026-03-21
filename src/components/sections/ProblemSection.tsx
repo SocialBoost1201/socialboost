@@ -28,15 +28,22 @@ const PROBLEMS = [
 
 export function ProblemSection() {
   return (
-    <section id="issues" className="bg-background-alt py-20 md:py-24 relative overflow-hidden">
+    <section id="issues" className="bg-background-alt pt-16 pb-20 md:pt-20 md:pb-24 relative overflow-hidden">
+      {/* Hero connection bridge */}
+      <div className="absolute inset-x-0 top-0 h-24 bg-[linear-gradient(to_bottom,rgba(8,17,26,0.2),rgba(8,17,26,0))] pointer-events-none" />
+
       {/* Background Decor */}
-      <div className="absolute top-0 right-0 w-1/2 h-full bg-linear-to-b from-brand-light/30 to-transparent pointer-events-none" />
+      <div className="absolute top-0 right-0 w-1/2 h-full bg-linear-to-b from-brand-light/18 to-transparent pointer-events-none" />
 
       <Container className="relative z-10">
-        <div className="text-center max-w-2xl mx-auto mb-16">
+        <div className="text-center max-w-2xl mx-auto mb-12 md:mb-14">
           <AnimatedSection>
-            <SectionTitle en="ISSUES" ja="こんな課題はありませんか？" className="mb-6" />
-            <p className="text-text-secondary leading-relaxed">
+            <SectionTitle
+              en="ISSUES"
+              ja="こんな課題はありませんか？"
+              className="mb-5 md:mb-6 [&>h2]:text-[clamp(2rem,4vw,3.5rem)] [&>h2]:leading-[1.12] [&>h2]:tracking-[-0.02em]"
+            />
+            <p className="text-[clamp(0.95rem,1.6vw,1.125rem)] text-text-secondary leading-relaxed [word-break:auto-phrase] [overflow-wrap:break-word]">
               多くのBtoB企業が、デジタル化やWebマーケティングにおいて共通の悩みを抱えています。
             </p>
           </AnimatedSection>

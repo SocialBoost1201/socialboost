@@ -23,6 +23,8 @@ const CATEGORIES: { id: ServiceCategory; label: string }[] = [
   { id: "ai", label: "AI導入支援" },
 ];
 
+const COMPARISON_PERSPECTIVES = ["価格の妥当性", "対応範囲", "立ち上げ速度", "公開後の改善余地"];
+
 const COMPARISON_DATA: Record<ServiceCategory, { items: ComparisonItem[] }> = {
   web: {
     items: [
@@ -170,35 +172,48 @@ export function PricingComparisonSection() {
   const [activeTab, setActiveTab] = useState<ServiceCategory>("web");
 
   return (
-    <section id="pricing" className="py-20 md:py-24 bg-gray-50 relative overflow-hidden">
+    <section
+      id="pricing"
+      className="relative overflow-hidden bg-[linear-gradient(to_bottom,#ffffff_0%,#f8fafc_18%,#f8fafc_100%)] pt-16 pb-20 md:pt-20 md:pb-24"
+    >
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-20 bg-[linear-gradient(to_bottom,rgba(8,17,26,0.07),rgba(8,17,26,0)_78%)]" />
       {/* Dynamic Background Elements */}
       <div className="absolute top-0 right-0 -translate-y-1/4 translate-x-1/4 w-[800px] h-[800px] bg-brand-primary/4 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/4 w-[600px] h-[600px] bg-brand-accent/4 rounded-full blur-3xl pointer-events-none" />
       
       <Container className="relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-4xl mx-auto mb-14 md:mb-16">
           <SectionTitle
-            ja="なぜ、圧倒的に合理的か"
-            en="COMPETITIVE ADVANTAGE"
+            ja="価格の比較より、成果の比較。"
+            en="PRICING COMPARISON"
             align="center"
-            className="mb-6"
+            className="mb-5 md:mb-6 [&>h2]:text-[clamp(2rem,3.3vw,3.4rem)] [&>h2]:leading-[1.12] [&>h2]:tracking-[-0.02em]"
           />
-          <p className="text-text-secondary text-base md:text-lg leading-relaxed">
-            単なる「安さ」ではなく、無駄な管理費のカットやモダン技術の活用により、
-            <br className="hidden md:block" />
-            <strong className="text-brand-primary font-bold">「相場より安く・早く・高品質」</strong>
-            な価値を生み出す根拠を領域別にご紹介します。
+          <p className="mx-auto max-w-3xl text-[clamp(0.98rem,1.35vw,1.08rem)] text-text-secondary leading-relaxed [text-wrap:balance] [word-break:auto-phrase] [overflow-wrap:break-word]">
+            価格だけを比べると、判断を誤ることがあります。SocialBoostは
+            <strong className="mx-1 text-brand-primary font-semibold">対応範囲・スピード・改善余地</strong>
+            まで含め、総コストで納得できる設計を行います。
           </p>
+          <div className="mt-5 flex flex-wrap items-center justify-center gap-2 md:mt-6">
+            {COMPARISON_PERSPECTIVES.map((perspective) => (
+              <span
+                key={perspective}
+                className="rounded-full border border-gray-200 bg-white/90 px-3.5 py-1.5 text-[0.7rem] md:text-xs font-semibold text-text-secondary tracking-[0.03em]"
+              >
+                {perspective}
+              </span>
+            ))}
+          </div>
         </div>
 
         {/* Tab Navigation */}
-        <AnimatedSection className="mb-12">
+        <AnimatedSection className="mb-10 md:mb-12">
           <div className="flex flex-wrap justify-center gap-2 p-1 bg-white/50 backdrop-blur-md rounded-2xl md:rounded-full border border-gray-200/50 shadow-sm max-w-4xl mx-auto">
             {CATEGORIES.map((cat) => (
               <button
                 key={cat.id}
                 onClick={() => setActiveTab(cat.id)}
-                className={`relative px-6 py-3 text-sm md:text-base font-bold rounded-xl md:rounded-full transition-all duration-300 ${
+                className={`relative min-h-11 px-4 md:px-6 py-2.5 md:py-3 text-sm md:text-base font-semibold rounded-xl md:rounded-full transition-all duration-300 ${
                   activeTab === cat.id
                     ? "text-white shadow-md"
                     : "text-text-secondary hover:text-brand-primary hover:bg-gray-100"
@@ -221,10 +236,14 @@ export function PricingComparisonSection() {
         <div className="max-w-5xl mx-auto">
           {/* Table Header (Desktop only) */}
           <div className="hidden md:grid grid-cols-12 gap-6 mb-6 px-6">
-            <div className="col-span-3"></div>
+            <div className="col-span-3 text-center">
+              <span className="inline-block px-4 py-1.5 bg-white text-gray-500 rounded-full text-sm font-bold tracking-wide border border-gray-200">
+                比較軸
+              </span>
+            </div>
             <div className="col-span-4 text-center">
               <span className="inline-block px-4 py-1.5 bg-gray-200 text-gray-500 rounded-full text-sm font-bold tracking-wide">
-                一般的な開発・制作会社
+                他社・一般的な制作/開発会社
               </span>
             </div>
             <div className="col-span-5 text-center relative">
@@ -253,32 +272,35 @@ export function PricingComparisonSection() {
                   return (
                     <div
                       key={idx}
-                      className="grid grid-cols-1 md:grid-cols-12 gap-0 md:gap-6 bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden group hover:border-brand-primary/30 transition-colors"
+                      className="grid grid-cols-1 md:grid-cols-12 gap-0 md:gap-6 rounded-[1.75rem] border border-gray-200/70 bg-white shadow-[0_12px_28px_rgba(8,17,26,0.06)] overflow-hidden group transition-all duration-300 hover:border-brand-primary/30 hover:shadow-[0_18px_36px_rgba(8,17,26,0.1)] md:min-h-[12.25rem]"
                     >
                       {/* Metric Name */}
-                      <div className="col-span-3 p-6 md:p-8 flex items-center gap-4 bg-gray-50/50 md:bg-transparent border-b md:border-b-0 border-gray-100">
+                      <div className="col-span-3 p-5 md:p-7 flex items-center gap-4 bg-gray-50/55 md:bg-transparent border-b md:border-b-0 border-gray-100">
                         <div className="w-12 h-12 rounded-full bg-brand-light flex items-center justify-center text-brand-primary shrink-0 transition-transform group-hover:scale-110 duration-300">
                           <Icon className="w-5 h-5" />
                         </div>
-                        <h3 className="font-bold text-text-primary text-lg md:text-base leading-tight">
-                          {item.title}
-                        </h3>
+                        <div>
+                          <div className="md:hidden mb-1 text-[0.68rem] font-semibold text-gray-500 tracking-[0.08em]">比較軸</div>
+                          <h3 className="font-bold text-text-primary text-base md:text-[1.04rem] leading-snug [word-break:auto-phrase] [overflow-wrap:break-word]">
+                            {item.title}
+                          </h3>
+                        </div>
                       </div>
 
                       {/* Mobile Header for Competitor */}
-                      <div className="md:hidden px-6 pt-6 pb-2 text-xs font-bold text-gray-400 uppercase tracking-widest">
-                        一般的なシステム会社
+                      <div className="md:hidden px-6 pt-5 pb-2 text-[0.68rem] font-semibold text-gray-500 tracking-[0.08em]">
+                        他社・一般的な制作/開発会社
                       </div>
 
                       {/* Competitor Column */}
-                      <div className="col-span-4 p-6 md:p-8 flex flex-col justify-center border-b md:border-b-0 md:border-r border-gray-100 bg-gray-50/30">
-                        <div className="flex items-start gap-3 opacity-60">
+                      <div className="col-span-4 p-6 md:p-8 flex flex-col justify-center border-b md:border-b-0 md:border-r border-gray-100 bg-gray-50/35">
+                        <div className="flex items-start gap-3.5">
                           <XCircle className="w-5 h-5 text-gray-400 shrink-0 mt-0.5" />
                           <div>
-                            <div className="font-bold text-gray-500 mb-1 line-through decoration-gray-300">
+                            <div className="mb-1 font-semibold text-gray-700 text-[0.95rem] md:text-base leading-snug [word-break:auto-phrase] [overflow-wrap:break-word]">
                               {item.competitor.value}
                             </div>
-                            <p className="text-sm text-gray-500 leading-relaxed">
+                            <p className="text-sm text-gray-500 leading-relaxed [word-break:auto-phrase] [overflow-wrap:break-word]">
                               {item.competitor.desc}
                             </p>
                           </div>
@@ -286,20 +308,20 @@ export function PricingComparisonSection() {
                       </div>
 
                       {/* Mobile Header for SocialBoost */}
-                      <div className="md:hidden px-6 pt-6 pb-2 text-xs font-bold text-brand-primary uppercase tracking-widest flex items-center gap-1.5">
+                      <div className="md:hidden px-6 pt-5 pb-2 text-[0.68rem] font-semibold text-brand-primary tracking-[0.08em] flex items-center gap-1.5">
                         <Sparkles className="w-3.5 h-3.5" />
                         SocialBoost
                       </div>
 
                       {/* SocialBoost Column */}
-                      <div className="col-span-5 p-4 md:p-8 flex flex-col justify-center relative bg-blue-50/50 border-t border-brand-primary/10 md:border-t-0">
+                      <div className="col-span-5 p-6 md:p-8 flex flex-col justify-center relative bg-blue-50/55 border-t border-brand-primary/10 md:border-t-0">
                         <div className="flex items-start gap-3">
                           <CheckCircle2 className="w-5 h-5 text-brand-primary shrink-0 mt-0.5" />
                           <div>
-                            <div className="font-extrabold text-brand-primary text-base md:text-xl mb-1.5">
+                            <div className="font-bold text-brand-primary text-[1rem] md:text-[1.12rem] leading-snug mb-1.5 [word-break:auto-phrase] [overflow-wrap:break-word]">
                               {item.us.value}
                             </div>
-                            <p className="text-sm text-text-secondary leading-relaxed font-medium">
+                            <p className="text-sm text-text-secondary leading-relaxed font-medium [word-break:auto-phrase] [overflow-wrap:break-word]">
                               {item.us.desc}
                             </p>
                           </div>

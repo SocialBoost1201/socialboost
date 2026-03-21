@@ -38,7 +38,7 @@ const itemVariants = {
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-svh flex items-center overflow-hidden bg-brand-navy pt-20 pb-18 md:pt-24 md:pb-22 lg:py-0">
+    <section className="relative min-h-svh flex items-center overflow-hidden bg-brand-navy pt-18 pb-[calc(4.5rem+env(safe-area-inset-bottom))] md:pt-24 md:pb-22 lg:py-0">
       {/* ── Background Visual ── */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <Image
@@ -73,28 +73,26 @@ export function HeroSection() {
             <motion.h1
               variants={itemVariants}
               style={{ color: "white" }}
-              className="max-w-[16ch] md:max-w-[18ch] mx-auto lg:mx-0 text-[clamp(2rem,3.9vw,3.7rem)] font-extrabold tracking-[-0.01em] drop-shadow-2xl leading-[1.24] mb-6 md:mb-8"
+              className="max-w-[15ch] md:max-w-[18ch] mx-auto lg:mx-0 text-[clamp(1.9rem,8.4vw,3.7rem)] font-extrabold tracking-[-0.01em] drop-shadow-2xl leading-[1.22] mb-5 md:mb-8 text-balance [word-break:auto-phrase] [overflow-wrap:break-word]"
             >
-              <span className="text-white">成果につながるWeb戦略を、</span>
+              <span className="text-white">Webと業務改善を</span>
               <span className="block mt-1 md:mt-2">
-                <span className="text-brand-primary whitespace-nowrap">設計から実装まで</span>
-                <span className="text-white whitespace-nowrap">一気通貫で支援。</span>
+                <span className="text-brand-primary">ひとつのチームで。</span>
               </span>
             </motion.h1>
 
-            <motion.p variants={itemVariants} className="text-base md:text-lg text-gray-200/95 leading-[1.85] mb-9 md:mb-11 max-w-3xl mx-auto lg:mx-0 font-medium">
-              コーポレートサイト制作、業務システム、AI活用まで。<br className="hidden lg:block" />
-              事業課題に直結する成果指標を起点に、意思決定しやすい設計でプロジェクトを推進します。
+            <motion.p variants={itemVariants} className="text-[clamp(0.98rem,3.8vw,1.125rem)] text-gray-200/95 leading-[1.82] mb-8 md:mb-11 max-w-3xl mx-auto lg:mx-0 font-medium [word-break:auto-phrase] [overflow-wrap:break-word]">
+              Web制作・業務システム・AI導入を一体で支援。課題整理から運用まで伴走します。
             </motion.p>
 
             <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-stretch gap-3.5 mb-7 max-w-xl mx-auto lg:mx-0">
-              <Button asChild size="lg" className="w-full sm:flex-1 h-14 text-sm px-6 shadow-xl shadow-brand-primary/25">
+              <Button asChild size="lg" className="w-full sm:flex-1 h-[3.5rem] text-sm px-6 shadow-xl shadow-brand-primary/25">
                 <Link href="/contact" className="flex items-center justify-center gap-2">
                   お問い合わせ・ご相談
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </Button>
-              <Button asChild variant="outline" size="lg" className="flex-none h-14 px-6 text-sm border-white/25 text-white hover:bg-white/10 whitespace-nowrap">
+              <Button asChild variant="outline" size="lg" className="flex-none h-[3.5rem] px-6 text-sm border-white/25 text-white hover:bg-white/10 whitespace-nowrap">
                 <Link href="/works">制作実績を見る</Link>
               </Button>
             </motion.div>
@@ -114,12 +112,12 @@ export function HeroSection() {
               </span>
             </motion.div>
 
-            <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 pt-7 md:pt-8 border-t border-white/10">
+            <motion.div variants={itemVariants} className="grid grid-cols-3 gap-2.5 sm:gap-4 pt-6 md:pt-8 border-t border-white/10">
               {STATS.map((s, i) => (
-                <div key={i} className="text-left rounded-2xl border border-white/10 bg-white/5 px-4 py-5 md:px-5 md:py-6">
-                  <div className="text-2xl md:text-4xl font-black text-white tracking-tight mb-1.5">{s.value}</div>
-                  <div className="text-xs font-bold text-gray-300 uppercase tracking-[0.18em] mb-1.5">{s.label}</div>
-                  <div className="text-xs text-gray-400 font-medium leading-relaxed">{s.sub}</div>
+                <div key={i} className="rounded-2xl border border-white/10 bg-white/5 px-2.5 py-3.5 text-center sm:text-left sm:px-4 sm:py-5 md:px-5 md:py-6">
+                  <div className="text-xl sm:text-2xl md:text-4xl font-black text-white tracking-tight mb-1">{s.value}</div>
+                  <div className="text-[10px] sm:text-xs font-bold text-gray-300 uppercase tracking-[0.08em] sm:tracking-[0.18em] mb-1">{s.label}</div>
+                  <div className="hidden md:block text-xs text-gray-400 font-medium leading-relaxed">{s.sub}</div>
                 </div>
               ))}
             </motion.div>

@@ -89,7 +89,7 @@ export function Header() {
           <Link href="/" className="inline-flex items-center space-x-3 transition-opacity hover:opacity-80" onClick={() => setIsMobileMenuOpen(false)}>
             <div className="relative h-8 w-8 md:h-10 md:w-10 shrink-0">
               <Image
-                src="/web-app-manifest-512x512.png"
+                src="/socialboost-header-logo.png"
                 alt="SocialBoost Logo"
                 fill
                 className="object-contain"

@@ -63,12 +63,12 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/round-favicon.png?v=5", sizes: "512x512", type: "image/png" },
+      { url: "/socialboost-favicon-round.png?v=6", sizes: "512x512", type: "image/png" },
     ],
     apple: [
-      { url: "/round-apple-icon.png?v=5", sizes: "512x512", type: "image/png" },
+      { url: "/socialboost-apple-icon-round.png?v=6", sizes: "512x512", type: "image/png" },
     ],
-    shortcut: "/round-favicon.png?v=5",
+    shortcut: "/socialboost-favicon-round.png?v=6",
   },
   alternates: {
     canonical: SITE_URL,

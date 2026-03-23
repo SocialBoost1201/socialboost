@@ -11,7 +11,7 @@ export function Footer() {
             <Link href="/" className="inline-flex items-center space-x-3 mb-8 transition-opacity hover:opacity-80">
               <div className="relative h-10 w-10 md:h-12 md:w-12 shrink-0">
                 <Image
-                  src="/web-app-manifest-512x512.png"
+                  src="/socialboost-header-logo.png"
                   alt="SocialBoost Logo"
                   fill
                   className="object-contain"

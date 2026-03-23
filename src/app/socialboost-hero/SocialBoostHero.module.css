@@ -1,0 +1,470 @@
+.hero {
+  --hero-white: rgb(255, 255, 255);
+  --hero-blue-strong: rgb(26, 108, 234);
+  --hero-blue-main: rgb(39, 143, 220);
+  --hero-cyan-main: rgb(33, 177, 220);
+  --hero-cyan-light: rgb(64, 215, 242);
+  --hero-line: rgba(255, 255, 255, 0.18);
+  --hero-copy: rgba(255, 255, 255, 0.98);
+  --hero-copy-soft: rgba(255, 255, 255, 0.9);
+  --hero-outline: rgba(255, 255, 255, 0.34);
+  --hero-glass: rgba(255, 255, 255, 0.12);
+  --hero-shadow: 0 24px 80px rgba(10, 92, 188, 0.16);
+  position: relative;
+  min-height: 100svh;
+  overflow: hidden;
+  isolation: isolate;
+  background: linear-gradient(90deg, var(--hero-blue-strong) 0%, var(--hero-blue-main) 34%, var(--hero-cyan-main) 68%, var(--hero-cyan-light) 100%);
+}
+
+.baseGradient {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(circle at 18% 22%, rgba(255, 255, 255, 0.26) 0, transparent 34%),
+    radial-gradient(circle at 82% 20%, rgba(188, 245, 255, 0.18) 0, transparent 38%),
+    radial-gradient(circle at 55% 86%, rgba(255, 255, 255, 0.14) 0, transparent 32%);
+}
+
+.lineOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  padding-inline: 6%;
+  pointer-events: none;
+}
+
+.lineColumn {
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.04));
+}
+
+.blurGlowLeft,
+.blurGlowRight,
+.blurGlowBottom {
+  position: absolute;
+  z-index: 0;
+  border-radius: 9999px;
+  filter: blur(72px);
+  pointer-events: none;
+}
+
+.blurGlowLeft {
+  left: -8%;
+  top: 12%;
+  width: 28rem;
+  height: 28rem;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.blurGlowRight {
+  right: -8%;
+  top: 8%;
+  width: 30rem;
+  height: 30rem;
+  background: rgba(180, 245, 255, 0.18);
+}
+
+.blurGlowBottom {
+  left: 50%;
+  bottom: -16%;
+  width: 32rem;
+  height: 32rem;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.introPanels {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  pointer-events: none;
+}
+
+.introPanel {
+  transform: scaleY(0);
+  transform-origin: top;
+  background: linear-gradient(180deg, rgb(19, 110, 239) 0%, rgb(43, 168, 241) 100%);
+}
+
+/* 承認済み改善①: panelReveal 1.4s → 1.2s */
+.introPanelsActive .introPanel {
+  animation: panelReveal 1.2s var(--panel-delay) cubic-bezier(0.28, 0.84, 0.42, 1) forwards;
+}
+
+.shell {
+  position: relative;
+  z-index: 4;
+  min-height: 100svh;
+  width: min(1440px, calc(100% - 40px));
+  margin-inline: auto;
+  display: flex;
+  align-items: stretch;
+}
+
+.desktopLayout {
+  width: 100%;
+  min-height: 100svh;
+  display: grid;
+  grid-template-columns: minmax(0, 45%) minmax(0, 55%);
+  align-items: center;
+  gap: 0;
+}
+
+.copyColumn {
+  position: relative;
+  z-index: 3;
+  padding-block: 112px 72px;
+  padding-right: 32px;
+  text-align: left;
+}
+
+.eyebrow {
+  margin: 0 0 20px;
+  color: rgba(255, 255, 255, 0.86);
+  font-size: 9.69pt;
+  line-height: 1.4;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.title,
+.titleMobile {
+  margin: 0;
+  color: var(--hero-copy);
+  text-shadow: 0 8px 36px rgba(12, 86, 176, 0.16);
+}
+
+.titleLine {
+  display: block;
+  font-size: 34.71pt;
+  line-height: 1.01;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  word-break: auto-phrase;
+  overflow-wrap: break-word;
+}
+
+.lead,
+.leadMobile {
+  margin: 28px 0 0;
+  max-width: 36rem;
+  color: var(--hero-copy-soft);
+  font-size: 11.63pt;
+  line-height: 1.72;
+  font-weight: 500;
+}
+
+.leadLine {
+  display: block;
+  word-break: auto-phrase;
+  overflow-wrap: break-word;
+}
+
+.actions,
+.actionsMobile {
+  margin-top: 32px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.primaryButton,
+.secondaryButton {
+  min-width: 220px;
+  height: 52px;
+  padding-inline: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border-radius: 9999px;
+  font-size: 11.63pt;
+  line-height: 1;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: transform 0.25s ease, opacity 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.primaryButton {
+  background: var(--hero-white);
+  color: rgb(28, 115, 192);
+  box-shadow: 0 18px 40px rgba(13, 95, 189, 0.18);
+}
+
+.secondaryButton {
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--hero-white);
+  backdrop-filter: blur(8px);
+}
+
+/* 承認済み改善③: primaryButton hover shadow 強化 */
+.primaryButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 22px 48px rgba(13, 95, 189, 0.24);
+}
+
+.secondaryButton:hover {
+  transform: translateY(-1px);
+}
+
+.visualColumn {
+  position: relative;
+  min-height: 100svh;
+}
+
+.visualStage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 100svh;
+  overflow: visible;
+}
+
+.visualCard {
+  position: absolute;
+  transform-origin: center center;
+}
+
+/* 承認済み改善②: border-radius 28px → 20px */
+.visualCardLink {
+  display: block;
+  min-height: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.36);
+  box-shadow: var(--hero-shadow);
+  backdrop-filter: blur(12px);
+}
+
+.visualImageWrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 10 / 16;
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.visualImage {
+  object-fit: cover;
+}
+
+/* 承認済み改善④: visualCaption gradient 微調整 */
+.visualCaption {
+  padding: 14px 16px 16px;
+  background: linear-gradient(to bottom, rgba(7, 82, 160, 0.06), rgba(7, 82, 160, 0.18));
+}
+
+.visualMeta {
+  display: block;
+  margin-bottom: 6px;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 8.07pt;
+  line-height: 1.4;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.visualTitle {
+  margin: 0;
+  color: var(--hero-white);
+  font-size: 13.95pt;
+  line-height: 1.3;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.mobileLayout {
+  display: none;
+}
+
+.mobileCopy {
+  text-align: center;
+  padding-top: 112px;
+}
+
+.mobileCarouselBlock {
+  margin-top: 32px;
+}
+
+.mobileCarouselViewport {
+  overflow: hidden;
+  padding-inline: 6px;
+}
+
+.mobileCarouselTrack {
+  display: flex;
+  align-items: stretch;
+}
+
+.mobileCard {
+  width: 100%;
+  flex: 0 0 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* 承認済み改善②: border-radius 24px → 18px */
+.mobileCardLink {
+  width: min(82vw, 320px);
+  min-height: 220px;
+  border-radius: 18px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.34);
+  box-shadow: 0 20px 60px rgba(10, 92, 188, 0.14);
+  text-decoration: none;
+}
+
+.mobileImageWrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.mobileImage {
+  object-fit: cover;
+}
+
+.mobileCaption {
+  min-height: 96px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 18px 18px 20px;
+}
+
+.mobileMeta {
+  color: rgba(255, 255, 255, 0.76);
+  font-size: 8.07pt;
+  line-height: 1.4;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.mobileTitle {
+  margin: 8px 0 0;
+  color: var(--hero-white);
+  font-size: 16.74pt;
+  line-height: 1.24;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+
+.mobileDots {
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.mobileDot {
+  width: 10px;
+  height: 10px;
+  border: 0;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.36);
+  transition: transform 0.25s ease, background-color 0.25s ease;
+}
+
+.mobileDotActive {
+  transform: scale(1.2);
+  background: rgba(255, 255, 255, 0.92);
+}
+
+@keyframes panelReveal {
+  0% {
+    transform: scaleY(0);
+    transform-origin: top;
+  }
+  42% {
+    transform: scaleY(1);
+    transform-origin: top;
+  }
+  57% {
+    transform: scaleY(1);
+    transform-origin: bottom;
+  }
+  100% {
+    transform: scaleY(0);
+    transform-origin: bottom;
+  }
+}
+
+@media (max-width: 1023px) {
+  .shell {
+    width: min(1440px, calc(100% - 32px));
+  }
+
+  .desktopLayout {
+    display: none;
+  }
+
+  .mobileLayout {
+    display: block;
+    width: 100%;
+    min-height: 100svh;
+    padding-bottom: calc(40px + env(safe-area-inset-bottom));
+  }
+}
+
+@media (max-width: 767px) {
+  .lineOverlay {
+    padding-inline: 8%;
+  }
+
+  .mobileCopy {
+    padding-top: 96px;
+  }
+
+  .eyebrow {
+    margin-bottom: 16px;
+    font-size: 8.07pt;
+    line-height: 1.5;
+    letter-spacing: 0.16em;
+  }
+
+  .titleMobile {
+    text-align: center;
+  }
+
+  .leadMobile {
+    margin: 24px auto 0;
+    max-width: 34rem;
+    text-align: center;
+  }
+
+  .actionsMobile {
+    margin-top: 24px;
+    justify-content: center;
+  }
+
+  .primaryButton,
+  .secondaryButton {
+    width: min(100%, 320px);
+  }
+}
+
+/* 承認済み改善⑤: .visualCard 追加 */
+@media (prefers-reduced-motion: reduce) {
+  .introPanel,
+  .primaryButton,
+  .secondaryButton,
+  .mobileDot,
+  .visualCard {
+    animation: none !important;
+    transition: none !important;
+  }
+}

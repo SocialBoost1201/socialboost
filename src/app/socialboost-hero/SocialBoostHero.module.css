@@ -1,32 +1,63 @@
+/* ─────────────────────────────────────────────────────────────
+   SocialBoost Hero — Spatial Gallery
+   Layer 1: 背景空間（グラデーション + グリッド + ノイズ）
+   Layer 1.5: 環境光（リムライト）
+   Layer 2: 3Dパネル群（rotateY + translateZ + opacity/scale差）
+   Layer 3: テキスト + CTA（最前面）
+───────────────────────────────────────────────────────────── */
+
 .hero {
+  /* ── カラー変数 ── */
   --hero-white: rgb(255, 255, 255);
-  --hero-blue-strong: rgb(26, 108, 234);
-  --hero-blue-main: rgb(39, 143, 220);
-  --hero-cyan-main: rgb(33, 177, 220);
-  --hero-cyan-light: rgb(64, 215, 242);
-  --hero-line: rgba(255, 255, 255, 0.18);
+  --hero-accent: rgb(56, 210, 248);           /* 一気通貫 水色 */
   --hero-copy: rgba(255, 255, 255, 0.98);
-  --hero-copy-soft: rgba(255, 255, 255, 0.9);
-  --hero-outline: rgba(255, 255, 255, 0.34);
-  --hero-glass: rgba(255, 255, 255, 0.12);
-  --hero-shadow: 0 24px 80px rgba(10, 92, 188, 0.16);
+  --hero-copy-soft: rgba(255, 255, 255, 0.88);
+  --hero-outline: rgba(255, 255, 255, 0.32);
+  --hero-shadow: 0 24px 80px rgba(6, 38, 96, 0.22);
+
+  /* ── 中間案背景（B案）── */
+  --hero-bg-from: rgb(14, 52, 120);
+  --hero-bg-mid: rgb(26, 108, 200);
+  --hero-bg-to: rgb(38, 160, 220);
+
   position: relative;
   min-height: 100svh;
   overflow: hidden;
   isolation: isolate;
-  background: linear-gradient(90deg, var(--hero-blue-strong) 0%, var(--hero-blue-main) 34%, var(--hero-cyan-main) 68%, var(--hero-cyan-light) 100%);
+  perspective: 1200px;
+  background: linear-gradient(
+    125deg,
+    var(--hero-bg-from) 0%,
+    var(--hero-bg-mid) 52%,
+    var(--hero-bg-to) 100%
+  );
 }
 
+/* ── Layer 1: ベースグラデーション ── */
 .baseGradient {
   position: absolute;
-  inset: 0;
+  inset: -10%; /* アニメーションでの余白確保 */
   z-index: 0;
   background:
-    radial-gradient(circle at 18% 22%, rgba(255, 255, 255, 0.26) 0, transparent 34%),
-    radial-gradient(circle at 82% 20%, rgba(188, 245, 255, 0.18) 0, transparent 38%),
-    radial-gradient(circle at 55% 86%, rgba(255, 255, 255, 0.14) 0, transparent 32%);
+    radial-gradient(circle at 16% 20%, rgba(255, 255, 255, 0.14) 0, transparent 36%),
+    radial-gradient(circle at 78% 18%, rgba(130, 230, 255, 0.12) 0, transparent 38%),
+    radial-gradient(circle at 50% 90%, rgba(20, 90, 180, 0.2) 0, transparent 40%);
+  animation: slowGradient 32s ease-in-out infinite;
 }
 
+/* ── ノイズテクスチャ（SVGフィルター不使用・CSS擬似 noise） ── */
+.noiseOverlay {
+  position: absolute;
+  inset: -20%;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  animation: staticNoise 0.8s steps(2) infinite;
+}
+
+/* ── グリッドライン ── */
 .lineOverlay {
   position: absolute;
   inset: 0;
@@ -40,48 +71,68 @@
 .lineColumn {
   width: 1px;
   height: 100%;
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.04));
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.0) 0%,
+    rgba(255, 255, 255, 0.18) 30%,
+    rgba(255, 255, 255, 0.06) 100%
+  );
+}
+
+/* ── Layer 1.5: 中央リムライト（空間の光源） ── */
+.rimLight {
+  position: absolute;
+  z-index: 2;
+  /* 右寄り中央に配置 — パネル群の背後 */
+  left: 50%;
+  top: 50%;
+  width: 44rem;
+  height: 44rem;
+  transform: translate(-10%, -50%);
+  border-radius: 9999px;
+  background: radial-gradient(
+    circle,
+    rgba(64, 200, 255, 0.22) 0%,
+    rgba(26, 108, 220, 0.12) 40%,
+    transparent 70%
+  );
+  filter: blur(60px);
+  pointer-events: none;
+  animation: slowGlow 14s ease-in-out infinite;
 }
 
 .blurGlowLeft,
-.blurGlowRight,
-.blurGlowBottom {
+.blurGlowRight {
   position: absolute;
   z-index: 0;
   border-radius: 9999px;
-  filter: blur(72px);
+  filter: blur(80px);
   pointer-events: none;
 }
 
 .blurGlowLeft {
-  left: -8%;
-  top: 12%;
-  width: 28rem;
-  height: 28rem;
-  background: rgba(255, 255, 255, 0.12);
+  left: -10%;
+  top: 10%;
+  width: 24rem;
+  height: 24rem;
+  background: rgba(255, 255, 255, 0.08);
+  animation: slowGlow 10s ease-in-out infinite alternate;
 }
 
 .blurGlowRight {
-  right: -8%;
-  top: 8%;
-  width: 30rem;
-  height: 30rem;
-  background: rgba(180, 245, 255, 0.18);
+  right: -10%;
+  top: 5%;
+  width: 28rem;
+  height: 28rem;
+  background: rgba(100, 210, 255, 0.1);
+  animation: slowGlow 16s ease-in-out infinite alternate-reverse;
 }
 
-.blurGlowBottom {
-  left: 50%;
-  bottom: -16%;
-  width: 32rem;
-  height: 32rem;
-  transform: translateX(-50%);
-  background: rgba(255, 255, 255, 0.1);
-}
-
+/* ── イントロパネル ── */
 .introPanels {
   position: absolute;
   inset: 0;
-  z-index: 5;
+  z-index: 20;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   pointer-events: none;
@@ -90,17 +141,17 @@
 .introPanel {
   transform: scaleY(0);
   transform-origin: top;
-  background: linear-gradient(180deg, rgb(19, 110, 239) 0%, rgb(43, 168, 241) 100%);
+  background: linear-gradient(180deg, rgb(14, 52, 120) 0%, rgb(26, 108, 200) 100%);
 }
 
-/* 承認済み改善①: panelReveal 1.4s → 1.2s */
 .introPanelsActive .introPanel {
   animation: panelReveal 1.2s var(--panel-delay) cubic-bezier(0.28, 0.84, 0.42, 1) forwards;
 }
 
+/* ── シェル（コンテンツ領域） ── */
 .shell {
   position: relative;
-  z-index: 4;
+  z-index: 10;
   min-height: 100svh;
   width: min(1440px, calc(100% - 40px));
   margin-inline: auto;
@@ -108,26 +159,30 @@
   align-items: stretch;
 }
 
+/* ── デスクトップレイアウト ── */
 .desktopLayout {
   width: 100%;
   min-height: 100svh;
   display: grid;
-  grid-template-columns: minmax(0, 45%) minmax(0, 55%);
+  grid-template-columns: minmax(0, 44%) minmax(0, 56%);
   align-items: center;
   gap: 0;
 }
 
+/* ── Layer 3: コピーカラム（最前面） ── */
 .copyColumn {
   position: relative;
   z-index: 3;
   padding-block: 112px 72px;
   padding-right: 32px;
   text-align: left;
+  /* 物理的に前面へ */
+  transform: translateZ(0);
 }
 
 .eyebrow {
   margin: 0 0 20px;
-  color: rgba(255, 255, 255, 0.86);
+  color: rgba(255, 255, 255, 0.78);
   font-size: 9.69pt;
   line-height: 1.4;
   font-weight: 600;
@@ -139,17 +194,23 @@
 .titleMobile {
   margin: 0;
   color: var(--hero-copy);
-  text-shadow: 0 8px 36px rgba(12, 86, 176, 0.16);
+  text-shadow: 0 6px 32px rgba(6, 32, 96, 0.2);
 }
 
 .titleLine {
   display: block;
   font-size: 34.71pt;
-  line-height: 1.01;
-  font-weight: 600;
+  line-height: 1.08;
+  font-weight: 700;
   letter-spacing: -0.04em;
   word-break: auto-phrase;
   overflow-wrap: break-word;
+}
+
+/* 「一気通貫」水色アクセント */
+.titleAccent {
+  color: var(--hero-accent);
+  font-style: normal;
 }
 
 .lead,
@@ -170,12 +231,13 @@
 
 .actions,
 .actionsMobile {
-  margin-top: 32px;
+  margin-top: 36px;
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
 }
 
+/* ── ボタン ── */
 .primaryButton,
 .secondaryButton {
   min-width: 220px;
@@ -191,35 +253,37 @@
   font-weight: 600;
   text-decoration: none;
   white-space: nowrap;
-  transition: transform 0.25s ease, opacity 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .primaryButton {
   background: var(--hero-white);
-  color: rgb(28, 115, 192);
-  box-shadow: 0 18px 40px rgba(13, 95, 189, 0.18);
+  color: rgb(14, 72, 160);
+  box-shadow: 0 18px 40px rgba(6, 38, 130, 0.22);
 }
 
 .secondaryButton {
-  border: 1px solid rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.60);
   background: rgba(255, 255, 255, 0.06);
   color: var(--hero-white);
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(10px);
 }
 
-/* 承認済み改善③: primaryButton hover shadow 強化 */
 .primaryButton:hover {
   transform: translateY(-2px);
-  box-shadow: 0 22px 48px rgba(13, 95, 189, 0.24);
+  box-shadow: 0 24px 50px rgba(6, 38, 130, 0.30);
 }
 
 .secondaryButton:hover {
   transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.10);
 }
 
+/* ── Layer 2: ビジュアルカラム（3D空間） ── */
 .visualColumn {
   position: relative;
   min-height: 100svh;
+  transform-style: preserve-3d;
 }
 
 .visualStage {
@@ -228,46 +292,51 @@
   height: 100%;
   min-height: 100svh;
   overflow: visible;
+  transform-style: preserve-3d;
 }
 
 .visualCard {
   position: absolute;
   transform-origin: center center;
+  transform-style: preserve-3d;
 }
 
-/* 承認済み改善②: border-radius 28px → 20px */
 .visualCardLink {
   display: block;
   min-height: 100%;
   border-radius: 20px;
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.16);
-  border: 1px solid rgba(255, 255, 255, 0.36);
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.30);
   box-shadow: var(--hero-shadow);
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(10px);
+  transition: box-shadow 0.3s ease;
+}
+
+.visualCardLink:hover {
+  box-shadow: 0 28px 80px rgba(6, 38, 96, 0.30);
 }
 
 .visualImageWrap {
   position: relative;
   width: 100%;
   aspect-ratio: 10 / 16;
-  background: rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.16);
 }
 
 .visualImage {
   object-fit: cover;
 }
 
-/* 承認済み改善④: visualCaption gradient 微調整 */
 .visualCaption {
   padding: 14px 16px 16px;
-  background: linear-gradient(to bottom, rgba(7, 82, 160, 0.06), rgba(7, 82, 160, 0.18));
+  background: linear-gradient(to bottom, rgba(6, 38, 120, 0.06), rgba(6, 38, 120, 0.20));
 }
 
 .visualMeta {
   display: block;
   margin-bottom: 6px;
-  color: rgba(255, 255, 255, 0.72);
+  color: rgba(255, 255, 255, 0.68);
   font-size: 8.07pt;
   line-height: 1.4;
   font-weight: 700;
@@ -284,6 +353,7 @@
   letter-spacing: -0.02em;
 }
 
+/* ── モバイルレイアウト ── */
 .mobileLayout {
   display: none;
 }
@@ -314,15 +384,14 @@
   justify-content: center;
 }
 
-/* 承認済み改善②: border-radius 24px → 18px */
 .mobileCardLink {
   width: min(82vw, 320px);
   min-height: 220px;
   border-radius: 18px;
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.14);
-  border: 1px solid rgba(255, 255, 255, 0.34);
-  box-shadow: 0 20px 60px rgba(10, 92, 188, 0.14);
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  box-shadow: 0 20px 60px rgba(6, 38, 120, 0.18);
   text-decoration: none;
 }
 
@@ -330,7 +399,7 @@
   position: relative;
   width: 100%;
   aspect-ratio: 16 / 10;
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.18);
 }
 
 .mobileImage {
@@ -346,7 +415,7 @@
 }
 
 .mobileMeta {
-  color: rgba(255, 255, 255, 0.76);
+  color: rgba(255, 255, 255, 0.72);
   font-size: 8.07pt;
   line-height: 1.4;
   font-weight: 700;
@@ -371,19 +440,21 @@
 }
 
 .mobileDot {
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
   border: 0;
   border-radius: 9999px;
-  background: rgba(255, 255, 255, 0.36);
-  transition: transform 0.25s ease, background-color 0.25s ease;
+  background: rgba(255, 255, 255, 0.32);
+  cursor: pointer;
+  transition: width 0.25s ease, background-color 0.25s ease;
 }
 
 .mobileDotActive {
-  transform: scale(1.2);
-  background: rgba(255, 255, 255, 0.92);
+  width: 20px;
+  background: rgba(255, 255, 255, 0.90);
 }
 
+/* ── @keyframes ── */
 @keyframes panelReveal {
   0% {
     transform: scaleY(0);
@@ -403,6 +474,32 @@
   }
 }
 
+@keyframes slowGradient {
+  0% { transform: scale(1.0) translate(0, 0); }
+  50% { transform: scale(1.05) translate(-2%, 2%); }
+  100% { transform: scale(1.0) translate(0, 0); }
+}
+
+@keyframes slowGlow {
+  0%, 100% { opacity: 0.6; transform: scale(1) translate(-10%, -50%); }
+  50% { opacity: 1; transform: scale(1.1) translate(-10%, -48%); }
+}
+
+@keyframes staticNoise {
+  0% { transform: translate(0, 0); }
+  10% { transform: translate(-5px, 5px); }
+  20% { transform: translate(-10px, -5px); }
+  30% { transform: translate(5px, -10px); }
+  40% { transform: translate(-5px, 15px); }
+  50% { transform: translate(-10px, 5px); }
+  60% { transform: translate(15px, 0); }
+  70% { transform: translate(0, 10px); }
+  80% { transform: translate(-15px, 0); }
+  90% { transform: translate(10px, 5px); }
+  100% { transform: translate(5px, 0); }
+}
+
+/* ── レスポンシブ ── */
 @media (max-width: 1023px) {
   .shell {
     width: min(1440px, calc(100% - 32px));
@@ -421,6 +518,10 @@
 }
 
 @media (max-width: 767px) {
+  .hero {
+    perspective: none;
+  }
+
   .lineOverlay {
     padding-inline: 8%;
   }
@@ -440,6 +541,10 @@
     text-align: center;
   }
 
+  .titleMobile .titleLine {
+    font-size: clamp(26pt, 8vw, 34.71pt);
+  }
+
   .leadMobile {
     margin: 24px auto 0;
     max-width: 34rem;
@@ -448,7 +553,8 @@
 
   .actionsMobile {
     margin-top: 24px;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
   }
 
   .primaryButton,
@@ -457,7 +563,7 @@
   }
 }
 
-/* 承認済み改善⑤: .visualCard 追加 */
+/* ── prefers-reduced-motion ── */
 @media (prefers-reduced-motion: reduce) {
   .introPanel,
   .primaryButton,

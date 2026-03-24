@@ -252,3 +252,73 @@ Full docs: [gsap.matchMedia()](https://gsap.com/docs/v3/GSAP/gsap.matchMedia/). 
 - ❌ Rely on the default **immediateRender: true** when stacking multiple **from()** or **fromTo()** tweens on the same property of the same target; set **immediateRender: false** on the later tweens so they animate correctly.
 - ❌ Use invalid or non-existent ease names; stick to documented eases.
 - ❌ Forget that **gsap.from()** uses the element’s current state as the end state; the initial values in the tween will be applied immediately unless `immediateRender: false` is in the `vars`.
+
+## Quick Recipes
+
+Ready-to-use patterns for common animation scenarios.
+
+### 1) Hero entrance (stagger)
+
+```javascript
+gsap.from(".hero [data-anim]", {
+  y: 24,
+  autoAlpha: 0,
+  duration: 0.8,
+  ease: "power2.out",
+  stagger: 0.06,
+});
+```
+
+### 2) Sequenced timeline
+
+```javascript
+const tl = gsap.timeline({ defaults: { ease: "power2.out", duration: 0.6 } });
+tl.from(".nav", { y: -20, autoAlpha: 0 })
+  .from(".hero-title", { y: 30, autoAlpha: 0 }, "-=0.2")
+  .from(".hero-cta", { scale: 0.95, autoAlpha: 0 }, "-=0.2");
+```
+
+### 3) Scroll-scrub pinned section
+
+```javascript
+gsap.registerPlugin(ScrollTrigger);
+
+gsap.timeline({
+  scrollTrigger: {
+    trigger: ".story",
+    start: "top top",
+    end: "+=800",
+    scrub: 1,
+    pin: true,
+  },
+}).to(".story .panel", { xPercent: -200 });
+```
+
+## Common Pitfalls (Additional)
+
+### ScrollTrigger not firing
+
+**Cause:** Trigger element has no height, or is inside an `overflow: hidden` container.
+
+**Fix:** Ensure the trigger element has height. For nested scroll containers, specify `scroller`:
+
+```javascript
+scrollTrigger: {
+  trigger: ".box",
+  scroller: ".scroll-container",
+}
+```
+
+Run `ScrollTrigger.refresh()` after dynamic content loads or layout changes.
+
+### FOUC (Flash of Unstyled Content)
+
+**Cause:** Animations initialize before fonts/images load, causing layout jumps.
+
+**Fix:** Initialize after layout is stable:
+
+```javascript
+window.addEventListener("load", () => {
+  ScrollTrigger.refresh();
+});
+```

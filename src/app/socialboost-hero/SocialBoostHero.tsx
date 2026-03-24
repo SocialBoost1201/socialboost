@@ -4,25 +4,28 @@ import type { CSSProperties, TouchEvent } from "react";
 import { useEffect, useEffectEvent, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import styles from "./SocialBoostHero.module.css";
 import { HERO_PORTFOLIO_ITEMS, type HeroPortfolioSlot } from "./portfolioData";
 
+// ─── 型定義 ────────────────────────────────────────────────────────────────
 type SlotMotionConfig = {
   left: number;
   top: number;
   width: number;
-  rotate: number;
+  rotateZ: number;
+  rotateY: number;
   opacity: number;
   zIndex: number;
   scale: number;
   floatY: [number, number, number];
-  floatRotate: [number, number, number];
+  floatZ: [number, number, number];
   floatDuration: number;
   enterDelay: number;
 };
 
+// ─── スロットローテーション順序 ─────────────────────────────────────────────
 const SLOT_ROTATION_TARGET: Record<HeroPortfolioSlot, HeroPortfolioSlot> = {
   "slot-front-left": "slot-front-center",
   "slot-front-center": "slot-back-top",
@@ -33,75 +36,106 @@ const SLOT_ROTATION_TARGET: Record<HeroPortfolioSlot, HeroPortfolioSlot> = {
 
 const CONTENT_EASE = [0.28, 0.84, 0.42, 1] as const;
 
+// ─── テキスト stagger variants ────────────────────────────────────────────
+const titleContainerVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.14,
+      delayChildren: 0.7,
+    },
+  },
+};
+
+const titleLineVariants = {
+  hidden: { opacity: 0, y: 28 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, ease: [0.28, 0.84, 0.42, 1] as [number, number, number, number] },
+  },
+};
+
+// ─── 空間スロット設定（blur なし・opacity/scale/size/zIndex 差のみで奥行き） ─
 function getSlotConfig(width: number, height: number): Record<HeroPortfolioSlot, SlotMotionConfig> {
   const safeWidth = Math.max(width, 960);
   const safeHeight = Math.max(height, 620);
 
   return {
+    // 中間右：主役
+    "slot-front-center": {
+      left: safeWidth * 0.58,
+      top: safeHeight * 0.46,
+      width: Math.min(safeWidth * 0.32, 320),
+      rotateZ: -2,
+      rotateY: -12,
+      opacity: 1.0,
+      zIndex: 6,
+      scale: 1.0,
+      floatY: [0, -12, 0],
+      floatZ: [0, 4, 0],
+      floatDuration: 7.0,
+      enterDelay: 0.2,
+    },
+    // 左前方：準主役
     "slot-front-left": {
-      left: safeWidth * 0.48,
+      left: safeWidth * 0.44,
       top: safeHeight * 0.58,
       width: Math.min(safeWidth * 0.2, 180),
-      rotate: -8,
-      opacity: 1,
-      zIndex: 5,
-      scale: 0.96,
-      floatY: [0, -10, 0],
-      floatRotate: [-8, -6, -8],
-      floatDuration: 6.2,
-      enterDelay: 0.15,
-    },
-    "slot-front-center": {
-      left: safeWidth * 0.61,
-      top: safeHeight * 0.5,
-      width: Math.min(safeWidth * 0.32, 320),
-      rotate: -2,
-      opacity: 1,
-      zIndex: 6,
-      scale: 1,
-      floatY: [0, -12, 0],
-      floatRotate: [-2, 0, -2],
-      floatDuration: 6.8,
-      enterDelay: 0.25,
-    },
-    "slot-mid-right": {
-      left: safeWidth * 0.83,
-      top: safeHeight * 0.48,
-      width: Math.min(safeWidth * 0.22, 210),
-      rotate: -6,
-      opacity: 0.96,
+      rotateZ: -10,
+      rotateY: -18,
+      opacity: 0.92,
       zIndex: 5,
       scale: 0.94,
+      floatY: [0, -9, 0],
+      floatZ: [0, 2, 0],
+      floatDuration: 6.4,
+      enterDelay: 0.1,
+    },
+    // 右遠景：脇役
+    "slot-mid-right": {
+      left: safeWidth * 0.82,
+      top: safeHeight * 0.44,
+      width: Math.min(safeWidth * 0.22, 200),
+      rotateZ: -5,
+      rotateY: -8,
+      opacity: 0.90,
+      zIndex: 5,
+      scale: 0.92,
       floatY: [0, -8, 0],
-      floatRotate: [-6, -4, -6],
-      floatDuration: 7.2,
-      enterDelay: 0.35,
+      floatZ: [0, 3, 0],
+      floatDuration: 7.6,
+      enterDelay: 0.3,
     },
+    // 奥上：背景
     "slot-back-top": {
-      left: safeWidth * 0.63,
-      top: safeHeight * 0.16,
-      width: Math.min(safeWidth * 0.17, 170),
-      rotate: -4,
-      opacity: 0.22,
+      left: safeWidth * 0.62,
+      top: safeHeight * 0.12,
+      width: Math.min(safeWidth * 0.17, 150),
+      rotateZ: -4,
+      rotateY: -20,
+      opacity: 0.28,
       zIndex: 2,
-      scale: 0.9,
-      floatY: [0, -7, 0],
-      floatRotate: [-4, -3, -4],
-      floatDuration: 7.8,
-      enterDelay: 0.45,
+      scale: 0.82,
+      floatY: [0, -6, 0],
+      floatZ: [0, 1, 0],
+      floatDuration: 8.2,
+      enterDelay: 0.4,
     },
+    // 奥下：背景
     "slot-back-bottom": {
       left: safeWidth * 0.76,
-      top: safeHeight * 0.28,
-      width: Math.min(safeWidth * 0.17, 170),
-      rotate: 2,
-      opacity: 0.18,
+      top: safeHeight * 0.26,
+      width: Math.min(safeWidth * 0.17, 150),
+      rotateZ: 3,
+      rotateY: -6,
+      opacity: 0.24,
       zIndex: 2,
-      scale: 0.88,
-      floatY: [0, -6, 0],
-      floatRotate: [2, 3, 2],
-      floatDuration: 8.4,
-      enterDelay: 0.55,
+      scale: 0.80,
+      floatY: [0, -5, 0],
+      floatZ: [0, 2, 0],
+      floatDuration: 9.0,
+      enterDelay: 0.5,
     },
   };
 }
@@ -113,6 +147,7 @@ function buildInitialAssignments() {
   }, {});
 }
 
+// ─── コンポーネント ─────────────────────────────────────────────────────────
 export default function SocialBoostHero() {
   const visualRef = useRef<HTMLDivElement | null>(null);
   const touchStartXRef = useRef<number | null>(null);
@@ -125,28 +160,20 @@ export default function SocialBoostHero() {
     const hidePanelsTimer = window.setTimeout(() => {
       setShowIntroPanels(false);
     }, 1500);
-
-    return () => {
-      window.clearTimeout(hidePanelsTimer);
-    };
+    return () => { window.clearTimeout(hidePanelsTimer); };
   }, []);
 
   useEffect(() => {
     if (!visualRef.current) return;
-
     const node = visualRef.current;
     const updateSize = () => {
       const rect = node.getBoundingClientRect();
       setStageSize({ width: rect.width, height: rect.height });
     };
-
     updateSize();
     const observer = new ResizeObserver(updateSize);
     observer.observe(node);
-
-    return () => {
-      observer.disconnect();
-    };
+    return () => { observer.disconnect(); };
   }, []);
 
   const rotateDesktopSlots = useEffectEvent(() => {
@@ -162,26 +189,19 @@ export default function SocialBoostHero() {
   });
 
   useEffect(() => {
-    const intervalId = window.setInterval(() => {
-      rotateDesktopSlots();
-    }, 4500);
-
-    return () => {
-      window.clearInterval(intervalId);
-    };
+    const intervalId = window.setInterval(() => { rotateDesktopSlots(); }, 6000);
+    return () => { window.clearInterval(intervalId); };
   }, []);
 
   useEffect(() => {
-    const intervalId = window.setInterval(() => {
-      advanceMobile();
-    }, 5000);
-
-    return () => {
-      window.clearInterval(intervalId);
-    };
+    const intervalId = window.setInterval(() => { advanceMobile(); }, 5000);
+    return () => { window.clearInterval(intervalId); };
   }, []);
 
-  const slotConfig = useMemo(() => getSlotConfig(stageSize.width, stageSize.height), [stageSize.height, stageSize.width]);
+  const slotConfig = useMemo(
+    () => getSlotConfig(stageSize.width, stageSize.height),
+    [stageSize.height, stageSize.width]
+  );
 
   const handleTouchStart = (event: TouchEvent<HTMLDivElement>) => {
     touchStartXRef.current = event.touches[0]?.clientX ?? null;
@@ -190,30 +210,60 @@ export default function SocialBoostHero() {
   const handleTouchEnd = (event: TouchEvent<HTMLDivElement>) => {
     const startX = touchStartXRef.current;
     const endX = event.changedTouches[0]?.clientX;
-
     if (startX === null || typeof endX !== "number") return;
-
     const delta = endX - startX;
     if (Math.abs(delta) < 44) return;
-
     setMobileIndex((current) => {
       if (delta < 0) return (current + 1) % HERO_PORTFOLIO_ITEMS.length;
       return (current - 1 + HERO_PORTFOLIO_ITEMS.length) % HERO_PORTFOLIO_ITEMS.length;
     });
   };
 
+  // ─── パララックス（視差効果）用 ────────────────────────────────────────────────────────
+  const mouseX = useMotionValue(0.5);
+  const mouseY = useMotionValue(0.5);
+
+  const handleMouseMove = (event: React.MouseEvent) => {
+    mouseX.set(event.clientX / stageSize.width);
+    mouseY.set(event.clientY / stageSize.height);
+  };
+
+  const handleMouseLeave = () => {
+    mouseX.set(0.5);
+    mouseY.set(0.5);
+  };
+
+  const springConfig = { damping: 20, stiffness: 60 };
+  const smoothMouseX = useSpring(mouseX, springConfig);
+  const smoothMouseY = useSpring(mouseY, springConfig);
+
+  const rotateX = useTransform(smoothMouseY, [0, 1], [6, -6]);
+  const rotateY = useTransform(smoothMouseX, [0, 1], [-8, 8]);
+  const translateX = useTransform(smoothMouseX, [0, 1], [-20, 20]);
+  const translateY = useTransform(smoothMouseY, [0, 1], [-20, 20]);
+
   return (
-    <section className={styles.hero} aria-labelledby="socialboost-hero-title">
+    <section
+      className={styles.hero}
+      aria-labelledby="socialboost-hero-title"
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+    >
+      {/* ── Layer 1: 背景空間 ── */}
       <div className={styles.baseGradient} aria-hidden="true" />
+      <div className={styles.noiseOverlay} aria-hidden="true" />
       <div className={styles.lineOverlay} aria-hidden="true">
         {Array.from({ length: 5 }).map((_, index) => (
           <span key={index} className={styles.lineColumn} />
         ))}
       </div>
+
+      {/* ── Layer 1.5: 環境光（リムライト） ── */}
+      <div className={styles.rimLight} aria-hidden="true" />
       <div className={styles.blurGlowLeft} aria-hidden="true" />
       <div className={styles.blurGlowRight} aria-hidden="true" />
-      <div className={styles.blurGlowBottom} aria-hidden="true" />
 
+      {/* ── イントロパネル ── */}
       {showIntroPanels && (
         <div className={`${styles.introPanels} ${styles.introPanelsActive}`} aria-hidden="true">
           {Array.from({ length: 4 }).map((_, index) => (
@@ -228,35 +278,61 @@ export default function SocialBoostHero() {
 
       <motion.div
         className={styles.shell}
-        initial={{ opacity: 0, y: 80 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{
-          duration: 0.8,
-          delay: 0.5,
-          ease: CONTENT_EASE,
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6, delay: 0.4, ease: CONTENT_EASE }}
+        style={{
+          rotateX,
+          rotateY,
+          x: translateX,
+          y: translateY,
         }}
       >
+        {/* ── デスクトップレイアウト ── */}
         <div className={styles.desktopLayout}>
-          <motion.div
-            className={styles.copyColumn}
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.05, ease: CONTENT_EASE }}
-          >
-            <p className={styles.eyebrow}>AI × Marketing × Growth</p>
+          {/* Layer 3: テキスト（空間最前面） */}
+          <div className={styles.copyColumn}>
+            <motion.p
+              className={styles.eyebrow}
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.6, ease: CONTENT_EASE }}
+            >
+              Web × 業務改善 × AI
+            </motion.p>
 
-            <h1 id="socialboost-hero-title" className={styles.title}>
-              <span className={styles.titleLine}>AIで、</span>
-              <span className={styles.titleLine}>集客と事業成長を</span>
-              <span className={styles.titleLine}>加速する。</span>
-            </h1>
+            {/* 行ごとに stagger で出現 */}
+            <motion.h1
+              id="socialboost-hero-title"
+              className={styles.title}
+              variants={titleContainerVariants}
+              initial="hidden"
+              animate="visible"
+            >
+              <motion.span className={styles.titleLine} variants={titleLineVariants}>
+                Webと業務改善を
+              </motion.span>
+              <motion.span className={styles.titleLine} variants={titleLineVariants}>
+                <span className={styles.titleAccent}>一気通貫</span>で前に進める。
+              </motion.span>
+            </motion.h1>
 
-            <p className={styles.lead}>
+            <motion.p
+              className={styles.lead}
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 1.2, ease: CONTENT_EASE }}
+            >
               <span className={styles.leadLine}>SNS運用、LP制作、SEO設計、業務効率化まで。</span>
               <span className={styles.leadLine}>SocialBoostは、AIとWeb戦略で事業の伸びしろを最大化します。</span>
-            </p>
+            </motion.p>
 
-            <div className={styles.actions}>
+            <motion.div
+              className={styles.actions}
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 1.4, ease: CONTENT_EASE }}
+            >
               <Link href="/contact" className={styles.primaryButton}>
                 <span>無料相談はこちら</span>
                 <ArrowRight size={16} />
@@ -264,10 +340,12 @@ export default function SocialBoostHero() {
               <Link href="/services" className={styles.secondaryButton}>
                 <span>サービスを見る</span>
               </Link>
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
 
+          {/* Layer 2: 3D空間パネル群 */}
           <div className={styles.visualColumn} ref={visualRef}>
+            {/* perspective ステージ */}
             <div className={styles.visualStage}>
               {HERO_PORTFOLIO_ITEMS.map((item) => {
                 const slot = desktopAssignments[item.id];
@@ -280,8 +358,9 @@ export default function SocialBoostHero() {
                     style={{ zIndex: config.zIndex }}
                     initial={{
                       opacity: 0,
-                      y: 80,
-                      scale: 0.96,
+                      y: 60,
+                      scale: 0.9,
+                      rotateY: config.rotateY - 20,
                     }}
                     animate={{
                       left: config.left,
@@ -289,22 +368,26 @@ export default function SocialBoostHero() {
                       width: config.width,
                       opacity: config.opacity,
                       scale: config.scale,
-                      rotate: config.rotate,
+                      rotateZ: config.rotateZ,
+                      rotateY: config.rotateY,
                       y: config.floatY,
+                      z: config.floatZ,
                     }}
                     transition={{
-                      left: { duration: 1.2, ease: CONTENT_EASE },
-                      top: { duration: 1.2, ease: CONTENT_EASE },
-                      width: { duration: 1.2, ease: CONTENT_EASE },
-                      opacity: { duration: 1.2, ease: CONTENT_EASE, delay: 0.04 },
-                      scale: { duration: 1.2, ease: CONTENT_EASE },
-                      rotate: {
+                      left: { duration: 1.4, ease: CONTENT_EASE },
+                      top: { duration: 1.4, ease: CONTENT_EASE },
+                      width: { duration: 1.4, ease: CONTENT_EASE },
+                      opacity: { duration: 1.2, ease: CONTENT_EASE, delay: config.enterDelay },
+                      scale: { duration: 1.4, ease: CONTENT_EASE },
+                      rotateZ: { duration: 1.4, ease: CONTENT_EASE },
+                      rotateY: { duration: 1.4, ease: CONTENT_EASE, delay: config.enterDelay },
+                      y: {
                         duration: config.floatDuration,
                         ease: "easeInOut",
                         repeat: Infinity,
                       },
-                      y: {
-                        duration: config.floatDuration,
+                      z: {
+                        duration: config.floatDuration * 1.2,
                         ease: "easeInOut",
                         repeat: Infinity,
                       },
@@ -332,22 +415,48 @@ export default function SocialBoostHero() {
           </div>
         </div>
 
+        {/* ── モバイルレイアウト ── */}
         <div className={styles.mobileLayout}>
           <div className={styles.mobileCopy}>
-            <p className={styles.eyebrow}>AI × Marketing × Growth</p>
+            <motion.p
+              className={styles.eyebrow}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.5, ease: CONTENT_EASE }}
+            >
+              Web × 業務改善 × AI
+            </motion.p>
 
-            <h1 className={styles.titleMobile}>
-              <span className={styles.titleLine}>AIで、</span>
-              <span className={styles.titleLine}>集客と事業成長を</span>
-              <span className={styles.titleLine}>加速する。</span>
-            </h1>
+            <motion.h1
+              className={styles.titleMobile}
+              variants={titleContainerVariants}
+              initial="hidden"
+              animate="visible"
+            >
+              <motion.span className={styles.titleLine} variants={titleLineVariants}>
+                Webと業務改善を
+              </motion.span>
+              <motion.span className={styles.titleLine} variants={titleLineVariants}>
+                <span className={styles.titleAccent}>一気通貫</span>で前に進める。
+              </motion.span>
+            </motion.h1>
 
-            <p className={styles.leadMobile}>
+            <motion.p
+              className={styles.leadMobile}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 1.2, ease: CONTENT_EASE }}
+            >
               <span className={styles.leadLine}>SNS運用、LP制作、SEO設計、業務効率化まで。</span>
               <span className={styles.leadLine}>SocialBoostは、AIとWeb戦略で事業の伸びしろを最大化します。</span>
-            </p>
+            </motion.p>
 
-            <div className={styles.actionsMobile}>
+            <motion.div
+              className={styles.actionsMobile}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 1.4, ease: CONTENT_EASE }}
+            >
               <Link href="/contact" className={styles.primaryButton}>
                 <span>無料相談はこちら</span>
                 <ArrowRight size={16} />
@@ -355,7 +464,7 @@ export default function SocialBoostHero() {
               <Link href="/services" className={styles.secondaryButton}>
                 <span>サービスを見る</span>
               </Link>
-            </div>
+            </motion.div>
           </div>
 
           <div className={styles.mobileCarouselBlock}>

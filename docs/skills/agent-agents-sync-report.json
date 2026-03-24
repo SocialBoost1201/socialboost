@@ -1,0 +1,156 @@
+[
+  {
+    "project_name": "Animo",
+    "project_path": "/Users/takumashinnyo/workspace/projects/Animo",
+    "agent_skills_exists": true,
+    "agents_dir_exists": true,
+    "agents_skills_exists": true,
+    "agents_skills_is_symlink": true,
+    "agents_skills_symlink_target": "../.agent/skills",
+    "status": "symlink_created",
+    "notes": ".agents/skills symlink を作成"
+  },
+  {
+    "project_name": "ink-addiction",
+    "project_path": "/Users/takumashinnyo/workspace/projects/ink-addiction",
+    "agent_skills_exists": true,
+    "agents_dir_exists": true,
+    "agents_skills_exists": true,
+    "agents_skills_is_symlink": true,
+    "agents_skills_symlink_target": "../.agent/skills",
+    "status": "symlink_created",
+    "notes": ".agents/skills symlink を作成"
+  },
+  {
+    "project_name": "NightOps",
+    "project_path": "/Users/takumashinnyo/workspace/projects/NightOps",
+    "agent_skills_exists": true,
+    "agents_dir_exists": true,
+    "agents_skills_exists": true,
+    "agents_skills_is_symlink": true,
+    "agents_skills_symlink_target": "../.agent/skills",
+    "status": "symlink_created",
+    "notes": ".agents/skills symlink を作成"
+  },
+  {
+    "project_name": "socialboost",
+    "project_path": "/Users/takumashinnyo/workspace/projects/socialboost",
+    "agent_skills_exists": true,
+    "agents_dir_exists": true,
+    "agents_skills_exists": true,
+    "agents_skills_is_symlink": true,
+    "agents_skills_symlink_target": "../.agent/skills",
+    "status": "symlink_created",
+    "notes": ".agents を新規作成 | .agents/skills symlink を作成"
+  },
+  {
+    "project_name": "TattooBase",
+    "project_path": "/Users/takumashinnyo/workspace/projects/TattooBase",
+    "agent_skills_exists": true,
+    "agents_dir_exists": true,
+    "agents_skills_exists": true,
+    "agents_skills_is_symlink": true,
+    "agents_skills_symlink_target": "../.agent/skills",
+    "status": "symlink_created",
+    "notes": ".agents/skills symlink を作成"
+  },
+  {
+    "project_name": "YoruMapAPI",
+    "project_path": "/Users/takumashinnyo/workspace/projects/YoruMapAPI",
+    "agent_skills_exists": true,
+    "agents_dir_exists": true,
+    "agents_skills_exists": true,
+    "agents_skills_is_symlink": true,
+    "agents_skills_symlink_target": "../.agent/skills",
+    "status": "symlink_created",
+    "notes": ".agents を新規作成 | .agents/skills symlink を作成"
+  },
+  {
+    "project_name": "YoruMapBusiness",
+    "project_path": "/Users/takumashinnyo/workspace/projects/YoruMapBusiness",
+    "agent_skills_exists": true,
+    "agents_dir_exists": true,
+    "agents_skills_exists": true,
+    "agents_skills_is_symlink": true,
+    "agents_skills_symlink_target": "../.agent/skills",
+    "status": "symlink_created",
+    "notes": ".agents を新規作成 | .agents/skills symlink を作成"
+  },
+  {
+    "project_name": "cri-seo-media-projects",
+    "project_path": "/Users/takumashinnyo/workspace/projects/cri-seo-media-projects",
+    "agent_skills_exists": false,
+    "agents_dir_exists": false,
+    "agents_skills_exists": false,
+    "agents_skills_is_symlink": false,
+    "agents_skills_symlink_target": null,
+    "status": "error_project_missing",
+    "notes": "対象プロジェクトディレクトリが存在しません"
+  },
+  {
+    "project_name": "research-session-hub",
+    "project_path": "/Users/takumashinnyo/workspace/projects/research-session-hub",
+    "agent_skills_exists": false,
+    "agents_dir_exists": false,
+    "agents_skills_exists": false,
+    "agents_skills_is_symlink": false,
+    "agents_skills_symlink_target": null,
+    "status": "error_project_missing",
+    "notes": "対象プロジェクトディレクトリが存在しません"
+  },
+  {
+    "project_name": "iihin-seiri",
+    "project_path": "/Users/takumashinnyo/workspace/projects/iihin-seiri",
+    "agent_skills_exists": false,
+    "agents_dir_exists": false,
+    "agents_skills_exists": false,
+    "agents_skills_is_symlink": false,
+    "agents_skills_symlink_target": null,
+    "status": "error_project_missing",
+    "notes": "対象プロジェクトディレクトリが存在しません"
+  },
+  {
+    "project_name": "ikotsu.com",
+    "project_path": "/Users/takumashinnyo/workspace/projects/ikotsu.com",
+    "agent_skills_exists": true,
+    "agents_dir_exists": true,
+    "agents_skills_exists": true,
+    "agents_skills_is_symlink": true,
+    "agents_skills_symlink_target": "../.agent/skills",
+    "status": "symlink_created",
+    "notes": ".agents/skills symlink を作成"
+  },
+  {
+    "project_name": "seiren-corporate",
+    "project_path": "/Users/takumashinnyo/workspace/projects/seiren-corporate",
+    "agent_skills_exists": true,
+    "agents_dir_exists": true,
+    "agents_skills_exists": true,
+    "agents_skills_is_symlink": true,
+    "agents_skills_symlink_target": "../.agent/skills",
+    "status": "symlink_created",
+    "notes": ".agents/skills symlink を作成"
+  },
+  {
+    "project_name": "seiren-ohaka-navi",
+    "project_path": "/Users/takumashinnyo/workspace/projects/seiren-ohaka-navi",
+    "agent_skills_exists": true,
+    "agents_dir_exists": true,
+    "agents_skills_exists": true,
+    "agents_skills_is_symlink": true,
+    "agents_skills_symlink_target": "../.agent/skills",
+    "status": "symlink_created",
+    "notes": ".agents/skills symlink を作成"
+  },
+  {
+    "project_name": "seiren-ohakajimai-navi",
+    "project_path": "/Users/takumashinnyo/workspace/projects/seiren-ohakajimai-navi",
+    "agent_skills_exists": true,
+    "agents_dir_exists": true,
+    "agents_skills_exists": true,
+    "agents_skills_is_symlink": true,
+    "agents_skills_symlink_target": "../.agent/skills",
+    "status": "symlink_created",
+    "notes": ".agents/skills symlink を作成"
+  }
+]

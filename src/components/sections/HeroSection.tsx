@@ -1,11 +1,12 @@
 "use client";
 
+import { useRef } from "react";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, ShieldCheck, Clock3, BadgeCheck } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import type { CSSProperties } from "react";
 
 const STATS = [
@@ -47,20 +48,71 @@ export function HeroSection() {
     "--hero-grad-dark": "#006ad3",
   } as CSSProperties;
 
+  // ─── マウス視差 ───────────────────────────────────────────
+  const sectionRef = useRef<HTMLElement>(null);
+  const mouseX = useMotionValue(0.5);
+  const mouseY = useMotionValue(0.5);
+  const smoothX = useSpring(mouseX, { damping: 22, stiffness: 50 });
+  const smoothY = useSpring(mouseY, { damping: 22, stiffness: 50 });
+  const bgX = useTransform(smoothX, [0, 1], [-24, 24]);
+  const bgY = useTransform(smoothY, [0, 1], [-16, 16]);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    const rect = sectionRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    mouseX.set((e.clientX - rect.left) / rect.width);
+    mouseY.set((e.clientY - rect.top) / rect.height);
+  };
+
+  const handleMouseLeave = () => {
+    mouseX.set(0.5);
+    mouseY.set(0.5);
+  };
+
   return (
-    <section style={heroTokens} className="relative isolate overflow-hidden bg-[var(--hero-base)]">
-      {/* HeroBackground */}
-      <div className="absolute inset-0 z-0 overflow-hidden">
+    <section
+      ref={sectionRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={heroTokens}
+      className="relative isolate overflow-hidden bg-[var(--hero-base)]"
+    >
+      {/* HeroBackground — マウス視差レイヤー */}
+      <motion.div
+        className="absolute inset-0 z-0 overflow-hidden"
+        style={{ x: bgX, y: bgY, scale: 1.06 }}
+      >
         <Image
           src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=2560"
           alt="Premium Office Environment"
           fill
-          className="object-cover opacity-[0.17] mix-blend-luminosity scale-[1.03]"
+          className="object-cover opacity-[0.17] mix-blend-luminosity"
           priority
         />
-        <div className="absolute inset-0 bg-[radial-gradient(70%_80%_at_50%_18%,rgba(51,216,255,0.15)_0%,rgba(8,17,26,0)_55%),radial-gradient(60%_60%_at_80%_70%,rgba(0,106,211,0.22)_0%,rgba(8,17,26,0)_58%)]" />
-        <div className="absolute inset-0 bg-[linear-gradient(125deg,rgba(62,163,255,0.08)_0%,transparent_42%,rgba(14,115,235,0.08)_100%)]" />
-      </div>
+        {/* 浮遊グラデーション1 */}
+        <motion.div
+          className="absolute inset-0"
+          style={{
+            background: "radial-gradient(70% 80% at 50% 18%,rgba(51,216,255,0.15) 0%,rgba(8,17,26,0) 55%),radial-gradient(60% 60% at 80% 70%,rgba(0,106,211,0.22) 0%,rgba(8,17,26,0) 58%)",
+          }}
+          animate={{
+            opacity: [0.7, 1, 0.7],
+            scale: [1, 1.06, 1],
+          }}
+          transition={{ duration: 8, ease: "easeInOut", repeat: Infinity }}
+        />
+        {/* 浮遊グラデーション2 */}
+        <motion.div
+          className="absolute inset-0"
+          style={{
+            background: "linear-gradient(125deg,rgba(62,163,255,0.08) 0%,transparent 42%,rgba(14,115,235,0.08) 100%)",
+          }}
+          animate={{
+            opacity: [1, 0.5, 1],
+          }}
+          transition={{ duration: 12, ease: "easeInOut", repeat: Infinity, delay: 2 }}
+        />
+      </motion.div>
 
       {/* HeroOverlay */}
       <div className="absolute inset-0 z-[1] bg-[linear-gradient(to_bottom,rgba(8,17,26,0.56),rgba(8,17,26,0.78)_34%,rgba(8,17,26,0.9)_100%)]" />
@@ -77,8 +129,12 @@ export function HeroSection() {
             {/* Eyebrow */}
             <motion.div variants={itemVariants} className="inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-white/[0.045] px-4 py-2 backdrop-blur-md mb-7 md:mb-8">
               <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full rounded-full bg-[var(--hero-primary)] opacity-75"></span>
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-[var(--hero-primary)]"></span>
+                <motion.span
+                  className="absolute inline-flex h-full w-full rounded-full bg-[var(--hero-primary)]"
+                  animate={{ scale: [1, 2.2, 1], opacity: [0.75, 0, 0.75] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "easeOut" }}
+                />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-[var(--hero-primary)]" />
               </span>
               <span className="text-xs font-bold text-slate-200 tracking-widest uppercase">
                 Digital Strategy & High-end Development

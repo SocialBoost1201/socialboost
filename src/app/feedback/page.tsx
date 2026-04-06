@@ -157,7 +157,7 @@ export default function FeedbackPage() {
               )}
 
               <div className="pt-4 border-t border-gray-100">
-                <Button type="submit" variant="primary" className="w-full py-4 text-lg font-bold" disabled={isSubmitting}>
+                <Button type="submit" variant="default" className="w-full py-4 text-lg font-bold" disabled={isSubmitting}>
                   {isSubmitting ? "送信中..." : "回答を送信する"}
                 </Button>
                 <p className="text-center text-xs text-gray-400 mt-4">

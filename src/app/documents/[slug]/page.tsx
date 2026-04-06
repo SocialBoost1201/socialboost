@@ -202,7 +202,7 @@ export default function DocumentDetailPage({ params }: { params: { slug: string 
                       )}
 
                       <div className="pt-4">
-                        <Button type="submit" variant="primary" className="w-full py-4 text-base font-bold" disabled={isSubmitting}>
+                        <Button type="submit" variant="default" className="w-full py-4 text-base font-bold" disabled={isSubmitting}>
                           {isSubmitting ? "送信中..." : "無料でダウンロードする"}
                         </Button>
                       </div>

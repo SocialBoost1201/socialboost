@@ -1,0 +1,69 @@
+/* ─────────────────────────────────────────────────────────────
+   HeroFloatingObjects
+   INOUEヒーローアニメーション移植:
+     sbFloatFall  → top + opacity（落下 + フェード）
+     sbRotate     → translateY + rotateY + rotate（3D回転）
+   2つのアニメーションを同一要素に適用（それぞれ独立したプロパティを操作）
+───────────────────────────────────────────────────────────── */
+
+.container {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── 各オブジェクト ── */
+.obj {
+  display: block;
+  position: absolute;
+  top: 0;
+  aspect-ratio: 3 / 4;
+
+  /* 落下アニメーション（top + opacity） */
+  animation:
+    sbFloatFall var(--fall-duration, 15s) linear var(--fall-delay, 0s) infinite,
+    sbRotate    var(--rot-duration,  15s) linear var(--rot-delay,  0s) infinite;
+
+  /* 初期状態は画面外上方 */
+  transform: translateY(-100%);
+
+  will-change: top, transform, opacity;
+}
+
+/* ── プレースホルダーボックスの見た目 ── */
+.box {
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.12) 0%,
+    rgba(255, 255, 255, 0.04) 60%,
+    rgba(56, 180, 255, 0.06) 100%
+  );
+  backdrop-filter: blur(4px);
+}
+
+/* ── @keyframes ── */
+@keyframes sbFloatFall {
+  0%   { opacity: 0;    top: -100vh; }
+  10%  { opacity: 0.45; }
+  90%  { opacity: 0.45; }
+  100% { opacity: 0;    top: 200vh;  }
+}
+
+@keyframes sbRotate {
+  0%   { transform: translateY(-100%); }
+  100% { transform: translateY(-50%) rotateY(1turn) rotate(1turn); }
+}
+
+/* ── prefers-reduced-motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .obj {
+    animation: none !important;
+    opacity: 0 !important;
+  }
+}

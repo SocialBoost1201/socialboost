@@ -134,7 +134,7 @@ export function FloatingWorks() {
       {visibleWorks.map((w, i) => (
         <motion.div
           key={i}
-          className="absolute w-[min(180px,28vw)] transform-gpu"
+          className="absolute w-[min(180px,28vw)] transform-gpu pointer-events-auto"
           style={{
             aspectRatio: "3/4",
             willChange: "transform, opacity",
@@ -180,7 +180,7 @@ export function FloatingWorks() {
               repeat: Infinity,
             },
           }}
-          whileHover={{ scale: 1.08, pointerEvents: "auto" }}
+          whileHover={{ scale: 1.08 }}
         >
           <div className="relative w-full h-full rounded-2xl overflow-hidden shadow-2xl ring-1 ring-white/15">
             <Image

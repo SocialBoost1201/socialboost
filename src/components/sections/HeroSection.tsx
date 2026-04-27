@@ -8,6 +8,7 @@ import Image from "next/image";
 import { ArrowRight, ShieldCheck, Clock3, BadgeCheck } from "lucide-react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import type { CSSProperties } from "react";
+import { FloatingWorks } from "@/components/hero/FloatingWorks";
 
 const STATS = [
   { value: "50+", label: "支援企業数", sub: "スタートアップから上場企業まで" },
@@ -116,6 +117,11 @@ export function HeroSection() {
 
       {/* HeroOverlay */}
       <div className="absolute inset-0 z-[1] bg-[linear-gradient(to_bottom,rgba(8,17,26,0.56),rgba(8,17,26,0.78)_34%,rgba(8,17,26,0.9)_100%)]" />
+
+      {/* FloatingWorks — 浮遊ポートレート層 */}
+      <div className="absolute inset-0 z-[2]">
+        <FloatingWorks />
+      </div>
 
       {/* HeroInner */}
       <div className="relative z-10 mx-auto flex min-h-svh w-[min(82.5rem,90%)] flex-col items-start justify-start pt-[9.5rem] sm:pt-[10.5rem] pb-[calc(4.5rem+env(safe-area-inset-bottom))] md:items-center md:justify-center md:pt-[6.25rem] md:pb-20">

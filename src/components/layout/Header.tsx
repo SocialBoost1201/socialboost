@@ -13,7 +13,8 @@ const navLinks = [
   { name: "サービス", href: "/services" },
   { name: "料金", href: "/pricing" },
   { name: "実績", href: "/works" },
-  { name: "選ばれる理由", href: "/why" },
+  { name: "AI", href: "/services/ai" },
+  { name: "問い合わせ", href: "/contact" },
 ];
 
 // スマホ用リッチナビ（メガメニュー）
@@ -120,11 +121,6 @@ export function Header() {
                 </li>
               ))}
             </ul>
-            <Button asChild size="sm" className="rounded-full px-6 shadow-md hover:shadow-lg transition-all hover:-translate-y-0.5">
-              <Link href="/contact" tabIndex={-1}>
-                お問い合わせ
-              </Link>
-            </Button>
           </nav>
 
           {/* Mobile Menu Toggle Button */}

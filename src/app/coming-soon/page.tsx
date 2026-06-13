@@ -9,6 +9,10 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "準備中",
   description: "こちらのページは現在準備中です。",
+  robots: {
+    index: false,
+    follow: true,
+  },
 };
 
 // 共通で利用するプレースホルダーページ（詳細ページやカテゴリページ用）

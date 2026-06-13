@@ -19,6 +19,9 @@ export const metadata: Metadata = {
     description: "多重下請けや非効率なプロセスを排除。事業成長に直結する価値のみに投資できる料金体系。",
     url: "https://socialboost.jp/pricing",
   },
+  alternates: {
+    canonical: "https://socialboost.jp/pricing",
+  },
 };
 
 export default function PricingPage() {

@@ -7,6 +7,14 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "特定商取引法に基づく表記",
   description: "SocialBoostの特定商取引法に基づく表記です。",
+  openGraph: {
+    title: "特定商取引法に基づく表記 | SocialBoost",
+    description: "SocialBoostの特定商取引法に基づく表記です。",
+    url: "https://socialboost.jp/legal/tokushoho",
+  },
+  alternates: {
+    canonical: "https://socialboost.jp/legal/tokushoho",
+  },
 };
 
 export default function TokushohoPage() {

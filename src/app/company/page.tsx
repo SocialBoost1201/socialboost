@@ -2,10 +2,19 @@ import { PageLayout } from "@/components/layout/PageLayout";
 import { Container } from "@/components/ui/Container";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { CTASection } from "@/components/sections/CTASection";
+import { Metadata } from "next";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "会社概要 | SocialBoost",
   description: "事業を加速させるデジタルパートナー、SocialBoost（ソーシャルブースト）の会社概要・ビジョンをご紹介します。",
+  openGraph: {
+    title: "会社概要 | SocialBoost",
+    description: "事業を加速させるデジタルパートナー、SocialBoost（ソーシャルブースト）の会社概要・ビジョンをご紹介します。",
+    url: "https://socialboost.jp/company",
+  },
+  alternates: {
+    canonical: "https://socialboost.jp/company",
+  },
 };
 
 const COMPANY_INFO = [

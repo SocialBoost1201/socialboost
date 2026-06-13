@@ -19,6 +19,9 @@ export const metadata = {
     description: "デジタル領域のあらゆる課題を、戦略から実装まで一気通貫で解決する総合ソリューション。",
     url: "https://socialboost.jp/services",
   },
+  alternates: {
+    canonical: "https://socialboost.jp/services",
+  },
 };
 
 export default function ServicesPage() {

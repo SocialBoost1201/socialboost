@@ -7,6 +7,14 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "利用規約",
   description: "SocialBoostが提供するサービスの利用規約です。",
+  openGraph: {
+    title: "利用規約 | SocialBoost",
+    description: "SocialBoostが提供するサービスの利用規約です。",
+    url: "https://socialboost.jp/legal/terms",
+  },
+  alternates: {
+    canonical: "https://socialboost.jp/legal/terms",
+  },
 };
 
 export default function TermsPage() {
